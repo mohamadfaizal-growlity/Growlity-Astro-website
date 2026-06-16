@@ -6,6 +6,8 @@ pageBlocks:
   - blockType: "Text Content"
     textContent: "Write your text here..."
   - blockType: "FAQ Section"
-    faqCategory: "ecovadis"
+    faqList:
+      - question: "Sample Question?"
+        answer: "Sample Answer."
 ---
 Placeholder content for solutions
