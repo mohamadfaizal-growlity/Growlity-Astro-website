@@ -51,9 +51,9 @@ const { page } = Astro.props;
         )}
 
         {/* FAQ BLOCK */}
-        {block.blockType === 'FAQ Section' && (
+        {block.blockType === 'FAQ Section' && block.faqList && (
           <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
-            <FAQAccordion category={block.faqCategory} limit={5} />
+            <FAQAccordion faqList={block.faqList} />
           </div>
         )}
 

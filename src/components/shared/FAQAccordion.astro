@@ -5,28 +5,44 @@ interface Props {
   category?: string;
   relatedSolution?: string;
   limit?: number;
+  faqList?: Array<{ question: string; answer: string }>;
 }
 
-const { category, relatedSolution, limit } = Astro.props;
+const { category, relatedSolution, limit, faqList } = Astro.props;
 
-// Fetch all FAQs
-let allFaqs = await getCollection('faqs');
+let allFaqs = [];
 
-// Sort by order
-allFaqs = allFaqs.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+if (faqList && faqList.length > 0) {
+  // Use the direct list provided from the page block
+  allFaqs = faqList.map((item, index) => ({
+    id: `custom-faq-${index}`,
+    data: {
+      question: item.question,
+      answer: item.answer,
+      order: index
+    }
+  }));
+} else {
+  // Fallback to querying the database
+  let dbFaqs = await getCollection('faqs');
+  
+  // Sort by order
+  dbFaqs = dbFaqs.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
 
-// Filter dynamically based on props
-if (category) {
-  allFaqs = allFaqs.filter(faq => faq.data.category === category);
-}
+  // Filter dynamically based on props
+  if (category) {
+    dbFaqs = dbFaqs.filter(faq => faq.data.category === category);
+  }
 
-if (relatedSolution) {
-  allFaqs = allFaqs.filter(faq => faq.data.relatedSolution === relatedSolution);
-}
+  if (relatedSolution) {
+    dbFaqs = dbFaqs.filter(faq => faq.data.relatedSolution === relatedSolution);
+  }
 
-// Apply limit if provided
-if (limit) {
-  allFaqs = allFaqs.slice(0, limit);
+  // Apply limit if provided
+  if (limit) {
+    dbFaqs = dbFaqs.slice(0, limit);
+  }
+  allFaqs = dbFaqs;
 }
 ---
 
