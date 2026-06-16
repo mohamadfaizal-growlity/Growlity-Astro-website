@@ -111,9 +111,9 @@ const tags = defineCollection({
   })
 });
 
-// 8. Authors
-const authors = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/authors" }),
+// 8. Experts
+const experts = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/experts" }),
   schema: z.object({
     name: z.string(),
     photo: z.string().optional(),
@@ -286,7 +286,7 @@ export const collections = {
   blog,
   blogCategories,
   tags,
-  authors,
+  experts,
   caseStudies,
   webinars,
   publications,
