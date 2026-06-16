@@ -1,0 +1,84 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  category?: string;
+  relatedSolution?: string;
+  limit?: number;
+}
+
+const { category, relatedSolution, limit } = Astro.props;
+
+// Fetch all FAQs
+let allFaqs = await getCollection('faqs');
+
+// Sort by order
+allFaqs = allFaqs.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+
+// Filter dynamically based on props
+if (category) {
+  allFaqs = allFaqs.filter(faq => faq.data.category === category);
+}
+
+if (relatedSolution) {
+  allFaqs = allFaqs.filter(faq => faq.data.relatedSolution === relatedSolution);
+}
+
+// Apply limit if provided
+if (limit) {
+  allFaqs = allFaqs.slice(0, limit);
+}
+---
+
+<div class="w-full max-w-4xl mx-auto my-12">
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+    <p class="text-lg text-gray-600">Find answers to common questions about our services and expertise.</p>
+  </div>
+
+  <div class="space-y-4">
+    {allFaqs.length > 0 ? (
+      allFaqs.map((faq) => (
+        <details class="group bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-gray-50 transition-colors">
+            <h3 class="text-lg font-medium text-gray-900 pr-4">
+              {faq.data.question}
+            </h3>
+            <span class="flex-shrink-0 ml-1.5 p-1.5 text-gray-900 bg-gray-100 rounded-full sm:p-3 group-open:bg-brand-green group-open:text-white transition-colors duration-200">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0 transition duration-300 group-open:-rotate-45" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+              </svg>
+            </span>
+          </summary>
+          
+          <div class="p-6 pt-0 text-gray-600 leading-relaxed border-t border-gray-100 mt-2 bg-white">
+            <p>{faq.data.answer}</p>
+          </div>
+        </details>
+      ))
+    ) : (
+      <p class="text-center text-gray-500 italic py-8">No FAQs available at this time.</p>
+    )}
+  </div>
+</div>
+
+<style>
+  /* Smooth animation for the details element */
+  details > summary {
+    list-style: none;
+  }
+  details[open] summary ~ * {
+    animation: slideDown 0.3s ease-in-out;
+  }
+  
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
