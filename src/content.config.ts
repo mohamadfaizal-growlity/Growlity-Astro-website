@@ -69,7 +69,13 @@ const solutions = defineCollection({
     relatedCaseStudies: z.array(z.string()).optional(),
     relatedBlogs: z.array(z.string()).optional(),
     seoTitle: z.string().optional(),
-    seoDescription: z.string().optional()
+    seoDescription: z.string().optional(),
+    pageBlocks: z.array(z.object({
+      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
+      textContent: z.string().optional(),
+      faqCategory: z.string().optional(),
+      ctaReference: z.string().optional()
+    })).optional()
   })
 });
 
@@ -97,7 +103,13 @@ const blog = defineCollection({
     relatedSolutions: z.array(z.string()).optional(),
     featuredBlogToggle: z.boolean().default(false),
     seoTitle: z.string().optional(),
-    seoDescription: z.string().optional()
+    seoDescription: z.string().optional(),
+    pageBlocks: z.array(z.object({
+      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
+      textContent: z.string().optional(),
+      faqCategory: z.string().optional(),
+      ctaReference: z.string().optional()
+    })).optional()
   })
 });
 
@@ -146,7 +158,13 @@ const caseStudies = defineCollection({
     testimonial: z.string().optional(),
     relatedSolution: z.string().optional(),
     seoTitle: z.string().optional(),
-    seoDescription: z.string().optional()
+    seoDescription: z.string().optional(),
+    pageBlocks: z.array(z.object({
+      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
+      textContent: z.string().optional(),
+      faqCategory: z.string().optional(),
+      ctaReference: z.string().optional()
+    })).optional()
   })
 });
 
