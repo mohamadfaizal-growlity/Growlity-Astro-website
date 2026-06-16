@@ -1,0 +1,91 @@
+---
+import { getCollection, render } from 'astro:content';
+import FAQAccordion from '../../components/shared/FAQAccordion.astro';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('caseStudies');
+  return cases.map(study => ({
+    params: { slug: study.id },
+    props: { study },
+  }));
+}
+
+const { study } = Astro.props;
+const { Content } = await render(study);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{study.data.seoTitle || `${study.data.clientName} Case Study`}</title>
+    <meta name="description" content={study.data.seoDescription || `Read how we helped ${study.data.clientName} in the ${study.data.industry} industry.`} />
+  </head>
+  <body class="bg-gray-50 text-gray-900">
+    
+    <!-- Hero Section -->
+    <header class="bg-brand-green text-white py-24 px-6 text-center">
+      <div class="max-w-4xl mx-auto">
+        <span class="text-sm font-bold text-brand-light-green uppercase tracking-wider block mb-2">Case Study • {study.data.industry}</span>
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          How we helped {study.data.clientName}
+        </h1>
+      </div>
+    </header>
+
+    <!-- Challenge, Solution, Results Summary -->
+    <div class="max-w-5xl mx-auto -mt-10 bg-white rounded-xl shadow-lg p-8 grid grid-cols-1 md:grid-cols-3 gap-8 border border-gray-100">
+      <div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3 border-b-2 border-red-500 pb-2 inline-block">The Challenge</h3>
+        <p class="text-gray-600">{study.data.challenge || "Detailed inside."}</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3 border-b-2 border-brand-green pb-2 inline-block">Our Solution</h3>
+        <p class="text-gray-600">{study.data.solution || "Detailed inside."}</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3 border-b-2 border-blue-500 pb-2 inline-block">The Results</h3>
+        <p class="text-gray-600">{study.data.results || "Detailed inside."}</p>
+      </div>
+    </div>
+
+    <!-- Main Content from Sitepins -->
+    <main class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-green">
+      <!-- Renders the main rich text article -->
+      <Content />
+    </main>
+
+    <!-- ACF-Like Dynamic Page Builder Blocks -->
+    {study.data.pageBlocks && study.data.pageBlocks.map((block) => (
+      <section class="w-full">
+        
+        {/* TEXT BLOCK */}
+        {block.blockType === 'Text Content' && block.textContent && (
+          <div class="max-w-4xl mx-auto py-8 px-6 prose prose-lg prose-green text-center">
+            <h2 class="text-2xl font-bold text-gray-900">{block.textContent}</h2>
+          </div>
+        )}
+
+        {/* FAQ BLOCK */}
+        {block.blockType === 'FAQ Section' && block.faqList && (
+          <div class="bg-white py-16 px-6 mt-8 mb-8 border-y border-gray-200 shadow-inner">
+            <FAQAccordion faqList={block.faqList} />
+          </div>
+        )}
+
+        {/* CTA BLOCK */}
+        {block.blockType === 'CTA Section' && block.ctaReference && (
+          <div class="bg-gray-900 text-white py-16 px-6 text-center my-8">
+            <h2 class="text-3xl font-bold mb-4">Want similar results?</h2>
+            <p class="text-xl mb-8 text-gray-300">Contact us to discuss {block.ctaReference}</p>
+            <a href="/contact" class="bg-brand-green text-white px-8 py-3 rounded font-bold hover:bg-green-600 transition-colors inline-block">
+              Get in Touch
+            </a>
+          </div>
+        )}
+
+      </section>
+    ))}
+
+  </body>
+</html>

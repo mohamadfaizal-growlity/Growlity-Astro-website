@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from 'astro:content';
+import FAQAccordion from '../../components/shared/FAQAccordion.astro';
+
+export async function getStaticPaths() {
+  const solutions = await getCollection('solutions');
+  return solutions.map(solution => ({
+    params: { slug: solution.id },
+    props: { solution },
+  }));
+}
+
+const { solution } = Astro.props;
+const { Content } = await render(solution);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{solution.data.seoTitle || `${solution.data.title} | Services`}</title>
+    <meta name="description" content={solution.data.seoDescription || solution.data.shortDescription || ''} />
+  </head>
+  <body class="bg-white text-gray-900">
+    
+    <!-- Service Header -->
+    <header class="bg-[#0b1b1a] text-white py-24 px-6 text-center">
+      <div class="max-w-4xl mx-auto">
+        <span class="text-brand-green font-bold uppercase tracking-widest text-sm mb-4 block">
+          {solution.data.category}
+        </span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6">
+          {solution.data.title}
+        </h1>
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+          {solution.data.shortDescription}
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Content from Sitepins -->
+    <main class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-green">
+      <Content />
+    </main>
+
+    <!-- ACF-Like Dynamic Page Builder Blocks -->
+    {solution.data.pageBlocks && solution.data.pageBlocks.map((block) => (
+      <section class="w-full">
+        
+        {/* TEXT BLOCK */}
+        {block.blockType === 'Text Content' && block.textContent && (
+          <div class="max-w-4xl mx-auto py-8 px-6 prose prose-lg prose-green text-center">
+            <h2 class="text-2xl font-bold text-gray-900">{block.textContent}</h2>
+          </div>
+        )}
+
+        {/* FAQ BLOCK */}
+        {block.blockType === 'FAQ Section' && block.faqList && (
+          <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
+            <FAQAccordion faqList={block.faqList} />
+          </div>
+        )}
+
+        {/* CTA BLOCK */}
+        {block.blockType === 'CTA Section' && block.ctaReference && (
+          <div class="bg-brand-green text-white py-16 px-6 text-center my-8">
+            <h2 class="text-3xl font-bold mb-4">Start your journey today</h2>
+            <p class="text-xl mb-8">Talk to our experts about {block.ctaReference}</p>
+            <a href="/contact" class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors inline-block">
+              Request a Consultation
+            </a>
+          </div>
+        )}
+
+      </section>
+    ))}
+
+  </body>
+</html>
