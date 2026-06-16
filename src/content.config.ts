@@ -44,7 +44,12 @@ const pages = defineCollection({
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
     ogImage: z.string().optional(),
-    faqCategory: z.string().optional()
+    pageBlocks: z.array(z.object({
+      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
+      textContent: z.string().optional(),
+      faqCategory: z.string().optional(),
+      ctaReference: z.string().optional()
+    })).optional()
   }),
 });
 
