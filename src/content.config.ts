@@ -47,7 +47,10 @@ const pages = defineCollection({
     pageBlocks: z.array(z.object({
       blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
       textContent: z.string().optional(),
-      faqCategory: z.string().optional(),
+      faqList: z.array(z.object({
+        question: z.string(),
+        answer: z.string()
+      })).optional(),
       ctaReference: z.string().optional()
     })).optional()
   }),
@@ -73,7 +76,7 @@ const solutions = defineCollection({
     pageBlocks: z.array(z.object({
       blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
       textContent: z.string().optional(),
-      faqCategory: z.string().optional(),
+      faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
       ctaReference: z.string().optional()
     })).optional()
   })
@@ -107,7 +110,7 @@ const blog = defineCollection({
     pageBlocks: z.array(z.object({
       blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
       textContent: z.string().optional(),
-      faqCategory: z.string().optional(),
+      faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
       ctaReference: z.string().optional()
     })).optional()
   })
@@ -162,7 +165,7 @@ const caseStudies = defineCollection({
     pageBlocks: z.array(z.object({
       blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
       textContent: z.string().optional(),
-      faqCategory: z.string().optional(),
+      faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
       ctaReference: z.string().optional()
     })).optional()
   })
