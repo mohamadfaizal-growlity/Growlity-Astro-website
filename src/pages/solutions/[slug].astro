@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import FAQAccordion from '../../components/shared/FAQAccordion.astro';
+
+// Tell Astro to create a page for every file in the "solutions" collection
+export async function getStaticPaths() {
+  const solutions = await getCollection('solutions');
+  return solutions.map(solution => ({
+    params: { slug: solution.id },
+    props: { solution },
+  }));
+}
+
+const { solution } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{solution.data.seoTitle || solution.data.title}</title>
+    <meta name="description" content={solution.data.seoDescription || solution.data.shortDescription || ''} />
+  </head>
+  <body class="bg-white text-gray-900">
+    
+    <!-- Solution Header -->
+    <header class="bg-brand-light-green py-20 px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-brand-green mb-4">
+        {solution.data.title}
+      </h1>
+      <p class="text-xl text-gray-700 max-w-3xl mx-auto">{solution.data.shortDescription}</p>
+    </header>
+
+    <!-- Main Content from Sitepins -->
+    <main class="max-w-4xl mx-auto py-12 px-6 prose prose-lg prose-green">
+      <!-- This renders the markdown content you write in the Sitepins Content tab! -->
+      {solution.body}
+    </main>
+
+    <!-- DYNAMIC FAQ COMPONENT -->
+    <!-- This will automatically render ONLY IF you turn "Show Faqs" ON in Sitepins -->
+    {solution.data.showFaqs && (
+      <div class="bg-gray-50 py-16 px-6">
+        <FAQAccordion limit={5} />
+      </div>
+    )}
+
+  </body>
+</html>

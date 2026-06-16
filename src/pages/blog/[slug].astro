@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import FAQAccordion from '../../components/shared/FAQAccordion.astro';
+
+// Tell Astro to create a page for every file in the "blog" collection
+export async function getStaticPaths() {
+  const blogs = await getCollection('blog');
+  return blogs.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{post.data.seoTitle || post.data.title}</title>
+    <meta name="description" content={post.data.seoDescription || post.data.excerpt || ''} />
+  </head>
+  <body class="bg-white text-gray-900">
+    
+    <!-- Blog Header -->
+    <header class="bg-brand-light-green py-20 px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-brand-green mb-4">
+        {post.data.title}
+      </h1>
+      {post.data.category && (
+        <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold mb-4">
+          {post.data.category}
+        </span>
+      )}
+      <p class="text-gray-600">
+        Published on {new Date(post.data.publishedDate).toLocaleDateString()}
+      </p>
+    </header>
+
+    <!-- Main Content from Sitepins -->
+    <main class="max-w-4xl mx-auto py-12 px-6 prose prose-lg prose-green">
+      <!-- This renders the markdown content you write in the Sitepins Content tab! -->
+      {post.body}
+    </main>
+
+    <!-- DYNAMIC FAQ COMPONENT -->
+    <!-- This will automatically render ONLY IF you turn "Show Faqs" ON in Sitepins -->
+    {post.data.showFaqs && (
+      <div class="bg-gray-50 py-16 px-6">
+        <FAQAccordion limit={5} />
+      </div>
+    )}
+
+  </body>
+</html>
