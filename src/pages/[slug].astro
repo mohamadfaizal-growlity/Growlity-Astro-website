@@ -40,10 +40,10 @@ const { page } = Astro.props;
     </main>
 
     <!-- DYNAMIC FAQ COMPONENT -->
-    <!-- This will automatically render ONLY IF you turn "Show Faqs" ON in Sitepins -->
-    {page.data.showFaqs && (
-      <div class="bg-gray-50 py-16 px-6">
-        <FAQAccordion limit={5} />
+    <!-- This will ONLY render if you type an FAQ Category in Sitepins -->
+    {page.data.faqCategory && (
+      <div class="bg-gray-50 py-16 px-6 mt-12">
+        <FAQAccordion category={page.data.faqCategory} limit={5} />
       </div>
     )}
 

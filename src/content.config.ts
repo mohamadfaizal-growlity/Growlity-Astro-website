@@ -41,10 +41,10 @@ const pages = defineCollection({
     heroTitle: z.string().optional(),
     heroDescription: z.string().optional(),
     heroImage: z.string().optional(),
-    showFaqs: z.boolean().default(false),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
-    ogImage: z.string().optional()
+    ogImage: z.string().optional(),
+    faqCategory: z.string().optional()
   }),
 });
 
