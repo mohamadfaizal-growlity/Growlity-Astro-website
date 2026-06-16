@@ -41,7 +41,7 @@ const pages = defineCollection({
     heroTitle: z.string().optional(),
     heroDescription: z.string().optional(),
     heroImage: z.string().optional(),
-    showFaqs: z.boolean().default(false),
+    showFaqs: z.boolean().optional(),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
     ogImage: z.string().optional()
@@ -63,7 +63,7 @@ const solutions = defineCollection({
     industriesServed: z.array(z.string()).optional(),
     relatedCaseStudies: z.array(z.string()).optional(),
     relatedBlogs: z.array(z.string()).optional(),
-    showFaqs: z.boolean().default(false),
+    showFaqs: z.boolean().optional(),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional()
   })
@@ -91,8 +91,8 @@ const blog = defineCollection({
     readingTime: z.string().optional(),
     relatedBlogs: z.array(z.string()).optional(),
     relatedSolutions: z.array(z.string()).optional(),
-    featuredBlogToggle: z.boolean().default(false),
-    showFaqs: z.boolean().default(false),
+    featuredBlogToggle: z.boolean().optional(),
+    showFaqs: z.boolean().optional(),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional()
   })
@@ -160,7 +160,7 @@ const webinars = defineCollection({
     timezone: z.string(),
     registrationLink: z.string().optional(),
     recordingLink: z.string().optional(),
-    upcomingToggle: z.boolean().default(true),
+    upcomingToggle: z.boolean().optional(),
     seoTitle: z.string().optional()
   })
 });
@@ -205,7 +205,7 @@ const testimonials = defineCollection({
     quote: z.string(),
     linkedCaseStudy: z.string().optional(),
     order: z.number().default(0),
-    featured: z.boolean().default(false)
+    featured: z.boolean().optional()
   })
 });
 
@@ -217,7 +217,7 @@ const clients = defineCollection({
     logo: z.string().optional(),
     website: z.string().optional(),
     industry: z.string().optional(),
-    featured: z.boolean().default(false)
+    featured: z.boolean().optional()
   })
 });
 
