@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 
 // 1. Global Settings
 const globalSettings = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/global-settings" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/global-settings" }),
   schema: z.object({
     siteName: z.string(),
     tagline: z.string().optional(),
@@ -35,13 +35,13 @@ const globalSettings = defineCollection({
 
 // 2. Pages
 const pages = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/pages" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/pages" }),
   schema: z.object({
     title: z.string(),
     heroTitle: z.string().optional(),
     heroDescription: z.string().optional(),
     heroImage: z.string().optional(),
-    showFaqs: z.boolean().optional(),
+    showFaqs: z.boolean().default(false),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
     ogImage: z.string().optional()
@@ -50,7 +50,7 @@ const pages = defineCollection({
 
 // 3. Solutions
 const solutions = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/solutions" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/solutions" }),
   schema: z.object({
     title: z.string(),
     category: z.string(),
@@ -63,7 +63,6 @@ const solutions = defineCollection({
     industriesServed: z.array(z.string()).optional(),
     relatedCaseStudies: z.array(z.string()).optional(),
     relatedBlogs: z.array(z.string()).optional(),
-    showFaqs: z.boolean().optional(),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional()
   })
@@ -71,7 +70,7 @@ const solutions = defineCollection({
 
 // 4. Solution Categories
 const solutionCategories = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/solution-categories" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/solution-categories" }),
   schema: z.object({
     title: z.string(),
   })
@@ -79,7 +78,7 @@ const solutionCategories = defineCollection({
 
 // 5. Blog Posts
 const blog = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
   schema: z.object({
     title: z.string(),
     featuredImage: z.string().optional(),
@@ -91,8 +90,7 @@ const blog = defineCollection({
     readingTime: z.string().optional(),
     relatedBlogs: z.array(z.string()).optional(),
     relatedSolutions: z.array(z.string()).optional(),
-    featuredBlogToggle: z.boolean().optional(),
-    showFaqs: z.boolean().optional(),
+    featuredBlogToggle: z.boolean().default(false),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional()
   })
@@ -100,7 +98,7 @@ const blog = defineCollection({
 
 // 6. Blog Categories
 const blogCategories = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/blog-categories" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog-categories" }),
   schema: z.object({
     title: z.string(),
   })
@@ -108,7 +106,7 @@ const blogCategories = defineCollection({
 
 // 7. Tags
 const tags = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/tags" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/tags" }),
   schema: z.object({
     title: z.string(),
   })
@@ -116,7 +114,7 @@ const tags = defineCollection({
 
 // 8. Experts
 const experts = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/experts" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/experts" }),
   schema: z.object({
     name: z.string(),
     photo: z.string().optional(),
@@ -129,7 +127,7 @@ const experts = defineCollection({
 
 // 9. Case Studies
 const caseStudies = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/case-studies" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/case-studies" }),
   schema: z.object({
     clientName: z.string(),
     industry: z.string(),
@@ -149,7 +147,7 @@ const caseStudies = defineCollection({
 
 // 10. Webinars
 const webinars = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/webinars" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/webinars" }),
   schema: z.object({
     title: z.string(),
     banner: z.string().optional(),
@@ -160,14 +158,14 @@ const webinars = defineCollection({
     timezone: z.string(),
     registrationLink: z.string().optional(),
     recordingLink: z.string().optional(),
-    upcomingToggle: z.boolean().optional(),
+    upcomingToggle: z.boolean().default(true),
     seoTitle: z.string().optional()
   })
 });
 
 // 11. Publications
 const publications = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/publications" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/publications" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -181,7 +179,7 @@ const publications = defineCollection({
 
 // 12. Team
 const team = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/team" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/team" }),
   schema: z.object({
     name: z.string(),
     designation: z.string(),
@@ -195,7 +193,7 @@ const team = defineCollection({
 
 // 13. Testimonials
 const testimonials = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/testimonials" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/testimonials" }),
   schema: z.object({
     clientName: z.string(),
     company: z.string(),
@@ -205,25 +203,25 @@ const testimonials = defineCollection({
     quote: z.string(),
     linkedCaseStudy: z.string().optional(),
     order: z.number().default(0),
-    featured: z.boolean().optional()
+    featured: z.boolean().default(false)
   })
 });
 
 // 14. Clients
 const clients = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/clients" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/clients" }),
   schema: z.object({
     companyName: z.string(),
     logo: z.string().optional(),
     website: z.string().optional(),
     industry: z.string().optional(),
-    featured: z.boolean().optional()
+    featured: z.boolean().default(false)
   })
 });
 
 // 15. FAQs
 const faqs = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/faqs" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/faqs" }),
   schema: z.object({
     question: z.string(),
     answer: z.string(),
@@ -235,7 +233,7 @@ const faqs = defineCollection({
 
 // 16. Statistics
 const statistics = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/statistics" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/statistics" }),
   schema: z.object({
     label: z.string(),
     value: z.string(),
@@ -245,7 +243,7 @@ const statistics = defineCollection({
 
 // 17. CTA Blocks
 const ctaBlocks = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/cta-blocks" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/cta-blocks" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -257,7 +255,7 @@ const ctaBlocks = defineCollection({
 
 // 18. Forms
 const forms = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/forms" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/forms" }),
   schema: z.object({
     formName: z.string(),
     formProvider: z.string(),
@@ -268,7 +266,7 @@ const forms = defineCollection({
 
 // 19. SEO Defaults
 const seoDefaults = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/seo-defaults" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/seo-defaults" }),
   schema: z.object({
     defaultTitle: z.string(),
     defaultDescription: z.string().optional(),
