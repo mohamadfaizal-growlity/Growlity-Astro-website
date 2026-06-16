@@ -35,17 +35,41 @@ const { page } = Astro.props;
 
     <!-- Main Content from Sitepins -->
     <main class="max-w-4xl mx-auto py-12 px-6 prose prose-lg prose-green">
-      <!-- This renders the markdown content you write in Sitepins! -->
-      {page.body}
+      <!-- This renders the standard markdown content -->
+      {page.body && <div>{page.body}</div>}
     </main>
 
-    <!-- DYNAMIC FAQ COMPONENT -->
-    <!-- This will ONLY render if you type an FAQ Category in Sitepins -->
-    {page.data.faqCategory && (
-      <div class="bg-gray-50 py-16 px-6 mt-12">
-        <FAQAccordion category={page.data.faqCategory} limit={5} />
-      </div>
-    )}
+    <!-- ACF-Like Dynamic Page Builder Blocks -->
+    {page.data.pageBlocks && page.data.pageBlocks.map((block) => (
+      <section class="w-full">
+        
+        {/* TEXT BLOCK */}
+        {block.blockType === 'Text Content' && block.textContent && (
+          <div class="max-w-4xl mx-auto py-8 px-6 prose prose-lg prose-green">
+            <p>{block.textContent}</p>
+          </div>
+        )}
+
+        {/* FAQ BLOCK */}
+        {block.blockType === 'FAQ Section' && (
+          <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
+            <FAQAccordion category={block.faqCategory} limit={5} />
+          </div>
+        )}
+
+        {/* CTA BLOCK */}
+        {block.blockType === 'CTA Section' && block.ctaReference && (
+          <div class="bg-brand-green text-white py-16 px-6 text-center my-8">
+            <h2 class="text-3xl font-bold mb-4">Ready to get started?</h2>
+            <p class="text-xl mb-8">Contact us about {block.ctaReference}</p>
+            <a href="/contact" class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors">
+              Contact Us
+            </a>
+          </div>
+        )}
+
+      </section>
+    ))}
 
   </body>
 </html>
