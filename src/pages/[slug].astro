@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import FAQAccordion from '../components/shared/FAQAccordion.astro';
+
+// This function tells Astro to create a page for every file in the "pages" collection
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map(page => ({
+    params: { slug: page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{page.data.seoTitle || page.data.title}</title>
+    <meta name="description" content={page.data.seoDescription || page.data.heroDescription || ''} />
+  </head>
+  <body class="bg-white text-gray-900">
+    
+    <!-- Page Header / Hero -->
+    <header class="bg-brand-light-green py-20 px-6 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-brand-green mb-4">
+        {page.data.heroTitle || page.data.title}
+      </h1>
+      {page.data.heroDescription && (
+        <p class="text-xl text-gray-700 max-w-3xl mx-auto">{page.data.heroDescription}</p>
+      )}
+    </header>
+
+    <!-- Main Content from Sitepins -->
+    <main class="max-w-4xl mx-auto py-12 px-6 prose prose-lg prose-green">
+      <!-- This renders the markdown content you write in Sitepins! -->
+      {page.body}
+    </main>
+
+    <!-- DYNAMIC FAQ COMPONENT -->
+    <!-- This will automatically render ONLY IF you turn "Show Faqs" ON in Sitepins -->
+    {page.data.showFaqs && (
+      <div class="bg-gray-50 py-16 px-6">
+        <FAQAccordion limit={5} />
+      </div>
+    )}
+
+  </body>
+</html>
