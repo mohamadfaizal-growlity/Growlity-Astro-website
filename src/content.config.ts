@@ -63,6 +63,7 @@ const solutions = defineCollection({
     industriesServed: z.array(z.string()).optional(),
     relatedCaseStudies: z.array(z.string()).optional(),
     relatedBlogs: z.array(z.string()).optional(),
+    showFaqs: z.boolean().default(false),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional()
   })
@@ -91,6 +92,7 @@ const blog = defineCollection({
     relatedBlogs: z.array(z.string()).optional(),
     relatedSolutions: z.array(z.string()).optional(),
     featuredBlogToggle: z.boolean().default(false),
+    showFaqs: z.boolean().default(false),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional()
   })
