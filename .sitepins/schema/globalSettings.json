@@ -1,0 +1,16 @@
+{
+  "file": "src/content/global-settings/placeholder.md",
+  "name": "Global Settings",
+  "fileType": "md",
+  "fmType": "yaml",
+  "template": [
+    {
+      "name": "disqusShortname",
+      "label": "Disqus Shortname",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    }
+  ]
+}

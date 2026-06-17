@@ -38,6 +38,22 @@
       "defaultValue": ""
     },
     {
+      "name": "seoTitle",
+      "label": "SEO Title",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "seoDescription",
+      "label": "SEO Description",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
       "name": "pageBlocks",
       "label": "PageBlocks",
       "type": "Array",

@@ -1,0 +1,16 @@
+{
+  "file": "src/content/seo-defaults/placeholder.md",
+  "name": "SEO Settings",
+  "fileType": "md",
+  "fmType": "yaml",
+  "template": [
+    {
+      "name": "googleAnalyticsId",
+      "label": "Google Analytics ID (e.g. G-XXXXXXX)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    }
+  ]
+}
