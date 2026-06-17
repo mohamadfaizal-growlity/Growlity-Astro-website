@@ -59,38 +59,38 @@ const { Content } = await render(study);
     <section class="w-full">
       
       {/* BANNER IMAGE BLOCK */}
-      {study.data.bannerImage && (
+      {study.data.bannerSection?.image && (
         <div class="w-full my-12 relative overflow-hidden group border-y border-gray-100">
           <div class="w-full aspect-[4/3] md:aspect-video max-h-[600px] overflow-hidden bg-gray-100 flex items-center justify-center">
-            <img src={study.data.bannerImage} alt={study.data.bannerCaption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <img src={study.data.bannerSection.image} alt={study.data.bannerSection.caption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           </div>
-          {study.data.bannerCaption && (
+          {study.data.bannerSection.caption && (
             <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24">
-              <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">{study.data.bannerCaption}</p>
+              <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">{study.data.bannerSection.caption}</p>
             </div>
           )}
         </div>
       )}
 
       {/* BOTTOM TEXT BLOCK */}
-      {study.data.bottomText && (
+      {study.data.bottomSection?.text && (
         <div class="max-w-4xl mx-auto py-8 px-6 prose prose-lg prose-green text-center">
-          <h2 class="text-2xl font-bold text-gray-900">{study.data.bottomText}</h2>
+          <h2 class="text-2xl font-bold text-gray-900">{study.data.bottomSection.text}</h2>
         </div>
       )}
 
       {/* FAQ BLOCK */}
-      {study.data.faqList && study.data.faqList.length > 0 && (
+      {study.data.faqSection && study.data.faqSection.length > 0 && (
         <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
-          <FAQAccordion faqList={study.data.faqList} />
+          <FAQAccordion faqList={study.data.faqSection} />
         </div>
       )}
 
       {/* CTA BLOCK */}
-      {study.data.ctaReference && (
+      {study.data.ctaSection?.reference && (
         <div class="bg-brand-green text-white py-16 px-6 text-center my-8">
           <h2 class="text-3xl font-bold mb-4">Want similar results?</h2>
-          <p class="text-xl mb-8">Contact us about {study.data.ctaReference}</p>
+          <p class="text-xl mb-8">Contact us about {study.data.ctaSection.reference}</p>
           <a href="/contact" class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors inline-block">
             Contact Us
           </a>

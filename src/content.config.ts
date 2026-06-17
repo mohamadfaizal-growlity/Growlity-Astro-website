@@ -39,20 +39,30 @@ const pages = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/pages" }),
   schema: ({ image }) => z.object({
     title: z.string(),
-    heroTitle: z.string().optional(),
-    heroDescription: z.string().optional(),
-    heroImage: z.string().optional(),
-    seoTitle: z.string().optional(),
-    seoDescription: z.string().optional(),
     ogImage: z.string().optional(),
-    bottomText: z.string().optional(),
-    bannerImage: z.string().optional(),
-    bannerCaption: z.string().optional(),
-    faqList: z.array(z.object({
+    heroSection: z.object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+      image: z.string().optional(),
+    }).optional(),
+    seoSettings: z.object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+    }).optional(),
+    bottomSection: z.object({
+      text: z.string().optional(),
+    }).optional(),
+    bannerSection: z.object({
+      image: z.string().optional(),
+      caption: z.string().optional(),
+    }).optional(),
+    faqSection: z.array(z.object({
       question: z.string(),
       answer: z.string()
     })).optional(),
-    ctaReference: z.string().optional()
+    ctaSection: z.object({
+      reference: z.string().optional()
+    }).optional()
   }),
 });
 
@@ -71,13 +81,21 @@ const solutions = defineCollection({
     industriesServed: z.array(z.string()).optional(),
     relatedCaseStudies: z.array(z.string()).optional(),
     relatedBlogs: z.array(z.string()).optional(),
-    seoTitle: z.string().optional(),
-    seoDescription: z.string().optional(),
-    bottomText: z.string().optional(),
-    bannerImage: z.string().optional(),
-    bannerCaption: z.string().optional(),
-    faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
-    ctaReference: z.string().optional()
+    seoSettings: z.object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+    }).optional(),
+    bottomSection: z.object({
+      text: z.string().optional(),
+    }).optional(),
+    bannerSection: z.object({
+      image: z.string().optional(),
+      caption: z.string().optional(),
+    }).optional(),
+    faqSection: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
+    ctaSection: z.object({
+      reference: z.string().optional()
+    }).optional()
   })
 });
 
@@ -104,13 +122,21 @@ const blog = defineCollection({
     relatedBlogs: z.array(z.string()).optional(),
     relatedSolutions: z.array(z.string()).optional(),
     featuredBlogToggle: z.boolean().default(false),
-    seoTitle: z.string().optional(),
-    seoDescription: z.string().optional(),
-    bottomText: z.string().optional(),
-    bannerImage: z.string().optional(),
-    bannerCaption: z.string().optional(),
-    faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
-    ctaReference: z.string().optional()
+    seoSettings: z.object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+    }).optional(),
+    bottomSection: z.object({
+      text: z.string().optional(),
+    }).optional(),
+    bannerSection: z.object({
+      image: z.string().optional(),
+      caption: z.string().optional(),
+    }).optional(),
+    faqSection: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
+    ctaSection: z.object({
+      reference: z.string().optional()
+    }).optional()
   })
 });
 
@@ -158,13 +184,21 @@ const caseStudies = defineCollection({
     metrics: z.array(z.string()).optional(),
     testimonial: z.string().optional(),
     relatedSolution: z.string().optional(),
-    seoTitle: z.string().optional(),
-    seoDescription: z.string().optional(),
-    bottomText: z.string().optional(),
-    bannerImage: z.string().optional(),
-    bannerCaption: z.string().optional(),
-    faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
-    ctaReference: z.string().optional()
+    seoSettings: z.object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+    }).optional(),
+    bottomSection: z.object({
+      text: z.string().optional(),
+    }).optional(),
+    bannerSection: z.object({
+      image: z.string().optional(),
+      caption: z.string().optional(),
+    }).optional(),
+    faqSection: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
+    ctaSection: z.object({
+      reference: z.string().optional()
+    }).optional()
   })
 });
 

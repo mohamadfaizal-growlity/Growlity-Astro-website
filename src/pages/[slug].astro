@@ -43,38 +43,38 @@ const { page } = Astro.props;
     <section class="w-full">
       
       {/* BANNER IMAGE BLOCK */}
-      {page.data.bannerImage && (
+      {page.data.bannerSection?.image && (
         <div class="w-full my-12 relative overflow-hidden group border-y border-gray-100">
           <div class="w-full aspect-[4/3] md:aspect-video max-h-[600px] overflow-hidden bg-gray-100 flex items-center justify-center">
-            <img src={page.data.bannerImage} alt={page.data.bannerCaption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <img src={page.data.bannerSection.image} alt={page.data.bannerSection.caption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           </div>
-          {page.data.bannerCaption && (
+          {page.data.bannerSection.caption && (
             <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24">
-              <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">{page.data.bannerCaption}</p>
+              <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">{page.data.bannerSection.caption}</p>
             </div>
           )}
         </div>
       )}
 
       {/* BOTTOM TEXT BLOCK */}
-      {page.data.bottomText && (
+      {page.data.bottomSection?.text && (
         <div class="max-w-4xl mx-auto py-8 px-6 prose prose-lg prose-green text-center">
-          <h2 class="text-2xl font-bold text-gray-900">{page.data.bottomText}</h2>
+          <h2 class="text-2xl font-bold text-gray-900">{page.data.bottomSection.text}</h2>
         </div>
       )}
 
       {/* FAQ BLOCK */}
-      {page.data.faqList && page.data.faqList.length > 0 && (
+      {page.data.faqSection && page.data.faqSection.length > 0 && (
         <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
-          <FAQAccordion faqList={page.data.faqList} />
+          <FAQAccordion faqList={page.data.faqSection} />
         </div>
       )}
 
       {/* CTA BLOCK */}
-      {page.data.ctaReference && (
+      {page.data.ctaSection?.reference && (
         <div class="bg-brand-green text-white py-16 px-6 text-center my-8">
           <h2 class="text-3xl font-bold mb-4">Ready to get started?</h2>
-          <p class="text-xl mb-8">Contact us about {page.data.ctaReference}</p>
+          <p class="text-xl mb-8">Contact us about {page.data.ctaSection.reference}</p>
           <a href="/contact" class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors">
             Contact Us
           </a>
