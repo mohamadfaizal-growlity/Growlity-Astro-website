@@ -9,5 +9,8 @@ pageBlocks:
     faqList:
       - question: "Sample Question?"
         answer: "Sample Answer."
+  - blockType: "Banner Image"
+    imageUpload: "https://via.placeholder.com/1200x600"
+    imageCaption: "Sample Banner Caption"
 ---
 Placeholder content for solutions

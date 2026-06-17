@@ -6,18 +6,15 @@ const files = [
   'src/content/case-studies/placeholder.md'
 ];
 
-const blockYaml = `pageBlocks:
-  - blockType: "Text Content"
-    textContent: "Write your text here..."
-  - blockType: "FAQ Section"
-    faqCategory: "ecovadis"`;
+const bannerBlock = `  - blockType: "Banner Image"
+    imageUpload: "https://via.placeholder.com/1200x600"
+    imageCaption: "Sample Banner Caption"
+`;
 
 files.forEach(file => {
   if (fs.existsSync(file)) {
     let content = fs.readFileSync(file, 'utf8');
-    if (!content.includes('pageBlocks:')) {
-      content = content.replace(/\n---\n(Placeholder.*)$/, '\n' + blockYaml + '\n---\n$1');
-      fs.writeFileSync(file, content);
-    }
+    content = content.replace(/\n---(\s*)$/m, '\n' + bannerBlock + '---$1');
+    fs.writeFileSync(file, content);
   }
 });
