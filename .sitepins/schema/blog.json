@@ -54,66 +54,56 @@
       "defaultValue": ""
     },
     {
-      "name": "pageBlocks",
-      "label": "PageBlocks",
+      "name": "bottomText",
+      "label": "Bottom Text",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "bannerImage",
+      "label": "Banner Image Upload",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "bannerCaption",
+      "label": "Banner Image Caption",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "ctaReference",
+      "label": "CTA Reference Text",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "faqList",
+      "label": "FAQ List",
       "type": "Array",
       "value": [],
       "isIgnored": false,
       "defaultValue": "",
       "fields": [
         {
-          "name": "blockType",
-          "label": "BlockType",
+          "name": "question",
+          "label": "Question",
           "type": "string",
           "value": "",
           "isIgnored": false,
           "defaultValue": ""
         },
         {
-          "name": "textContent",
-          "label": "TextContent",
-          "type": "string",
-          "value": "",
-          "isIgnored": false,
-          "defaultValue": ""
-        },
-        {
-          "name": "faqList",
-          "label": "FaqList",
-          "type": "Array",
-          "value": [],
-          "isIgnored": false,
-          "defaultValue": "",
-          "fields": [
-            {
-              "name": "question",
-              "label": "Question",
-              "type": "string",
-              "value": "",
-              "isIgnored": false,
-              "defaultValue": ""
-            },
-            {
-              "name": "answer",
-              "label": "Answer",
-              "type": "string",
-              "value": "",
-              "isIgnored": false,
-              "defaultValue": ""
-            }
-          ]
-        },
-        {
-          "name": "imageUpload",
-          "label": "ImageUpload",
-          "type": "string",
-          "value": "",
-          "isIgnored": false,
-          "defaultValue": ""
-        },
-        {
-          "name": "imageCaption",
-          "label": "ImageCaption",
+          "name": "answer",
+          "label": "Answer",
           "type": "string",
           "value": "",
           "isIgnored": false,

@@ -45,17 +45,14 @@ const pages = defineCollection({
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
     ogImage: z.string().optional(),
-    pageBlocks: z.array(z.object({
-      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section', 'Banner Image']),
-      textContent: z.string().optional(),
-      faqList: z.array(z.object({
-        question: z.string(),
-        answer: z.string()
-      })).optional(),
-      ctaReference: z.string().optional(),
-      imageUpload: z.string().optional(),
-      imageCaption: z.string().optional()
-    })).optional()
+    bottomText: z.string().optional(),
+    bannerImage: z.string().optional(),
+    bannerCaption: z.string().optional(),
+    faqList: z.array(z.object({
+      question: z.string(),
+      answer: z.string()
+    })).optional(),
+    ctaReference: z.string().optional()
   }),
 });
 
@@ -76,14 +73,11 @@ const solutions = defineCollection({
     relatedBlogs: z.array(z.string()).optional(),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
-    pageBlocks: z.array(z.object({
-      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section', 'Banner Image']),
-      textContent: z.string().optional(),
-      faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
-      ctaReference: z.string().optional(),
-      imageUpload: z.string().optional(),
-      imageCaption: z.string().optional()
-    })).optional()
+    bottomText: z.string().optional(),
+    bannerImage: z.string().optional(),
+    bannerCaption: z.string().optional(),
+    faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
+    ctaReference: z.string().optional()
   })
 });
 
@@ -112,14 +106,11 @@ const blog = defineCollection({
     featuredBlogToggle: z.boolean().default(false),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
-    pageBlocks: z.array(z.object({
-      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section', 'Banner Image']),
-      textContent: z.string().optional(),
-      faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
-      ctaReference: z.string().optional(),
-      imageUpload: z.string().optional(),
-      imageCaption: z.string().optional()
-    })).optional()
+    bottomText: z.string().optional(),
+    bannerImage: z.string().optional(),
+    bannerCaption: z.string().optional(),
+    faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
+    ctaReference: z.string().optional()
   })
 });
 
@@ -169,14 +160,11 @@ const caseStudies = defineCollection({
     relatedSolution: z.string().optional(),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
-    pageBlocks: z.array(z.object({
-      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section', 'Banner Image']),
-      textContent: z.string().optional(),
-      faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
-      ctaReference: z.string().optional(),
-      imageUpload: z.string().optional(),
-      imageCaption: z.string().optional()
-    })).optional()
+    bottomText: z.string().optional(),
+    bannerImage: z.string().optional(),
+    bannerCaption: z.string().optional(),
+    faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
+    ctaReference: z.string().optional()
   })
 });
 

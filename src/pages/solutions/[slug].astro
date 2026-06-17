@@ -43,51 +43,49 @@ const { Content } = await render(solution);
       <Content />
     </main>
 
-    <!-- ACF-Like Dynamic Page Builder Blocks -->
-    {solution.data.pageBlocks && solution.data.pageBlocks.map((block) => (
-      <section class="w-full">
-        
-        {/* TEXT BLOCK */}
-        {block.blockType === 'Text Content' && block.textContent && (
-          <div class="max-w-4xl mx-auto py-8 px-6 prose prose-lg prose-green text-center">
-            <h2 class="text-2xl font-bold text-gray-900">{block.textContent}</h2>
-          </div>
-        )}
-
-        {/* FAQ BLOCK */}
-        {block.blockType === 'FAQ Section' && block.faqList && (
-          <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
-            <FAQAccordion faqList={block.faqList} />
-          </div>
-        )}
-
-        {/* CTA BLOCK */}
-        {block.blockType === 'CTA Section' && block.ctaReference && (
-          <div class="bg-brand-green text-white py-16 px-6 text-center my-8">
-            <h2 class="text-3xl font-bold mb-4">Start your journey today</h2>
-            <p class="text-xl mb-8">Talk to our experts about {block.ctaReference}</p>
-            <a href="/contact" class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors inline-block">
-              Request a Consultation
-            </a>
-          </div>
-        )}
-
+    <!-- Static Fields Section -->
+    <section class="w-full">
       
-        {/* BANNER IMAGE BLOCK */}
-        {block.blockType === 'Banner Image' && block.imageUpload && (
-          <div class="w-full my-12 relative overflow-hidden group border-y border-gray-100">
-            <div class="w-full aspect-[4/3] md:aspect-video max-h-[600px] overflow-hidden bg-gray-100 flex items-center justify-center">
-              <img src={block.imageUpload} alt={block.imageCaption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-            </div>
-            {block.imageCaption && (
-              <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24">
-                <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">{block.imageCaption}</p>
-              </div>
-            )}
+      {/* BANNER IMAGE BLOCK */}
+      {solution.data.bannerImage && (
+        <div class="w-full my-12 relative overflow-hidden group border-y border-gray-100">
+          <div class="w-full aspect-[4/3] md:aspect-video max-h-[600px] overflow-hidden bg-gray-100 flex items-center justify-center">
+            <img src={solution.data.bannerImage} alt={solution.data.bannerCaption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           </div>
-        )}
-      </section>
-    ))}
+          {solution.data.bannerCaption && (
+            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24">
+              <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">{solution.data.bannerCaption}</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* BOTTOM TEXT BLOCK */}
+      {solution.data.bottomText && (
+        <div class="max-w-4xl mx-auto py-8 px-6 prose prose-lg prose-green text-center">
+          <h2 class="text-2xl font-bold text-gray-900">{solution.data.bottomText}</h2>
+        </div>
+      )}
+
+      {/* FAQ BLOCK */}
+      {solution.data.faqList && solution.data.faqList.length > 0 && (
+        <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
+          <FAQAccordion faqList={solution.data.faqList} />
+        </div>
+      )}
+
+      {/* CTA BLOCK */}
+      {solution.data.ctaReference && (
+        <div class="bg-brand-green text-white py-16 px-6 text-center my-8">
+          <h2 class="text-3xl font-bold mb-4">Ready to get started?</h2>
+          <p class="text-xl mb-8">Contact us about {solution.data.ctaReference}</p>
+          <a href="/contact" class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors inline-block">
+            Contact Us
+          </a>
+        </div>
+      )}
+      
+    </section>
 
   </body>
 </html>
