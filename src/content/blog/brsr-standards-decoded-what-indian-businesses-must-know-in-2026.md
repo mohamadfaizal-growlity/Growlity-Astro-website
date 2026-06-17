@@ -4,7 +4,7 @@ author: "Admin"
 publishedDate: 2026-06-17T09:27:00.000Z
 category: "Business Strategy"
 pageBlocks:
-  - blockType: ""
+  - blockType: "Banner Image "
     textContent: ""
     faqList:
       - question: What are BRSR Standards?
@@ -46,7 +46,7 @@ pageBlocks:
           Together, these principles help organizations build a more transparent
           and sustainable operational framework.
     imageUpload: /image7.png
-    imageCaption: ""
+    imageCaption: BRBS
 draft: false
 ---
 # BRSR Standards Decoded: What Indian Businesses Must Know in 2026
