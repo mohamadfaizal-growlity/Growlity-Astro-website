@@ -99,14 +99,6 @@ const solutions = defineCollection({
   })
 });
 
-// 4. Solution Categories
-const solutionCategories = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/solution-categories" }),
-  schema: ({ image }) => z.object({
-    title: z.string(),
-  })
-});
-
 // 5. Blog Posts
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
@@ -137,22 +129,6 @@ const blog = defineCollection({
     ctaSection: z.object({
       reference: z.string().optional()
     }).optional()
-  })
-});
-
-// 6. Blog Categories
-const blogCategories = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog-categories" }),
-  schema: ({ image }) => z.object({
-    title: z.string(),
-  })
-});
-
-// 7. Tags
-const tags = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/tags" }),
-  schema: ({ image }) => z.object({
-    title: z.string(),
   })
 });
 
@@ -266,10 +242,7 @@ export const collections = {
   globalSettings,
   pages,
   solutions,
-  solutionCategories,
   blog,
-  blogCategories,
-  tags,
   experts,
   caseStudies,
   webinars,
