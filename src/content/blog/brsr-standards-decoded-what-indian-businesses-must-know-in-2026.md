@@ -47,7 +47,7 @@ pageBlocks:
           and sustainable operational framework.
     imageUpload: /image7.png
     imageCaption: BRBS
-draft: false
+draft: true
 ---
 # BRSR Standards Decoded: What Indian Businesses Must Know in 2026
 
