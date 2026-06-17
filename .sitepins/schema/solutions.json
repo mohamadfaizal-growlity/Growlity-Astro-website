@@ -1,0 +1,31 @@
+{
+  "file": "src/content/solutions/placeholder.md",
+  "name": "solutions",
+  "fileType": "md",
+  "fmType": "yaml",
+  "template": [
+    { "name": "title", "label": "Title", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "category", "label": "Category", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "featuredImage", "label": "Featured Image", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "shortDescription", "label": "Short Description", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "problemStatement", "label": "Problem Statement", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "seoTitle", "label": "SEO Title", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "seoDescription", "label": "SEO Description", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "bottomText", "label": "Bottom Text", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "bannerImage", "label": "Banner Image Upload", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "bannerCaption", "label": "Banner Image Caption", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "ctaReference", "label": "CTA Reference Text", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    {
+      "name": "faqList",
+      "label": "FAQ List",
+      "type": "Array",
+      "value": [],
+      "isIgnored": false,
+      "defaultValue": "",
+      "fields": [
+        { "name": "question", "label": "Question", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+        { "name": "answer", "label": "Answer", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" }
+      ]
+    }
+  ]
+}

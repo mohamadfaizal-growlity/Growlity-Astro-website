@@ -1,0 +1,35 @@
+{
+  "file": "src/content/case-studies/placeholder.md",
+  "name": "caseStudies",
+  "fileType": "md",
+  "fmType": "yaml",
+  "template": [
+    { "name": "clientName", "label": "Client Name", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "industry", "label": "Industry", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "clientLogo", "label": "Client Logo", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "thumbnail", "label": "Thumbnail", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "challenge", "label": "Challenge", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "solution", "label": "Solution Overview", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "implementation", "label": "Implementation Details", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "results", "label": "Results", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "testimonial", "label": "Testimonial Quote", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "seoTitle", "label": "SEO Title", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "seoDescription", "label": "SEO Description", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "bottomText", "label": "Bottom Text", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "bannerImage", "label": "Banner Image Upload", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "bannerCaption", "label": "Banner Image Caption", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    { "name": "ctaReference", "label": "CTA Reference Text", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    {
+      "name": "faqList",
+      "label": "FAQ List",
+      "type": "Array",
+      "value": [],
+      "isIgnored": false,
+      "defaultValue": "",
+      "fields": [
+        { "name": "question", "label": "Question", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+        { "name": "answer", "label": "Answer", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" }
+      ]
+    }
+  ]
+}
