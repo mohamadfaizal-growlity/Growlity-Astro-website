@@ -16,8 +16,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 // Fetch settings
-const seoSettings = await getCollection('seoDefaults');
-const gaId = seoSettings.length > 0 ? seoSettings[0].data.googleAnalyticsId : null;
+const gaId = null;
 
 const globalSettings = await getCollection('globalSettings');
 const disqusShortname = globalSettings.length > 0 ? globalSettings[0].data.disqusShortname : null;

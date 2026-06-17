@@ -8,7 +8,7 @@ interface Props {
   faqList?: Array<{ question: string; answer: string }>;
 }
 
-const { category, relatedSolution, limit, faqList } = Astro.props;
+const { faqList } = Astro.props;
 
 let allFaqs = [];
 
@@ -22,27 +22,6 @@ if (faqList && faqList.length > 0) {
       order: index
     }
   }));
-} else {
-  // Fallback to querying the database
-  let dbFaqs = await getCollection('faqs');
-  
-  // Sort by order
-  dbFaqs = dbFaqs.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
-
-  // Filter dynamically based on props
-  if (category) {
-    dbFaqs = dbFaqs.filter(faq => faq.data.category === category);
-  }
-
-  if (relatedSolution) {
-    dbFaqs = dbFaqs.filter(faq => faq.data.relatedSolution === relatedSolution);
-  }
-
-  // Apply limit if provided
-  if (limit) {
-    dbFaqs = dbFaqs.slice(0, limit);
-  }
-  allFaqs = dbFaqs;
 }
 ---
 

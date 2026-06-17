@@ -234,20 +234,6 @@ const publications = defineCollection({
   })
 });
 
-// 12. Team
-const team = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/team" }),
-  schema: ({ image }) => z.object({
-    name: z.string(),
-    designation: z.string(),
-    photo: z.string().optional(),
-    bio: z.string().optional(),
-    linkedin: z.string().optional(),
-    email: z.string().optional(),
-    order: z.number().default(0)
-  })
-});
-
 // 13. Testimonials
 const testimonials = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/testimonials" }),
@@ -276,66 +262,6 @@ const clients = defineCollection({
   })
 });
 
-// 15. FAQs
-const faqs = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/faqs" }),
-  schema: ({ image }) => z.object({
-    question: z.string(),
-    answer: z.string(),
-    category: z.string().optional(),
-    relatedSolution: z.string().optional(),
-    order: z.number().default(0)
-  })
-});
-
-// 16. Statistics
-const statistics = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/statistics" }),
-  schema: ({ image }) => z.object({
-    label: z.string(),
-    value: z.string(),
-    order: z.number().default(0)
-  })
-});
-
-// 17. CTA Blocks
-const ctaBlocks = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/cta-blocks" }),
-  schema: ({ image }) => z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    buttonText: z.string(),
-    buttonUrl: z.string(),
-    backgroundImage: z.string().optional()
-  })
-});
-
-// 18. Forms
-const forms = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/forms" }),
-  schema: ({ image }) => z.object({
-    formName: z.string(),
-    formProvider: z.string(),
-    formId: z.string(),
-    successMessage: z.string().optional()
-  })
-});
-
-// 19. SEO Defaults
-const seoDefaults = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/seo-defaults" }),
-  schema: ({ image }) => z.object({
-    defaultTitle: z.string(),
-    defaultDescription: z.string().optional(),
-    defaultOgImage: z.string().optional(),
-    schemaSettings: z.string().optional(),
-    googleAnalyticsId: z.string().optional(),
-    googleSearchConsoleId: z.string().optional(),
-    metaPixelId: z.string().optional(),
-    linkedinInsightTag: z.string().optional()
-  })
-});
-
 export const collections = {
   globalSettings,
   pages,
@@ -348,12 +274,6 @@ export const collections = {
   caseStudies,
   webinars,
   publications,
-  team,
   testimonials,
-  clients,
-  faqs,
-  statistics,
-  ctaBlocks,
-  forms,
-  seoDefaults
+  clients
 };

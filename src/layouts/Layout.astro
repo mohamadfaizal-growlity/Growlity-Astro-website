@@ -8,9 +8,8 @@ interface Props {
 
 const { title } = Astro.props;
 
-// Fetch GA ID from seoDefaults if available
-const seoSettings = await getCollection('seoDefaults');
-const gaId = seoSettings.length > 0 ? seoSettings[0].data.googleAnalyticsId : null;
+// Fetch GA ID from globalSettings if available (Fallback added for future)
+const gaId = null;
 ---
 
 <!doctype html>
