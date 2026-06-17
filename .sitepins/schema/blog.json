@@ -1,0 +1,109 @@
+{
+  "file": "src/content/blog/placeholder.md",
+  "name": "blog",
+  "fileType": "md",
+  "fmType": "yaml",
+  "template": [
+    {
+      "name": "title",
+      "label": "Title",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "author",
+      "label": "Author",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "publishedDate",
+      "label": "PublishedDate",
+      "type": "Date",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": "",
+      "alwaysUseCurrentDate": false
+    },
+    {
+      "name": "category",
+      "label": "Category",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "pageBlocks",
+      "label": "PageBlocks",
+      "type": "Array",
+      "value": [],
+      "isIgnored": false,
+      "defaultValue": "",
+      "fields": [
+        {
+          "name": "blockType",
+          "label": "BlockType",
+          "type": "string",
+          "value": "",
+          "isIgnored": false,
+          "defaultValue": ""
+        },
+        {
+          "name": "textContent",
+          "label": "TextContent",
+          "type": "string",
+          "value": "",
+          "isIgnored": false,
+          "defaultValue": ""
+        },
+        {
+          "name": "faqList",
+          "label": "FaqList",
+          "type": "Array",
+          "value": [],
+          "isIgnored": false,
+          "defaultValue": "",
+          "fields": [
+            {
+              "name": "question",
+              "label": "Question",
+              "type": "string",
+              "value": "",
+              "isIgnored": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "answer",
+              "label": "Answer",
+              "type": "string",
+              "value": "",
+              "isIgnored": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "imageUpload",
+          "label": "ImageUpload",
+          "type": "string",
+          "value": "",
+          "isIgnored": false,
+          "defaultValue": ""
+        },
+        {
+          "name": "imageCaption",
+          "label": "ImageCaption",
+          "type": "string",
+          "value": "",
+          "isIgnored": false,
+          "defaultValue": ""
+        }
+      ]
+    }
+  ]
+}
