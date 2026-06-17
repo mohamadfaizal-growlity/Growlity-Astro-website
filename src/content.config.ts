@@ -45,13 +45,15 @@ const pages = defineCollection({
     seoDescription: z.string().optional(),
     ogImage: z.string().optional(),
     pageBlocks: z.array(z.object({
-      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
+      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section', 'Banner Image']),
       textContent: z.string().optional(),
       faqList: z.array(z.object({
         question: z.string(),
         answer: z.string()
       })).optional(),
-      ctaReference: z.string().optional()
+      ctaReference: z.string().optional(),
+      imageUpload: z.string().optional(),
+      imageCaption: z.string().optional()
     })).optional()
   }),
 });
@@ -74,10 +76,12 @@ const solutions = defineCollection({
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
     pageBlocks: z.array(z.object({
-      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
+      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section', 'Banner Image']),
       textContent: z.string().optional(),
       faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
-      ctaReference: z.string().optional()
+      ctaReference: z.string().optional(),
+      imageUpload: z.string().optional(),
+      imageCaption: z.string().optional()
     })).optional()
   })
 });
@@ -108,10 +112,12 @@ const blog = defineCollection({
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
     pageBlocks: z.array(z.object({
-      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
+      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section', 'Banner Image']),
       textContent: z.string().optional(),
       faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
-      ctaReference: z.string().optional()
+      ctaReference: z.string().optional(),
+      imageUpload: z.string().optional(),
+      imageCaption: z.string().optional()
     })).optional()
   })
 });
@@ -163,10 +169,12 @@ const caseStudies = defineCollection({
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
     pageBlocks: z.array(z.object({
-      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section']),
+      blockType: z.enum(['Text Content', 'FAQ Section', 'CTA Section', 'Banner Image']),
       textContent: z.string().optional(),
       faqList: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
-      ctaReference: z.string().optional()
+      ctaReference: z.string().optional(),
+      imageUpload: z.string().optional(),
+      imageCaption: z.string().optional()
     })).optional()
   })
 });
