@@ -4,7 +4,7 @@ author: "Admin"
 publishedDate: 2026-06-17T09:27:00.000Z
 category: "Business Strategy"
 pageBlocks:
-  - blockType: "Banner Image "
+  - blockType: Banner Image
     textContent: ""
     faqList:
       - question: What are BRSR Standards?
