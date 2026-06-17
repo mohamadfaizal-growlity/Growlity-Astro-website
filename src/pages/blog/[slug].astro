@@ -14,6 +14,13 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+// Fetch settings
+const seoSettings = await getCollection('seoDefaults');
+const gaId = seoSettings.length > 0 ? seoSettings[0].data.googleAnalyticsId : null;
+
+const globalSettings = await getCollection('globalSettings');
+const disqusShortname = globalSettings.length > 0 ? globalSettings[0].data.disqusShortname : null;
 ---
 
 <html lang="en">
@@ -22,6 +29,19 @@ const { Content } = await render(post);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{post.data.seoTitle || post.data.title}</title>
     <meta name="description" content={post.data.seoDescription || post.data.excerpt || ''} />
+
+    {/* Google Analytics */}
+    {gaId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
   </head>
   <body class="bg-white text-gray-900">
     
@@ -100,6 +120,26 @@ const { Content } = await render(post);
         )}
       </section>
     ))}
+
+    {/* Disqus Comments */}
+    {disqusShortname && (
+      <div class="max-w-4xl mx-auto py-12 px-6 border-t border-gray-200 mt-12">
+        <div id="disqus_thread"></div>
+        <script define:vars={{ disqusShortname, postUrl: `https://growlity-astro-website.vercel.app/blog/${post.id}`, postId: post.id }}>
+          var disqus_config = function () {
+            this.page.url = postUrl;
+            this.page.identifier = postId;
+          };
+          (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    )}
 
   </body>
 </html>

@@ -30,6 +30,7 @@ const globalSettings = defineCollection({
     footerText: z.string().optional(),
     cookieConsentText: z.string().optional(),
     popupSettings: z.string().optional(),
+    disqusShortname: z.string().optional(),
   })
 });
 
