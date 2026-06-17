@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import FAQAccordion from '../../components/shared/FAQAccordion.astro';
+import '../../styles/global.css';
 
 // This function tells Astro to create a page for every file in the "blog" collection
 export async function getStaticPaths() {
@@ -38,6 +39,15 @@ const { Content } = await render(post);
         </div>
       </div>
     </header>
+
+    <!-- Main Featured Image (Shows at the top) -->
+    {post.data.featuredImage && (
+      <div class="w-full max-w-5xl mx-auto mt-8 px-6">
+        <div class="w-full h-[400px] md:h-[500px] overflow-hidden rounded-2xl shadow-lg">
+          <img src={post.data.featuredImage} alt={post.data.title} class="w-full h-full object-cover" />
+        </div>
+      </div>
+    )}
 
     <!-- Main Content from Sitepins -->
     <main class="max-w-4xl mx-auto py-12 px-6 prose prose-lg prose-green">

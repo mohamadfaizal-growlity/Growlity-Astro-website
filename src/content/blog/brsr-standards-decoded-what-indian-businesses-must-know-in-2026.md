@@ -3,9 +3,10 @@ title: "BRSR Standards Decoded: What Indian Businesses Must Know in 2026"
 author: "Admin"
 publishedDate: 2026-06-17T09:27:00.000Z
 category: "Business Strategy"
+featuredImage: "/image7.png"
+draft: false
 pageBlocks:
-  - blockType: Banner Image
-    textContent: ""
+  - blockType: "FAQ Section"
     faqList:
       - question: What are BRSR Standards?
         answer: BRSR Standards, or Business Responsibility and Sustainability Reporting
@@ -45,9 +46,6 @@ pageBlocks:
           services, inclusive growth, and responsible business practices.
           Together, these principles help organizations build a more transparent
           and sustainable operational framework.
-    imageUpload: /image7.png
-    imageCaption: BRBS
-draft: true
 ---
 # BRSR Standards Decoded: What Indian Businesses Must Know in 2026
 
