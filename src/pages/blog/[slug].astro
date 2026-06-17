@@ -43,7 +43,7 @@ const { Content } = await render(post);
     <!-- Main Featured Image (Shows at the top) -->
     {post.data.featuredImage && (
       <div class="w-full max-w-5xl mx-auto mt-8 px-6">
-        <div class="w-full h-[400px] md:h-[500px] overflow-hidden rounded-2xl shadow-lg">
+        <div class="w-full aspect-[4/3] md:aspect-video max-h-[600px] overflow-hidden rounded-2xl shadow-lg bg-gray-100">
           <img src={post.data.featuredImage} alt={post.data.title} class="w-full h-full object-cover" />
         </div>
       </div>
@@ -88,8 +88,8 @@ const { Content } = await render(post);
         {/* BANNER IMAGE BLOCK */}
         {block.blockType === 'Banner Image' && block.imageUpload && (
           <div class="w-full my-12 relative overflow-hidden group border-y border-gray-100">
-            <div class="w-full max-h-[600px] overflow-hidden bg-gray-100 flex items-center justify-center">
-              <img src={block.imageUpload} alt={block.imageCaption || "Featured Banner"} class="w-full h-auto min-h-[300px] object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="w-full aspect-[4/3] md:aspect-video max-h-[600px] overflow-hidden bg-gray-100 flex items-center justify-center">
+              <img src={block.imageUpload} alt={block.imageCaption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             </div>
             {block.imageCaption && (
               <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24">
