@@ -119,7 +119,16 @@ const { title, fields, submitButtonText, successMessage } = formEntry.data;
           successMsg.classList.remove('hidden');
           successMsg.classList.remove('text-green-600');
           successMsg.classList.add('text-red-600');
-          successMsg.innerHTML = jsonRes.error || "An error occurred";
+          
+          let errorText = "An error occurred";
+          if (jsonRes.error) {
+            if (typeof jsonRes.error === 'object') {
+              errorText = jsonRes.error.message || JSON.stringify(jsonRes.error);
+            } else {
+              errorText = jsonRes.error;
+            }
+          }
+          successMsg.innerHTML = errorText;
           form.querySelector('button').innerText = 'Error';
         }
       })
