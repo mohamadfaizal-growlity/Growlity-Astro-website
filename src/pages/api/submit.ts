@@ -10,7 +10,7 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Missing formId' }), { status: 400 });
     }
 
-    const githubToken = import.meta.env.GITHUB_TOKEN || process.env.GITHUB_TOKEN;
+    const githubToken = import.meta.env.GITHUB_TOKEN || (typeof process !== 'undefined' ? process.env.GITHUB_TOKEN : undefined);
     if (!githubToken) {
       console.error("Missing GITHUB_TOKEN environment variable.");
       return new Response(JSON.stringify({ error: 'Server misconfiguration: Missing GitHub Token.' }), { status: 500 });
@@ -28,8 +28,8 @@ export const POST: APIRoute = async ({ request }) => {
     mdContent += `---\n`;
     
     // Base64 encode the content (required by GitHub API)
-    // Use Buffer for base64 encoding which works in Node/Vercel edge
-    const contentEncoded = Buffer.from(mdContent).toString('base64');
+    // Use btoa for universal edge/node compatibility
+    const contentEncoded = btoa(unescape(encodeURIComponent(mdContent)));
 
     // GitHub API URL for creating a file
     const owner = 'mohamadfaizal-growlity';
