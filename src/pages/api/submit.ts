@@ -4,7 +4,7 @@ import type { APIRoute } from 'astro';
 export const POST: APIRoute = async ({ request }) => {
   try {
     const data = await request.json();
-    const { formId, ...fields } = data;
+    const { formId, submittedFrom, ...fields } = data;
 
     if (!formId) {
       return new Response(JSON.stringify({ error: 'Missing formId' }), { status: 400 });
@@ -21,7 +21,7 @@ export const POST: APIRoute = async ({ request }) => {
     const filename = `src/content/entries/${formId}-${timestamp}.md`;
     
     // Construct YAML frontmatter
-    let mdContent = `---\nformId: "${formId}"\nsubmittedAt: "${new Date().toISOString()}"\ndata:\n`;
+    let mdContent = `---\nformId: "${formId}"\nsubmittedFrom: "${submittedFrom || 'unknown'}"\nsubmittedAt: "${new Date().toISOString()}"\ndata:\n`;
     for (const [key, value] of Object.entries(fields)) {
       mdContent += `  ${key}: "${String(value).replace(/"/g, '\\"')}"\n`;
     }

@@ -1,8 +1,8 @@
 {
-  "file": "src/content/entries/{{slug}}.json",
+  "file": "src/content/entries/{{slug}}.md",
   "name": "Form Entries",
-  "fileType": "json",
-  "fmType": "json",
+  "fileType": "md",
+  "fmType": "yaml",
   "template": [
     {
       "name": "formId",
@@ -41,3 +41,4 @@
     }
   ]
 }
+

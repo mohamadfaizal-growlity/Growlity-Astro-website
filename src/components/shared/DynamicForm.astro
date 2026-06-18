@@ -22,6 +22,7 @@ const { title, fields, submitButtonText, successMessage } = formEntry.data;
   
   <form action="/api/submit" method="POST" class="space-y-6" id={`dynamic-form-${id}`}>
     <input type="hidden" name="formId" value={id} />
+    <input type="hidden" name="submittedFrom" id={`submittedFrom-${id}`} value="" />
     
     <div class="grid grid-cols-1 gap-6">
       {fields.map((field, index) => (
@@ -84,8 +85,13 @@ const { title, fields, submitButtonText, successMessage } = formEntry.data;
 <script define:vars={{ id }}>
   const form = document.getElementById(`dynamic-form-${id}`);
   const successMsg = document.getElementById(`success-msg-${id}`);
+  const submittedFromInput = document.getElementById(`submittedFrom-${id}`);
   
   if (form) {
+    if (submittedFromInput) {
+      submittedFromInput.value = window.location.pathname;
+    }
+
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       const formData = new FormData(form);
