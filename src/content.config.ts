@@ -114,6 +114,7 @@ const blog = defineCollection({
     relatedBlogs: z.array(z.string()).optional(),
     relatedSolutions: z.array(z.string()).optional(),
     featuredBlogToggle: z.boolean().default(false),
+    draft: z.boolean().default(false),
     seoSettings: z.object({
       title: z.string().optional(),
       description: z.string().optional(),
@@ -206,6 +207,7 @@ const publications = defineCollection({
     pdfUpload: z.string().optional(),
     category: z.string(),
     publishDate: z.date(),
+    draft: z.boolean().default(false),
     seoTitle: z.string().optional()
   })
 });

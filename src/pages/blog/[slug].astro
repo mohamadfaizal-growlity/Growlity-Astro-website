@@ -1,5 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
+import Callout from '../../components/mdx/Callout.astro';
+import YouTube from '../../components/mdx/YouTube.astro';
 import FAQAccordion from '../../components/shared/FAQAccordion.astro';
 import '../../styles/global.css';
 
@@ -71,7 +73,7 @@ const disqusShortname = globalSettings.length > 0 ? globalSettings[0].data.disqu
     <!-- Main Content from Sitepins -->
     <main class="max-w-4xl mx-auto py-12 px-6 prose prose-lg prose-green">
       <!-- This renders the rich text content -->
-      <Content />
+      <Content components={{ Callout, YouTube }} />
     </main>
 
     <!-- Static Fields Section -->

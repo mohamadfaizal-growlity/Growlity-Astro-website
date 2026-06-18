@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const allBlogs = await getCollection('blog', (post) => {
-  return !post.data.draft; // Do not show drafts
+  return !post.data.draft && post.data.publishedDate <= new Date(); // Do not show drafts or future posts
 });
 
 // Sort by date (newest first)
