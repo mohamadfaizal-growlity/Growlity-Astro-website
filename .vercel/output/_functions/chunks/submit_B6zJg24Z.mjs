@@ -2,7 +2,7 @@ const prerender = false;
 const POST = async ({ request }) => {
   try {
     const data = await request.json();
-    const { formId, ...fields } = data;
+    const { formId, submittedFrom, ...fields } = data;
     if (!formId) {
       return new Response(JSON.stringify({ error: "Missing formId" }), { status: 400 });
     }
@@ -12,13 +12,20 @@ const POST = async ({ request }) => {
       return new Response(JSON.stringify({ error: "Server misconfiguration: Missing GitHub Token." }), { status: 500 });
     }
     const timestamp = (/* @__PURE__ */ new Date()).toISOString().replace(/[:.]/g, "-");
-    const filename = `src/content/entries/${formId}-${timestamp}.json`;
-    const entryData = {
-      formId,
-      submittedAt: (/* @__PURE__ */ new Date()).toISOString(),
-      data: fields
-    };
-    const contentEncoded = Buffer.from(JSON.stringify(entryData, null, 2)).toString("base64");
+    const filename = `src/content/entries/${formId}-${timestamp}.md`;
+    let mdContent = `---
+formId: "${formId}"
+submittedFrom: "${submittedFrom || "unknown"}"
+submittedAt: "${(/* @__PURE__ */ new Date()).toISOString()}"
+data:
+`;
+    for (const [key, value] of Object.entries(fields)) {
+      mdContent += `  ${key}: "${String(value).replace(/"/g, '\\"')}"
+`;
+    }
+    mdContent += `---
+`;
+    const contentEncoded = Buffer.from(mdContent).toString("base64");
     const owner = "mohamadfaizal-growlity";
     const repo = "Growlity-Astro-website";
     const branch = "Admin_Panel";
