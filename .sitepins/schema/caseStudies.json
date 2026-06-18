@@ -1,7 +1,7 @@
 {
-  "file": "src/content/case-studies/placeholder.md",
+  "file": "src/content/case-studies/placeholder.mdx",
   "name": "caseStudies",
-  "fileType": "md",
+  "fileType": "mdx",
   "fmType": "yaml",
   "template": [
     { "name": "clientName", "label": "Client Name", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },

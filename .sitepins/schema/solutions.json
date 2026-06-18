@@ -1,7 +1,7 @@
 {
-  "file": "src/content/solutions/placeholder.md",
+  "file": "src/content/solutions/placeholder.mdx",
   "name": "solutions",
-  "fileType": "md",
+  "fileType": "mdx",
   "fmType": "yaml",
   "template": [
     { "name": "title", "label": "Title", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },

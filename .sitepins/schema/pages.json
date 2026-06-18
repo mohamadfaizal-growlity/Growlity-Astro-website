@@ -1,7 +1,7 @@
 {
-  "file": "src/content/pages/placeholder.md",
+  "file": "src/content/pages/placeholder.mdx",
   "name": "pages",
-  "fileType": "md",
+  "fileType": "mdx",
   "fmType": "yaml",
   "template": [
     {
