@@ -16,19 +16,20 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Server misconfiguration: Missing GitHub Token.' }), { status: 500 });
     }
 
-    // Prepare the content
+    // Prepare the content as markdown with YAML frontmatter
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `src/content/entries/${formId}-${timestamp}.json`;
+    const filename = `src/content/entries/${formId}-${timestamp}.md`;
     
-    const entryData = {
-      formId,
-      submittedAt: new Date().toISOString(),
-      data: fields
-    };
+    // Construct YAML frontmatter
+    let mdContent = `---\nformId: "${formId}"\nsubmittedAt: "${new Date().toISOString()}"\ndata:\n`;
+    for (const [key, value] of Object.entries(fields)) {
+      mdContent += `  ${key}: "${String(value).replace(/"/g, '\\"')}"\n`;
+    }
+    mdContent += `---\n`;
     
     // Base64 encode the content (required by GitHub API)
     // Use Buffer for base64 encoding which works in Node/Vercel edge
-    const contentEncoded = Buffer.from(JSON.stringify(entryData, null, 2)).toString('base64');
+    const contentEncoded = Buffer.from(mdContent).toString('base64');
 
     // GitHub API URL for creating a file
     const owner = 'mohamadfaizal-growlity';

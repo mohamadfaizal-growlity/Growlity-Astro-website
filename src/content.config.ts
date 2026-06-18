@@ -269,7 +269,7 @@ const forms = defineCollection({
 
 // 16. Form Entries
 const entries = defineCollection({
-  loader: glob({ pattern: "**/*.json", base: "./src/content/entries" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries" }),
   schema: z.object({
     formId: z.string(),
     submittedAt: z.string(),
