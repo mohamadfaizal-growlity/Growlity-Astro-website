@@ -27,9 +27,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
     mdContent += `---\n`;
     
-    // Base64 encode the content (required by GitHub API)
-    // Use btoa for universal edge/node compatibility
-    const contentEncoded = btoa(unescape(encodeURIComponent(mdContent)));
+    const contentEncoded = typeof Buffer !== 'undefined' ? Buffer.from(mdContent).toString('base64') : btoa(unescape(encodeURIComponent(mdContent)));
 
     // GitHub API URL for creating a file
     const owner = 'mohamadfaizal-growlity';
