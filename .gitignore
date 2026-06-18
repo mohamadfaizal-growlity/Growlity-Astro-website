@@ -1,5 +1,5 @@
 # build output
-dist/
+# dist/ is commented out to prevent Vercel from breaking Serverless functions
 # generated types
 .astro/
 
