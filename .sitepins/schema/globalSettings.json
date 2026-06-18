@@ -11,6 +11,62 @@
       "value": "",
       "isIgnored": false,
       "defaultValue": ""
+    },
+    {
+      "name": "enablePopup",
+      "label": "Enable Popup (Toggle)",
+      "type": "boolean",
+      "value": false,
+      "isIgnored": false,
+      "defaultValue": false
+    },
+    {
+      "name": "popupHeadline",
+      "label": "Popup Headline",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "popupMessage",
+      "label": "Popup Message",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "popupButtonText",
+      "label": "Popup Button Text",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "popupButtonLink",
+      "label": "Popup Button Link",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "headerScripts",
+      "label": "Header Scripts (Code Snippets)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "footerScripts",
+      "label": "Footer Scripts (Code Snippets)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
     }
   ]
 }

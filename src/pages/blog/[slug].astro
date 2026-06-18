@@ -4,6 +4,7 @@ import Callout from '../../components/mdx/Callout.astro';
 import YouTube from '../../components/mdx/YouTube.astro';
 import CTA from '../../components/mdx/CTA.astro';
 import MarkdownLink from '../../components/mdx/MarkdownLink.astro';
+import Comments from '../../components/shared/Comments.astro';
 import FAQAccordion from '../../components/shared/FAQAccordion.astro';
 import '../../styles/global.css';
 
@@ -119,27 +120,16 @@ const disqusShortname = globalSettings.length > 0 ? globalSettings[0].data.disqu
           </a>
         </div>
       )}
-      
+      </div>
     </section>
 
     {/* Disqus Comments */}
     {disqusShortname && (
-      <div class="max-w-4xl mx-auto py-12 px-6 border-t border-gray-200 mt-12">
-        <div id="disqus_thread"></div>
-        <script define:vars={{ disqusShortname, postUrl: `https://growlity-astro-website.vercel.app/blog/${post.id}`, postId: post.id }}>
-          var disqus_config = function () {
-            this.page.url = postUrl;
-            this.page.identifier = postId;
-          };
-          (function() {
-            var d = document, s = d.createElement('script');
-            s.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-          })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-      </div>
+      <Comments 
+        shortname={disqusShortname} 
+        url={`https://growlity-astro-website.vercel.app/blog/${post.id}`}
+        identifier={post.id}
+      />
     )}
 
   </body>

@@ -31,6 +31,13 @@ const globalSettings = defineCollection({
     cookieConsentText: z.string().optional(),
     popupSettings: z.string().optional(),
     disqusShortname: z.string().optional(),
+    enablePopup: z.boolean().default(false).optional(),
+    popupHeadline: z.string().optional(),
+    popupMessage: z.string().optional(),
+    popupButtonText: z.string().optional(),
+    popupButtonLink: z.string().optional(),
+    headerScripts: z.string().optional(),
+    footerScripts: z.string().optional(),
   })
 });
 
