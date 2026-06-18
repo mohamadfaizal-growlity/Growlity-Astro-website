@@ -247,6 +247,23 @@ const clients = defineCollection({
   })
 });
 
+// 15. Forms
+const forms = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/forms" }),
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    sendToEmail: z.string().optional(),
+    fields: z.array(z.object({
+      label: z.string(),
+      type: z.enum(['text', 'email', 'tel', 'textarea', 'checkbox']),
+      required: z.boolean().default(true),
+      placeholder: z.string().optional()
+    })),
+    submitButtonText: z.string().default('Submit'),
+    successMessage: z.string().default('Thank you! Your submission has been received.')
+  })
+});
+
 export const collections = {
   globalSettings,
   pages,
@@ -257,5 +274,7 @@ export const collections = {
   webinars,
   publications,
   testimonials,
-  clients
+  clients,
+  forms
 };
+
