@@ -11,21 +11,17 @@ const { id } = Astro.props;
 const formEntry = await getEntry('forms', id);
 
 if (!formEntry) {
-  // If the form doesn't exist, we don't render anything or render an error
   return;
 }
 
-const { title, sendToEmail, fields, submitButtonText, successMessage } = formEntry.data;
-const accessKey = "YOUR_WEB3FORMS_ACCESS_KEY"; // They will replace this or we can add it to global settings later
+const { title, fields, submitButtonText, successMessage } = formEntry.data;
 ---
 
 <div class="my-12 w-full max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
   <h3 class="text-3xl font-bold text-gray-900 mb-6 text-center">{title}</h3>
   
-  <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6" id={`dynamic-form-${id}`}>
-    <input type="hidden" name="access_key" value={accessKey} />
-    <input type="hidden" name="subject" value={`New Submission: ${title}`} />
-    {sendToEmail && <input type="hidden" name="replyto" value={sendToEmail} />}
+  <form action="/api/submit" method="POST" class="space-y-6" id={`dynamic-form-${id}`}>
+    <input type="hidden" name="formId" value={id} />
     
     <div class="grid grid-cols-1 gap-6">
       {fields.map((field, index) => (
@@ -98,7 +94,7 @@ const accessKey = "YOUR_WEB3FORMS_ACCESS_KEY"; // They will replace this or we c
 
       form.querySelector('button').innerText = 'Sending...';
 
-      fetch('https://api.web3forms.com/submit', {
+      fetch('/api/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,17 +103,17 @@ const accessKey = "YOUR_WEB3FORMS_ACCESS_KEY"; // They will replace this or we c
         body: json
       })
       .then(async (response) => {
-        let json = await response.json();
+        let jsonRes = await response.json();
         if (response.status == 200) {
           form.reset();
           successMsg.classList.remove('hidden');
           form.querySelector('button').innerText = 'Submitted';
         } else {
-          console.log(response);
+          console.log(jsonRes);
           successMsg.classList.remove('hidden');
           successMsg.classList.remove('text-green-600');
           successMsg.classList.add('text-red-600');
-          successMsg.innerHTML = json.message;
+          successMsg.innerHTML = jsonRes.error || "An error occurred";
           form.querySelector('button').innerText = 'Error';
         }
       })

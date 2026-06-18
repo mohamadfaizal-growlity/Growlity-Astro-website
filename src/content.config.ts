@@ -267,6 +267,16 @@ const forms = defineCollection({
   })
 });
 
+// 16. Form Entries
+const entries = defineCollection({
+  loader: glob({ pattern: "**/*.json", base: "./src/content/entries" }),
+  schema: z.object({
+    formId: z.string(),
+    submittedAt: z.string(),
+    data: z.record(z.string(), z.any())
+  })
+});
+
 export const collections = {
   globalSettings,
   pages,
@@ -280,6 +290,7 @@ export const collections = {
   clients,
   forms
 };
+
 
 
 

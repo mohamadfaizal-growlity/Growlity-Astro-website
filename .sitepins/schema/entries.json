@@ -1,0 +1,43 @@
+{
+  "file": "src/content/entries/{{slug}}.json",
+  "name": "Form Entries",
+  "fileType": "json",
+  "fmType": "json",
+  "template": [
+    {
+      "name": "formId",
+      "label": "Form Slug (Which form was this submitted to?)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "submittedAt",
+      "label": "Date Submitted",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "data",
+      "label": "Form Data (JSON Format)",
+      "type": "object",
+      "fields": [
+        {
+          "name": "Email",
+          "label": "Email",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "Name",
+          "label": "Name",
+          "type": "string",
+          "value": ""
+        }
+      ]
+    }
+  ]
+}
