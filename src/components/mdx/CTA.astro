@@ -6,14 +6,16 @@ interface Props {
 }
 
 const { 
-  text = "Interested in learning more?", 
+  text, 
   link = "/contact",
   buttonText = "Contact Us" 
 } = Astro.props;
 ---
 
 <div class="my-8 bg-brand-light-green border border-brand-green/20 rounded-xl p-8 text-center shadow-sm">
-  <h3 class="text-2xl font-bold text-gray-900 mb-2 mt-0">{text}</h3>
+  <h3 class="text-2xl font-bold text-gray-900 mb-2 mt-0">
+    {text ? text : (Astro.slots.has('default') ? <slot /> : "Interested in learning more?")}
+  </h3>
   <div class="mt-6">
     <a href={link} class="inline-block bg-brand-green text-white px-8 py-3 rounded-md font-bold hover:bg-green-800 transition-colors no-underline">
       {buttonText}

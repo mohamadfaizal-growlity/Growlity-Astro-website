@@ -4,6 +4,7 @@ import FAQAccordion from '../../components/shared/FAQAccordion.astro';
 import Callout from '../../components/mdx/Callout.astro';
 import YouTube from '../../components/mdx/YouTube.astro';
 import CTA from '../../components/mdx/CTA.astro';
+import MarkdownLink from '../../components/mdx/MarkdownLink.astro';
 
 export async function getStaticPaths() {
   const cases = await getCollection('caseStudies');
@@ -55,7 +56,7 @@ const { Content } = await render(study);
     <!-- Main Content from Sitepins -->
     <main class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-green">
       <!-- Renders the main rich text article -->
-      <Content components={{ Callout, YouTube, CTA }} />
+      <Content components={{ Callout, YouTube, CTA, a: MarkdownLink }} />
     </main>
 
     <!-- Static Fields Section -->
