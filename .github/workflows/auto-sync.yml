@@ -1,0 +1,30 @@
+name: Auto Sync Admin_Panel to main
+
+on:
+  push:
+    branches:
+      - Admin_Panel
+
+permissions:
+  contents: write
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Merge Admin_Panel to main
+        run: |
+          git checkout main
+          git pull origin main
+          git merge origin/Admin_Panel --no-edit || git merge --abort
+          git push origin main

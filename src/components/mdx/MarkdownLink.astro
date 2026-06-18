@@ -1,5 +1,6 @@
 ---
 import CTA from './CTA.astro';
+import DynamicForm from '../shared/DynamicForm.astro';
 
 interface Props {
   href?: string;
@@ -13,6 +14,8 @@ const { href, ...props } = Astro.props;
   <CTA>
     <slot />
   </CTA>
+) : href?.startsWith('#form-') ? (
+  <DynamicForm id={href.replace('#form-', '')} />
 ) : (
   <a href={href} {...props} class="text-brand-green font-medium underline hover:text-green-800 transition-colors">
     <slot />

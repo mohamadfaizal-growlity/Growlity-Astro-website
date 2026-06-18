@@ -31,6 +31,13 @@ const globalSettings = defineCollection({
     cookieConsentText: z.string().optional(),
     popupSettings: z.string().optional(),
     disqusShortname: z.string().optional(),
+    enablePopup: z.boolean().default(false).optional(),
+    popupHeadline: z.string().optional(),
+    popupMessage: z.string().optional(),
+    popupButtonText: z.string().optional(),
+    popupButtonLink: z.string().optional(),
+    headerScripts: z.string().optional(),
+    footerScripts: z.string().optional(),
   })
 });
 
@@ -240,6 +247,37 @@ const clients = defineCollection({
   })
 });
 
+// 15. Forms
+const forms = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/forms" }),
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    sendToEmail: z.string().optional(),
+    fields: z.preprocess((val) => {
+      if (val === "" || val === null || val === undefined) return [];
+      return val;
+    }, z.array(z.object({
+      label: z.string(),
+      type: z.enum(['text', 'email', 'tel', 'textarea', 'checkbox']).optional().default('text'),
+      required: z.boolean().default(true),
+      placeholder: z.string().optional()
+    }))).optional().default([]),
+    submitButtonText: z.string().default('Submit'),
+    successMessage: z.string().default('Thank you! Your submission has been received.')
+  })
+});
+
+// 16. Form Entries
+const entries = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries" }),
+  schema: z.object({
+    formId: z.string(),
+    submittedFrom: z.string().optional(),
+    submittedAt: z.string(),
+    data: z.record(z.string(), z.any())
+  })
+});
+
 export const collections = {
   globalSettings,
   pages,
@@ -250,5 +288,10 @@ export const collections = {
   webinars,
   publications,
   testimonials,
-  clients
+  clients,
+  forms
 };
+
+
+
+

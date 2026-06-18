@@ -1,0 +1,52 @@
+{
+  "file": "src/content/entries/{{slug}}.md",
+  "name": "Form Entries",
+  "fileType": "md",
+  "fmType": "yaml",
+  "template": [
+    {
+      "name": "formId",
+      "label": "Form Slug (Which form was this submitted to?)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "submittedFrom",
+      "label": "Page URL (Where was this form submitted from?)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "submittedAt",
+      "label": "Date Submitted",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "data",
+      "label": "Form Data (JSON Format)",
+      "type": "object",
+      "fields": [
+        {
+          "name": "Email",
+          "label": "Email",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "Name",
+          "label": "Name",
+          "type": "string",
+          "value": ""
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,132 @@
+---
+import { getEntry } from 'astro:content';
+
+interface Props {
+  id: string; // The slug of the form
+}
+
+const { id } = Astro.props;
+
+// Fetch the form from the collection
+const formEntry = await getEntry('forms', id);
+
+if (!formEntry) {
+  return;
+}
+
+const { title, fields, submitButtonText, successMessage } = formEntry.data;
+---
+
+<div class="my-12 w-full max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+  <h3 class="text-3xl font-bold text-gray-900 mb-6 text-center">{title}</h3>
+  
+  <form action="/api/submit" method="POST" class="space-y-6" id={`dynamic-form-${id}`}>
+    <input type="hidden" name="formId" value={id} />
+    <input type="hidden" name="submittedFrom" id={`submittedFrom-${id}`} value="" />
+    
+    <div class="grid grid-cols-1 gap-6">
+      {fields.map((field, index) => (
+        <div>
+          {field.type !== 'checkbox' && (
+            <label for={`field-${id}-${index}`} class="block text-sm font-medium text-gray-700 mb-1">
+              {field.label} {field.required && <span class="text-red-500">*</span>}
+            </label>
+          )}
+          
+          {field.type === 'textarea' ? (
+            <textarea
+              id={`field-${id}-${index}`}
+              name={field.label}
+              required={field.required}
+              placeholder={field.placeholder || ''}
+              rows={4}
+              class="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none transition-colors"
+            ></textarea>
+          ) : field.type === 'checkbox' ? (
+            <div class="flex items-center">
+              <input
+                id={`field-${id}-${index}`}
+                name={field.label}
+                type="checkbox"
+                required={field.required}
+                class="h-5 w-5 text-brand-green focus:ring-brand-green border-gray-300 rounded"
+              />
+              <label for={`field-${id}-${index}`} class="ml-3 block text-sm text-gray-700">
+                {field.label} {field.required && <span class="text-red-500">*</span>}
+              </label>
+            </div>
+          ) : (
+            <input
+              id={`field-${id}-${index}`}
+              name={field.label}
+              type={field.type}
+              required={field.required}
+              placeholder={field.placeholder || ''}
+              class="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-brand-green focus:ring-1 focus:ring-brand-green outline-none transition-colors"
+            />
+          )}
+        </div>
+      ))}
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-brand-green text-white font-bold py-3 px-6 rounded-md hover:bg-green-800 transition-colors mt-8"
+    >
+      {submitButtonText}
+    </button>
+
+    <div class="hidden text-center text-green-600 font-bold mt-4" id={`success-msg-${id}`}>
+      {successMessage}
+    </div>
+  </form>
+</div>
+
+<script define:vars={{ id }}>
+  const form = document.getElementById(`dynamic-form-${id}`);
+  const successMsg = document.getElementById(`success-msg-${id}`);
+  const submittedFromInput = document.getElementById(`submittedFrom-${id}`);
+  
+  if (form) {
+    if (submittedFromInput) {
+      submittedFromInput.value = window.location.pathname;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      form.querySelector('button').innerText = 'Sending...';
+
+      fetch('/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: json
+      })
+      .then(async (response) => {
+        let jsonRes = await response.json();
+        if (response.status == 200) {
+          form.reset();
+          successMsg.classList.remove('hidden');
+          form.querySelector('button').innerText = 'Submitted';
+        } else {
+          console.log(jsonRes);
+          successMsg.classList.remove('hidden');
+          successMsg.classList.remove('text-green-600');
+          successMsg.classList.add('text-red-600');
+          successMsg.innerHTML = jsonRes.error || "An error occurred";
+          form.querySelector('button').innerText = 'Error';
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        successMsg.innerHTML = "Something went wrong!";
+      });
+    });
+  }
+</script>

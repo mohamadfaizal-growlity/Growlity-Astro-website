@@ -1,12 +1,17 @@
 ---
-import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 import '../styles/global.css';
+import GlobalPopup from '../components/shared/GlobalPopup.astro';
 
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
+
+// Fetch settings for Scripts
+const settings = await getEntry('globalSettings', 'placeholder');
+const { headerScripts, footerScripts } = settings?.data || {};
 
 // Fetch GA ID from globalSettings if available (Fallback added for future)
 const gaId = null;
@@ -34,8 +39,16 @@ const gaId = null;
 				</script>
 			</>
 		)}
+		
+		{/* Custom Header Scripts (from Sitepins) */}
+		{headerScripts && <Fragment set:html={headerScripts} />}
 	</head>
 	<body class="bg-brand-light text-brand-dark font-sans flex flex-col min-h-screen">
 		<slot />
+		
+		<GlobalPopup />
+		
+		{/* Custom Footer Scripts (from Sitepins) */}
+		{footerScripts && <Fragment set:html={footerScripts} />}
 	</body>
 </html>

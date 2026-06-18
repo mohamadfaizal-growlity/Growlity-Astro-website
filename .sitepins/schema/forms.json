@@ -1,0 +1,78 @@
+{
+  "file": "src/content/forms/{{slug}}.md",
+  "name": "Forms",
+  "fileType": "md",
+  "fmType": "yaml",
+  "template": [
+    {
+      "name": "title",
+      "label": "Form Title",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "sendToEmail",
+      "label": "Send Submissions To (Email)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": "hello@growlity.com"
+    },
+    {
+      "name": "fields",
+      "label": "Form Fields",
+      "type": "Array",
+      "fields": [
+        {
+          "name": "label",
+          "label": "Field Label (e.g. First Name)",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "type",
+          "label": "Field Type",
+          "type": "select",
+          "value": "text",
+          "options": [
+            {"label": "Short Text", "value": "text"},
+            {"label": "Email Address", "value": "email"},
+            {"label": "Phone Number", "value": "tel"},
+            {"label": "Long Text (Paragraph)", "value": "textarea"},
+            {"label": "Checkbox", "value": "checkbox"}
+          ]
+        },
+        {
+          "name": "required",
+          "label": "Is this field required?",
+          "type": "boolean",
+          "value": true
+        },
+        {
+          "name": "placeholder",
+          "label": "Placeholder Text",
+          "type": "string",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "submitButtonText",
+      "label": "Submit Button Text",
+      "type": "string",
+      "value": "Submit",
+      "isIgnored": false,
+      "defaultValue": "Submit"
+    },
+    {
+      "name": "successMessage",
+      "label": "Success Message",
+      "type": "string",
+      "value": "Thank you! Your submission has been received.",
+      "isIgnored": false,
+      "defaultValue": "Thank you! Your submission has been received."
+    }
+  ]
+}
