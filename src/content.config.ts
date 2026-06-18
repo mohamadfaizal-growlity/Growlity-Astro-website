@@ -258,10 +258,10 @@ const forms = defineCollection({
       return val;
     }, z.array(z.object({
       label: z.string(),
-      type: z.enum(['text', 'email', 'tel', 'textarea', 'checkbox']),
+      type: z.enum(['text', 'email', 'tel', 'textarea', 'checkbox']).optional().default('text'),
       required: z.boolean().default(true),
       placeholder: z.string().optional()
-    })),
+    }))).optional().default([]),
     submitButtonText: z.string().default('Submit'),
     successMessage: z.string().default('Thank you! Your submission has been received.')
   })
@@ -280,5 +280,6 @@ export const collections = {
   clients,
   forms
 };
+
 
 
