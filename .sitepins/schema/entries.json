@@ -13,6 +13,14 @@
       "defaultValue": ""
     },
     {
+      "name": "submittedFrom",
+      "label": "Page URL (Where was this form submitted from?)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
       "name": "submittedAt",
       "label": "Date Submitted",
       "type": "string",
