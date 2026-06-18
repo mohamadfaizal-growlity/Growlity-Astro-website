@@ -253,7 +253,10 @@ const forms = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     sendToEmail: z.string().optional(),
-    fields: z.array(z.object({
+    fields: z.preprocess((val) => {
+      if (val === "" || val === null || val === undefined) return [];
+      return val;
+    }, z.array(z.object({
       label: z.string(),
       type: z.enum(['text', 'email', 'tel', 'textarea', 'checkbox']),
       required: z.boolean().default(true),
@@ -277,4 +280,5 @@ export const collections = {
   clients,
   forms
 };
+
 
