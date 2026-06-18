@@ -4,22 +4,95 @@
   "fileType": "mdx",
   "fmType": "yaml",
   "template": [
-    { "name": "clientName", "label": "Client Name", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
-    { "name": "industry", "label": "Industry", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
-    { "name": "clientLogo", "label": "Client Logo", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
-    { "name": "thumbnail", "label": "Thumbnail", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
-    { "name": "challenge", "label": "Challenge", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
-    { "name": "solution", "label": "Solution Overview", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
-    { "name": "implementation", "label": "Implementation Details", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
-    { "name": "results", "label": "Results", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
-    { "name": "testimonial", "label": "Testimonial Quote", "type": "string", "value": "", "isIgnored": false, "defaultValue": "" },
+    {
+      "name": "clientName",
+      "label": "Client Name",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "industry",
+      "label": "Industry",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "clientLogo",
+      "label": "Client Logo",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "thumbnail",
+      "label": "Thumbnail",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "challenge",
+      "label": "Challenge",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "solution",
+      "label": "Solution Overview",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "implementation",
+      "label": "Implementation Details",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "results",
+      "label": "Results",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "testimonial",
+      "label": "Testimonial Quote",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
     {
       "name": "seoSettings",
       "label": "SEO Settings",
       "type": "object",
       "fields": [
-        { "name": "title", "label": "SEO Title", "type": "string", "value": "" },
-        { "name": "description", "label": "SEO Description", "type": "string", "value": "" }
+        {
+          "name": "title",
+          "label": "SEO Title",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "description",
+          "label": "SEO Description",
+          "type": "string",
+          "value": ""
+        }
       ]
     },
     {
@@ -27,7 +100,12 @@
       "label": "Bottom Text Section",
       "type": "object",
       "fields": [
-        { "name": "text", "label": "Bottom Text", "type": "string", "value": "" }
+        {
+          "name": "text",
+          "label": "Bottom Text",
+          "type": "string",
+          "value": ""
+        }
       ]
     },
     {
@@ -35,8 +113,18 @@
       "label": "Banner Section",
       "type": "object",
       "fields": [
-        { "name": "image", "label": "Banner Image Upload", "type": "string", "value": "" },
-        { "name": "caption", "label": "Banner Caption", "type": "string", "value": "" }
+        {
+          "name": "image",
+          "label": "Banner Image Upload",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "caption",
+          "label": "Banner Caption",
+          "type": "string",
+          "value": ""
+        }
       ]
     },
     {
@@ -44,7 +132,12 @@
       "label": "Call To Action (CTA)",
       "type": "object",
       "fields": [
-        { "name": "reference", "label": "CTA Reference Text", "type": "string", "value": "" }
+        {
+          "name": "reference",
+          "label": "CTA Reference Text",
+          "type": "string",
+          "value": ""
+        }
       ]
     },
     {
@@ -52,9 +145,27 @@
       "label": "FAQ Section",
       "type": "Array",
       "fields": [
-        { "name": "question", "label": "Question", "type": "string", "value": "" },
-        { "name": "answer", "label": "Answer", "type": "string", "value": "" }
+        {
+          "name": "question",
+          "label": "Question",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "answer",
+          "label": "Answer",
+          "type": "string",
+          "value": ""
+        }
       ]
+    },
+    {
+      "name": "draft",
+      "label": "Draft",
+      "type": "boolean",
+      "value": false,
+      "isIgnored": false,
+      "defaultValue": false
     }
   ]
 }
