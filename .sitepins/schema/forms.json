@@ -23,26 +23,19 @@
     {
       "name": "fields",
       "label": "Form Fields",
-      "type": "list",
-      "value": [],
-      "isIgnored": false,
-      "defaultValue": [],
-      "template": [
+      "type": "Array",
+      "fields": [
         {
           "name": "label",
           "label": "Field Label (e.g. First Name)",
           "type": "string",
-          "value": "",
-          "isIgnored": false,
-          "defaultValue": ""
+          "value": ""
         },
         {
           "name": "type",
           "label": "Field Type",
           "type": "select",
           "value": "text",
-          "isIgnored": false,
-          "defaultValue": "text",
           "options": [
             {"label": "Short Text", "value": "text"},
             {"label": "Email Address", "value": "email"},
@@ -55,17 +48,13 @@
           "name": "required",
           "label": "Is this field required?",
           "type": "boolean",
-          "value": true,
-          "isIgnored": false,
-          "defaultValue": true
+          "value": true
         },
         {
           "name": "placeholder",
           "label": "Placeholder Text",
           "type": "string",
-          "value": "",
-          "isIgnored": false,
-          "defaultValue": ""
+          "value": ""
         }
       ]
     },
