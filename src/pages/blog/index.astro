@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
@@ -63,3 +64,4 @@ allBlogs.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.va
     </div>
   </main>
 </Layout>
+
