@@ -1,6 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import FAQAccordion from '../components/shared/FAQAccordion.astro';
+import Callout from '../components/mdx/Callout.astro';
+import YouTube from '../components/mdx/YouTube.astro';
+import CTA from '../components/mdx/CTA.astro';
 
 // This function tells Astro to create a page for every file in the "pages" collection
 export async function getStaticPaths() {
@@ -12,6 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
+const { Content } = await render(page);
 ---
 
 <html lang="en">
@@ -36,7 +40,7 @@ const { page } = Astro.props;
     <!-- Main Content from Sitepins -->
     <main class="max-w-4xl mx-auto py-12 px-6 prose prose-lg prose-green">
       <!-- This renders the standard markdown content -->
-      {page.body && <div>{page.body}</div>}
+      <Content components={{ Callout, YouTube, CTA }} />
     </main>
 
     <!-- Static Fields Section -->

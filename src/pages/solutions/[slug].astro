@@ -1,6 +1,9 @@
 ---
 import { getCollection, render } from 'astro:content';
 import FAQAccordion from '../../components/shared/FAQAccordion.astro';
+import Callout from '../../components/mdx/Callout.astro';
+import YouTube from '../../components/mdx/YouTube.astro';
+import CTA from '../../components/mdx/CTA.astro';
 
 export async function getStaticPaths() {
   const solutions = await getCollection('solutions');
@@ -40,7 +43,7 @@ const { Content } = await render(solution);
 
     <!-- Main Content from Sitepins -->
     <main class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-green">
-      <Content />
+      <Content components={{ Callout, YouTube, CTA }} />
     </main>
 
     <!-- Static Fields Section -->
