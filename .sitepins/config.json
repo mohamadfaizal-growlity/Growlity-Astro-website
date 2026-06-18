@@ -4,16 +4,5 @@
   "public": "public",
   "configs": [],
   "custom-commit": false,
-  "arrangement": [
-    "pages",
-    "solutions",
-    "blog",
-    "caseStudies",
-    "webinars",
-    "publications",
-    "experts",
-    "testimonials",
-    "clients",
-    "globalSettings"
-  ]
+  "arrangement": []
 }
