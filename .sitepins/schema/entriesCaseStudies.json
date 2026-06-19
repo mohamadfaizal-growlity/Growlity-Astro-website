@@ -1,34 +1,12 @@
 {
-  "file": "src/content/Entries - Case Studies/case-studies/{{slug}}.md",
+  "file": "src/content/entries/case-studies/{{slug}}.md",
   "name": "Entries - Case Studies",
   "fileType": "md",
   "fmType": "yaml",
   "template": [
-    {
-      "name": "title",
-      "label": "Title",
-      "type": "string"
-    },
-    {
-      "name": "formId",
-      "label": "Form Slug",
-      "type": "string"
-    },
-    {
-      "name": "submittedFrom",
-      "label": "Page URL",
-      "type": "string"
-    },
-    {
-      "name": "submittedAt",
-      "label": "Submitted At",
-      "type": "string"
-    },
-    {
-      "name": "data",
-      "label": "Form Data",
-      "type": "object"
-    }
+    { "name": "formId", "label": "Form Slug", "type": "string" },
+    { "name": "submittedFrom", "label": "Page URL", "type": "string" },
+    { "name": "submittedAt", "label": "Submitted At", "type": "string" },
+    { "name": "data", "label": "Form Data", "type": "object" }
   ]
 }
-

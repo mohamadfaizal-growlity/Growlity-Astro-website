@@ -4,5 +4,21 @@
   "public": "public",
   "configs": [],
   "custom-commit": false,
-  "arrangement": []
+  "arrangement": [
+    "globalSettings",
+    "pages",
+    "solutions",
+    "blog",
+    "case-studies",
+    "clients",
+    "experts",
+    "webinars",
+    "publications",
+    "testimonials",
+    "forms",
+    "entriesBlog",
+    "entriesCaseStudies",
+    "entriesSolutions",
+    "entriesGeneral"
+  ]
 }

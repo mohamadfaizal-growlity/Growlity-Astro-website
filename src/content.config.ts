@@ -271,12 +271,11 @@ const forms = defineCollection({
 const entries = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries" }),
   schema: z.object({
-    title: z.string().optional(),
     formId: z.string(),
     submittedFrom: z.string().optional(),
-    submittedAt: z.string().optional(),
-    data: z.any().optional(),
-  }),
+    submittedAt: z.string(),
+    data: z.record(z.string(), z.any())
+  })
 });
 
 export const collections = {
@@ -290,23 +289,8 @@ export const collections = {
   publications,
   testimonials,
   clients,
-  forms,
-  entriesBlog,
-  entriesCasestudies,
-  entriesSolutions,
-  entriesGeneral
+  forms
 };
-  globalSettings,
-  pages,
-  solutions,
-  blog,
-  experts,
-  caseStudies,
-  webinars,
-  publications,
-  testimonials,
-  clients,
-
 
 
 
