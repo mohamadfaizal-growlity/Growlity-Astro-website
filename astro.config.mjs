@@ -12,10 +12,8 @@ import vercel from '@astrojs/vercel';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://growlity-astro-website.vercel.app',
-  output: 'server',
-  adapter: vercel({
-    includeFiles: ['./dist/**/*']
-  }),
+  output: 'static',
+  adapter: vercel(),
   vite: {
     plugins: [tailwindcss()]
   },
