@@ -1,5 +1,5 @@
 {
-  "file": "src/content/entries/blog/{{slug}}.md",
+  "file": "src/content/entriesBlog/{{slug}}.md",
   "name": "Entries - Blog",
   "fileType": "md",
   "fmType": "yaml",
@@ -10,3 +10,4 @@
     { "name": "data", "label": "Form Data", "type": "object" }
   ]
 }
+

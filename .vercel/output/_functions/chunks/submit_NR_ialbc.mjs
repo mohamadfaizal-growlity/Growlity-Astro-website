@@ -11,26 +11,16 @@ const POST = async ({ request }) => {
       console.error("Missing GITHUB_TOKEN environment variable.");
       return new Response(JSON.stringify({ error: "Server misconfiguration: Missing GitHub Token." }), { status: 500 });
     }
-    let categoryFolder = "entries-general";
-    let categoryLabel = "General";
-    if (submittedFrom) {
-      if (submittedFrom.includes("/blog")) {
-        categoryFolder = "entries-blog";
-        categoryLabel = "Blog";
-      } else if (submittedFrom.includes("/case-studies")) {
-        categoryFolder = "entries-casestudies";
-        categoryLabel = "Case Study";
-      } else if (submittedFrom.includes("/solutions")) {
-        categoryFolder = "entries-solutions";
-        categoryLabel = "Solution";
+    let group = "general";
+    if (submittedFrom && typeof submittedFrom === "string") {
+      const parts = submittedFrom.split("/").filter(Boolean);
+      if (parts.length > 0) {
+        group = parts[0];
       }
     }
-    const userName = fields.Name || fields.name || "Customer";
-    const title = `[${categoryLabel}] Form: ${formId} - ${userName}`;
     const timestamp = (/* @__PURE__ */ new Date()).toISOString().replace(/[:.]/g, "-");
-    const filename = `src/content/${categoryFolder}/${formId}-${timestamp}.md`;
+    const filename = `src/content/entries/${group}/${formId}-${timestamp}.md`;
     let mdContent = `---
-title: "${title}"
 formId: "${formId}"
 submittedFrom: "${submittedFrom || "unknown"}"
 submittedAt: "${(/* @__PURE__ */ new Date()).toISOString()}"

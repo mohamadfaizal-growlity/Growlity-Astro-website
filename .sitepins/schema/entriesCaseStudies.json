@@ -1,5 +1,5 @@
 {
-  "file": "src/content/entries/case-studies/{{slug}}.md",
+  "file": "src/content/entriesCaseStudies/{{slug}}.md",
   "name": "Entries - Case Studies",
   "fileType": "md",
   "fmType": "yaml",
@@ -10,3 +10,4 @@
     { "name": "data", "label": "Form Data", "type": "object" }
   ]
 }
+
