@@ -267,15 +267,49 @@ const forms = defineCollection({
   })
 });
 
-// 16. Form Entries
-const entries = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries" }),
+// Form Entries by Category
+const entriesBlog = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries-blog" }),
   schema: z.object({
+    title: z.string().optional(),
     formId: z.string(),
     submittedFrom: z.string().optional(),
-    submittedAt: z.string(),
-    data: z.record(z.string(), z.any())
-  })
+    submittedAt: z.string().optional(),
+    data: z.any().optional(),
+  }),
+});
+
+const entriesCasestudies = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries-casestudies" }),
+  schema: z.object({
+    title: z.string().optional(),
+    formId: z.string(),
+    submittedFrom: z.string().optional(),
+    submittedAt: z.string().optional(),
+    data: z.any().optional(),
+  }),
+});
+
+const entriesSolutions = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries-solutions" }),
+  schema: z.object({
+    title: z.string().optional(),
+    formId: z.string(),
+    submittedFrom: z.string().optional(),
+    submittedAt: z.string().optional(),
+    data: z.any().optional(),
+  }),
+});
+
+const entriesGeneral = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries-general" }),
+  schema: z.object({
+    title: z.string().optional(),
+    formId: z.string(),
+    submittedFrom: z.string().optional(),
+    submittedAt: z.string().optional(),
+    data: z.any().optional(),
+  }),
 });
 
 export const collections = {
@@ -289,8 +323,23 @@ export const collections = {
   publications,
   testimonials,
   clients,
-  forms
+  forms,
+  entriesBlog,
+  entriesCasestudies,
+  entriesSolutions,
+  entriesGeneral
 };
+  globalSettings,
+  pages,
+  solutions,
+  blog,
+  experts,
+  caseStudies,
+  webinars,
+  publications,
+  testimonials,
+  clients,
+
 
 
 
