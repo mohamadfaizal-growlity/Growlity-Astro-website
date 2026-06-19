@@ -39,7 +39,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Prepare the content as markdown with YAML frontmatter
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `src/content/${categoryFolder}/${formId}-${timestamp}.md`;
+    const filename = `src/content/entries/${formId}-${timestamp}.md`;
     
     // Construct YAML frontmatter
     let mdContent = `---\ntitle: "${title}"\nformId: "${formId}"\nsubmittedFrom: "${submittedFrom || 'unknown'}"\nsubmittedAt: "${new Date().toISOString()}"\ndata:\n`;

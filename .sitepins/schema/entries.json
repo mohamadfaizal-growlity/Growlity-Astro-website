@@ -1,6 +1,6 @@
 {
-  "file": "src/content/entries-solutions/{{slug}}.md",
-  "name": "Solution Entries",
+  "file": "src/content/entries/{{slug}}.md",
+  "name": "Entries",
   "fileType": "md",
   "fmType": "yaml",
   "template": [

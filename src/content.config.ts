@@ -267,42 +267,9 @@ const forms = defineCollection({
   })
 });
 
-// Form Entries by Category
-const entriesBlog = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries-blog" }),
-  schema: z.object({
-    title: z.string().optional(),
-    formId: z.string(),
-    submittedFrom: z.string().optional(),
-    submittedAt: z.string().optional(),
-    data: z.any().optional(),
-  }),
-});
-
-const entriesCasestudies = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries-casestudies" }),
-  schema: z.object({
-    title: z.string().optional(),
-    formId: z.string(),
-    submittedFrom: z.string().optional(),
-    submittedAt: z.string().optional(),
-    data: z.any().optional(),
-  }),
-});
-
-const entriesSolutions = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries-solutions" }),
-  schema: z.object({
-    title: z.string().optional(),
-    formId: z.string(),
-    submittedFrom: z.string().optional(),
-    submittedAt: z.string().optional(),
-    data: z.any().optional(),
-  }),
-});
-
-const entriesGeneral = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries-general" }),
+// 16. Form Entries
+const entries = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries" }),
   schema: z.object({
     title: z.string().optional(),
     formId: z.string(),
