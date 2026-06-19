@@ -16,33 +16,22 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Server misconfiguration: Missing GitHub Token.' }), { status: 500 });
     }
 
-    // Determine the category folder based on the submittedFrom URL
-    let categoryFolder = "entries-general";
-    let categoryLabel = "General";
-    
-    if (submittedFrom) {
-      if (submittedFrom.includes('/blog')) {
-        categoryFolder = "entries-blog";
-        categoryLabel = "Blog";
-      } else if (submittedFrom.includes('/case-studies')) {
-        categoryFolder = "entries-casestudies";
-        categoryLabel = "Case Study";
-      } else if (submittedFrom.includes('/solutions')) {
-        categoryFolder = "entries-solutions";
-        categoryLabel = "Solution";
+    // Determine the group folder based on submittedFrom URL
+    let group = 'general';
+    if (submittedFrom && typeof submittedFrom === 'string') {
+      // For paths like /blog/post-name, extract "blog"
+      const parts = submittedFrom.split('/').filter(Boolean);
+      if (parts.length > 0) {
+        group = parts[0];
       }
     }
 
-    // Extract user name for the title (if available)
-    const userName = fields.Name || fields.name || "Customer";
-    const title = `[${categoryLabel}] Form: ${formId} - ${userName}`;
-
     // Prepare the content as markdown with YAML frontmatter
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `src/content/entries/${formId}-${timestamp}.md`;
+    const filename = `src/content/entries/${group}/${formId}-${timestamp}.md`;
     
     // Construct YAML frontmatter
-    let mdContent = `---\ntitle: "${title}"\nformId: "${formId}"\nsubmittedFrom: "${submittedFrom || 'unknown'}"\nsubmittedAt: "${new Date().toISOString()}"\ndata:\n`;
+    let mdContent = `---\nformId: "${formId}"\nsubmittedFrom: "${submittedFrom || 'unknown'}"\nsubmittedAt: "${new Date().toISOString()}"\ndata:\n`;
     for (const [key, value] of Object.entries(fields)) {
       mdContent += `  ${key}: "${String(value).replace(/"/g, '\\"')}"\n`;
     }

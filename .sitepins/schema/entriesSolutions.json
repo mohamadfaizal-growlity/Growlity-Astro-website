@@ -1,0 +1,34 @@
+{
+  "file": "src/content/Entries - Solutions/solutions/{{slug}}.md",
+  "name": "Entries - Solutions",
+  "fileType": "md",
+  "fmType": "yaml",
+  "template": [
+    {
+      "name": "title",
+      "label": "Title",
+      "type": "string"
+    },
+    {
+      "name": "formId",
+      "label": "Form Slug",
+      "type": "string"
+    },
+    {
+      "name": "submittedFrom",
+      "label": "Page URL",
+      "type": "string"
+    },
+    {
+      "name": "submittedAt",
+      "label": "Submitted At",
+      "type": "string"
+    },
+    {
+      "name": "data",
+      "label": "Form Data",
+      "type": "object"
+    }
+  ]
+}
+

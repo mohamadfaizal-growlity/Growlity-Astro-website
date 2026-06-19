@@ -1,6 +1,6 @@
 {
-  "file": "src/content/entries/{{slug}}.md",
-  "name": "Entries",
+  "file": "src/content/Entries - Case Studies/case-studies/{{slug}}.md",
+  "name": "Entries - Case Studies",
   "fileType": "md",
   "fmType": "yaml",
   "template": [
@@ -31,3 +31,4 @@
     }
   ]
 }
+
