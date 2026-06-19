@@ -17,21 +17,18 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Determine the group folder based on submittedFrom URL
-    let group = 'General';
+    let group = 'general';
     if (submittedFrom && typeof submittedFrom === 'string') {
       // For paths like /blog/post-name, extract "blog"
       const parts = submittedFrom.split('/').filter(Boolean);
       if (parts.length > 0) {
-        const firstPart = parts[0].toLowerCase();
-        if (firstPart === 'blog') group = 'Blog';
-        else if (firstPart === 'case-studies') group = 'CaseStudies';
-        else if (firstPart === 'solutions') group = 'Solutions';
+        group = parts[0];
       }
     }
 
     // Prepare the content as markdown with YAML frontmatter
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = `src/content/entries${group}/${formId}-${timestamp}.md`;
+    const filename = `src/content/entries/${group}/${formId}-${timestamp}.md`;
     
     // Construct YAML frontmatter
     let mdContent = `---\nformId: "${formId}"\nsubmittedFrom: "${submittedFrom || 'unknown'}"\nsubmittedAt: "${new Date().toISOString()}"\ndata:\n`;

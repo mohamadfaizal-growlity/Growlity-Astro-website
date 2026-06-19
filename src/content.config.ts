@@ -268,35 +268,8 @@ const forms = defineCollection({
 });
 
 // 16. Form Entries
-const entriesBlog = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entriesBlog" }),
-  schema: z.object({
-    formId: z.string(),
-    submittedFrom: z.string().optional(),
-    submittedAt: z.string(),
-    data: z.record(z.string(), z.any())
-  })
-});
-const entriesGeneral = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entriesGeneral" }),
-  schema: z.object({
-    formId: z.string(),
-    submittedFrom: z.string().optional(),
-    submittedAt: z.string(),
-    data: z.record(z.string(), z.any())
-  })
-});
-const entriesCaseStudies = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entriesCaseStudies" }),
-  schema: z.object({
-    formId: z.string(),
-    submittedFrom: z.string().optional(),
-    submittedAt: z.string(),
-    data: z.record(z.string(), z.any())
-  })
-});
-const entriesSolutions = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entriesSolutions" }),
+const entries = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/entries" }),
   schema: z.object({
     formId: z.string(),
     submittedFrom: z.string().optional(),
@@ -317,10 +290,7 @@ export const collections = {
   testimonials,
   clients,
   forms,
-  entriesBlog,
-  entriesCaseStudies,
-  entriesGeneral,
-  entriesSolutions
+  entries
 };
 
 
