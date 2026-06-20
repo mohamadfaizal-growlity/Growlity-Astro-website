@@ -116,8 +116,23 @@ export default function SettingsView() {
               </div>
             </div>
             <div className="flex gap-2">
-              <button className="px-3 py-1 border border-[#2271b1] text-[#2271b1] hover:bg-[#f6f7f7] rounded text-sm transition-colors">Change Site Icon</button>
-              <button className="px-3 py-1 border border-[#d63638] text-[#d63638] hover:bg-[#f6f7f7] rounded text-sm transition-colors">Remove Site Icon</button>
+              <button 
+                type="button"
+                onClick={() => {
+                  const url = window.prompt("Enter image URL or path for site icon:", settings.siteIcon);
+                  if (url !== null) setSettings(prev => ({ ...prev, siteIcon: url }));
+                }}
+                className="px-3 py-1 border border-[#2271b1] text-[#2271b1] hover:bg-[#f6f7f7] rounded text-sm transition-colors"
+              >
+                Change Site Icon
+              </button>
+              <button 
+                type="button"
+                onClick={() => setSettings(prev => ({ ...prev, siteIcon: "" }))}
+                className="px-3 py-1 border border-[#d63638] text-[#d63638] hover:bg-[#f6f7f7] rounded text-sm transition-colors"
+              >
+                Remove Site Icon
+              </button>
             </div>
             <p className="text-[#646970] mt-2 text-xs">The Site Icon is what you see in browser tabs, bookmark bars, and within the WordPress mobile apps. It should be square and at least <code>512</code> by <code>512</code> pixels.</p>
           </div>
