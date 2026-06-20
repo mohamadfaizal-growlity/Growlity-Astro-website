@@ -7,6 +7,10 @@ export default function ContentEditor() {
   let { slug } = useParams();
   if (slug) slug = decodeURIComponent(slug);
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const group = searchParams.get('group');
+  
   const [schema, setSchema] = useState<any>(null);
   const [data, setData] = useState<any>({});
   const [content, setContent] = useState('');
@@ -44,7 +48,13 @@ export default function ContentEditor() {
   }, [collection, slug]);
 
   const handleSave = async () => {
-    const targetSlug = isNew ? (data.title ? data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'new-post') : slug;
+    let targetSlug = slug;
+    if (isNew) {
+      targetSlug = data.title ? data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'new-post';
+      if (group) {
+        targetSlug = `${group}/${targetSlug}`;
+      }
+    }
     
     await fetch('/api/sitepins/content', {
       method: 'POST',
@@ -52,7 +62,7 @@ export default function ContentEditor() {
       body: JSON.stringify({ collection, slug: targetSlug, data, content })
     });
     
-    navigate(`/collections/${collection}`);
+    navigate(`/collections/${collection}${group ? `?group=${group}` : ''}`);
   };
 
   const updateField = (path: string, value: any) => {

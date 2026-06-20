@@ -13,7 +13,23 @@ export async function GET() {
     const files = fs.readdirSync(schemaDir).filter(f => f.endsWith('.json'));
     const schemas = files.map(file => {
       const content = fs.readFileSync(path.join(schemaDir, file), 'utf-8');
-      return JSON.parse(content);
+      const schema = JSON.parse(content);
+      
+      let baseDir = path.join(process.cwd(), 'src', 'content', schema.name);
+      if (schema.file) {
+         baseDir = path.join(process.cwd(), path.dirname(schema.file));
+      }
+      
+      let groups: string[] = [];
+      if (fs.existsSync(baseDir)) {
+        groups = fs.readdirSync(baseDir).filter(f => {
+          const stat = fs.statSync(path.join(baseDir, f));
+          return stat.isDirectory();
+        });
+      }
+      schema.groups = groups;
+      
+      return schema;
     });
 
     return new Response(JSON.stringify(schemas), { 

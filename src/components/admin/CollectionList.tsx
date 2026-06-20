@@ -4,8 +4,12 @@ import { Plus, Edit, Trash2 } from 'lucide-react';
 
 export default function CollectionList() {
   const { collection } = useParams();
+  const location = useLocation();
   const [items, setItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const searchParams = new URLSearchParams(location.search);
+  const group = searchParams.get('group');
 
   useEffect(() => {
     fetch(`/api/sitepins/content?collection=${collection}`)
@@ -18,18 +22,25 @@ export default function CollectionList() {
 
   const handleDelete = async (slug: string) => {
     if (!confirm('Are you sure you want to delete this item?')) return;
-    await fetch(`/api/sitepins/content?collection=${collection}&slug=${slug}`, { method: 'DELETE' });
+    await fetch(`/api/sitepins/content?collection=${collection}&slug=${encodeURIComponent(slug)}`, { method: 'DELETE' });
     setItems(items.filter(i => i.slug !== slug));
   };
 
   if (loading) return <div className="p-8">Loading...</div>;
 
+  const filteredItems = items.filter(item => {
+    if (!group) return true;
+    return item.slug.startsWith(`${group}/`);
+  });
+
   return (
     <div className="p-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-slate-800 capitalize">{collection}</h1>
+        <h1 className="text-3xl font-bold text-slate-800 capitalize">
+          {collection} {group && <span className="text-emerald-500 font-medium">/ {group}</span>}
+        </h1>
         <Link 
-          to={`/collections/${collection}/new`}
+          to={`/collections/${collection}/new${group ? `?group=${group}` : ''}`}
           className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors shadow-sm"
         >
           <Plus size={20} />
@@ -47,14 +58,14 @@ export default function CollectionList() {
             </tr>
           </thead>
           <tbody>
-            {items.length === 0 ? (
+            {filteredItems.length === 0 ? (
               <tr>
                 <td colSpan={3} className="px-6 py-8 text-center text-slate-500">
                   No items found. Create your first one!
                 </td>
               </tr>
             ) : (
-              items.map((item) => (
+              filteredItems.map((item) => (
                 <tr key={item.slug} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
                   <td className="px-6 py-4 font-medium text-slate-800">
                     {item.data?.title || item.slug}
