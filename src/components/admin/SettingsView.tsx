@@ -44,14 +44,21 @@ export default function SettingsView() {
   const handleSave = async () => {
     setSaving(true);
     try {
-      await fetch('/api/sitepins/settings', {
+      const response = await fetch('/api/sitepins/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(settings)
       });
+      
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error || 'Failed to save settings');
+      }
+      
       alert('Settings saved successfully!');
-    } catch (e) {
-      alert('Failed to save settings.');
+      window.dispatchEvent(new CustomEvent('settings-updated', { detail: settings }));
+    } catch (e: any) {
+      alert(`Error: ${e.message}`);
     }
     setSaving(false);
   };

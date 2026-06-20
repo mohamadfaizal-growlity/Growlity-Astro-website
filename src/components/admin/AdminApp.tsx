@@ -70,6 +70,7 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
   const [siteLogo, setSiteLogo] = React.useState<string>("");
 
   React.useEffect(() => {
+    // Fetch initial settings
     fetch('/api/sitepins/settings')
       .then(res => res.json())
       .then(data => {
@@ -78,6 +79,16 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
         }
       })
       .catch(console.error);
+
+    // Listen for live updates from SettingsView
+    const handleSettingsUpdate = (e: any) => {
+      if (e.detail && typeof e.detail.siteLogo !== 'undefined') {
+        setSiteLogo(e.detail.siteLogo);
+      }
+    };
+    
+    window.addEventListener('settings-updated', handleSettingsUpdate as EventListener);
+    return () => window.removeEventListener('settings-updated', handleSettingsUpdate as EventListener);
   }, []);
 
   const staticNavItems = [
