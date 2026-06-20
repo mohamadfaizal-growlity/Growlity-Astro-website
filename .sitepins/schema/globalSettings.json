@@ -67,6 +67,126 @@
       "value": "",
       "isIgnored": false,
       "defaultValue": ""
+    },
+    {
+      "name": "siteTitle",
+      "label": "Site Title",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "tagline",
+      "label": "Tagline",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "siteIcon",
+      "label": "Site Icon (URL)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "wpAddress",
+      "label": "WordPress Address (URL)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "siteAddress",
+      "label": "Site Address (URL)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "adminEmail",
+      "label": "Administration Email Address",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "membership",
+      "label": "Membership (Anyone can register)",
+      "type": "boolean",
+      "value": false,
+      "isIgnored": false,
+      "defaultValue": false
+    },
+    {
+      "name": "defaultRole",
+      "label": "New User Default Role",
+      "type": "string",
+      "value": "Subscriber",
+      "isIgnored": false,
+      "defaultValue": "Subscriber"
+    },
+    {
+      "name": "siteLanguage",
+      "label": "Site Language",
+      "type": "string",
+      "value": "en_US",
+      "isIgnored": false,
+      "defaultValue": "en_US"
+    },
+    {
+      "name": "timezone",
+      "label": "Timezone",
+      "type": "string",
+      "value": "UTC",
+      "isIgnored": false,
+      "defaultValue": "UTC"
+    },
+    {
+      "name": "dateFormat",
+      "label": "Date Format",
+      "type": "string",
+      "value": "F j, Y",
+      "isIgnored": false,
+      "defaultValue": "F j, Y"
+    },
+    {
+      "name": "timeFormat",
+      "label": "Time Format",
+      "type": "string",
+      "value": "g:i a",
+      "isIgnored": false,
+      "defaultValue": "g:i a"
+    },
+    {
+      "name": "weekStartsOn",
+      "label": "Week Starts On",
+      "type": "string",
+      "value": "Monday",
+      "isIgnored": false,
+      "defaultValue": "Monday"
+    },
+    {
+      "name": "wpsLoginUrl",
+      "label": "WPS Hide Login - Login URL",
+      "type": "string",
+      "value": "https://growlity.com/",
+      "isIgnored": false,
+      "defaultValue": "https://growlity.com/"
+    },
+    {
+      "name": "wpsRedirectionUrl",
+      "label": "WPS Hide Login - Redirection URL",
+      "type": "string",
+      "value": "https://growlity.com/404",
+      "isIgnored": false,
+      "defaultValue": "https://growlity.com/404"
     }
   ]
 }
