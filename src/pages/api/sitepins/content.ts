@@ -4,6 +4,23 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
+function getContentDir(collection: string): string {
+  const schemaDir = path.join(process.cwd(), '.sitepins', 'schema');
+  if (fs.existsSync(schemaDir)) {
+    const files = fs.readdirSync(schemaDir).filter(f => f.endsWith('.json'));
+    for (const f of files) {
+      try {
+        const content = fs.readFileSync(path.join(schemaDir, f), 'utf-8');
+        const schema = JSON.parse(content);
+        if (schema.name === collection && schema.file) {
+          return path.join(process.cwd(), path.dirname(schema.file));
+        }
+      } catch (e) {}
+    }
+  }
+  return path.join(process.cwd(), 'src', 'content', collection);
+}
+
 export async function GET({ request }: { request: Request }) {
   try {
     const url = new URL(request.url);
@@ -13,7 +30,7 @@ export async function GET({ request }: { request: Request }) {
       return new Response(JSON.stringify({ error: 'Collection is required' }), { status: 400 });
     }
 
-    const contentDir = path.join(process.cwd(), 'src', 'content', collection);
+    const contentDir = getContentDir(collection);
     if (!fs.existsSync(contentDir)) {
       return new Response(JSON.stringify([]), { status: 200 });
     }
@@ -48,7 +65,7 @@ export async function POST({ request }: { request: Request }) {
       return new Response(JSON.stringify({ error: 'Collection and slug are required' }), { status: 400 });
     }
 
-    const contentDir = path.join(process.cwd(), 'src', 'content', collection);
+    const contentDir = getContentDir(collection);
     if (!fs.existsSync(contentDir)) {
       fs.mkdirSync(contentDir, { recursive: true });
     }
@@ -77,7 +94,7 @@ export async function DELETE({ request }: { request: Request }) {
       return new Response(JSON.stringify({ error: 'Collection and slug are required' }), { status: 400 });
     }
 
-    const contentDir = path.join(process.cwd(), 'src', 'content', collection);
+    const contentDir = getContentDir(collection);
     const filePath = path.join(contentDir, `${slug}.mdx`);
     
     if (fs.existsSync(filePath)) {
