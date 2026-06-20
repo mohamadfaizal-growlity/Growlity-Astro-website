@@ -5,6 +5,14 @@
   "fmType": "yaml",
   "template": [
     {
+      "name": "siteName",
+      "label": "Site Name",
+      "type": "string",
+      "value": "Growlity",
+      "isIgnored": false,
+      "defaultValue": "Growlity"
+    },
+    {
       "name": "disqusShortname",
       "label": "Disqus Shortname",
       "type": "string",
@@ -126,49 +134,82 @@
     },
     {
       "name": "defaultRole",
-      "label": "New User Default Role (Subscriber, Contributor, Author, Editor, Administrator)",
-      "type": "string",
+      "label": "New User Default Role",
+      "type": "select",
       "value": "Subscriber",
+      "options": [
+        {"label": "Subscriber", "value": "Subscriber"},
+        {"label": "Contributor", "value": "Contributor"},
+        {"label": "Author", "value": "Author"},
+        {"label": "Editor", "value": "Editor"},
+        {"label": "Administrator", "value": "Administrator"}
+      ],
       "isIgnored": false,
       "defaultValue": "Subscriber"
     },
     {
       "name": "siteLanguage",
-      "label": "Site Language (en_US, en_GB, es_ES)",
-      "type": "string",
+      "label": "Site Language",
+      "type": "select",
       "value": "en_US",
+      "options": [
+        {"label": "English (United States)", "value": "en_US"},
+        {"label": "English (UK)", "value": "en_GB"},
+        {"label": "Español", "value": "es_ES"}
+      ],
       "isIgnored": false,
       "defaultValue": "en_US"
     },
     {
       "name": "timezone",
-      "label": "Timezone (UTC, UTC+5:30, America/New_York)",
-      "type": "string",
+      "label": "Timezone",
+      "type": "select",
       "value": "UTC",
+      "options": [
+        {"label": "UTC", "value": "UTC"},
+        {"label": "UTC+5:30", "value": "UTC+5:30"},
+        {"label": "America/New_York", "value": "America/New_York"}
+      ],
       "isIgnored": false,
       "defaultValue": "UTC"
     },
     {
       "name": "dateFormat",
-      "label": "Date Format (F j, Y | Y-m-d | m/d/Y | d/m/Y)",
-      "type": "string",
+      "label": "Date Format",
+      "type": "select",
       "value": "F j, Y",
+      "options": [
+        {"label": "June 20, 2026 (F j, Y)", "value": "F j, Y"},
+        {"label": "2026-06-20 (Y-m-d)", "value": "Y-m-d"},
+        {"label": "06/20/2026 (m/d/Y)", "value": "m/d/Y"},
+        {"label": "20/06/2026 (d/m/Y)", "value": "d/m/Y"}
+      ],
       "isIgnored": false,
       "defaultValue": "F j, Y"
     },
     {
       "name": "timeFormat",
-      "label": "Time Format (g:i a | g:i A | H:i)",
-      "type": "string",
+      "label": "Time Format",
+      "type": "select",
       "value": "g:i a",
+      "options": [
+        {"label": "2:42 pm (g:i a)", "value": "g:i a"},
+        {"label": "2:42 PM (g:i A)", "value": "g:i A"},
+        {"label": "14:42 (H:i)", "value": "H:i"}
+      ],
       "isIgnored": false,
       "defaultValue": "g:i a"
     },
     {
       "name": "weekStartsOn",
-      "label": "Week Starts On (Sunday, Monday, Tuesday)",
-      "type": "string",
+      "label": "Week Starts On",
+      "type": "select",
       "value": "Monday",
+      "options": [
+        {"label": "Sunday", "value": "Sunday"},
+        {"label": "Monday", "value": "Monday"},
+        {"label": "Tuesday", "value": "Tuesday"}
+      ],
       "isIgnored": false,
       "defaultValue": "Monday"
     },
