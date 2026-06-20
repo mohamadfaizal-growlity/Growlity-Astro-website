@@ -166,7 +166,7 @@ export default function VisualEditor() {
     <div className="flex h-screen bg-slate-100 overflow-hidden">
       {/* LEFT SIDEBAR: COMPONENTS LIBRARY */}
       <div className="w-72 bg-white border-r border-slate-200 flex flex-col shadow-sm z-10">
-        <div className="p-4 border-b border-slate-100 flex items-center gap-3">
+        <div className="h-16 px-4 border-b border-slate-200 flex items-center gap-3 bg-white">
           <button onClick={() => navigate(-1)} className="text-slate-400 hover:text-slate-800 transition-colors">
             <ArrowLeft size={20} />
           </button>
@@ -194,13 +194,18 @@ export default function VisualEditor() {
       <div className="flex-1 flex flex-col relative">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         
-        <div className="h-16 px-6 border-b border-slate-200 bg-white/80 backdrop-blur-md flex items-center justify-between z-10 relative">
-          <h1 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
-            Visual Builder <span className="text-xs font-normal px-2 py-1 bg-slate-100 rounded-md text-slate-500">{slug}</span>
-          </h1>
+        <div className="h-16 px-6 border-b border-slate-200 bg-white/80 backdrop-blur-md flex items-center justify-between z-10 relative gap-4">
+          <div className="flex items-center gap-3 min-w-0 flex-1">
+            <h1 className="text-lg font-semibold text-slate-800 whitespace-nowrap">
+              Visual Builder
+            </h1>
+            <span className="text-xs font-normal px-2 py-1 bg-slate-100 rounded-md text-slate-500 truncate max-w-[150px] sm:max-w-xs" title={slug}>
+              {slug}
+            </span>
+          </div>
           <button 
             onClick={handleSave}
-            className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-lg font-medium transition-colors shadow-lg shadow-emerald-500/20"
+            className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-lg font-medium transition-colors shadow-lg shadow-emerald-500/20 whitespace-nowrap flex-shrink-0"
           >
             <Save size={18} />
             Save Layout
@@ -238,7 +243,7 @@ export default function VisualEditor() {
 
       {/* RIGHT SIDEBAR: PROPERTIES / VARIANTS */}
       <div className="w-80 bg-white border-l border-slate-200 flex flex-col shadow-sm z-10">
-        <div className="h-16 px-6 border-b border-slate-100 flex items-center gap-2 bg-slate-50/50">
+        <div className="h-16 px-6 border-b border-slate-200 flex items-center gap-2 bg-slate-50/50">
           <Settings2 size={18} className="text-slate-400" />
           <h2 className="font-bold text-slate-800">Properties</h2>
         </div>
