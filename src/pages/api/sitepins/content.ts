@@ -35,13 +35,27 @@ export async function GET({ request }: { request: Request }) {
       return new Response(JSON.stringify([]), { status: 200 });
     }
 
-    const files = fs.readdirSync(contentDir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
+    const files: string[] = [];
+    function getFiles(dir: string, currentPath: string = '') {
+      const items = fs.readdirSync(dir);
+      for (const item of items) {
+        const fullPath = path.join(dir, item);
+        const relPath = currentPath ? `${currentPath}/${item}` : item;
+        if (fs.statSync(fullPath).isDirectory()) {
+          getFiles(fullPath, relPath);
+        } else if (item.endsWith('.md') || item.endsWith('.mdx')) {
+          files.push(relPath);
+        }
+      }
+    }
+    getFiles(contentDir);
+
     const items = files.map(file => {
       const filePath = path.join(contentDir, file);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
       const { data } = matter(fileContent);
       return {
-        slug: file.replace(/\.mdx?$/, ''),
+        slug: file.replace(/\\/g, '/').replace(/\.mdx?$/, ''),
         file,
         data,
       };
@@ -66,11 +80,13 @@ export async function POST({ request }: { request: Request }) {
     }
 
     const contentDir = getContentDir(collection);
-    if (!fs.existsSync(contentDir)) {
-      fs.mkdirSync(contentDir, { recursive: true });
+    const filePath = path.join(contentDir, `${slug}.mdx`);
+    const fileDir = path.dirname(filePath);
+    
+    if (!fs.existsSync(fileDir)) {
+      fs.mkdirSync(fileDir, { recursive: true });
     }
 
-    const filePath = path.join(contentDir, `${slug}.mdx`);
     const fileContent = matter.stringify(content || '', data || {});
     
     fs.writeFileSync(filePath, fileContent, 'utf-8');
@@ -95,10 +111,13 @@ export async function DELETE({ request }: { request: Request }) {
     }
 
     const contentDir = getContentDir(collection);
-    const filePath = path.join(contentDir, `${slug}.mdx`);
+    const mdxPath = path.join(contentDir, `${slug}.mdx`);
+    const mdPath = path.join(contentDir, `${slug}.md`);
     
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
+    if (fs.existsSync(mdxPath)) {
+      fs.unlinkSync(mdxPath);
+    } else if (fs.existsSync(mdPath)) {
+      fs.unlinkSync(mdPath);
     }
 
     return new Response(JSON.stringify({ success: true }), { 
