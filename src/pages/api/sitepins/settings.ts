@@ -5,7 +5,7 @@ import path from 'path';
 
 const settingsFile = path.join(process.cwd(), 'src', 'data', 'settings.json');
 const githubToken = process.env.GITHUB_TOKEN;
-const githubRepo = process.env.GITHUB_REPO; // e.g. mohamadfaizal-growlity/Growlity-Astro-website
+const githubRepo = process.env.GITHUB_REPO || (process.env.VERCEL_GIT_REPO_OWNER && process.env.VERCEL_GIT_REPO_SLUG ? `${process.env.VERCEL_GIT_REPO_OWNER}/${process.env.VERCEL_GIT_REPO_SLUG}` : null);
 const githubPath = 'src/data/settings.json';
 
 function ensureDataDir() {
