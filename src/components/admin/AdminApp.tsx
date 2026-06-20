@@ -67,14 +67,14 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
 const Sidebar = ({ schemas }: { schemas: any[] }) => {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
-  const [siteIcon, setSiteIcon] = React.useState<string>("");
+  const [siteLogo, setSiteLogo] = React.useState<string>("");
 
   React.useEffect(() => {
     fetch('/api/sitepins/settings')
       .then(res => res.json())
       .then(data => {
-        if (data && data.siteIcon) {
-          setSiteIcon(data.siteIcon);
+        if (data && data.siteLogo) {
+          setSiteLogo(data.siteLogo);
         }
       })
       .catch(console.error);
@@ -90,8 +90,8 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
   return (
     <div className="w-64 bg-slate-900 text-slate-300 h-screen flex flex-col shadow-2xl sticky top-0 left-0">
       <div className="h-16 flex items-center px-6 border-b border-slate-800 bg-slate-950">
-        {siteIcon ? (
-          <img src={siteIcon} alt="Site Logo" className="h-8 max-w-full object-contain" />
+        {siteLogo ? (
+          <img src={siteLogo} alt="Site Logo" className="h-8 max-w-full object-contain" />
         ) : (
           <h1 className="text-xl font-bold text-white tracking-wider flex items-center gap-2">
             <span className="text-emerald-400">Site</span>Pins

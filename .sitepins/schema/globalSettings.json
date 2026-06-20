@@ -93,6 +93,14 @@
       "defaultValue": ""
     },
     {
+      "name": "siteLogo",
+      "label": "Site Logo (Full Image)",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
       "name": "siteIcon",
       "label": "Site Icon (URL)",
       "type": "string",

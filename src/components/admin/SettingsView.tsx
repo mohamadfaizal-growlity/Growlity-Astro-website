@@ -7,6 +7,7 @@ export default function SettingsView() {
   const [settings, setSettings] = useState({
     siteTitle: 'Growlity',
     tagline: 'Growth with Sustainability',
+    siteLogo: '',
     siteIcon: '',
     wpAddress: 'https://growlity.com',
     siteAddress: 'https://growlity.com',
@@ -102,10 +103,57 @@ export default function SettingsView() {
           </div>
         </div>
 
-        {/* Site Icon */}
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="sm:w-1/3 font-semibold pt-1">Site Icon</div>
-          <div className="sm:w-2/3">
+        <div className="grid grid-cols-12 gap-6 items-start">
+          <div className="col-span-3 text-sm font-semibold text-[#1d2327]">Site Logo</div>
+          <div className="col-span-9">
+            <div className="mb-3">
+              <div className="w-48 h-24 border border-[#dcdcde] bg-[#f0f0f1] flex items-center justify-center rounded">
+                {settings.siteLogo ? (
+                  <img src={settings.siteLogo} alt="Site Logo" className="max-w-full max-h-full object-contain p-2" />
+                ) : (
+                  <div className="text-[#646970] font-bold text-3xl">Logo</div>
+                )}
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <input 
+                type="file" 
+                accept="image/*" 
+                className="hidden" 
+                id="siteLogoUpload" 
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      setSettings(prev => ({ ...prev, siteLogo: reader.result as string }));
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }} 
+              />
+              <button 
+                type="button"
+                onClick={() => document.getElementById('siteLogoUpload')?.click()}
+                className="px-3 py-1 border border-[#2271b1] text-[#2271b1] hover:bg-[#f6f7f7] rounded text-sm transition-colors"
+              >
+                Upload Site Logo
+              </button>
+              <button 
+                type="button"
+                onClick={() => setSettings(prev => ({ ...prev, siteLogo: "" }))}
+                className="px-3 py-1 border border-[#d63638] text-[#d63638] hover:bg-[#f6f7f7] rounded text-sm transition-colors"
+              >
+                Remove Site Logo
+              </button>
+            </div>
+            <p className="text-[#646970] mt-2 text-xs">The Site Logo is used in the header of your website and the dashboard.</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-12 gap-6 items-start">
+          <div className="col-span-3 text-sm font-semibold text-[#1d2327]">Site Icon</div>
+          <div className="col-span-9">
             <div className="flex items-center gap-4 mb-2">
               <div className="w-24 h-24 bg-slate-100 border border-slate-300 rounded flex items-center justify-center overflow-hidden">
                 {settings.siteIcon ? (
