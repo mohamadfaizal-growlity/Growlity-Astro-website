@@ -64,7 +64,7 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
   );
 };
 
-const Sidebar = ({ schemas }: { schemas: any[] }) => {
+const Sidebar = ({ schemas, settings }: { schemas: any[], settings: any }) => {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
@@ -78,9 +78,13 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
   return (
     <div className="w-64 bg-slate-900 text-slate-300 h-screen flex flex-col shadow-2xl sticky top-0 left-0">
       <div className="h-16 flex items-center px-6 border-b border-slate-800 bg-slate-950">
-        <h1 className="text-xl font-bold text-white tracking-wider flex items-center gap-2">
-          <span className="text-emerald-400">Site</span>Pins
-        </h1>
+        {settings?.siteIcon ? (
+          <img src={settings.siteIcon} alt="Site Logo" className="h-8 max-w-full object-contain" />
+        ) : (
+          <h1 className="text-xl font-bold text-white tracking-wider flex items-center gap-2">
+            <span className="text-emerald-400">Growlity</span>
+          </h1>
+        )}
       </div>
       <div className="flex-1 overflow-y-auto py-6">
         <div className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Core</div>
@@ -160,15 +164,18 @@ export default function AdminApp() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [schemas, setSchemas] = useState<any[]>([]);
+  const [settings, setSettings] = useState<any>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/sitepins/schema')
-      .then(res => res.json())
-      .then(data => {
-        setSchemas(Array.isArray(data) ? data : []);
-        setLoading(false);
-      });
+    Promise.all([
+      fetch('/api/sitepins/schema').then(res => res.json()),
+      fetch('/api/sitepins/settings').then(res => res.json())
+    ]).then(([schemaData, settingsData]) => {
+      setSchemas(Array.isArray(schemaData) ? schemaData : []);
+      setSettings(settingsData || {});
+      setLoading(false);
+    }).catch(() => setLoading(false));
   }, []);
 
   if (!isAuthenticated) {
@@ -216,7 +223,7 @@ export default function AdminApp() {
   return (
     <Router>
       <div className="flex min-h-screen bg-slate-50">
-        <Sidebar schemas={schemas} />
+        <Sidebar schemas={schemas} settings={settings} />
         <main className="flex-1 overflow-x-hidden">
           <Routes>
             <Route path="/" element={<Dashboard />} />
