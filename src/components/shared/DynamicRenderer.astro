@@ -1,0 +1,34 @@
+---
+import React from 'react';
+// We would import the actual frontend components here, e.g.:
+// import Hero from './Hero.astro';
+// import Features from './Features.astro';
+
+const { blocks } = Astro.props;
+
+// Mock mapping
+const componentMap: Record<string, any> = {
+  Hero: 'div',
+  Features: 'div',
+  TextContent: 'div',
+  FAQ: 'div'
+};
+---
+
+<div class="dynamic-layout">
+  {blocks && blocks.map((block: any) => {
+    const Component = componentMap[block.componentId];
+    if (!Component) return null;
+
+    return (
+      <div class={`block-wrapper variant-${block.variant}`} data-block-id={block.id}>
+        {/* Render placeholder for now */}
+        <div class="p-8 border-2 border-dashed border-gray-300 rounded-xl my-4 bg-gray-50 text-center">
+          <h3 class="text-xl font-bold text-gray-800">{block.componentId} Block</h3>
+          <p class="text-gray-500">Variant: {block.variant}</p>
+          <pre class="text-left bg-gray-100 p-4 rounded-lg mt-4 text-xs overflow-auto">{JSON.stringify(block.data, null, 2)}</pre>
+        </div>
+      </div>
+    );
+  })}
+</div>

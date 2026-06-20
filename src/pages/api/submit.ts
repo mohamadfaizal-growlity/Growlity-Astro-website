@@ -1,5 +1,6 @@
 export const prerender = false;
 import type { APIRoute } from 'astro';
+import nodemailer from 'nodemailer';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -65,6 +66,38 @@ export const POST: APIRoute = async ({ request }) => {
       const errorText = await githubResponse.text();
       console.error("GitHub API Error:", errorText);
       return new Response(JSON.stringify({ error: 'Failed to save entry to database.' }), { status: 500 });
+    }
+
+    // Automated Email Sending Logic
+    try {
+      // For testing we use a free Ethereal Email account (or you can provide your own SMTP details)
+      // To get test credentials, go to https://ethereal.email/create
+      const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST || 'smtp.ethereal.email',
+        port: Number(process.env.SMTP_PORT) || 587,
+        auth: {
+          user: process.env.SMTP_USER || 'test@ethereal.email', // Replace with valid test credentials
+          pass: process.env.SMTP_PASS || 'testpassword'
+        }
+      });
+
+      // Construct email body
+      let emailHtml = `<h2>New Form Submission: ${formId}</h2><ul>`;
+      for (const [key, value] of Object.entries(fields)) {
+        emailHtml += `<li><strong>${key}:</strong> ${value}</li>`;
+      }
+      emailHtml += `</ul><p>Submitted from: ${submittedFrom || 'unknown'}</p>`;
+
+      await transporter.sendMail({
+        from: '"SitePins Admin" <admin@sitepins.local>',
+        to: process.env.ADMIN_EMAIL || 'admin@growlity.com',
+        subject: `New Submission on ${formId}`,
+        html: emailHtml
+      });
+      console.log('Automated email sent successfully.');
+    } catch (emailError) {
+      console.error('Failed to send automated email:', emailError);
+      // We don't fail the whole request if email fails, but we log it.
     }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });

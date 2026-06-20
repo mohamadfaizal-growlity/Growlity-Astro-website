@@ -6,6 +6,7 @@ import Callout from '../components/mdx/Callout.astro';
 import YouTube from '../components/mdx/YouTube.astro';
 import CTA from '../components/mdx/CTA.astro';
 import MarkdownLink from '../components/mdx/MarkdownLink.astro';
+import DynamicRenderer from '../components/shared/DynamicRenderer.astro';
 
 // This function tells Astro to create a page for every file in the "pages" collection
 export async function getStaticPaths() {
@@ -44,6 +45,11 @@ const { Content } = await render(page);
       <!-- This renders the standard markdown content -->
       <Content components={{ Callout, YouTube, CTA, a: MarkdownLink }} />
     </main>
+
+    <!-- Visual Builder Dynamic Blocks -->
+    {page.data.blocks && page.data.blocks.length > 0 && (
+      <DynamicRenderer blocks={page.data.blocks} />
+    )}
 
     <!-- Static Fields Section -->
     <section class="w-full">
