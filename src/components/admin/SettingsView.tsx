@@ -116,15 +116,28 @@ export default function SettingsView() {
               </div>
             </div>
             <div className="flex gap-2">
+              <input 
+                type="file" 
+                accept="image/*" 
+                className="hidden" 
+                id="siteIconUpload" 
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      setSettings(prev => ({ ...prev, siteIcon: reader.result as string }));
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                }} 
+              />
               <button 
                 type="button"
-                onClick={() => {
-                  const url = window.prompt("Enter image URL or path for site icon:", settings.siteIcon);
-                  if (url !== null) setSettings(prev => ({ ...prev, siteIcon: url }));
-                }}
+                onClick={() => document.getElementById('siteIconUpload')?.click()}
                 className="px-3 py-1 border border-[#2271b1] text-[#2271b1] hover:bg-[#f6f7f7] rounded text-sm transition-colors"
               >
-                Change Site Icon
+                Upload Site Icon
               </button>
               <button 
                 type="button"
