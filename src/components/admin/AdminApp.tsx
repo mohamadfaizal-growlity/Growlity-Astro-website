@@ -91,18 +91,17 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
 
 const Dashboard = () => (
   <div className="p-8">
-    <h1 className="text-3xl font-bold text-slate-800 mb-6">Dashboard</h1>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {[
-        { title: 'Total Pages', value: '12', color: 'from-emerald-500 to-teal-400' },
-        { title: 'Blog Posts', value: '34', color: 'from-blue-500 to-indigo-400' },
-        { title: 'Media Files', value: '128', color: 'from-purple-500 to-pink-400' },
-      ].map((stat) => (
-        <div key={stat.title} className={`rounded-xl p-6 shadow-lg bg-gradient-to-br ${stat.color} text-white`}>
-          <h3 className="text-white/80 font-medium">{stat.title}</h3>
-          <p className="text-4xl font-bold mt-2">{stat.value}</p>
-        </div>
-      ))}
+    <h1 className="text-3xl font-bold text-slate-800 mb-2">Welcome to SitePins</h1>
+    <p className="text-slate-500 mb-8">Select a collection from the sidebar to start managing your content.</p>
+    
+    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8 text-center">
+      <div className="w-16 h-16 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+        <LayoutDashboard size={32} />
+      </div>
+      <h2 className="text-xl font-bold text-slate-800 mb-2">Your Dashboard is Ready</h2>
+      <p className="text-slate-500 max-w-md mx-auto">
+        You can now easily create pages, write blog posts, and use the Bricks-style visual editor to design your site.
+      </p>
     </div>
   </div>
 );
