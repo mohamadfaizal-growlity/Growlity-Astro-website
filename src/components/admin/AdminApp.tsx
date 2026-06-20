@@ -13,6 +13,7 @@ import {
 import CollectionList from './CollectionList';
 import ContentEditor from './ContentEditor';
 import VisualEditor from './VisualEditor';
+import SettingsView from './SettingsView';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 
 const CollectionNavItem = ({ schema }: { schema: any }) => {
@@ -224,7 +225,7 @@ export default function AdminApp() {
             <Route path="/collections/:collection/:slug/builder" element={<VisualEditor />} />
             <Route path="/media" element={<PlaceholderView title="Media Library" />} />
             <Route path="/emails" element={<PlaceholderView title="Email Campaigns" />} />
-            <Route path="/settings" element={<PlaceholderView title="Site Settings" />} />
+            <Route path="/settings" element={<SettingsView />} />
           </Routes>
         </main>
       </div>
