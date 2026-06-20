@@ -64,7 +64,7 @@ export default function CollectionList() {
                   </td>
                   <td className="px-6 py-4 flex justify-end gap-3">
                     <Link 
-                      to={`/collections/${collection}/${item.slug}`}
+                      to={`/collections/${collection}/${encodeURIComponent(item.slug)}`}
                       className="text-blue-500 hover:text-blue-700 transition-colors"
                     >
                       <Edit size={18} />

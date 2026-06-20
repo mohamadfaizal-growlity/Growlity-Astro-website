@@ -3,7 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Save, ArrowLeft } from 'lucide-react';
 
 export default function ContentEditor() {
-  const { collection, slug } = useParams();
+  const { collection } = useParams();
+  let { slug } = useParams();
+  if (slug) slug = decodeURIComponent(slug);
   const navigate = useNavigate();
   const [schema, setSchema] = useState<any>(null);
   const [data, setData] = useState<any>({});
@@ -125,7 +127,7 @@ export default function ContentEditor() {
               <p>Status: <span className="text-emerald-500 font-medium">Draft</span></p>
             </div>
             <button 
-              onClick={() => navigate(`/collections/${collection}/${slug}/builder`)}
+              onClick={() => navigate(`/collections/${collection}/${encodeURIComponent(slug || '')}/builder`)}
               className="w-full mt-4 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-200 py-2 rounded-lg font-medium transition-colors"
             >
               Open Bricks Visual Editor

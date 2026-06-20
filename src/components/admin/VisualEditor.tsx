@@ -77,7 +77,9 @@ const SortableBlock = ({ block, isActive, onSelect, onDelete }: { block: BlockDa
 };
 
 export default function VisualEditor() {
-  const { collection, slug } = useParams();
+  const { collection } = useParams();
+  let { slug } = useParams();
+  if (slug) slug = decodeURIComponent(slug);
   const navigate = useNavigate();
   
   const [blocks, setBlocks] = useState<BlockData[]>([]);
