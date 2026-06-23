@@ -1,0 +1,96 @@
+---
+export const prerender = true;
+import { getCollection, render } from 'astro:content';
+import FAQAccordion from '../../components/shared/FAQAccordion.astro';
+import Callout from '../../components/mdx/Callout.astro';
+import YouTube from '../../components/mdx/YouTube.astro';
+import CTA from '../../components/mdx/CTA.astro';
+import MarkdownLink from '../../components/mdx/MarkdownLink.astro';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map(post => ({
+    params: { slug: post.id },
+    props: { solution: post },
+  }));
+}
+
+const { solution } = Astro.props;
+const { Content } = await render(solution);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{solution.data.seoTitle || `${solution.data.title} | Services`}</title>
+    <meta name="description" content={solution.data.seoDescription || solution.data.shortDescription || ''} />
+  </head>
+  <body class="bg-white text-gray-900">
+    
+    <!-- Service Header -->
+    <header class="bg-[#0b1b1a] text-white py-24 px-6 text-center">
+      <div class="max-w-4xl mx-auto">
+        <span class="text-brand-green font-bold uppercase tracking-widest text-sm mb-4 block">
+          {solution.data.category}
+        </span>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6">
+          {solution.data.title}
+        </h1>
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+          {solution.data.shortDescription}
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Content from Sitepins -->
+    <main class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-green">
+      <Content components={{ Callout, YouTube, CTA, a: MarkdownLink }} />
+    </main>
+
+    <!-- Static Fields Section -->
+    <section class="w-full">
+      
+      {/* BANNER IMAGE BLOCK */}
+      {solution.data.bannerSection?.image && (
+        <div class="w-full my-12 relative overflow-hidden group border-y border-gray-100">
+          <div class="w-full aspect-[4/3] md:aspect-video max-h-[600px] overflow-hidden bg-gray-100 flex items-center justify-center">
+            <img src={solution.data.bannerSection.image} alt={solution.data.bannerSection.caption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          </div>
+          {solution.data.bannerSection.caption && (
+            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24">
+              <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">{solution.data.bannerSection.caption}</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* BOTTOM TEXT BLOCK */}
+      {solution.data.bottomSection?.text && (
+        <div class="max-w-4xl mx-auto py-8 px-6 prose prose-lg prose-green text-center">
+          <h2 class="text-2xl font-bold text-gray-900">{solution.data.bottomSection.text}</h2>
+        </div>
+      )}
+
+      {/* FAQ BLOCK */}
+      {solution.data.faqSection && solution.data.faqSection.length > 0 && (
+        <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
+          <FAQAccordion faqList={solution.data.faqSection} />
+        </div>
+      )}
+
+      {/* CTA BLOCK */}
+      {solution.data.ctaSection?.reference && (
+        <div class="bg-brand-green text-white py-16 px-6 text-center my-8">
+          <h2 class="text-3xl font-bold mb-4">Ready to get started?</h2>
+          <p class="text-xl mb-8">Contact us about {solution.data.ctaSection.reference}</p>
+          <a href="/contact" class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors inline-block">
+            Contact Us
+          </a>
+        </div>
+      )}
+      
+    </section>
+
+  </body>
+</html>
