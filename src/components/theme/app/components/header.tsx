@@ -171,7 +171,7 @@ export function Header() {
                     <NavigationMenuContent>
                       <ul className="grid w-[200px] gap-3 p-4">
                         <li>
-                          <a href="/blog" className="block text-sm text-muted-foreground hover:text-[#0066FF] transition-colors">Blogs</a>
+                          <a href="/blogs" className="block text-sm text-muted-foreground hover:text-[#0066FF] transition-colors">Blogs</a>
                         </li>
                         <li>
                           <a href="/case-studies" className="block text-sm text-muted-foreground hover:text-[#0066FF] transition-colors">Case Studies</a>
@@ -280,7 +280,7 @@ export function Header() {
                       </button>
                       {openMobileAccordion === 'resources' && (
                         <div className="flex flex-col gap-2 px-4 pb-4 bg-slate-50/50">
-                          <a href="/blog" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Blogs</a>
+                          <a href="/blogs" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Blogs</a>
                           <a href="/case-studies" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Case Studies</a>
                           <a href="/webinars" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Webinars</a>
                           <a href="/publications" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Publications</a>

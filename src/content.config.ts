@@ -73,9 +73,9 @@ const pages = defineCollection({
   }),
 });
 
-// 3. Solutions
-const solutions = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/solutions" }),
+// 3. Services
+const services = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/services" }),
   schema: ({ image }) => z.object({
     title: z.string(),
     category: z.string(),
@@ -106,9 +106,9 @@ const solutions = defineCollection({
   })
 });
 
-// 5. Blog Posts
-const blog = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
+// 5. Blogs
+const blogs = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blogs" }),
   schema: ({ image }) => z.object({
     title: z.string(),
     featuredImage: z.string().optional(),
@@ -235,9 +235,9 @@ const testimonials = defineCollection({
   })
 });
 
-// 14. Clients
-const clients = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/clients" }),
+// 14. Customers
+const customers = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/customers" }),
   schema: ({ image }) => z.object({
     companyName: z.string(),
     logo: z.string().optional(),
@@ -281,14 +281,14 @@ const entries = defineCollection({
 export const collections = {
   globalSettings,
   pages,
-  solutions,
-  blog,
+  services,
+  blogs,
   experts,
   caseStudies,
   webinars,
   publications,
   testimonials,
-  clients,
+  customers,
   forms,
   entries
 };
