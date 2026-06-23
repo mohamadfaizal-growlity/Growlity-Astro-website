@@ -1,6 +1,7 @@
 {
   "file": "src/content/services/placeholder.mdx",
   "name": "services",
+  "label": "Solutions",
   "fileType": "mdx",
   "fmType": "yaml",
   "template": [

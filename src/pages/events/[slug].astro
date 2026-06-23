@@ -1,0 +1,111 @@
+---
+export const prerender = true;
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Callout from '../../components/mdx/Callout.astro';
+import YouTube from '../../components/mdx/YouTube.astro';
+import CTA from '../../components/mdx/CTA.astro';
+import MarkdownLink from '../../components/mdx/MarkdownLink.astro';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  return events.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.seoTitle || post.data.title} | Growlity`}>
+  
+  <!-- Hero Section -->
+  <div class="relative bg-slate-900 text-white overflow-hidden py-20 lg:py-28">
+    <div class="absolute inset-0 z-0">
+      {post.data.banner ? (
+        <img src={post.data.banner} alt="Background" class="w-full h-full object-cover opacity-20" />
+      ) : (
+        <div class="w-full h-full bg-gradient-to-br from-slate-900 via-[#0066FF]/20 to-[#00C853]/10"></div>
+      )}
+      <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {post.data.upcomingToggle && (
+        <span class="inline-block bg-[#00C853] text-white text-xs font-bold px-3 py-1.5 rounded-full mb-6 tracking-wide shadow-[0_0_15px_rgba(0,200,83,0.5)]">
+          UPCOMING EVENT
+        </span>
+      )}
+      
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight max-w-4xl drop-shadow-lg">
+        {post.data.title}
+      </h1>
+      
+      <div class="flex flex-wrap items-center gap-6 md:gap-10 text-lg md:text-xl font-medium text-slate-200">
+        <div class="flex items-center gap-2">
+          <svg class="w-6 h-6 text-[#0066FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+          {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </div>
+        
+        {post.data.time && (
+          <div class="flex items-center gap-2">
+            <svg class="w-6 h-6 text-[#0066FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            {post.data.time}
+          </div>
+        )}
+
+        {post.data.location && (
+          <div class="flex items-center gap-2">
+            <svg class="w-6 h-6 text-[#0066FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            {post.data.location}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-slate-50 min-h-screen py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-12">
+      
+      <!-- Main Content -->
+      <div class="flex-1 order-2 lg:order-1">
+        <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100">
+          <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b border-slate-100 pb-4">Event Details</h2>
+          <article class="prose prose-lg prose-slate max-w-none prose-a:text-[#0066FF] hover:prose-a:text-[#0052CC] prose-headings:text-slate-800">
+            <Content components={{ Callout, YouTube, CTA, a: MarkdownLink }} />
+          </article>
+        </div>
+      </div>
+      
+      <!-- Sidebar -->
+      <div class="w-full lg:w-80 flex-shrink-0 order-1 lg:order-2 space-y-8">
+        
+        <!-- Action Card -->
+        <div class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,102,255,0.08)] border border-slate-100 relative overflow-hidden text-center lg:-mt-32 z-20">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
+          <h3 class="text-xl font-bold text-slate-800 mb-6 mt-2">Reserve Your Spot</h3>
+          
+          {post.data.upcomingToggle && post.data.registrationLink ? (
+            <a href={post.data.registrationLink} target="_blank" rel="noopener noreferrer" class="block w-full bg-[#0066FF] hover:bg-[#0052CC] text-white px-6 py-4 rounded-xl font-medium transition-all shadow-lg shadow-[#0066FF]/20 hover:shadow-[#0066FF]/40 hover:-translate-y-0.5">
+              Register Now
+            </a>
+          ) : !post.data.upcomingToggle ? (
+             <div class="p-4 bg-slate-50 text-slate-500 rounded-xl text-sm border border-slate-100">
+              This event has already ended.
+            </div>
+          ) : (
+            <div class="p-4 bg-slate-50 text-slate-500 rounded-xl text-sm border border-slate-100">
+              Registration link will be available soon.
+            </div>
+          )}
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</Layout>
