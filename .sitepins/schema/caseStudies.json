@@ -1,6 +1,6 @@
 {
   "file": "src/content/case-studies/placeholder.mdx",
-  "name": "case-studies",
+  "name": "caseStudies",
   "label": "Case Studies",
   "fileType": "mdx",
   "fmType": "yaml",
