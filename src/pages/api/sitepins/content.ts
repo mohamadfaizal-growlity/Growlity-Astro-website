@@ -5,19 +5,30 @@ import path from 'path';
 import matter from 'gray-matter';
 
 function getContentDir(collection: string): string {
-  const schemaDir = path.join(process.cwd(), '.sitepins', 'schema');
-  if (fs.existsSync(schemaDir)) {
-    const files = fs.readdirSync(schemaDir).filter(f => f.endsWith('.json'));
-    for (const f of files) {
-      try {
-        const content = fs.readFileSync(path.join(schemaDir, f), 'utf-8');
-        const schema = JSON.parse(content);
-        if (schema.name === collection && schema.file) {
-          return path.join(process.cwd(), path.dirname(schema.file));
-        }
-      } catch (e) {}
+  const checkDir = (dirPath: string) => {
+    if (fs.existsSync(dirPath)) {
+      const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.json'));
+      for (const f of files) {
+        try {
+          const content = fs.readFileSync(path.join(dirPath, f), 'utf-8');
+          const schema = JSON.parse(content);
+          if (schema.name === collection && schema.file) {
+            return path.join(process.cwd(), path.dirname(schema.file));
+          }
+        } catch (e) {}
+      }
     }
-  }
+    return null;
+  };
+
+  const schemaDir = path.join(process.cwd(), '.sitepins', 'schema');
+  const foundInSchema = checkDir(schemaDir);
+  if (foundInSchema) return foundInSchema;
+
+  const hiddenSchemaDir = path.join(process.cwd(), '.sitepins', 'hidden-schema');
+  const foundInHidden = checkDir(hiddenSchemaDir);
+  if (foundInHidden) return foundInHidden;
+
   return path.join(process.cwd(), 'src', 'content', collection);
 }
 
