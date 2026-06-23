@@ -10,7 +10,7 @@ interface Props {
 
 const { faqList } = Astro.props;
 
-let allFaqs = [];
+let allFaqs: Array<{id: string, data: {question: string, answer: string, order: number}}> = [];
 
 if (faqList && faqList.length > 0) {
   // Use the direct list provided from the page block
