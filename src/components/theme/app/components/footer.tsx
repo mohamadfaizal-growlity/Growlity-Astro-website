@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Linkedin, Twitter, Facebook, Youtube, Mail, Phone, MapPin } from "lucide-react";
 
-export function Footer() {
+export function Footer({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string }) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -13,7 +13,7 @@ export function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <img src="/growlity-logo.png" alt="Growlity Logo" className="h-10 w-auto object-contain" />
+              <img src={siteLogo} alt="Growlity Logo" className="h-10 w-auto object-contain" />
             </div>
             <p className="text-sm text-muted-foreground mb-4">
               Growth with Sustainability. Your trusted partner for ESG transformation and climate action.
