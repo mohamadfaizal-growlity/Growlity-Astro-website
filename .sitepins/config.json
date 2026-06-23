@@ -4,13 +4,5 @@
   "public": "public",
   "configs": [],
   "custom-commit": false,
-  "arrangement": [
-    "posts",
-    "pages",
-    "case-studies",
-    "events",
-    "publications",
-    "solutions",
-    "webinars"
-  ]
+  "arrangement": []
 }
