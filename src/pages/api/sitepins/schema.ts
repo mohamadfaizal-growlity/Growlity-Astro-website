@@ -6,13 +6,22 @@ import path from 'path';
 export async function GET() {
   try {
     const schemaDir = path.join(process.cwd(), '.sitepins', 'schema');
-    if (!fs.existsSync(schemaDir)) {
+    const hiddenSchemaDir = path.join(process.cwd(), '.sitepins', 'hidden-schema');
+    
+    let files: {file: string, dir: string}[] = [];
+    if (fs.existsSync(schemaDir)) {
+      files = files.concat(fs.readdirSync(schemaDir).filter(f => f.endsWith('.json')).map(f => ({file: f, dir: schemaDir})));
+    }
+    if (fs.existsSync(hiddenSchemaDir)) {
+      files = files.concat(fs.readdirSync(hiddenSchemaDir).filter(f => f.endsWith('.json')).map(f => ({file: f, dir: hiddenSchemaDir})));
+    }
+
+    if (files.length === 0) {
       return new Response(JSON.stringify([]), { status: 200, headers: { 'Content-Type': 'application/json' } });
     }
 
-    const files = fs.readdirSync(schemaDir).filter(f => f.endsWith('.json'));
-    const schemas = files.map(file => {
-      const content = fs.readFileSync(path.join(schemaDir, file), 'utf-8');
+    const schemas = files.map(({file, dir}) => {
+      const content = fs.readFileSync(path.join(dir, file), 'utf-8');
       const schema = JSON.parse(content);
       
       let baseDir = path.join(process.cwd(), 'src', 'content', schema.name);
