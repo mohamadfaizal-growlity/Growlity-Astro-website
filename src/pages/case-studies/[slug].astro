@@ -20,7 +20,7 @@ const { study } = Astro.props;
 const { Content } = await render(study);
 ---
 
-<Layout title={study.data.seoTitle || `${study.data.clientName} Case Study`} description={study.data.seoDescription || `Read how we helped ${study.data.clientName} in the ${study.data.industry} industry.`}>
+<Layout title={study.data.seoSettings?.title || `${study.data.clientName} Case Study`} description={study.data.seoSettings?.description || `Read how we helped ${study.data.clientName} in the ${study.data.industry} industry.`}>
     <!-- Hero Section -->
     <header class="bg-brand-green text-white py-24 px-6 text-center">
       <div class="max-w-4xl mx-auto">

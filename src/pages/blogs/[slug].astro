@@ -32,14 +32,14 @@ const disqusShortname = globalSettings.length > 0 ? globalSettings[0].data.disqu
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{post.data.seoTitle || post.data.title}</title>
-    <meta name="description" content={post.data.seoDescription || post.data.excerpt || ''} />
+    <title>{post.data.seoSettings?.title || post.data.title}</title>
+    <meta name="description" content={post.data.seoSettings?.description || post.data.excerpt || ''} />
 
     {/* Google Analytics */}
     {gaId && (
       <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-        <script define:vars={{ gaId }}>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());

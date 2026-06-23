@@ -21,9 +21,9 @@ const allServices = await getCollection('services');
             <h2 class="text-xl font-bold text-gray-900 group-hover:text-green-700 transition-colors mb-2">
               {service.data.title}
             </h2>
-            {service.data.heroDescription && (
+            {service.data.shortDescription && (
               <p class="text-gray-600 mt-2">
-                {service.data.heroDescription}
+                {service.data.shortDescription}
               </p>
             )}
             <div class="mt-auto pt-6 text-green-700 font-medium text-sm group-hover:text-green-800">
