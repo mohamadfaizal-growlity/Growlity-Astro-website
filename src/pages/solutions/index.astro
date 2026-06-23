@@ -16,7 +16,7 @@ const allServices = await getCollection('services');
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {allServices.map((service) => (
-        <a href={`/services/${service.id}`} class="block group">
+        <a href={`/solutions/${service.id}`} class="block group">
           <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all h-full flex flex-col p-6">
             <h2 class="text-xl font-bold text-gray-900 group-hover:text-green-700 transition-colors mb-2">
               {service.data.title}
