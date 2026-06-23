@@ -1,6 +1,7 @@
 {
   "file": "src/content/publications/placeholder.mdx",
   "name": "publications",
+  "label": "Publications",
   "fileType": "mdx",
   "fmType": "yaml",
   "template": [

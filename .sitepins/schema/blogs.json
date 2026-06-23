@@ -1,6 +1,7 @@
 {
   "file": "src/content/blogs/placeholder.mdx",
   "name": "blogs",
+  "label": "Posts",
   "fileType": "mdx",
   "fmType": "yaml",
   "template": [

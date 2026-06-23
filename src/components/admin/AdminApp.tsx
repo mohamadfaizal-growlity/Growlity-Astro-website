@@ -35,7 +35,7 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
       >
         <div className="flex items-center gap-3">
           <FolderOpen size={20} />
-          {schema.name}
+          {schema.label || schema.name}
         </div>
         {schema.groups && schema.groups.length > 0 && (
           <button 

@@ -1,6 +1,7 @@
 {
   "file": "src/content/webinars/placeholder.mdx",
   "name": "webinars",
+  "label": "Webinar",
   "fileType": "mdx",
   "fmType": "yaml",
   "template": [

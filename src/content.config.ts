@@ -204,6 +204,21 @@ const webinars = defineCollection({
   })
 });
 
+// 10b. Events
+const events = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/events" }),
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    banner: z.string().optional(),
+    location: z.string().optional(),
+    date: z.date(),
+    time: z.string().optional(),
+    registrationLink: z.string().optional(),
+    upcomingToggle: z.boolean().default(true),
+    seoTitle: z.string().optional()
+  })
+});
+
 // 11. Publications
 const publications = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/publications" }),
@@ -286,6 +301,7 @@ export const collections = {
   experts,
   caseStudies,
   webinars,
+  events,
   publications,
   testimonials,
   customers,
