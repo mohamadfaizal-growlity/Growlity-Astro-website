@@ -2,12 +2,15 @@
 import { getEntry } from 'astro:content';
 import '../styles/global.css';
 import GlobalPopup from '../components/shared/GlobalPopup.astro';
+import { Header } from '../components/theme/app/components/header';
+import { Footer } from '../components/theme/app/components/footer';
 
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = "Growlity - Business Sustainability Ratings" } = Astro.props;
 
 // Fetch settings for Scripts
 const settings = await getEntry('globalSettings', 'placeholder');
@@ -18,10 +21,10 @@ const gaId = null;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="antialiased">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Growlity - Business Sustainability Ratings" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
@@ -43,8 +46,14 @@ const gaId = null;
 		{/* Custom Header Scripts (from Sitepins) */}
 		{headerScripts && <Fragment set:html={headerScripts} />}
 	</head>
-	<body class="bg-brand-light text-brand-dark font-sans flex flex-col min-h-screen">
-		<slot />
+	<body class="bg-background text-foreground font-sans flex flex-col min-h-screen">
+		<Header client:load />
+		
+		<main class="flex-grow">
+			<slot />
+		</main>
+		
+		<Footer client:idle />
 		
 		<GlobalPopup />
 		
