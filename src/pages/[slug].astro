@@ -7,6 +7,7 @@ import YouTube from '../components/mdx/YouTube.astro';
 import CTA from '../components/mdx/CTA.astro';
 import MarkdownLink from '../components/mdx/MarkdownLink.astro';
 import DynamicRenderer from '../components/shared/DynamicRenderer.astro';
+import Layout from '../layouts/Layout.astro';
 
 // This function tells Astro to create a page for every file in the "pages" collection
 export async function getStaticPaths() {
@@ -21,15 +22,7 @@ const { page } = Astro.props;
 const { Content } = await render(page);
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{page.data.seoTitle || page.data.title}</title>
-    <meta name="description" content={page.data.seoDescription || page.data.heroDescription || ''} />
-  </head>
-  <body class="bg-white text-gray-900">
-    
+<Layout title={page.data.seoTitle || page.data.title} description={page.data.seoDescription || page.data.heroDescription || ''}>
     <!-- Page Header / Hero -->
     <header class="bg-brand-light-green py-20 px-6 text-center">
       <h1 class="text-4xl md:text-5xl font-bold text-brand-green mb-4">
@@ -95,5 +88,4 @@ const { Content } = await render(page);
       
     </section>
 
-  </body>
-</html>
+</Layout>
