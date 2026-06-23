@@ -31,11 +31,11 @@ const upcomingWebinars = allWebinars
   .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
 ---
 
-<Layout title={`Webinars | Growlity | Page ${page.currentPage}`}>
+<Layout title="Webinars | Growlity">
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     
     <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Webinars & Events</h1>
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Webinars</h1>
       <p class="text-xl text-slate-500 max-w-2xl mx-auto">Join our experts to navigate the future of sustainability, compliance, and ESG strategies.</p>
     </div>
 
@@ -63,7 +63,7 @@ const upcomingWebinars = allWebinars
           <div id="carousel" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 pb-8 -mb-8">
             {upcomingWebinars.map((post) => (
               <a href={`/webinars/${post.id}`} class="snap-start shrink-0 w-full sm:w-[80%] lg:w-[calc(50%-12px)] xl:w-[calc(33.333%-16px)] block group/card relative">
-                <article class="bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.05)] border border-slate-100 overflow-hidden hover:shadow-[0_8px_30px_rgb(0,102,255,0.12)] hover:-translate-y-1 transition-all duration-300 h-full flex flex-col relative">
+                <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full flex flex-col relative">
                   
                   <div class="absolute top-4 right-4 bg-[#00C853] text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-lg shadow-[#00C853]/30">
                     UPCOMING
@@ -74,7 +74,7 @@ const upcomingWebinars = allWebinars
                       <img 
                         src={post.data.featuredImage || post.data.banner} 
                         alt={post.data.title} 
-                        class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
+                        class="w-full h-full object-cover"
                       />
                     ) : (
                       <div class="w-full h-full flex items-center justify-center text-[#0066FF]/20 bg-gradient-to-br from-blue-50 to-indigo-50">
@@ -92,7 +92,7 @@ const upcomingWebinars = allWebinars
                       <span class="mx-2">•</span>
                       <span>{post.data.time}</span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-800 group-hover/card:text-[#0066FF] transition-colors mb-4 leading-snug">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 leading-snug">
                       {post.data.title}
                     </h3>
                     
@@ -128,13 +128,13 @@ const upcomingWebinars = allWebinars
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {page.data.map((post: any) => (
             <a href={`/webinars/${post.id}`} class="block group">
-              <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 transition-all duration-300 h-full flex flex-col relative">
+              <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden h-full flex flex-col relative">
                 
                 {post.data.featuredImage || post.data.banner ? (
                   <img 
                     src={post.data.featuredImage || post.data.banner} 
                     alt={post.data.title} 
-                    class="w-full h-48 object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                    class="w-full h-48 object-cover"
                   />
                 ) : (
                   <div class="w-full h-48 bg-slate-100 flex items-center justify-center text-slate-300">
@@ -148,7 +148,7 @@ const upcomingWebinars = allWebinars
                       {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                     </time>
                   </div>
-                  <h3 class="text-lg font-bold text-slate-800 group-hover:text-[#0066FF] transition-colors mb-4 leading-snug">
+                  <h3 class="text-lg font-bold text-slate-800 mb-4 leading-snug">
                     {post.data.title}
                   </h3>
                   
