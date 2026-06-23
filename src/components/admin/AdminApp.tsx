@@ -64,7 +64,7 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
   );
 };
 
-const Sidebar = ({ schemas, siteLogo }: { schemas: any[], siteLogo?: string }) => {
+const Sidebar = ({ schemas, siteLogo, onLogout }: { schemas: any[], siteLogo?: string, onLogout?: () => void }) => {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
@@ -123,7 +123,10 @@ const Sidebar = ({ schemas, siteLogo }: { schemas: any[], siteLogo?: string }) =
         </nav>
       </div>
       <div className="p-4 border-t border-slate-200">
-        <button className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-slate-600 hover:bg-slate-50 hover:text-[#0066FF] transition-colors text-left">
+        <button 
+          onClick={onLogout}
+          className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-slate-600 hover:bg-slate-50 hover:text-[#0066FF] transition-colors text-left"
+        >
           <LogOut size={20} />
           Logout
         </button>
@@ -245,7 +248,7 @@ export default function AdminApp() {
   return (
     <Router>
       <div className="flex min-h-screen bg-slate-50">
-        <Sidebar schemas={schemas} siteLogo={siteLogo} />
+        <Sidebar schemas={schemas} siteLogo={siteLogo} onLogout={() => setIsAuthenticated(false)} />
         <main className="flex-1 overflow-x-hidden">
           <Routes>
             <Route path="/" element={<Dashboard />} />
