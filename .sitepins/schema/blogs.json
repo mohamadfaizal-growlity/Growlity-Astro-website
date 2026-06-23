@@ -1,6 +1,6 @@
 {
-  "file": "src/content/solutions/placeholder.mdx",
-  "name": "solutions",
+  "file": "src/content/blogs/placeholder.mdx",
+  "name": "blogs",
   "fileType": "mdx",
   "fmType": "yaml",
   "template": [
@@ -13,32 +13,25 @@
       "defaultValue": ""
     },
     {
+      "name": "author",
+      "label": "Author",
+      "type": "string",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": ""
+    },
+    {
+      "name": "publishedDate",
+      "label": "PublishedDate",
+      "type": "Date",
+      "value": "",
+      "isIgnored": false,
+      "defaultValue": "",
+      "alwaysUseCurrentDate": false
+    },
+    {
       "name": "category",
       "label": "Category",
-      "type": "string",
-      "value": "",
-      "isIgnored": false,
-      "defaultValue": ""
-    },
-    {
-      "name": "featuredImage",
-      "label": "Featured Image",
-      "type": "string",
-      "value": "",
-      "isIgnored": false,
-      "defaultValue": ""
-    },
-    {
-      "name": "shortDescription",
-      "label": "Short Description",
-      "type": "string",
-      "value": "",
-      "isIgnored": false,
-      "defaultValue": ""
-    },
-    {
-      "name": "problemStatement",
-      "label": "Problem Statement",
       "type": "string",
       "value": "",
       "isIgnored": false,
