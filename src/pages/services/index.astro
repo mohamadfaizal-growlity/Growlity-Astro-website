@@ -1,0 +1,37 @@
+---
+export const prerender = true;
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allServices = await getCollection('services');
+
+---
+
+<Layout title="Solutions | Growlity">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Our Solutions</h1>
+      <p class="text-xl text-gray-600">Discover how we can help your business achieve its sustainability goals</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {allServices.map((service) => (
+        <a href={`/services/${service.id}`} class="block group">
+          <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all h-full flex flex-col p-6">
+            <h2 class="text-xl font-bold text-gray-900 group-hover:text-green-700 transition-colors mb-2">
+              {service.data.title}
+            </h2>
+            {service.data.heroDescription && (
+              <p class="text-gray-600 mt-2">
+                {service.data.heroDescription}
+              </p>
+            )}
+            <div class="mt-auto pt-6 text-green-700 font-medium text-sm group-hover:text-green-800">
+              Learn more &rarr;
+            </div>
+          </article>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>
