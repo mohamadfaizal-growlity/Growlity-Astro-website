@@ -48,7 +48,7 @@ const SortableBlock = ({ block, isActive, onSelect, onDelete }: { block: BlockDa
       ref={setNodeRef} 
       style={style} 
       className={`group relative flex items-center p-4 mb-3 bg-white border-2 rounded-xl transition-all cursor-pointer shadow-sm
-        ${isActive ? 'border-emerald-500 shadow-emerald-500/10' : 'border-slate-200 hover:border-slate-300'}
+        ${isActive ? 'border-[#0066FF] shadow-blue-500/10' : 'border-slate-200 hover:border-slate-300'}
       `}
       onClick={onSelect}
     >
@@ -61,7 +61,7 @@ const SortableBlock = ({ block, isActive, onSelect, onDelete }: { block: BlockDa
       </div>
       <div className="flex-1">
         <div className="flex items-center gap-2 font-semibold text-slate-800">
-          {componentDef?.icon && <span className="text-emerald-500">{iconMap[componentDef.icon]}</span>}
+          {componentDef?.icon && <span className="text-[#00C853]">{iconMap[componentDef.icon]}</span>}
           {componentDef?.name || 'Unknown Block'}
         </div>
         <div className="text-xs text-slate-500 mt-1">Variant: {block.variant || 'Default'}</div>
@@ -179,9 +179,9 @@ export default function VisualEditor() {
             <div 
               key={comp.id}
               onClick={() => addBlock(comp.id)}
-              className="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-emerald-500 hover:shadow-md hover:shadow-emerald-500/10 cursor-pointer transition-all bg-slate-50 hover:bg-white group"
+              className="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:border-[#0066FF] hover:shadow-md hover:shadow-blue-500/10 cursor-pointer transition-all bg-slate-50 hover:bg-white group"
             >
-              <div className="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-lg bg-[#0066FF]/10 text-[#0066FF] flex items-center justify-center group-hover:scale-110 transition-transform">
                 {iconMap[comp.icon] || <LayoutTemplate size={20} />}
               </div>
               <div className="flex-1">
@@ -207,7 +207,7 @@ export default function VisualEditor() {
           </div>
           <button 
             onClick={handleSave}
-            className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-lg font-medium transition-colors shadow-lg shadow-emerald-500/20 whitespace-nowrap flex-shrink-0"
+            className="flex items-center gap-2 bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-white px-5 py-2 rounded-lg font-medium transition-colors shadow-lg shadow-blue-500/20 whitespace-nowrap flex-shrink-0"
           >
             <Save size={18} />
             Save Layout
@@ -266,7 +266,7 @@ export default function VisualEditor() {
                       onClick={() => updateActiveBlockVariant(v.id)}
                       className={`text-left px-4 py-2.5 rounded-lg border text-sm font-medium transition-all ${
                         activeBlock.variant === v.id 
-                          ? 'border-emerald-500 bg-emerald-50 text-emerald-700 shadow-sm' 
+                          ? 'border-[#0066FF] bg-[#0066FF]/5 text-[#0066FF] shadow-sm' 
                           : 'border-slate-200 text-slate-600 hover:border-slate-300 hover:bg-slate-50'
                       }`}
                     >
@@ -287,14 +287,14 @@ export default function VisualEditor() {
                         rows={4}
                         value={activeBlock.data[field.name] || ''}
                         onChange={(e) => updateActiveBlockData(field.name, e.target.value)}
-                        className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none text-sm resize-y"
+                        className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#0066FF] outline-none text-sm resize-y"
                       />
                     ) : (
                       <input
                         type="text"
                         value={activeBlock.data[field.name] || ''}
                         onChange={(e) => updateActiveBlockData(field.name, e.target.value)}
-                        className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none text-sm"
+                        className="w-full px-3 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#0066FF] outline-none text-sm"
                       />
                     )}
                   </div>

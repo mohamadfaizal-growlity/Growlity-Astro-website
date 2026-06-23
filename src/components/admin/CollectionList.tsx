@@ -37,11 +37,11 @@ export default function CollectionList() {
     <div className="p-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-slate-800 capitalize">
-          {collection} {group && <span className="text-emerald-500 font-medium">/ {group}</span>}
+          {collection} {group && <span className="text-[#0066FF] font-medium">/ {group}</span>}
         </h1>
         <Link 
           to={`/collections/${collection}/new${group ? `?group=${group}` : ''}`}
-          className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors shadow-sm"
+          className="flex items-center gap-2 bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-white px-4 py-2 rounded-lg font-medium transition-colors shadow-sm"
         >
           <Plus size={20} />
           Create New

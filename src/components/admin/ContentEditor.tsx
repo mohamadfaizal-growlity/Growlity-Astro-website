@@ -84,7 +84,7 @@ export default function ContentEditor() {
         </div>
         <button 
           onClick={handleSave}
-          className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2 rounded-lg font-medium transition-colors shadow-lg shadow-emerald-500/30"
+          className="flex items-center gap-2 bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-white px-6 py-2 rounded-lg font-medium transition-colors shadow-lg shadow-blue-500/30"
         >
           <Save size={20} />
           Save Changes
@@ -103,7 +103,7 @@ export default function ContentEditor() {
                     type="text"
                     value={data[field.name] || ''}
                     onChange={(e) => updateField(field.name, e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#0066FF] outline-none"
                   />
                 )}
                 {field.type === 'object' && (
@@ -119,7 +119,7 @@ export default function ContentEditor() {
                             newObj[subField.name] = e.target.value;
                             updateField(field.name, newObj);
                           }}
-                          className="w-full px-3 py-1.5 rounded border border-slate-300 text-sm focus:ring-2 focus:ring-emerald-500 outline-none"
+                          className="w-full px-3 py-1.5 rounded border border-slate-300 text-sm focus:ring-2 focus:ring-[#0066FF] outline-none"
                         />
                       </div>
                     ))}
@@ -134,7 +134,7 @@ export default function ContentEditor() {
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-4">
             <h2 className="text-lg font-semibold text-slate-800 border-b pb-2">Publish Settings</h2>
             <div className="text-sm text-slate-600">
-              <p>Status: <span className="text-emerald-500 font-medium">Draft</span></p>
+              <p>Status: <span className="text-[#00C853] font-medium">Draft</span></p>
             </div>
             <button 
               onClick={() => navigate(`/collections/${collection}/${encodeURIComponent(slug || '')}/builder`)}

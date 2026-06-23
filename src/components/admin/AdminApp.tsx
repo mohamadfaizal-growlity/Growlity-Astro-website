@@ -31,7 +31,7 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
     <div className="space-y-1">
       <Link
         to={`/collections/${schema.name}`}
-        className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 capitalize ${isActive && !currentGroup ? 'bg-emerald-500/10 text-emerald-400 font-medium' : 'hover:bg-slate-800 hover:text-white'}`}
+        className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 capitalize ${isActive && !currentGroup ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium' : 'hover:bg-slate-800 hover:text-white'}`}
       >
         <div className="flex items-center gap-3">
           <FolderOpen size={20} />
@@ -53,7 +53,7 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
             <Link
               key={group}
               to={`/collections/${schema.name}?group=${group}`}
-              className={`block px-3 py-1.5 rounded-lg text-sm transition-colors ${currentGroup === group ? 'text-emerald-400 font-medium bg-emerald-500/5' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}
+              className={`block px-3 py-1.5 rounded-lg text-sm transition-colors ${currentGroup === group ? 'text-[#0066FF] font-medium bg-[#0066FF]/5' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}
             >
               {group}
             </Link>
@@ -104,9 +104,7 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
         {siteLogo ? (
           <img src={siteLogo} alt="Site Logo" className="h-8 max-w-full object-contain" />
         ) : (
-          <h1 className="text-xl font-bold text-white tracking-wider flex items-center gap-2">
-            <span className="text-emerald-400">Site</span>Pins
-          </h1>
+          <img src="/growlity-logo.png" alt="Growlity Logo" className="h-8 max-w-full object-contain" />
         )}
       </div>
       <div className="flex-1 overflow-y-auto py-6">
@@ -115,7 +113,7 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
           <Link
             to="/"
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
-              isActive('/') && location.pathname === '/' ? 'bg-emerald-500/10 text-emerald-400 font-medium' : 'hover:bg-slate-800 hover:text-white'
+              isActive('/') && location.pathname === '/' ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium' : 'hover:bg-slate-800 hover:text-white'
             }`}
           >
             <LayoutDashboard size={20} /> Dashboard
@@ -137,7 +135,7 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
               to={item.path}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
                 isActive(item.path)
-                  ? 'bg-emerald-500/10 text-emerald-400 font-medium'
+                  ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium'
                   : 'hover:bg-slate-800 hover:text-white'
               }`}
             >
@@ -163,7 +161,7 @@ const Dashboard = () => (
     <p className="text-slate-500 mb-8">Select a collection from the sidebar to start managing your content.</p>
     
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8 text-center">
-      <div className="w-16 h-16 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="w-16 h-16 bg-[#0066FF]/10 text-[#0066FF] rounded-full flex items-center justify-center mx-auto mb-4">
         <LayoutDashboard size={32} />
       </div>
       <h2 className="text-xl font-bold text-slate-800 mb-2">Your Dashboard is Ready</h2>
@@ -203,12 +201,12 @@ export default function AdminApp() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-100">
         <div className="bg-white p-10 rounded-2xl shadow-xl max-w-sm w-full border border-slate-200">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">
-              <span className="text-emerald-500">Site</span>Pins
-            </h1>
-            <p className="text-slate-500">Please authenticate to continue</p>
-          </div>
+            <div className="mb-8">
+              <img src="/growlity-logo.png" alt="Growlity Logo" className="h-10 mx-auto w-auto object-contain mb-4" />
+            </div>
+            <div className="text-center mb-8">
+              <p className="text-slate-500">Please authenticate to continue</p>
+            </div>
           <form 
             onSubmit={(e) => {
               e.preventDefault();
@@ -222,13 +220,13 @@ export default function AdminApp() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0066FF] focus:border-[#0066FF] outline-none transition-all"
                 placeholder="Enter admin password"
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl transition-colors shadow-lg shadow-emerald-500/30"
+              className="w-full bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-white font-bold py-3 px-4 rounded-xl transition-colors shadow-lg shadow-blue-500/30"
             >
               Login to Dashboard
             </button>
