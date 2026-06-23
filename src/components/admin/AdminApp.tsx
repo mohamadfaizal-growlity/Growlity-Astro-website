@@ -68,6 +68,15 @@ const Sidebar = ({ schemas, siteLogo, onLogout }: { schemas: any[], siteLogo?: s
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
+  const preferredOrder = ['blogs', 'pages', 'caseStudies', 'events', 'publications', 'services', 'webinars'];
+  
+  const primarySchemas = schemas.filter(s => preferredOrder.includes(s.name))
+    .sort((a, b) => preferredOrder.indexOf(a.name) - preferredOrder.indexOf(b.name));
+    
+  const otherSchemas = schemas.filter(s => !preferredOrder.includes(s.name))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+
   const staticNavItems = [
     { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
     { name: 'Media', path: '/media', icon: <ImageIcon size={20} /> },
@@ -97,12 +106,23 @@ const Sidebar = ({ schemas, siteLogo, onLogout }: { schemas: any[], siteLogo?: s
           </Link>
         </nav>
 
-        <div className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Collections</div>
+        <div className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Content</div>
         <nav className="space-y-1 px-3 mb-6">
-          {schemas.map((schema) => (
+          {primarySchemas.map((schema) => (
             <CollectionNavItem key={schema.name} schema={schema} />
           ))}
         </nav>
+
+        {otherSchemas.length > 0 && (
+          <>
+            <div className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Other Collections</div>
+            <nav className="space-y-1 px-3 mb-6">
+              {otherSchemas.map((schema) => (
+                <CollectionNavItem key={schema.name} schema={schema} />
+              ))}
+            </nav>
+          </>
+        )}
 
         <div className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">System</div>
         <nav className="space-y-1 px-3">
