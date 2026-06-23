@@ -6,6 +6,7 @@ import Callout from '../../components/mdx/Callout.astro';
 import YouTube from '../../components/mdx/YouTube.astro';
 import CTA from '../../components/mdx/CTA.astro';
 import MarkdownLink from '../../components/mdx/MarkdownLink.astro';
+import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
@@ -19,15 +20,7 @@ const { solution } = Astro.props;
 const { Content } = await render(solution);
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{solution.data.seoTitle || `${solution.data.title} | Services`}</title>
-    <meta name="description" content={solution.data.seoDescription || solution.data.shortDescription || ''} />
-  </head>
-  <body class="bg-white text-gray-900">
-    
+<Layout title={solution.data.seoTitle || `${solution.data.title} | Services`} description={solution.data.seoDescription || solution.data.shortDescription || ''}>
     <!-- Service Header -->
     <header class="bg-[#0b1b1a] text-white py-24 px-6 text-center">
       <div class="max-w-4xl mx-auto">
@@ -92,5 +85,4 @@ const { Content } = await render(solution);
       
     </section>
 
-  </body>
-</html>
+</Layout>
