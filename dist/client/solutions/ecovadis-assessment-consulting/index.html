@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="en" class="antialiased"> <head><meta charset="UTF-8"><meta name="description" content="Ecovadis Assesment Consulting - Learn more about our comprehensive services."><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.4.7"><title>Ecovadis Assesment Consulting | Services</title><style>details[data-astro-cid-dlqxcx5m]>summary[data-astro-cid-dlqxcx5m]{list-style:none}details[data-astro-cid-dlqxcx5m][open] summary[data-astro-cid-dlqxcx5m]~[data-astro-cid-dlqxcx5m]{animation:slideDown .3s ease-in-out}@keyframes slideDown{0%{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+</style><link rel="stylesheet" href="/_astro/global.4g9ATjHR.css"></head> <body class="bg-background text-foreground font-sans flex flex-col min-h-screen"> <style>astro-island,astro-slot,astro-static-slot{display:contents}</style><script>(()=>{var e=async t=>{await(await t())()};(self.Astro||(self.Astro={})).load=e;window.dispatchEvent(new Event("astro:load"));})();</script><script>(()=>{var g=Object.defineProperty;var w=(c,s,d)=>s in c?g(c,s,{enumerable:!0,configurable:!0,writable:!0,value:d}):c[s]=d;var l=(c,s,d)=>w(c,typeof s!="symbol"?s+"":s,d);var E=new Set(["__proto__","constructor","prototype"]);{let c={0:t=>y(t),1:t=>d(t),2:t=>new RegExp(t),3:t=>new Date(t),4:t=>new Map(d(t)),5:t=>new Set(d(t)),6:t=>BigInt(t),7:t=>new URL(t),8:t=>new Uint8Array(t),9:t=>new Uint16Array(t),10:t=>new Uint32Array(t),11:t=>Number.POSITIVE_INFINITY*t},s=t=>{let[p,e]=t;return p in c?c[p](e):void 0},d=t=>t.map(s),y=t=>typeof t!="object"||t===null?t:Object.fromEntries(Object.entries(t).map(([p,e])=>[p,s(e)]));class f extends HTMLElement{constructor(){super(...arguments);l(this,"Component");l(this,"hydrator");l(this,"hydrate",async()=>{var b;if(!this.hydrator||!this.isConnected)return;let e=(b=this.parentElement)==null?void 0:b.closest("astro-island[ssr]");if(e){e.addEventListener("astro:hydrate",this.hydrate,{once:!0});return}let n=this.querySelectorAll("astro-slot"),r={},i=this.querySelectorAll("template[data-astro-template]");for(let o of i){let a=o.closest(this.tagName);a!=null&&a.isSameNode(this)&&(r[o.getAttribute("data-astro-template")||"default"]=o.innerHTML,o.remove())}for(let o of n){let a=o.closest(this.tagName);a!=null&&a.isSameNode(this)&&(r[o.getAttribute("name")||"default"]=o.innerHTML)}let u;try{u=this.hasAttribute("props")?y(JSON.parse(this.getAttribute("props"))):{}}catch(o){let a=this.getAttribute("component-url")||"<unknown>",v=this.getAttribute("component-export");throw v&&(a+=` (export ${v})`),console.error(`[hydrate] Error parsing props for component ${a}`,this.getAttribute("props"),o),o}let h;await this.hydrator(this)(this.Component,u,r,{client:this.getAttribute("client")}),this.removeAttribute("ssr"),this.dispatchEvent(new CustomEvent("astro:hydrate"))});l(this,"unmount",()=>{this.isConnected||this.dispatchEvent(new CustomEvent("astro:unmount"))})}disconnectedCallback(){document.removeEventListener("astro:after-swap",this.unmount),document.addEventListener("astro:after-swap",this.unmount,{once:!0})}connectedCallback(){if(!this.hasAttribute("await-children")||document.readyState==="interactive"||document.readyState==="complete")this.childrenConnectedCallback();else{let e=()=>{document.removeEventListener("DOMContentLoaded",e),n.disconnect(),this.childrenConnectedCallback()},n=new MutationObserver(()=>{var r;((r=this.lastChild)==null?void 0:r.nodeType)===Node.COMMENT_NODE&&this.lastChild.nodeValue==="astro:end"&&(this.lastChild.remove(),e())});n.observe(this,{childList:!0}),document.addEventListener("DOMContentLoaded",e)}}async childrenConnectedCallback(){let e=this.getAttribute("before-hydration-url");e&&await import(e),this.start()}getRetryImportUrl(e){let n=new URL(e,document.baseURI),r=`astro-retry=${Date.now()}`,i=n.hash.replace(/^#/,"");return n.hash=i?`${i}&${r}`:r,n.toString()}async importWithRetry(e){try{return await import(e)}catch(n){return await new Promise(r=>setTimeout(r,1e3)),import(this.getRetryImportUrl(e))}}handleHydrationError(e){let n=this.getAttribute("component-url"),r=new CustomEvent("astro:hydration-error",{cancelable:!0,bubbles:!0,composed:!0,detail:{error:e,componentUrl:n}});this.dispatchEvent(r)&&console.error(`[astro-island] Error hydrating ${n}`,e)}async start(){let e=JSON.parse(this.getAttribute("opts")),n=this.getAttribute("client");if(Astro[n]===void 0){window.addEventListener(`astro:${n}`,()=>this.start(),{once:!0});return}try{await Astro[n](async()=>{let r=this.getAttribute("renderer-url");try{let[i,{default:u}]=await Promise.all([this.importWithRetry(this.getAttribute("component-url")),r?this.importWithRetry(r):Promise.resolve({default:()=>()=>{}})]),h=this.getAttribute("component-export")||"default";if(h.includes(".")){this.Component=i;for(let m of h.split(".")){if(E.has(m)||!this.Component||typeof this.Component!="object"&&typeof this.Component!="function"||!Object.hasOwn(this.Component,m))throw new Error(`Invalid component export path: ${h}`);this.Component=this.Component[m]}}else{if(E.has(h))throw new Error(`Invalid component export path: ${h}`);this.Component=i[h]}return this.hydrator=u,this.hydrate}catch(i){return this.handleHydrationError(i),()=>{}}},e,this)}catch(r){this.handleHydrationError(r)}}attributeChangedCallback(){this.hydrate()}}l(f,"observedAttributes",["props"]),customElements.get("astro-island")||customElements.define("astro-island",f)}})();</script><astro-island uid="Z1z7635" prefix="r2" component-url="/_astro/header.BAeGoS7-.js" component-export="Header" renderer-url="/_astro/client.Cq54w6aN.js" props="{&quot;siteLogo&quot;:[0,&quot;/growlity-logo.png&quot;]}" ssr client="load" opts="{&quot;name&quot;:&quot;Header&quot;,&quot;value&quot;:true}" await-children><div class="bg-gradient-to-r from-[#0066FF] to-[#00C853] text-white py-2"><div class="container mx-auto px-4"><div class="flex items-center justify-center gap-2 text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles h-4 w-4"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg><span>New: ESGTech.ai Platform Now Available - Request Your Demo Today</span></div></div></div><header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60"><div class="container mx-auto px-4"><div class="flex h-16 items-center justify-between"><a href="/" class="flex items-center space-x-2"><img src="/growlity-logo.png" alt="Growlity Logo" class="h-10 w-auto object-contain"/></a><nav class="hidden lg:flex items-center gap-6"><nav aria-label="Main" data-orientation="horizontal" dir="ltr" data-slot="navigation-menu" data-viewport="false" class="group/navigation-menu relative flex max-w-max flex-1 items-center justify-center"><div style="position:relative"><ul data-orientation="horizontal" data-slot="navigation-menu-list" class="group flex flex-1 list-none items-center justify-center gap-1" dir="ltr"><li data-slot="navigation-menu-item" class="relative"><button id="radix-_r2R_a_-trigger-radix-_r2R_5q_" data-state="closed" aria-expanded="false" aria-controls="radix-_r2R_a_-content-radix-_r2R_5q_" data-slot="navigation-menu-trigger" class="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 group" data-radix-collection-item="">About us<!-- --> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button></li><li data-slot="navigation-menu-item" class="relative"><button id="radix-_r2R_a_-trigger-radix-_r2R_9q_" data-state="closed" aria-expanded="false" aria-controls="radix-_r2R_a_-content-radix-_r2R_9q_" data-slot="navigation-menu-trigger" class="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 group" data-radix-collection-item="">Services<!-- --> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button></li><li data-slot="navigation-menu-item" class="relative"><a href="/customers"><a data-slot="navigation-menu-link" class="data-[active=true]:focus:bg-accent data-[active=true]:hover:bg-accent data-[active=true]:bg-accent/50 data-[active=true]:text-accent-foreground focus-visible:ring-ring/50 [&amp;_svg:not([class*=&#x27;text-&#x27;])]:text-muted-foreground flex-col gap-1 p-2 outline-none focus-visible:ring-[3px] focus-visible:outline-1 [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 group inline-flex h-10 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50" data-radix-collection-item="">Customers</a></a></li><li data-slot="navigation-menu-item" class="relative"><button id="radix-_r2R_a_-trigger-radix-_r2R_hq_" data-state="closed" aria-expanded="false" aria-controls="radix-_r2R_a_-content-radix-_r2R_hq_" data-slot="navigation-menu-trigger" class="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 focus-visible:ring-ring/50 outline-none transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 group" data-radix-collection-item="">Resources<!-- --> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down relative top-[1px] ml-1 size-3 transition duration-300 group-data-[state=open]:rotate-180" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button></li></ul></div></nav></nav><div class="flex items-center gap-3"><a href="/contact" class="hidden md:block"><button data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive border bg-background dark:bg-input/30 dark:border-input dark:hover:bg-input/50 h-9 px-4 py-2 has-[&gt;svg]:px-3 border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF] hover:text-white">Login</button></a><a href="/contact"><button data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844]">Contact Us</button></a><button data-slot="sheet-trigger" class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-9 rounded-md lg:hidden" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-_r2R_1u_" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button></div></div></div></header><!--astro:end--></astro-island> <main class="flex-grow">   <header class="bg-[#0b1b1a] text-white py-24 px-6 text-center"> <div class="max-w-4xl mx-auto"> <span class="text-brand-green font-bold uppercase tracking-widest text-sm mb-4 block"> General </span> <h1 class="text-4xl md:text-5xl font-extrabold mb-6"> Ecovadis Assesment Consulting </h1> <p class="text-xl text-gray-300 max-w-2xl mx-auto"> Ecovadis Assesment Consulting - Learn more about our comprehensive services. </p> </div> </header>  <main class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-green"> <p>Home</p>
+<h1 id="ecovadis-assessment-consulting-to-improve-your-sustainability-score">EcoVadis Assessment Consulting to Improve Your Sustainability Score</h1>
+<p><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Book Your free consultation</a><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Scrore improvement plan</a></p>
+<p><img src="https://growlity.com/wp-content/uploads/2026/03/ecovadis-logo.png" alt/></p>
+<h2 id="trusted-by-225-global-enterprises">Trusted by 225+ Global Enterprises</h2>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/a-packaging.png" alt="a-packaging"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/aarti-steel.png" alt="aarti-steel"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/adama-india.png" alt="adama-india"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/allchem.png" alt="allchem"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/ami-lifescience.png" alt="ami-lifescience"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/image-2.png" alt="ami-organics"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/aml-rightsource.png" alt="aml-rightsource"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/apexon.png" alt="apexon"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/asian-star.png" alt="asian-star"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/BADGER-COLOR.png" alt="BADGER COLOR"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Bedmutha.png" alt="Bedmutha"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Clifton-Export.png" alt="Clifton Export"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Craft-Lab-Grown-Diamonds-1.png" alt="Craft Lab Grown Diamonds"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Dharmanandan-Diamonds.png" alt="Dharmanandan Diamonds"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/dholakia-technologies-1.png" alt="dholakia-technologies 1"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Dips-Apparel-Limited.png" alt="Dips Apparel Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/effy-group.png" alt/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/EPL-Limited.png" alt="EPL Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/excellent-facets-1.png" alt="excellent facets"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Finorchem-Limited.png" alt="Finorchem Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Ganges-Jute.png" alt="Ganges Jute"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Gloster-Limited-1.png" alt="Gloster Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Glowstar-Diamonds.png" alt="Glowstar Diamonds"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/a-packaging.png" alt="a-packaging"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/aarti-steel.png" alt="aarti-steel"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/adama-india.png" alt="adama-india"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/allchem.png" alt="allchem"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/ami-lifescience.png" alt="ami-lifescience"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/image-2.png" alt="ami-organics"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/aml-rightsource.png" alt="aml-rightsource"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/apexon.png" alt="apexon"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/asian-star.png" alt="asian-star"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/BADGER-COLOR.png" alt="BADGER COLOR"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Bedmutha.png" alt="Bedmutha"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Clifton-Export.png" alt="Clifton Export"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Craft-Lab-Grown-Diamonds-1.png" alt="Craft Lab Grown Diamonds"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Dharmanandan-Diamonds.png" alt="Dharmanandan Diamonds"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/dholakia-technologies-1.png" alt="dholakia-technologies 1"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Dips-Apparel-Limited.png" alt="Dips Apparel Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/effy-group.png" alt/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/EPL-Limited.png" alt="EPL Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/excellent-facets-1.png" alt="excellent facets"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Finorchem-Limited.png" alt="Finorchem Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Ganges-Jute.png" alt="Ganges Jute"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Gloster-Limited-1.png" alt="Gloster Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Glowstar-Diamonds.png" alt="Glowstar Diamonds"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Godrej.png" alt="Godrej"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Goldi-Solar.png" alt="Goldi Solar"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Graham-Packaging-.png" alt="Graham Packaging"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Granules-India-Limited.png" alt="Granules India Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Hardcastle-Petrofer.png" alt="Hardcastle Petrofer"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Hari-Krishna-Exports.png" alt="Hari Krishna Exports"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Harisons-group.png" alt="Harisons group"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Harsha-Engineers-International-Limited.png" alt="Harsha Engineers International Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Indigo-Jewellery.png" alt="Indigo Jewellery"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Industrial-Metal-Powders.png" alt="Industrial Metal Powders"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Indutch-Composites-Technology.png" alt="Indutch Composites Technology"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Infinity-Mountings-of-NY-LLC.png" alt="Infinity Mountings of NY, LLC"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Inovar-Packaging.png" alt="Inovar Packaging"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Interglobe-Aviation-Limited-IndiGo.png" alt="Interglobe Aviation Limited (IndiGo)"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/I-Pangram.png" alt="I-Pangram"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/ITC-Limited-.png" alt="ITC Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Jay-Finechem-.png" alt="Jay Finechem"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/JMF-Performance-Materials.png" alt="JMF Performance Materials"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/JS-MC-CARTHY.png" alt="JS MC CARTHY"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Jutify-LLP.png" alt="Jutify LLP"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/K.-Girdharlal-International.png" alt="K. Girdharlal International"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Ketan-Brothers-Diamondz.png" alt="Ketan Brothers Diamondz"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/KIM-International.png" alt="KIM International"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Godrej.png" alt="Godrej"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Goldi-Solar.png" alt="Goldi Solar"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Graham-Packaging-.png" alt="Graham Packaging"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Granules-India-Limited.png" alt="Granules India Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Hardcastle-Petrofer.png" alt="Hardcastle Petrofer"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Hari-Krishna-Exports.png" alt="Hari Krishna Exports"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Harisons-group.png" alt="Harisons group"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Harsha-Engineers-International-Limited.png" alt="Harsha Engineers International Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Indigo-Jewellery.png" alt="Indigo Jewellery"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Industrial-Metal-Powders.png" alt="Industrial Metal Powders"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Indutch-Composites-Technology.png" alt="Indutch Composites Technology"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Infinity-Mountings-of-NY-LLC.png" alt="Infinity Mountings of NY, LLC"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Inovar-Packaging.png" alt="Inovar Packaging"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Interglobe-Aviation-Limited-IndiGo.png" alt="Interglobe Aviation Limited (IndiGo)"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/I-Pangram.png" alt="I-Pangram"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/ITC-Limited-.png" alt="ITC Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Jay-Finechem-.png" alt="Jay Finechem"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/JMF-Performance-Materials.png" alt="JMF Performance Materials"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/JS-MC-CARTHY.png" alt="JS MC CARTHY"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Jutify-LLP.png" alt="Jutify LLP"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/K.-Girdharlal-International.png" alt="K. Girdharlal International"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Ketan-Brothers-Diamondz.png" alt="Ketan Brothers Diamondz"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/KIM-International.png" alt="KIM International"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Kisna-Jewelry.png" alt="Kisna Jewelry"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Kourosh-Co.-Ltd.png" alt="Kourosh Co. Ltd."/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/laxmi-diamonds.png" alt="laxmi diamonds"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Legend-Jewellery.png" alt="Legend Jewellery"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Lewens-Labs.png" alt="Lewens Labs"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Luthra-Group.png" alt="Luthra Group"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Mahavir-synthesis.png" alt="Mahavir synthesis"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Maitri-Lab-Grown-Diamonds.png" alt="Maitri Lab Grown Diamonds"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Marathon.png" alt="Marathon"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Mars-Stitch-Limited-1.png" alt="Mars Stitch Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Meraya.png" alt="Meraya"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Meridian.png" alt="Meridian"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Mewburn-Ellis-LLP.png" alt="Mewburn Ellis LLP"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/MP-Birla-Group.png" alt="MP Birla Group"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Navitas-Solar.png" alt="Navitas Solar"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Novopor-Advanced-Science-Pvt.-Ltd.png" alt="Novopor Advanced Science Pvt. Ltd"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Ognebene-India-Limited.png" alt="Ognebene India Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Overnight-Mountings-Inc.png" alt="Overnight Mountings Inc"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Plastipak-.png" alt="Plastipak"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Praveen-lab.png" alt="Praveen lab"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Prism-Inc.-USA.png" alt="Prism Inc. (USA)"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Riya-Tours-Travels.png" alt="Riya Tours &amp; Travels"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Shivam-Jewels.png" alt="Shivam Jewels"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Shree-Ramkrishna-Exports.png" alt="Shree Ramkrishna Exports"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Kisna-Jewelry.png" alt="Kisna Jewelry"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Kourosh-Co.-Ltd.png" alt="Kourosh Co. Ltd."/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/laxmi-diamonds.png" alt="laxmi diamonds"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Legend-Jewellery.png" alt="Legend Jewellery"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Lewens-Labs.png" alt="Lewens Labs"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Luthra-Group.png" alt="Luthra Group"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Mahavir-synthesis.png" alt="Mahavir synthesis"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Maitri-Lab-Grown-Diamonds.png" alt="Maitri Lab Grown Diamonds"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Marathon.png" alt="Marathon"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Mars-Stitch-Limited-1.png" alt="Mars Stitch Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Meraya.png" alt="Meraya"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Meridian.png" alt="Meridian"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Mewburn-Ellis-LLP.png" alt="Mewburn Ellis LLP"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/MP-Birla-Group.png" alt="MP Birla Group"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Navitas-Solar.png" alt="Navitas Solar"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Novopor-Advanced-Science-Pvt.-Ltd.png" alt="Novopor Advanced Science Pvt. Ltd"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Ognebene-India-Limited.png" alt="Ognebene India Limited"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Overnight-Mountings-Inc.png" alt="Overnight Mountings Inc"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Plastipak-.png" alt="Plastipak"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Praveen-lab.png" alt="Praveen lab"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Prism-Inc.-USA.png" alt="Prism Inc. (USA)"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Riya-Tours-Travels.png" alt="Riya Tours &amp; Travels"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Shivam-Jewels.png" alt="Shivam Jewels"/></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/Shree-Ramkrishna-Exports.png" alt="Shree Ramkrishna Exports"/></p>
+<h3 id="ecovadis-assessment-excellence">EcoVadis Assessment Excellence</h3>
+<p>Companies across global supply chains are increasingly required to complete an assessment to demonstrate responsible business practices. Buyers, investors, and partners use these ratings to evaluate ESG performance.</p>
+<h3 id="the-challenge">The Challenge</h3>
+<p>Completing the assessment successfully requires structured documentation and clear policies. Many organizations struggle to interpret the questionnaire or submit the right evidence to achieve a passing score.</p>
+<h3 id="the-expert-advantage">The Expert Advantage</h3>
+<p>Our experts help companies navigate the process with confidence. From readiness evaluation to policy development, we guide you step-by-step to improve performance and strengthen your rating.</p>
+<p> <a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Book Your Free Consultation</a></p>
+<h2 id="our-ecovadis-assessment-consulting-services">Our EcoVadis Assessment Consulting Services</h2>
+<p>Our experts provide end-to-end support to help organizations complete the process efficiently and strengthen sustainability performance.</p>
+<h3 id="readiness-assessment">Readiness Assessment</h3>
+<p>We conduct a structured evaluation of your sustainability policies, management systems, and documentation to identify gaps before submission.</p>
+<h3 id="policy-development-and-documentation">Policy Development and Documentation</h3>
+<p>We help develop key ESG policies such as:<br/>
+• Environmental policy<br/>
+• Human rights policy<br/>
+• Ethical business conduct policy<br/>
+• Sustainable procurement policy<br/>
+Clear documentation significantly improves evaluation outcomes.</p>
+<h3 id="questionnaire-guidance">Questionnaire Guidance</h3>
+<p>Our specialists guide organizations in completing the questionnaire accurately while ensuring responses reflect actual sustainability practices.</p>
+<h3 id="evidence-and-documentation-support">Evidence and Documentation Support</h3>
+<p>We assist in organizing and submitting the required supporting documents to strengthen credibility.<br/>
+Score Improvement Strategy</p>
+<h3 id="score-improvement-strategy">Score Improvement Strategy</h3>
+<p>After submission, we develop a roadmap to improve sustainability performance and increase the likelihood of a stronger rating in future evaluations.</p>
+<p><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Start Your EcoVadis Assessment Journey</a></p>
+<h2 id="our-step-by-step-ecovadis-support-process">Our Step-by-Step EcoVadis Support Process</h2>
+<p>We follow a structured methodology designed to simplify the evaluation process.</p>
+<p>1</p>
+<h3 id="initial-consultation">Initial Consultation</h3>
+<p>Understand your organization’s sustainability practices and objectives.</p>
+<p>2</p>
+<h3 id="gap-analysis">Gap Analysis</h3>
+<p>Evaluate existing policies and identify areas requiring improvement.</p>
+<p>3</p>
+<h3 id="policy-and-documentation-development">Policy and Documentation Development</h3>
+<p>Develop structured ESG documentation aligned with global best practices.</p>
+<p>4</p>
+<h3 id="questionnaire-completion">Questionnaire Completion</h3>
+<p>Support teams in completing the submission accurately.</p>
+<p>5</p>
+<h3 id="score-improvement-strategy-1">Score Improvement Strategy</h3>
+<p>Create a long-term sustainability roadmap to strengthen ESG performance</p>
+<p><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Book a Free Sustainability Consultation</a></p>
+<h2 id="what-is-ecovadis-assessment">What Is EcoVadis Assessment?</h2>
+<p>The <strong><a href="https://ecovadis.com/" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">EcoVadis</a> assessment</strong> is a globally recognized sustainability rating system used by companies to evaluate suppliers and partners on environmental, social, and governance (ESG) performance.</p>
+<p>The platform assesses companies across four key sustainability themes:</p>
+<p>• Environment<br/>
+• Labor and Human Rights<br/>
+• Ethics<br/>
+• Sustainable Procurement</p>
+<p>Organizations submit documentation, policies, and supporting evidence through the questionnaire. Based on the evaluation, companies receive a score and may qualify for medals such as Bronze, Silver, Gold, or Platinum.</p>
+<p>Today, thousands of multinational companies rely on sustainability ratings to monitor supplier performance and ensure responsible sourcing practices.</p>
+<p>Completing the process effectively allows businesses to:</p>
+<p>• Strengthen supply chain relationships<br/>
+• Demonstrate ESG commitment<br/>
+• Meet buyer sustainability requirements<br/>
+• Improve transparency and risk management</p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/ecovadis-1.webp" alt="ecovadis score"/></p>
+<p><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Talk to our Expert Today</a></p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/ecovadis-1.webp" alt="ecovadis score"/></p>
+<h2 id="why-companies-choose-growlity-for-ecovadis-assessment"><strong>Why Companies Choose Growlity for EcoVadis Assessment</strong></h2>
+<p>Most companies already have sustainability initiatives in place.<br/>
+What they lack is a structured system that EcoVadis can evaluate confidently.</p>
+<p>That is why many organizations receive lower scores than expected despite investing in ESG activities.</p>
+<p>At Growlity, we help companies transform scattered sustainability efforts into audit-ready, score-focused ESG systems aligned with EcoVadis methodology.</p>
+<p>From policy development and documentation structuring to questionnaire guidance and score improvement strategy, our experts provide end-to-end support designed to strengthen both sustainability performance and supplier credibility.</p>
+<h3 id="what-we-help-you-improve">What We Help You Improve</h3>
+<ul>
+<li>
+<p>ESG policy structure</p>
+</li>
+<li>
+<p>Supporting documentation quality</p>
+</li>
+<li>
+<p>Sustainability governance</p>
+</li>
+<li>
+<p>Questionnaire accuracy</p>
+</li>
+<li>
+<p>Implementation evidence</p>
+</li>
+<li>
+<p>Supplier sustainability processes</p>
+</li>
+<li>
+<p>Corrective action planning</p>
+</li>
+<li>
+<p>Long-term score improvement</p>
+</li>
+</ul>
+<p><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Contact us</a></p>
+<h2 id="why-ecovadis-assessment-matters-for-businesses">Why EcoVadis Assessment Matters for Businesses</h2>
+<p>Sustainability is no longer optional. Global organizations are integrating ESG performance into procurement decisions and supplier evaluation frameworks.</p>
+<p>Completing the <strong>assessment</strong> allows companies to demonstrate that their operations align with international sustainability expectations.</p>
+<p><strong>Key benefits include:</strong></p>
+<h3 id="supply-chain-access">Supply Chain Access</h3>
+<p>Many multinational companies require suppliers to complete sustainability ratings before onboarding.</p>
+<h3 id="improved-corporate-credibility">Improved Corporate Credibility</h3>
+<p>A strong sustainability score helps build trust with customers, partners, and investors.</p>
+<h3 id="risk-management">Risk Management</h3>
+<p>Structured sustainability policies help reduce operational, environmental, and social risks.</p>
+<h3 id="competitive-advantage">Competitive Advantage</h3>
+<p>Companies with higher sustainability ratings often stand out during supplier selection.<br/>
+Organizations that proactively strengthen ESG practices are better positioned to meet evolving regulatory and market expectations.</p>
+<p><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Improve Your Score with Expert Guidance</a></p>
+<h2 id="common-challenges-companies-face-in-assessment">Common Challenges Companies Face in Assessment</h2>
+<p>Although the process appears straightforward, many organizations face difficulties when completing the questionnaire and preparing documentation.<br/>
+<strong>Common challenges include:</strong></p>
+<p>1</p>
+<h3 id="lack-of-required-policies">Lack of Required Policies</h3>
+<p>Many companies do not have formal sustainability policies aligned with international frameworks.</p>
+<p>2</p>
+<h3 id="difficulty-understanding-the-questionnaire">Difficulty Understanding the Questionnaire</h3>
+<p>The questionnaire requires detailed information about sustainability practices and evidence.</p>
+<p>3</p>
+<h3 id="insufficient-documentation">Insufficient Documentation</h3>
+<p>Supporting evidence must be clear, structured, and aligned with ESG expectations.</p>
+<p>4</p>
+<h3 id="low-initial-scores">Low Initial Scores</h3>
+<p>Organizations often receive low ratings due to gaps in governance or missing sustainability initiatives.</p>
+<p>5</p>
+<h3 id="uncertainty-about-score-improvement">Uncertainty About Score Improvement</h3>
+<p>Many companies do not know which actions will significantly improve their sustainability rating.</p>
+<p><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Request EcoVadis Gap Assessment</a></p>
+<p>Partner</p>
+<h2 id="why-choose-us"><strong>Why Choose Us</strong></h2>
+<p><a href="#" class="text-brand-green font-medium underline hover:text-green-800 transition-colors"><img src="https://growlity.com/wp-content/uploads/2025/06/8-1024x1024.jpg" alt/></a></p>
+<p>EcoVadis Platinum Certified</p>
+<p>Growlity is proud to be an EcoVadis Platinum Certified organization.</p>
+<p><a href="#" class="text-brand-green font-medium underline hover:text-green-800 transition-colors"><img src="https://growlity.com/wp-content/uploads/2025/06/10-1024x1024.jpg" alt/></a></p>
+<p>Certified EcoVadis Consultant</p>
+<p>Growlity is an officially certified EcoVadis consultant.</p>
+<p><a href="#" class="text-brand-green font-medium underline hover:text-green-800 transition-colors"><img src="https://growlity.com/wp-content/uploads/2025/06/9-1024x1024.jpg" alt/></a></p>
+<p>Accredited Training Partner</p>
+<p>Growlity is officially accredited training partner.</p>
+<p><a href="#" class="text-brand-green font-medium underline hover:text-green-800 transition-colors"><img src="https://growlity.com/wp-content/uploads/2025/06/CDP-1024x1024.jpg" alt/></a></p>
+<p>Regional Sustainability Leadership</p>
+<p>Growlity achieved Regional Sustainability Leadership</p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/08/ecovadis-1.webp" alt="ecovadis score"/></p>
+<h2 id="case-study-improving-a-supplier-sustainability-score">Case Study: Improving a Supplier Sustainability Score</h2>
+<p>A manufacturing company supplying to global buyers faced challenges during the evaluation process. The organization lacked structured ESG documentation and received a low initial rating.</p>
+<p>Our consulting team conducted a sustainability gap analysis and supported the company in developing environmental and human rights policies, improving internal governance practices, and organizing documentation.</p>
+<p>Within one assessment cycle, the company improved its sustainability score significantly and strengthened relationships with international clients.</p>
+<p>This demonstrates how structured sustainability management can improve supplier credibility and market opportunities.</p>
+<p><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Get Your Score Improvement Plan</a></p>
+<h2 id="understanding-ecovadis-score-levels-and-medal-recognition">Understanding EcoVadis Score Levels and Medal Recognition</h2>
+<h3 id="how-scores-and-medals-work">How Scores and Medals Work</h3>
+<p>The EcoVadis assessment evaluates companies using a sustainability scoring system ranging from 0 to 100, based on performance across four ESG themes: Environment, Labor &amp; Human Rights, Ethics, and Sustainable Procurement.</p>
+<p>In addition to the score, companies may receive medals that recognize top-performing organizations relative to all companies evaluated globally.</p>
+<p>Since 2024–2025, medals are awarded based on percentile ranking rather than fixed score thresholds. This means a company’s recognition depends on how it performs compared with other companies in the database over the previous 12 months.</p>
+<p><strong>Current percentile recognition levels include:</strong></p>
+<p><img src="https://growlity.com/wp-content/uploads/2026/03/platinum-2026.png" alt="Ecovadis assessment"/></p>
+<h4 id="platinum-medal">Platinum Medal</h4>
+<p>Top 1% of companies</p>
+<p><img src="https://growlity.com/wp-content/uploads/2026/03/gold-2026.png" alt="Ecovadis assessment"/></p>
+<h4 id="gold-medal">Gold Medal</h4>
+<p>Top 5% of companies</p>
+<p><img src="https://growlity.com/wp-content/uploads/2026/03/silver-2026.png" alt/></p>
+<h4 id="silver-medal">Silver Medal</h4>
+<p>Top 15% of companie</p>
+<p><img src="https://growlity.com/wp-content/uploads/2026/03/bronze-2026.png" alt/></p>
+<h4 id="bronze-medal">Bronze Medal</h4>
+<p>Top 35% of companies</p>
+<p>Companies outside these percentile ranges may still receive a <strong>scorecard and improvement recommendations</strong>, which can be used to strengthen sustainability performance in future assessments.</p>
+<p>This percentile approach ensures that sustainability recognition reflects <strong>current global performance benchmarks rather than static thresholds.</strong></p>
+<p> <a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Talk to our experts today.</a></p>
+<p>Scoring System</p>
+<h2 id="ecovadis-badges">EcoVadis Badges</h2>
+<p><img src="https://growlity.com/wp-content/uploads/2025/06/6-1024x1024.jpg" alt/></p>
+<p>Committed</p>
+<p>A minimum score of 45</p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/06/7-1024x1024.jpg" alt/></p>
+<p>Fast Mover</p>
+<p>A score between 34-44</p>
+<p>Solve For Sustainability </p>
+<h2 id="why-growlity">Why Growlity?</h2>
+<p><img src="https://growlity.com/wp-content/uploads/2025/06/1-1-1024x755.png" alt="Certified Experts"/></p>
+<p>Certified Experts</p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/06/2-1-1024x755.png" alt="Proven Score Growth"/></p>
+<p>Proven Score Growth</p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/07/lient-1024x755.png" alt="End-to-End Support"/></p>
+<p>End-to-End Support</p>
+<p><img src="https://growlity.com/wp-content/uploads/2025/06/4-1-1024x755.png" alt="Training &amp; Action Planning"/></p>
+<p>Training &amp; Action Planning</p>
+<p>EcoVadis FAQs    *{ box-sizing:border-box; margin:0; padding:0; } body{ font-family:‘Plus Jakarta Sans’,sans-serif; } .FAQ-section{ padding:20px 20px 100px; background:#f8fafc; } .ev-faq-container{ max-width:1200px; margin:0 auto; } .ev-faq-intro{ text-align:center; margin-bottom:50px; } .ev-faq-subtitle{ display:inline-block; padding:6px 16px; background:rgba(0,184,124,0.1); border:1px solid rgba(0,184,124,0.2); border-radius:50px; color:#00B87C; font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:1px; } .ev-h2-blue{ font-size:clamp(32px,5vw,42px); font-weight:800; color:#0b72e7; margin-top:15px; line-height:1.2; } .ev-faq-list{ max-width:900px; margin:0 auto; display:flex; flex-direction:column; gap:16px; } .ev-faq-item{ background:#ffffff; border:1px solid #e2e8f0; border-radius:16px; overflow:hidden; transition:all 0.3s ease; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); } .ev-faq-item:hover{ transform:translateY(-2px); box-shadow:0 12px 24px rgba(0,0,0,0.08); } .ev-faq-question{ width:100%; padding:24px 30px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; background:transparent; border:none; text-align:left; transition:background 0.3s ease; } .ev-faq-h3{ font-size:18px; font-weight:700; color:#1e293b; line-height:1.4; } .ev-faq-icon{ font-size:22px; color:#0b72e7; transition:transform 0.4s cubic-bezier(0.4,0,0.2,1); flex-shrink:0; line-height:1; } .ev-faq-answer{ max-height:0; overflow:hidden; opacity:0; will-change:max-height; transition: max-height 0.4s ease, opacity 0.3s ease; } .ev-faq-item.active .ev-faq-answer{ opacity:1; } .ev-faq-answer-inner{ padding:0 30px 30px; } .ev-faq-answer-inner p{ font-size:16px; line-height:1.7; color:#475569; margin-bottom:15px; } .ev-faq-answer-inner p:last-child{ margin-bottom:0; } .ev-faq-answer-inner ul{ margin:10px 0 15px 20px; color:#475569; font-size:16px; line-height:1.7; } .ev-faq-answer-inner strong{ color:#1e293b; font-weight:700; } .faq-cta-link{ color:#0b72e7; font-weight:700; text-decoration:none; } .faq-cta-link:hover{ text-decoration:underline; } .ev-faq-item.active{ border-color:#0b72e7; box-shadow:0 10px 25px -5px rgba(11,114,231,0.1); } .ev-faq-item.active .ev-faq-h3{ color:#0b72e7; } .ev-faq-item.active .ev-faq-icon{ transform:rotate(45deg); color:#00B87C; } @media (max-width:768px){ .ev-faq-question{ padding:18px 16px; } .ev-faq-answer-inner{ padding:0 16px 24px; } .ev-faq-h3{ font-size:16px; } .ev-h2-blue{ font-size:28px; } }</p>
+<p>Common Questions</p>
+<h2 id="ecovadis-assessment-frequently-asked-questions">EcoVadis Assessment Frequently Asked Questions</h2>
+<h3 id="what-is-an-ecovadis-assessment">What is an EcoVadis assessment?</h3>
+<ul>
+<li></li>
+</ul>
+<p>An EcoVadis assessment is a sustainability evaluation system used by companies worldwide to measure the environmental, social, and ethical performance of businesses across global supply chains.</p>
+<p>During the process, companies complete a structured questionnaire and submit supporting documentation that demonstrates their sustainability practices, policies, and management systems.</p>
+<p>The assessment evaluates organizations across key ESG areas such as environmental impact, labor practices, business ethics, and responsible sourcing.</p>
+<p><strong>Need help completing your assessment? <a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Book an EcoVadis Consultation →</a></strong></p>
+<h3 id="what-are-the-4-pillars-of-ecovadis">What are the 4 pillars of EcoVadis?</h3>
+<ul>
+<li></li>
+</ul>
+<p>The EcoVadis assessment framework evaluates companies across four sustainability pillars.</p>
+<p><strong>Environment</strong><br/>
+Environmental management systems, carbon emissions, waste management, and climate initiatives.</p>
+<p><strong>Labor and Human Rights</strong><br/>
+Employee safety, diversity, working conditions, and human rights protection.</p>
+<p><strong>Ethics</strong><br/>
+Anti-corruption, governance, compliance, and responsible business conduct.</p>
+<p><strong>Sustainable Procurement</strong><br/>
+Supplier sustainability management and responsible sourcing practices.</p>
+<h3 id="how-does-the-ecovadis-calculation-work">How does the EcoVadis calculation work?</h3>
+<ul>
+<li></li>
+</ul>
+<p>EcoVadis scores are calculated using a weighted assessment of sustainability policies, actions, and measurable results.</p>
+<ul>
+<li>Policy commitments</li>
+<li>Implementation actions</li>
+<li>Performance indicators</li>
+<li>Supporting evidence</li>
+</ul>
+<p>Companies may receive Bronze, Silver, Gold, or Platinum recognition depending on final performance.</p>
+<h3 id="where-can-i-find-the-ecovadis-questionnaire">Where can I find the EcoVadis questionnaire?</h3>
+<ul>
+<li></li>
+</ul>
+<p>The EcoVadis questionnaire becomes available after registration on the EcoVadis platform.</p>
+<p>The questionnaire is customized based on company size, industry, and operational geography.</p>
+<p>Companies must provide sustainability policies, certifications, and supporting ESG documentation.</p>
+<h3 id="what-kind-of-questions-are-included-in-an-ecovadis-assessment">What kind of questions are included in an EcoVadis assessment?</h3>
+<ul>
+<li></li>
+</ul>
+<p>EcoVadis assessment questions focus on sustainability management practices and ESG performance.</p>
+<ul>
+<li>Environmental management</li>
+<li>Carbon reduction initiatives</li>
+<li>Employee health and safety</li>
+<li>Human rights practices</li>
+<li>Anti-corruption policies</li>
+<li>Responsible sourcing</li>
+</ul>
+<p>Strong documentation and evidence are essential for achieving higher scores.</p>
+<h3 id="what-is-the-ecovadis-360-watch-monitoring-system">What Is the EcoVadis 360° Watch Monitoring System?</h3>
+<ul>
+<li></li>
+</ul>
+<p>EcoVadis 360° Watch is an AI-driven monitoring system that tracks sustainability-related controversies and ESG risks linked to companies.</p>
+<ul>
+<li>Corruption allegations</li>
+<li>Labor violations</li>
+<li>Environmental incidents</li>
+<li>ESG-related legal disputes</li>
+</ul>
+<p>Significant controversies may affect a company’s EcoVadis rating or medal eligibility.</p>
+<p>document.addEventListener(‘DOMContentLoaded’, () =&gt; { const faqItems = document.querySelectorAll(‘.ev-faq-item’); faqItems.forEach(item =&gt; { const trigger = item.querySelector(‘.ev-faq-question’); trigger.addEventListener(‘click’, () =&gt; { const isActive = item.classList.contains(‘active’); faqItems.forEach(otherItem =&gt; { otherItem.classList.remove(‘active’); const otherAnswer = otherItem.querySelector(‘.ev-faq-answer’); otherItem .querySelector(‘.ev-faq-question’) .setAttribute(‘aria-expanded’,‘false’); if(otherAnswer){ otherAnswer.style.maxHeight = null; } }); if(!isActive){ item.classList.add(‘active’); trigger.setAttribute(‘aria-expanded’,‘true’); const answer = item.querySelector(‘.ev-faq-answer’); if(answer){ answer.style.maxHeight = answer.scrollHeight + “px”; } } }); }); /* Open first FAQ by default */ const firstItem = faqItems[0]; if(firstItem){ firstItem.classList.add(‘active’); const firstAnswer = firstItem.querySelector(‘.ev-faq-answer’); const firstTrigger = firstItem.querySelector(‘.ev-faq-question’); firstTrigger.setAttribute(‘aria-expanded’,‘true’); firstAnswer.style.maxHeight = firstAnswer.scrollHeight + “px”; } });</p>
+<p>Ready for the ASsesmment ?</p>
+<h3 id="start-your-assessment-today">Start Your Assessment Today</h3>
+<p>Companies that proactively strengthen sustainability performance gain a competitive advantage in global supply chains.</p>
+<p>Our experts help organizations navigate the process efficiently while ensuring alignment with international ESG expectations.</p>
+<p>Whether you are completing the process for the first time or aiming to improve your rating, we provide the expertise required to succeed.</p>
+<p><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Schedule Free Consultation</a><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Request Support</a><a href="https://growlity.com/contact-us" class="text-brand-green font-medium underline hover:text-green-800 transition-colors">Speak With ESG Experts</a></p> </main>  <section class="w-full">         </section>  </main> <script>(()=>{var l=(n,t)=>{let i=async()=>{await(await n())()},e=typeof t.value=="object"?t.value:void 0,s={timeout:e==null?void 0:e.timeout};"requestIdleCallback"in window?window.requestIdleCallback(i,s):setTimeout(i,s.timeout||200)};(self.Astro||(self.Astro={})).idle=l;window.dispatchEvent(new Event("astro:idle"));})();</script><astro-island uid="ZUAUUd" prefix="r3" component-url="/_astro/footer.DiMz3v4B.js" component-export="Footer" renderer-url="/_astro/client.Cq54w6aN.js" props="{&quot;siteLogo&quot;:[0,&quot;/growlity-logo.png&quot;]}" ssr client="idle" opts="{&quot;name&quot;:&quot;Footer&quot;,&quot;value&quot;:true}" await-children><footer class="bg-gray-50 border-t"><div class="container mx-auto px-4 py-16"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8"><div class="lg:col-span-1"><div class="flex items-center gap-2 mb-4"><img src="/growlity-logo.png" alt="Growlity Logo" class="h-10 w-auto object-contain"/></div><p class="text-sm text-muted-foreground mb-4">Growth with Sustainability. Your trusted partner for ESG transformation and climate action.</p><div class="flex gap-3"><a href="#" class="hover:text-[#0066FF] transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin h-5 w-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="#" class="hover:text-[#0066FF] transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter h-5 w-5"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a><a href="#" class="hover:text-[#00C853] transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook h-5 w-5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a><a href="#" class="hover:text-[#00C853] transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube h-5 w-5"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a></div></div><div><h4 class="font-semibold mb-4">Services</h4><ul class="space-y-3 text-sm text-muted-foreground"><li><a href="/solutions/esg-strategy" class="hover:text-[#0066FF] transition-colors">ESG Strategy</a></li><li><a href="/solutions/carbon-accounting" class="hover:text-[#0066FF] transition-colors">Carbon Accounting</a></li><li><a href="/solutions/net-zero" class="hover:text-[#0066FF] transition-colors">Net Zero Advisory</a></li><li><a href="/solutions/esg-reporting" class="hover:text-[#0066FF] transition-colors">ESG Reporting</a></li><li><a href="/solutions/ecovadis" class="hover:text-[#0066FF] transition-colors">EcoVadis</a></li><li><a href="/solutions/cdp" class="hover:text-[#0066FF] transition-colors">CDP</a></li></ul></div><div><h4 class="font-semibold mb-4">Solutions</h4><ul class="space-y-3 text-sm text-muted-foreground"><li><a href="/industries/manufacturing" class="hover:text-[#0066FF] transition-colors">Manufacturing</a></li><li><a href="/industries/chemicals" class="hover:text-[#0066FF] transition-colors">Chemicals</a></li><li><a href="/frameworks/gri" class="hover:text-[#0066FF] transition-colors">GRI Reporting</a></li><li><a href="/frameworks/issb" class="hover:text-[#0066FF] transition-colors">ISSB Standards</a></li><li><a href="/frameworks/tcfd" class="hover:text-[#0066FF] transition-colors">TCFD Framework</a></li><li><a href="/esgtech" class="hover:text-[#0066FF] transition-colors">ESGTech.ai Platform</a></li></ul></div><div><h4 class="font-semibold mb-4">Company</h4><ul class="space-y-3 text-sm text-muted-foreground"><li><a href="/about" class="hover:text-[#0066FF] transition-colors">About Us</a></li><li><a href="/case-studie" class="hover:text-[#0066FF] transition-colors">Case Studies</a></li><li><a href="/resources" class="hover:text-[#0066FF] transition-colors">Resources</a></li><li><a href="/contact" class="hover:text-[#0066FF] transition-colors">Contact Us</a></li><li><a href="/careers" class="hover:text-[#0066FF] transition-colors">Careers</a></li><li><a href="/partners" class="hover:text-[#0066FF] transition-colors">Partners</a></li></ul></div><div><h4 class="font-semibold mb-4">Get in Touch</h4><ul class="space-y-3 text-sm text-muted-foreground"><li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail h-4 w-4 mt-0.5 text-[#0066FF]"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg><a href="mailto:info@growlity.com" class="hover:text-[#0066FF] transition-colors">info@growlity.com</a></li><li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone h-4 w-4 mt-0.5 text-[#00C853]"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><a href="tel:+1234567890" class="hover:text-[#00C853] transition-colors">+1 (234) 567-890</a></li><li class="flex items-start gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-4 w-4 mt-0.5 text-[#0066FF]"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg><span>Global Offices:<br/>USA, UK, India, UAE</span></li></ul></div></div><div class="mt-12 pt-8 border-t"><div class="max-w-2xl"><h4 class="font-semibold mb-2">Subscribe to ESG Insights</h4><p class="text-sm text-muted-foreground mb-4">Get the latest ESG trends, regulations, and best practices delivered to your inbox.</p><div class="flex gap-2"><input type="email" data-slot="input" class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border px-3 py-1 text-base bg-input-background transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive max-w-xs" placeholder="Enter your email"/><button data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground h-9 px-4 py-2 has-[&gt;svg]:px-3 bg-[#0066FF] hover:bg-[#0052CC]">Subscribe</button></div></div></div></div><div class="border-t bg-white"><div class="container mx-auto px-4 py-6"><div class="flex flex-col md:flex-row justify-between items-center gap-4"><p class="text-sm text-muted-foreground">© <!-- -->2026<!-- --> Growlity. All rights reserved.</p><div class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm text-muted-foreground"><a href="/privacy" class="hover:text-[#0066FF] transition-colors">Privacy Policy</a><a href="/terms" class="hover:text-[#0066FF] transition-colors">Terms of Service</a><a href="/cookies" class="hover:text-[#0066FF] transition-colors">Cookie Policy</a></div></div></div></div></footer><!--astro:end--></astro-island> <script type="module">document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("global-popup"),s=document.getElementById("close-popup");e&&s&&(sessionStorage.getItem("popupDismissed")||setTimeout(()=>{e.classList.remove("hidden"),setTimeout(()=>{e.classList.remove("opacity-0","pointer-events-none"),e.firstElementChild?.classList.remove("scale-95")},10)},2e3),s.addEventListener("click",()=>{e.classList.add("opacity-0","pointer-events-none"),e.firstElementChild?.classList.add("scale-95"),setTimeout(()=>{e.classList.add("hidden")},300),sessionStorage.setItem("popupDismissed","true")}))});</script>   </body></html>
