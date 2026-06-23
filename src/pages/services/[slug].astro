@@ -20,7 +20,7 @@ const { solution } = Astro.props;
 const { Content } = await render(solution);
 ---
 
-<Layout title={solution.data.seoTitle || `${solution.data.title} | Services`} description={solution.data.seoDescription || solution.data.shortDescription || ''}>
+<Layout title={solution.data.seoSettings?.title || `${solution.data.title} | Services`} description={solution.data.seoSettings?.description || solution.data.shortDescription || ''}>
     <!-- Service Header -->
     <header class="bg-[#0b1b1a] text-white py-24 px-6 text-center">
       <div class="max-w-4xl mx-auto">

@@ -1,18 +1,18 @@
 ---
 export const prerender = true;
-import { getCollection, render } from 'astro:content';
-import FAQAccordion from '../components/shared/FAQAccordion.astro';
-import Callout from '../components/mdx/Callout.astro';
-import YouTube from '../components/mdx/YouTube.astro';
-import CTA from '../components/mdx/CTA.astro';
-import MarkdownLink from '../components/mdx/MarkdownLink.astro';
-import DynamicRenderer from '../components/shared/DynamicRenderer.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection, render } from "astro:content";
+import FAQAccordion from "../components/shared/FAQAccordion.astro";
+import Callout from "../components/mdx/Callout.astro";
+import YouTube from "../components/mdx/YouTube.astro";
+import CTA from "../components/mdx/CTA.astro";
+import MarkdownLink from "../components/mdx/MarkdownLink.astro";
+import DynamicRenderer from "../components/shared/DynamicRenderer.astro";
+import Layout from "../layouts/Layout.astro";
 
 // This function tells Astro to create a page for every file in the "pages" collection
 export async function getStaticPaths() {
-  const pages = await getCollection('pages');
-  return pages.map(page => ({
+  const pages = await getCollection("pages");
+  return pages.map((page) => ({
     params: { slug: page.id },
     props: { page },
   }));
@@ -22,70 +22,92 @@ const { page } = Astro.props;
 const { Content } = await render(page);
 ---
 
-<Layout title={page.data.seoTitle || page.data.title} description={page.data.seoDescription || page.data.heroDescription || ''}>
-    <!-- Page Header / Hero -->
-    <header class="bg-brand-light-green py-20 px-6 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-brand-green mb-4">
-        {page.data.heroTitle || page.data.title}
-      </h1>
-      {page.data.heroDescription && (
-        <p class="text-xl text-gray-700 max-w-3xl mx-auto">{page.data.heroDescription}</p>
-      )}
-    </header>
+<Layout
+  title={page.data.seoSettings?.title || page.data.title}
+  description={page.data.seoSettings?.description || page.data.heroSection?.description || ""}
+>
+  <!-- Page Header / Hero -->
+  <header class="bg-brand-light-green py-20 px-6 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold text-brand-green mb-4">
+      {page.data.heroSection?.title || page.data.title}
+    </h1>
+    {
+      page.data.heroSection?.description && (
+        <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+          {page.data.heroSection?.description}
+        </p>
+      )
+    }
+  </header>
 
-    <!-- Main Content from Sitepins -->
-    <main class="max-w-4xl mx-auto py-12 px-6 prose prose-lg prose-green">
-      <!-- This renders the standard markdown content -->
-      <Content components={{ Callout, YouTube, CTA, a: MarkdownLink }} />
-    </main>
+  <!-- Main Content from Sitepins -->
+  <main class="max-w-4xl mx-auto py-12 px-6 prose prose-lg prose-green">
+    <!-- This renders the standard markdown content -->
+    <Content components={{ Callout, YouTube, CTA, a: MarkdownLink }} />
+  </main>
 
-    <!-- Visual Builder Dynamic Blocks -->
-    {page.data.blocks && page.data.blocks.length > 0 && (
-      <DynamicRenderer blocks={page.data.blocks} />
-    )}
+    <!-- Visual Builder Dynamic Blocks removed -->
 
-    <!-- Static Fields Section -->
-    <section class="w-full">
-      
-      {/* BANNER IMAGE BLOCK */}
-      {page.data.bannerSection?.image && (
+  <!-- Static Fields Section -->
+  <section class="w-full">
+    {/* BANNER IMAGE BLOCK */}
+    {
+      page.data.bannerSection?.image && (
         <div class="w-full my-12 relative overflow-hidden group border-y border-gray-100">
           <div class="w-full aspect-[4/3] md:aspect-video max-h-[600px] overflow-hidden bg-gray-100 flex items-center justify-center">
-            <img src={page.data.bannerSection.image} alt={page.data.bannerSection.caption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <img
+              src={page.data.bannerSection.image}
+              alt={page.data.bannerSection.caption || "Featured Banner"}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
           </div>
           {page.data.bannerSection.caption && (
             <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24">
-              <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">{page.data.bannerSection.caption}</p>
+              <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">
+                {page.data.bannerSection.caption}
+              </p>
             </div>
           )}
         </div>
-      )}
+      )
+    }
 
-      {/* BOTTOM TEXT BLOCK */}
-      {page.data.bottomSection?.text && (
+    {/* BOTTOM TEXT BLOCK */}
+    {
+      page.data.bottomSection?.text && (
         <div class="max-w-4xl mx-auto py-8 px-6 prose prose-lg prose-green text-center">
-          <h2 class="text-2xl font-bold text-gray-900">{page.data.bottomSection.text}</h2>
+          <h2 class="text-2xl font-bold text-gray-900">
+            {page.data.bottomSection.text}
+          </h2>
         </div>
-      )}
+      )
+    }
 
-      {/* FAQ BLOCK */}
-      {page.data.faqSection && page.data.faqSection.length > 0 && (
+    {/* FAQ BLOCK */}
+    {
+      page.data.faqSection && page.data.faqSection.length > 0 && (
         <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
           <FAQAccordion faqList={page.data.faqSection} />
         </div>
-      )}
+      )
+    }
 
-      {/* CTA BLOCK */}
-      {page.data.ctaSection?.reference && (
+    {/* CTA BLOCK */}
+    {
+      page.data.ctaSection?.reference && (
         <div class="bg-brand-green text-white py-16 px-6 text-center my-8">
           <h2 class="text-3xl font-bold mb-4">Ready to get started?</h2>
-          <p class="text-xl mb-8">Contact us about {page.data.ctaSection.reference}</p>
-          <a href="/contact" class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors">
+          <p class="text-xl mb-8">
+            Contact us about {page.data.ctaSection.reference}
+          </p>
+          <a
+            href="/contact"
+            class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors"
+          >
             Contact Us
           </a>
         </div>
-      )}
-      
-    </section>
-
+      )
+    }
+  </section>
 </Layout>
