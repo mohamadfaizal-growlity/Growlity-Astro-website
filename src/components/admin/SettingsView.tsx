@@ -72,7 +72,7 @@ export default function SettingsView() {
         <button 
           onClick={handleSave}
           disabled={saving}
-          className="flex items-center gap-2 bg-[#2271b1] hover:bg-[#135e96] text-white px-4 py-1.5 rounded text-sm transition-colors"
+          className="flex items-center gap-2 bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-white px-4 py-1.5 rounded text-sm transition-colors"
         >
           <Save size={16} />
           {saving ? 'Saving...' : 'Save Changes'}
@@ -90,7 +90,7 @@ export default function SettingsView() {
               name="siteTitle"
               value={settings.siteTitle} 
               onChange={handleChange}
-              className="w-full max-w-md px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+              className="w-full max-w-md px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
             />
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function SettingsView() {
               name="tagline"
               value={settings.tagline} 
               onChange={handleChange}
-              className="w-full max-w-md px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+              className="w-full max-w-md px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
             />
             <p className="text-[#646970] mt-1 text-xs">In a few words, explain what this site is about. Example: "Just another WordPress site."</p>
           </div>
@@ -142,7 +142,7 @@ export default function SettingsView() {
               <button 
                 type="button"
                 onClick={() => document.getElementById('siteLogoUpload')?.click()}
-                className="px-3 py-1 border border-[#2271b1] text-[#2271b1] hover:bg-[#f6f7f7] rounded text-sm transition-colors"
+                className="px-3 py-1 border border-[#0066FF] text-[#0066FF] hover:bg-[#f6f7f7] rounded text-sm transition-colors"
               >
                 Upload Site Logo
               </button>
@@ -166,7 +166,7 @@ export default function SettingsView() {
                 {settings.siteIcon ? (
                   <img src={settings.siteIcon} alt="Site Icon" className="w-full h-full object-cover" />
                 ) : (
-                  <span className="text-4xl text-emerald-600 font-bold">G</span>
+                  <span className="text-4xl text-[#0066FF] font-bold">G</span>
                 )}
               </div>
             </div>
@@ -190,7 +190,7 @@ export default function SettingsView() {
               <button 
                 type="button"
                 onClick={() => document.getElementById('siteIconUpload')?.click()}
-                className="px-3 py-1 border border-[#2271b1] text-[#2271b1] hover:bg-[#f6f7f7] rounded text-sm transition-colors"
+                className="px-3 py-1 border border-[#0066FF] text-[#0066FF] hover:bg-[#f6f7f7] rounded text-sm transition-colors"
               >
                 Upload Site Icon
               </button>
@@ -215,7 +215,7 @@ export default function SettingsView() {
               name="wpAddress"
               value={settings.wpAddress} 
               onChange={handleChange}
-              className="w-full max-w-md px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+              className="w-full max-w-md px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
             />
           </div>
         </div>
@@ -229,9 +229,9 @@ export default function SettingsView() {
               name="siteAddress"
               value={settings.siteAddress} 
               onChange={handleChange}
-              className="w-full max-w-md px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+              className="w-full max-w-md px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
             />
-            <p className="text-[#646970] mt-1 text-xs">Enter the same address here unless you <a href="#" className="text-[#2271b1] underline">want your site home page to be different from your WordPress installation directory.</a></p>
+            <p className="text-[#646970] mt-1 text-xs">Enter the same address here unless you <a href="#" className="text-[#0066FF] underline">want your site home page to be different from your WordPress installation directory.</a></p>
           </div>
         </div>
 
@@ -244,7 +244,7 @@ export default function SettingsView() {
               name="adminEmail"
               value={settings.adminEmail} 
               onChange={handleChange}
-              className="w-full max-w-md px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+              className="w-full max-w-md px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
             />
             <p className="text-[#646970] mt-1 text-xs">This address is used for admin purposes. If you change this, an email will be sent to your new address to confirm it. The new address will not become active until confirmed.</p>
           </div>
@@ -260,7 +260,7 @@ export default function SettingsView() {
               id="membership"
               checked={settings.membership} 
               onChange={handleChange}
-              className="w-4 h-4 border-[#8c8f94] rounded focus:ring-1 focus:ring-[#2271b1]"
+              className="w-4 h-4 border-[#8c8f94] rounded focus:ring-1 focus:ring-[#0066FF]"
             />
             <label htmlFor="membership">Anyone can register</label>
           </div>
@@ -274,7 +274,7 @@ export default function SettingsView() {
               name="defaultRole"
               value={settings.defaultRole} 
               onChange={handleChange}
-              className="max-w-xs px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+              className="max-w-xs px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
             >
               <option value="Subscriber">Subscriber</option>
               <option value="Contributor">Contributor</option>
@@ -293,7 +293,7 @@ export default function SettingsView() {
               name="siteLanguage"
               value={settings.siteLanguage} 
               onChange={handleChange}
-              className="max-w-xs px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+              className="max-w-xs px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
             >
               <option value="en_US">English (United States)</option>
               <option value="en_GB">English (UK)</option>
@@ -310,7 +310,7 @@ export default function SettingsView() {
               name="timezone"
               value={settings.timezone} 
               onChange={handleChange}
-              className="max-w-xs px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+              className="max-w-xs px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
             >
               <option value="UTC">UTC</option>
               <option value="UTC+5:30">UTC+5:30</option>
@@ -337,7 +337,7 @@ export default function SettingsView() {
                   value={fmt.value} 
                   checked={settings.dateFormat === fmt.value}
                   onChange={handleChange}
-                  className="text-[#2271b1] focus:ring-[#2271b1]"
+                  className="text-[#0066FF] focus:ring-[#0066FF]"
                 />
                 <span className="min-w-[120px] inline-block">{fmt.label}</span>
                 <code className="text-[#646970] bg-slate-100 px-1 rounded">{fmt.value}</code>
@@ -362,7 +362,7 @@ export default function SettingsView() {
                   value={fmt.value} 
                   checked={settings.timeFormat === fmt.value}
                   onChange={handleChange}
-                  className="text-[#2271b1] focus:ring-[#2271b1]"
+                  className="text-[#0066FF] focus:ring-[#0066FF]"
                 />
                 <span className="min-w-[120px] inline-block">{fmt.label}</span>
                 <code className="text-[#646970] bg-slate-100 px-1 rounded">{fmt.value}</code>
@@ -379,7 +379,7 @@ export default function SettingsView() {
               name="weekStartsOn"
               value={settings.weekStartsOn} 
               onChange={handleChange}
-              className="max-w-xs px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+              className="max-w-xs px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
             >
               <option value="Sunday">Sunday</option>
               <option value="Monday">Monday</option>
@@ -392,7 +392,7 @@ export default function SettingsView() {
         <div className="pt-4">
           <h2 className="text-xl font-medium text-slate-800 mb-2">WPS Hide Login</h2>
           <p className="text-[#646970] mb-6 text-xs">
-            Need help? Try the <a href="#" className="text-[#2271b1] underline">support forum</a>. This plugin is kindly brought to you by WPServeur...
+            Need help? Try the <a href="#" className="text-[#0066FF] underline">support forum</a>. This plugin is kindly brought to you by WPServeur...
           </p>
 
           <div className="space-y-6">
@@ -406,7 +406,7 @@ export default function SettingsView() {
                     name="wpsLoginUrl"
                     value={settings.wpsLoginUrl.replace('https://growlity.com/', '')} 
                     onChange={(e) => setSettings(prev => ({...prev, wpsLoginUrl: 'https://growlity.com/' + e.target.value}))}
-                    className="flex-1 max-w-[200px] px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+                    className="flex-1 max-w-[200px] px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
                   />
                 </div>
                 <p className="text-[#646970] mt-1 text-xs">Protect your website by changing the login URL and preventing access to the wp-login.php page and the wp-admin directory to non-connected people.</p>
@@ -423,7 +423,7 @@ export default function SettingsView() {
                     name="wpsRedirectionUrl"
                     value={settings.wpsRedirectionUrl.replace('https://growlity.com/', '')} 
                     onChange={(e) => setSettings(prev => ({...prev, wpsRedirectionUrl: 'https://growlity.com/' + e.target.value}))}
-                    className="flex-1 max-w-[200px] px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] outline-none shadow-sm"
+                    className="flex-1 max-w-[200px] px-3 py-1.5 border border-[#8c8f94] rounded focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF] outline-none shadow-sm"
                   />
                 </div>
                 <p className="text-[#646970] mt-1 text-xs">Redirect URL when someone tries to access the wp-login.php page and the wp-admin directory while not logged in.</p>
@@ -437,7 +437,7 @@ export default function SettingsView() {
           <button 
             onClick={handleSave}
             disabled={saving}
-            className="bg-[#2271b1] hover:bg-[#135e96] text-white px-5 py-2 rounded font-medium transition-colors"
+            className="bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-white px-5 py-2 rounded font-medium transition-colors"
           >
             {saving ? 'Saving...' : 'Save Changes'}
           </button>
