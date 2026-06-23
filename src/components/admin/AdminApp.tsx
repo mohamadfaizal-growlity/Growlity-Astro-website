@@ -64,32 +64,9 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
   );
 };
 
-const Sidebar = ({ schemas }: { schemas: any[] }) => {
+const Sidebar = ({ schemas, siteLogo }: { schemas: any[], siteLogo?: string }) => {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
-  const [siteLogo, setSiteLogo] = React.useState<string>("");
-
-  React.useEffect(() => {
-    // Fetch initial settings
-    fetch('/api/sitepins/settings')
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.siteLogo) {
-          setSiteLogo(data.siteLogo);
-        }
-      })
-      .catch(console.error);
-
-    // Listen for live updates from SettingsView
-    const handleSettingsUpdate = (e: any) => {
-      if (e.detail && typeof e.detail.siteLogo !== 'undefined') {
-        setSiteLogo(e.detail.siteLogo);
-      }
-    };
-    
-    window.addEventListener('settings-updated', handleSettingsUpdate as EventListener);
-    return () => window.removeEventListener('settings-updated', handleSettingsUpdate as EventListener);
-  }, []);
 
   const staticNavItems = [
     { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
@@ -187,6 +164,7 @@ export default function AdminApp() {
   const [password, setPassword] = useState('');
   const [schemas, setSchemas] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [siteLogo, setSiteLogo] = useState<string>("");
 
   useEffect(() => {
     fetch('/api/sitepins/schema')
@@ -195,6 +173,26 @@ export default function AdminApp() {
         setSchemas(Array.isArray(data) ? data : []);
         setLoading(false);
       });
+
+    // Fetch initial settings for logo
+    fetch('/api/sitepins/settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.siteLogo) {
+          setSiteLogo(data.siteLogo);
+        }
+      })
+      .catch(console.error);
+
+    // Listen for live updates from SettingsView
+    const handleSettingsUpdate = (e: any) => {
+      if (e.detail && typeof e.detail.siteLogo !== 'undefined') {
+        setSiteLogo(e.detail.siteLogo);
+      }
+    };
+    
+    window.addEventListener('settings-updated', handleSettingsUpdate as EventListener);
+    return () => window.removeEventListener('settings-updated', handleSettingsUpdate as EventListener);
   }, []);
 
   if (!isAuthenticated) {
@@ -204,7 +202,11 @@ export default function AdminApp() {
         <div className="bg-white p-12 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] max-w-md w-full border border-slate-100 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
             <div className="mb-8">
-              <img src="/growlity-logo.png" alt="Growlity Logo" className="h-10 mx-auto w-auto object-contain mb-4" />
+              {siteLogo ? (
+                <img src={siteLogo} alt="Site Logo" className="h-10 mx-auto w-auto object-contain mb-4" />
+              ) : (
+                <img src="/growlity-logo.png" alt="Growlity Logo" className="h-10 mx-auto w-auto object-contain mb-4" />
+              )}
             </div>
             <div className="text-center mb-8">
               <p className="text-slate-500">Please authenticate to continue</p>
@@ -243,7 +245,7 @@ export default function AdminApp() {
   return (
     <Router>
       <div className="flex min-h-screen bg-slate-50">
-        <Sidebar schemas={schemas} />
+        <Sidebar schemas={schemas} siteLogo={siteLogo} />
         <main className="flex-1 overflow-x-hidden">
           <Routes>
             <Route path="/" element={<Dashboard />} />
