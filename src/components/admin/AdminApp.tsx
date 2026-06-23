@@ -31,7 +31,7 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
     <div className="space-y-1">
       <Link
         to={`/collections/${schema.name}`}
-        className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 capitalize ${isActive && !currentGroup ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium' : 'hover:bg-slate-800 hover:text-white'}`}
+        className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 capitalize ${isActive && !currentGroup ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium' : 'hover:bg-slate-50 text-slate-600 hover:text-[#0066FF]'}`}
       >
         <div className="flex items-center gap-3">
           <FolderOpen size={20} />
@@ -48,12 +48,12 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
       </Link>
       
       {schema.groups && schema.groups.length > 0 && isOpen && (
-        <div className="ml-6 mt-1 space-y-1 border-l border-slate-700 pl-2">
+        <div className="ml-6 mt-1 space-y-1 border-l border-slate-200 pl-2">
           {schema.groups.map((group: string) => (
             <Link
               key={group}
               to={`/collections/${schema.name}?group=${group}`}
-              className={`block px-3 py-1.5 rounded-lg text-sm transition-colors ${currentGroup === group ? 'text-[#0066FF] font-medium bg-[#0066FF]/5' : 'text-slate-400 hover:text-white hover:bg-slate-800'}`}
+              className={`block px-3 py-1.5 rounded-lg text-sm transition-colors ${currentGroup === group ? 'text-[#0066FF] font-medium bg-[#0066FF]/5' : 'text-slate-500 hover:text-[#0066FF] hover:bg-slate-50'}`}
             >
               {group}
             </Link>
@@ -99,8 +99,8 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
   ];
 
   return (
-    <div className="w-64 bg-slate-900 text-slate-300 h-screen flex flex-col shadow-2xl sticky top-0 left-0">
-      <div className="h-16 flex items-center px-6 border-b border-slate-800 bg-slate-950">
+    <div className="w-64 bg-white border-r border-slate-200 text-slate-600 h-screen flex flex-col shadow-sm sticky top-0 left-0 z-50">
+      <div className="h-16 flex items-center px-6 border-b border-slate-200 bg-white/95 backdrop-blur">
         {siteLogo ? (
           <img src={siteLogo} alt="Site Logo" className="h-8 max-w-full object-contain" />
         ) : (
@@ -113,7 +113,7 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
           <Link
             to="/"
             className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
-              isActive('/') && location.pathname === '/' ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium' : 'hover:bg-slate-800 hover:text-white'
+              isActive('/') && location.pathname === '/' ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium' : 'hover:bg-slate-50 text-slate-600 hover:text-[#0066FF]'
             }`}
           >
             <LayoutDashboard size={20} /> Dashboard
@@ -136,7 +136,7 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
               className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
                 isActive(item.path)
                   ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium'
-                  : 'hover:bg-slate-800 hover:text-white'
+                  : 'hover:bg-slate-50 text-slate-600 hover:text-[#0066FF]'
               }`}
             >
               {item.icon}
@@ -145,8 +145,8 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
           ))}
         </nav>
       </div>
-      <div className="p-4 border-t border-slate-800">
-        <button className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg hover:bg-slate-800 hover:text-white transition-colors text-left">
+      <div className="p-4 border-t border-slate-200">
+        <button className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-slate-600 hover:bg-slate-50 hover:text-[#0066FF] transition-colors text-left">
           <LogOut size={20} />
           Logout
         </button>
@@ -157,15 +157,16 @@ const Sidebar = ({ schemas }: { schemas: any[] }) => {
 
 const Dashboard = () => (
   <div className="p-8">
-    <h1 className="text-3xl font-bold text-slate-800 mb-2">Welcome to SitePins</h1>
+    <h1 className="text-3xl font-bold text-slate-800 mb-2">Welcome to Growlity Admin</h1>
     <p className="text-slate-500 mb-8">Select a collection from the sidebar to start managing your content.</p>
     
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8 text-center">
-      <div className="w-16 h-16 bg-[#0066FF]/10 text-[#0066FF] rounded-full flex items-center justify-center mx-auto mb-4">
-        <LayoutDashboard size={32} />
+    <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,102,255,0.08)] border border-slate-100 p-12 text-center relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
+      <div className="w-20 h-20 bg-[#0066FF]/10 text-[#0066FF] rounded-full flex items-center justify-center mx-auto mb-6">
+        <LayoutDashboard size={40} />
       </div>
-      <h2 className="text-xl font-bold text-slate-800 mb-2">Your Dashboard is Ready</h2>
-      <p className="text-slate-500 max-w-md mx-auto">
+      <h2 className="text-2xl font-bold text-slate-800 mb-3">Your Dashboard is Ready</h2>
+      <p className="text-slate-500 max-w-md mx-auto text-lg leading-relaxed">
         You can now easily create pages, write blog posts, and use the Bricks-style visual editor to design your site.
       </p>
     </div>
@@ -199,8 +200,9 @@ export default function AdminApp() {
   if (!isAuthenticated) {
     // ... authentication UI remains same ...
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-100">
-        <div className="bg-white p-10 rounded-2xl shadow-xl max-w-sm w-full border border-slate-200">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="bg-white p-12 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] max-w-md w-full border border-slate-100 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
             <div className="mb-8">
               <img src="/growlity-logo.png" alt="Growlity Logo" className="h-10 mx-auto w-auto object-contain mb-4" />
             </div>
