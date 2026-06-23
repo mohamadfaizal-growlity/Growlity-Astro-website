@@ -11,7 +11,7 @@ export async function getStaticPaths({ paginate }: any) {
   // to show the latest added ones first (assuming they are returned in order of creation/filename)
   allCases = allCases.reverse();
 
-  return paginate(allCases, { pageSize: 9 });
+  return paginate(allCases, { pageSize: 12 });
 }
 
 const { page } = Astro.props as any;
@@ -24,7 +24,16 @@ const { page } = Astro.props as any;
       <p class="text-xl text-gray-600 max-w-2xl mx-auto">Discover how we help global organizations achieve their sustainability goals.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="flex items-center justify-between mb-8">
+      <button class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors shadow-sm font-medium">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+        </svg>
+        Filter
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {page.data.map((study: any) => (
         <a href={`/case-studie/${study.id}`} class="block group">
           <article class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 h-full flex flex-col relative">
@@ -32,7 +41,7 @@ const { page } = Astro.props as any;
               {study.data.industry}
             </div>
             
-            <div class="h-56 w-full relative overflow-hidden bg-slate-50">
+            <div class="aspect-video w-full relative overflow-hidden bg-slate-50">
               {study.data.featuredImage || study.data.thumbnail ? (
                 <img 
                   src={study.data.featuredImage || study.data.thumbnail} 

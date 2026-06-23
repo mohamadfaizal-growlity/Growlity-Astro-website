@@ -16,7 +16,7 @@ export async function getStaticPaths({ paginate }: any) {
     .filter((post) => post.data.date < today)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-  return paginate(pastWebinars, { pageSize: 6 });
+  return paginate(pastWebinars, { pageSize: 12 });
 }
 
 const { page } = Astro.props as any;
@@ -69,7 +69,7 @@ const upcomingWebinars = allWebinars
                     UPCOMING
                   </div>
                   
-                  <div class="h-56 w-full relative overflow-hidden bg-slate-50">
+                  <div class="aspect-video w-full relative overflow-hidden bg-slate-50">
                     {post.data.featuredImage || post.data.banner ? (
                       <img 
                         src={post.data.featuredImage || post.data.banner} 
@@ -123,9 +123,15 @@ const upcomingWebinars = allWebinars
           <h2 class="text-2xl font-bold text-slate-800">
             {page.currentPage === 1 ? 'Past Webinars' : `Past Webinars (Page ${page.currentPage})`}
           </h2>
+          <button class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors shadow-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            Filter
+          </button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {page.data.map((post: any) => (
             <a href={`/webinars/${post.id}`} class="block group">
               <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden h-full flex flex-col relative">
@@ -134,10 +140,10 @@ const upcomingWebinars = allWebinars
                   <img 
                     src={post.data.featuredImage || post.data.banner} 
                     alt={post.data.title} 
-                    class="w-full h-48 object-cover"
+                    class="w-full aspect-video object-cover"
                   />
                 ) : (
-                  <div class="w-full h-48 bg-slate-100 flex items-center justify-center text-slate-300">
+                  <div class="w-full aspect-video bg-slate-100 flex items-center justify-center text-slate-300">
                     <Calendar className="w-12 h-12" />
                   </div>
                 )}
