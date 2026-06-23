@@ -11,7 +11,7 @@ import {
 import { Menu, X, ChevronDown, Sparkles, ChevronRight } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
-export function Header() {
+export function Header({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeService, setActiveService] = useState("Strategy and Advisory");
   const [openMobileAccordion, setOpenMobileAccordion] = useState<string | null>(null);
@@ -84,7 +84,7 @@ export function Header() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <a href="/" className="flex items-center space-x-2">
-              <img src="/growlity-logo.png" alt="Growlity Logo" className="h-10 w-auto object-contain" />
+              <img src={siteLogo} alt="Growlity Logo" className="h-10 w-auto object-contain" />
             </a>
 
             {/* Desktop Navigation */}
@@ -212,7 +212,7 @@ export function Header() {
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[85vw] sm:max-w-md p-0 flex flex-col bg-slate-50/95 backdrop-blur-md border-l-0">
                   <div className="p-6 border-b bg-white flex items-center justify-between">
-                    <img src="/growlity-logo.png" alt="Growlity Logo" className="h-8 w-auto object-contain" />
+                    <img src={siteLogo} alt="Growlity Logo" className="h-8 w-auto object-contain" />
                   </div>
                   
                   <nav className="flex-1 flex flex-col gap-2 p-6 overflow-y-auto">

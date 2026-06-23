@@ -18,6 +18,19 @@ const { headerScripts, footerScripts } = settings?.data || {};
 
 // Fetch GA ID from globalSettings if available (Fallback added for future)
 const gaId = null;
+
+// Fetch dynamic site settings (logo)
+import { GET } from '../pages/api/sitepins/settings';
+let siteLogo = "/growlity-logo.png";
+try {
+  const response = await GET();
+  if (response && response.status === 200) {
+     const settings = await response.json();
+     if (settings.siteLogo) siteLogo = settings.siteLogo;
+  }
+} catch(e) {
+  console.error("Failed to fetch settings for logo:", e);
+}
 ---
 
 <!doctype html>
@@ -47,13 +60,13 @@ const gaId = null;
 		{headerScripts && <Fragment set:html={headerScripts} />}
 	</head>
 	<body class="bg-background text-foreground font-sans flex flex-col min-h-screen">
-		<Header client:load />
+		<Header client:load siteLogo={siteLogo} />
 		
 		<main class="flex-grow">
 			<slot />
 		</main>
 		
-		<Footer client:idle />
+		<Footer client:idle siteLogo={siteLogo} />
 		
 		<GlobalPopup />
 		
