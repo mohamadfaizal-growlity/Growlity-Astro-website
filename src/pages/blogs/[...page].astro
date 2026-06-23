@@ -3,27 +3,57 @@ export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import FeaturedCarousel from '../../components/FeaturedCarousel';
 
 export async function getStaticPaths({ paginate }: any) {
   const allBlogs = await getCollection('blogs', (post) => {
     return !post.data.draft && post.data.publishedDate <= new Date();
   });
 
-  // Sort by date (newest first)
   allBlogs.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
 
   return paginate(allBlogs, { pageSize: 9 });
 }
 
 const { page } = Astro.props as any;
+
+const allBlogsForCarousel = await getCollection('blogs', (post) => {
+  return !post.data.draft && post.data.publishedDate <= new Date();
+});
+allBlogsForCarousel.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
+const featuredBlogs = allBlogsForCarousel.slice(0, 5);
 ---
 
 <Layout title={`Blog | Growlity ${page.currentPage > 1 ? `| Page ${page.currentPage}` : ''}`}>
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">Our Blog</h1>
-      <p class="text-xl text-gray-600">Latest insights, news, and articles</p>
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">Our Blog</h1>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">Latest insights, news, and articles</p>
     </div>
+
+    {page.currentPage === 1 && featuredBlogs.length > 0 && (
+      <FeaturedCarousel 
+        client:load 
+        title="Featured Insights"
+        subtitle="Our most recent and popular articles"
+        items={featuredBlogs.map((post: any) => ({
+          id: post.id,
+          title: post.data.title,
+          image: post.data.featuredImage || '',
+          date: post.data.publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+          category: post.data.category || 'Blog',
+          badge: 'NEW',
+          url: `/blog/${post.id}`,
+          buttonText: 'Read Article'
+        }))}
+      />
+    )}
+
+    {page.currentPage === 1 && (
+      <div class="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
+        <h2 class="text-2xl font-bold text-gray-800">All Articles</h2>
+      </div>
+    )}
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {page.data.map((post: any) => (
