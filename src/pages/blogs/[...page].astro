@@ -2,16 +2,23 @@
 export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-const allBlogs = await getCollection('blogs', (post) => {
-  return !post.data.draft && post.data.publishedDate <= new Date(); // Do not show drafts or future posts
-});
+export async function getStaticPaths({ paginate }: any) {
+  const allBlogs = await getCollection('blogs', (post) => {
+    return !post.data.draft && post.data.publishedDate <= new Date();
+  });
 
-// Sort by date (newest first)
-allBlogs.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
+  // Sort by date (newest first)
+  allBlogs.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf());
+
+  return paginate(allBlogs, { pageSize: 9 });
+}
+
+const { page } = Astro.props as any;
 ---
 
-<Layout title="Blog | Growlity">
+<Layout title={`Blog | Growlity ${page.currentPage > 1 ? `| Page ${page.currentPage}` : ''}`}>
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="text-center mb-12">
       <h1 class="text-4xl font-bold text-gray-900 mb-4">Our Blog</h1>
@@ -19,7 +26,7 @@ allBlogs.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.va
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {allBlogs.map((post) => (
+      {page.data.map((post: any) => (
         <a href={`/blog/${post.id}`} class="block group">
           <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all h-full flex flex-col">
             {post.data.featuredImage ? (
@@ -62,6 +69,45 @@ allBlogs.sort((a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.va
         </a>
       ))}
     </div>
+
+    {/* PAGINATION CONTROLS */}
+    {page.lastPage > 1 && (
+      <div class="mt-16 flex items-center justify-center gap-2">
+        {page.url.prev ? (
+          <a href={page.url.prev} class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 text-slate-600 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-blue-50 transition-colors font-medium">
+            <ArrowLeft className="w-4 h-4" /> Previous
+          </a>
+        ) : (
+          <span class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-100 text-slate-300 cursor-not-allowed font-medium">
+            <ArrowLeft className="w-4 h-4" /> Previous
+          </span>
+        )}
+        
+        <div class="flex items-center gap-1 mx-4">
+          {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
+            <a 
+              href={pageNum === 1 ? '/blogs' : `/blogs/${pageNum}`}
+              class={`w-10 h-10 flex items-center justify-center rounded-lg font-medium transition-colors ${
+                pageNum === page.currentPage 
+                  ? 'bg-[#0066FF] text-white shadow-md' 
+                  : 'text-slate-600 hover:bg-slate-100'
+              }`}
+            >
+              {pageNum}
+            </a>
+          ))}
+        </div>
+
+        {page.url.next ? (
+          <a href={page.url.next} class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 text-slate-600 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-blue-50 transition-colors font-medium">
+            Next <ArrowRight className="w-4 h-4" />
+          </a>
+        ) : (
+          <span class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-100 text-slate-300 cursor-not-allowed font-medium">
+            Next <ArrowRight className="w-4 h-4" />
+          </span>
+        )}
+      </div>
+    )}
   </main>
 </Layout>
-
