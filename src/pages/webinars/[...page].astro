@@ -1,0 +1,266 @@
+---
+export const prerender = true;
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { ArrowLeft, ArrowRight, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+
+export async function getStaticPaths({ paginate }: any) {
+  const allWebinars = await getCollection('webinars');
+  
+  // Create a date representing "today" at midnight for accurate comparison
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Filter and sort Past Webinars (descending)
+  const pastWebinars = allWebinars
+    .filter((post) => post.data.date < today)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  return paginate(pastWebinars, { pageSize: 6 });
+}
+
+const { page } = Astro.props as any;
+
+// Fetch upcoming webinars for the current page
+const allWebinars = await getCollection('webinars');
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const upcomingWebinars = allWebinars
+  .filter((post) => post.data.date >= today)
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+---
+
+<Layout title={`Webinars | Growlity | Page ${page.currentPage}`}>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Webinars & Events</h1>
+      <p class="text-xl text-slate-500 max-w-2xl mx-auto">Join our experts to navigate the future of sustainability, compliance, and ESG strategies.</p>
+    </div>
+
+    {/* UPCOMING WEBINARS CAROUSEL */}
+    {upcomingWebinars.length > 0 && page.currentPage === 1 && (
+      <section class="mb-20">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-[#00C853] animate-pulse"></span>
+            Upcoming Webinars
+          </h2>
+          
+          {/* Carousel Controls */}
+          <div class="hidden md:flex gap-2">
+            <button id="prevBtn" class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-blue-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button id="nextBtn" class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-blue-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        <div class="relative w-full overflow-hidden rounded-2xl group">
+          <div id="carousel" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 pb-8 -mb-8">
+            {upcomingWebinars.map((post) => (
+              <a href={`/webinars/${post.id}`} class="snap-start shrink-0 w-full sm:w-[80%] lg:w-[calc(50%-12px)] xl:w-[calc(33.333%-16px)] block group/card relative">
+                <article class="bg-white rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.05)] border border-slate-100 overflow-hidden hover:shadow-[0_8px_30px_rgb(0,102,255,0.12)] hover:-translate-y-1 transition-all duration-300 h-full flex flex-col relative">
+                  
+                  <div class="absolute top-4 right-4 bg-[#00C853] text-white text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-lg shadow-[#00C853]/30">
+                    UPCOMING
+                  </div>
+                  
+                  <div class="h-56 w-full relative overflow-hidden bg-slate-50">
+                    {post.data.featuredImage || post.data.banner ? (
+                      <img 
+                        src={post.data.featuredImage || post.data.banner} 
+                        alt={post.data.title} 
+                        class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div class="w-full h-full flex items-center justify-center text-[#0066FF]/20 bg-gradient-to-br from-blue-50 to-indigo-50">
+                        <Calendar className="w-16 h-16" />
+                      </div>
+                    )}
+                  </div>
+                  
+                  <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex items-center text-sm text-[#0066FF] mb-3 font-semibold bg-blue-50 w-fit px-3 py-1 rounded-md">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      <time datetime={post.data.date.toISOString()}>
+                        {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                      </time>
+                      <span class="mx-2">•</span>
+                      <span>{post.data.time}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 group-hover/card:text-[#0066FF] transition-colors mb-4 leading-snug">
+                      {post.data.title}
+                    </h3>
+                    
+                    {post.data.speaker && (
+                      <div class="mt-auto flex items-center gap-3 pt-5 border-t border-slate-100">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#0066FF] to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-md">
+                          {post.data.speaker.charAt(0)}
+                        </div>
+                        <div>
+                          <p class="text-sm font-bold text-slate-900">{post.data.speaker}</p>
+                          <p class="text-xs text-slate-500">Speaker</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </article>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {/* PAST WEBINARS GRID */}
+    {page.data.length > 0 && (
+      <section>
+        <div class="flex items-center justify-between mb-8 border-b border-slate-200 pb-4">
+          <h2 class="text-2xl font-bold text-slate-800">
+            {page.currentPage === 1 ? 'Past Webinars' : `Past Webinars (Page ${page.currentPage})`}
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {page.data.map((post: any) => (
+            <a href={`/webinars/${post.id}`} class="block group">
+              <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 transition-all duration-300 h-full flex flex-col relative">
+                
+                {post.data.featuredImage || post.data.banner ? (
+                  <img 
+                    src={post.data.featuredImage || post.data.banner} 
+                    alt={post.data.title} 
+                    class="w-full h-48 object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                  />
+                ) : (
+                  <div class="w-full h-48 bg-slate-100 flex items-center justify-center text-slate-300">
+                    <Calendar className="w-12 h-12" />
+                  </div>
+                )}
+                
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-center text-sm text-slate-500 mb-3 font-medium">
+                    <time datetime={post.data.date.toISOString()}>
+                      {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                    </time>
+                  </div>
+                  <h3 class="text-lg font-bold text-slate-800 group-hover:text-[#0066FF] transition-colors mb-4 leading-snug">
+                    {post.data.title}
+                  </h3>
+                  
+                  {post.data.speaker && (
+                    <div class="mt-auto flex items-center gap-3 pt-4 border-t border-slate-100">
+                      <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm">
+                        {post.data.speaker.charAt(0)}
+                      </div>
+                      <div>
+                        <p class="text-sm font-semibold text-slate-700">{post.data.speaker}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </article>
+            </a>
+          ))}
+        </div>
+
+        {/* PAGINATION CONTROLS */}
+        {page.lastPage > 1 && (
+          <div class="mt-16 flex items-center justify-center gap-2">
+            {page.url.prev ? (
+              <a href={page.url.prev} class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 text-slate-600 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-blue-50 transition-colors font-medium">
+                <ArrowLeft className="w-4 h-4" /> Previous
+              </a>
+            ) : (
+              <span class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-100 text-slate-300 cursor-not-allowed font-medium">
+                <ArrowLeft className="w-4 h-4" /> Previous
+              </span>
+            )}
+            
+            <div class="flex items-center gap-1 mx-4">
+              {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((pageNum) => (
+                <a 
+                  href={pageNum === 1 ? '/webinars' : `/webinars/${pageNum}`}
+                  class={`w-10 h-10 flex items-center justify-center rounded-lg font-medium transition-colors ${
+                    pageNum === page.currentPage 
+                      ? 'bg-[#0066FF] text-white shadow-md' 
+                      : 'text-slate-600 hover:bg-slate-100'
+                  }`}
+                >
+                  {pageNum}
+                </a>
+              ))}
+            </div>
+
+            {page.url.next ? (
+              <a href={page.url.next} class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 text-slate-600 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-blue-50 transition-colors font-medium">
+                Next <ArrowRight className="w-4 h-4" />
+              </a>
+            ) : (
+              <span class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-100 text-slate-300 cursor-not-allowed font-medium">
+                Next <ArrowRight className="w-4 h-4" />
+              </span>
+            )}
+          </div>
+        )}
+      </section>
+    )}
+  </main>
+</Layout>
+
+<style>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+</style>
+
+<script>
+  // Simple Carousel Script
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById('carousel');
+    const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement;
+    const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement;
+    
+    if (carousel && prevBtn && nextBtn) {
+      // Get the width of the first item to know how much to scroll
+      const getScrollAmount = () => {
+        const item = carousel.querySelector('a');
+        if (item) {
+          // item width + gap (24px = 1.5rem)
+          return item.offsetWidth + 24;
+        }
+        return 300;
+      };
+
+      const updateButtons = () => {
+        const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+        prevBtn.disabled = carousel.scrollLeft <= 0;
+        nextBtn.disabled = carousel.scrollLeft >= maxScrollLeft - 5; // 5px tolerance
+      };
+
+      prevBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+      });
+
+      carousel.addEventListener('scroll', updateButtons);
+      window.addEventListener('resize', updateButtons);
+      
+      // Initial state
+      updateButtons();
+    }
+  });
+</script>
