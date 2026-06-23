@@ -68,7 +68,7 @@ const Sidebar = ({ schemas, siteLogo, onLogout }: { schemas: any[], siteLogo?: s
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
-  const preferredOrder = ['blogs', 'pages', 'caseStudies', 'events', 'publications', 'services', 'webinars'];
+  const preferredOrder = ['Posts', 'Pages', 'Case Studies', 'Events', 'Publications', 'Solutions', 'Webinar'];
   
   const primarySchemas = schemas.filter(s => preferredOrder.includes(s.name))
     .sort((a, b) => preferredOrder.indexOf(a.name) - preferredOrder.indexOf(b.name));
