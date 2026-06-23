@@ -21,11 +21,23 @@ export default defineConfig({
   output: 'static',
   adapter: vercel(),
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      {
+        name: 'theme-react-router-alias',
+        enforce: 'pre',
+        resolveId(source, importer) {
+          if (source === 'react-router') {
+            if (importer && !importer.includes('node_modules') && !importer.includes('admin')) {
+              return path.resolve(__dirname, './src/lib/react-router-polyfill.tsx');
+            }
+          }
+          return null;
+        }
+      }
+    ],
     resolve: {
-      alias: [
-        { find: /^react-router$/, replacement: path.resolve(__dirname, './src/lib/react-router-polyfill.tsx') }
-      ]
+      alias: []
     }
   },
 
