@@ -219,6 +219,17 @@ const events = defineCollection({
   })
 });
 
+// 10c. Comments
+const comments = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/comments" }),
+  schema: () => z.object({
+    title: z.string().optional(),
+    author: z.string().optional(),
+    content: z.string().optional(),
+    date: z.date().optional()
+  })
+});
+
 // 11. Publications
 const publications = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/publications" }),
@@ -302,6 +313,7 @@ export const collections = {
   caseStudies,
   webinars,
   events,
+  comments,
   publications,
   testimonials,
   customers,
