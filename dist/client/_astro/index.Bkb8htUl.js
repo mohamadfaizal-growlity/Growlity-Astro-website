@@ -1,0 +1,1 @@
+import{c as o}from"./createLucideIcon.D_JjEoqQ.js";import{g as r}from"./index.CJ7Pa_h0.js";import{r as t}from"./index.CBNDYNWH.js";const e=[["path",{d:"m6 9 6 6 6-6",key:"qrunsl"}]],n=o("chevron-down",e);var a=t();const p=r(a);export{n as C,p as R,a as r};

@@ -3,7 +3,6 @@ export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { ArrowLeft, ArrowRight, ArrowRight as ArrowIcon } from 'lucide-react';
-import FeaturedCarousel from '../../components/FeaturedCarousel';
 
 export async function getStaticPaths({ paginate }: any) {
   let allCases = await getCollection('caseStudies');
@@ -16,10 +15,6 @@ export async function getStaticPaths({ paginate }: any) {
 }
 
 const { page } = Astro.props as any;
-
-let allCasesForCarousel = await getCollection('caseStudies');
-allCasesForCarousel = allCasesForCarousel.reverse();
-const featuredCases = allCasesForCarousel.slice(0, 5);
 ---
 
 <Layout title={`Case Studies | Growlity ${page.currentPage > 1 ? `| Page ${page.currentPage}` : ''}`}>
@@ -28,29 +23,6 @@ const featuredCases = allCasesForCarousel.slice(0, 5);
       <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">Case Studies</h1>
       <p class="text-xl text-gray-600 max-w-2xl mx-auto">Discover how we help global organizations achieve their sustainability goals.</p>
     </div>
-
-    {page.currentPage === 1 && featuredCases.length > 0 && (
-      <FeaturedCarousel 
-        client:load 
-        title="Featured Success Stories"
-        subtitle="Explore our top client achievements"
-        items={featuredCases.map((study: any) => ({
-          id: study.id,
-          title: study.data.title,
-          image: study.data.featuredImage || study.data.thumbnail || '',
-          category: study.data.industry,
-          badge: 'FEATURED',
-          url: `/case-studie/${study.id}`,
-          buttonText: 'Read Case Study'
-        }))}
-      />
-    )}
-
-    {page.currentPage === 1 && (
-      <div class="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
-        <h2 class="text-2xl font-bold text-gray-800">All Case Studies</h2>
-      </div>
-    )}
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {page.data.map((study: any) => (

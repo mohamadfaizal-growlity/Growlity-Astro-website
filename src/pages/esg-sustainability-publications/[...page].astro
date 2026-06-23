@@ -3,7 +3,6 @@ export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import FeaturedCarousel from '../../components/FeaturedCarousel';
 
 export async function getStaticPaths({ paginate }: any) {
   const allPublications = await getCollection('publications', (post) => {
@@ -17,44 +16,14 @@ export async function getStaticPaths({ paginate }: any) {
 }
 
 const { page } = Astro.props as any;
-
-const allPubsForCarousel = await getCollection('publications', (post) => {
-  return !post.data.draft; 
-});
-allPubsForCarousel.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
-const featuredPubs = allPubsForCarousel.slice(0, 5);
 ---
 
 <Layout title={`Publications | Growlity ${page.currentPage > 1 ? `| Page ${page.currentPage}` : ''}`}>
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4 tracking-tight">ESG Sustainability Publications</h1>
-      <p class="text-xl text-slate-500 max-w-2xl mx-auto">Global sustainability perspectives, reports, and insights.</p>
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-slate-800 mb-4">ESG Sustainability Publications</h1>
+      <p class="text-xl text-slate-500">Global sustainability perspectives, reports, and insights.</p>
     </div>
-
-    {page.currentPage === 1 && featuredPubs.length > 0 && (
-      <FeaturedCarousel 
-        client:load 
-        title="Latest Publications"
-        subtitle="Our most recent research and reports"
-        items={featuredPubs.map((post: any) => ({
-          id: post.id,
-          title: post.data.title,
-          image: post.data.featuredImage || post.data.thumbnail || '',
-          date: post.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
-          category: post.data.category || 'Report',
-          badge: 'NEW',
-          url: `/esg-sustainability-publications/${post.id}`,
-          buttonText: 'Read Report'
-        }))}
-      />
-    )}
-
-    {page.currentPage === 1 && (
-      <div class="flex items-center justify-between mb-8 border-b border-slate-200 pb-4">
-        <h2 class="text-2xl font-bold text-slate-800">All Publications</h2>
-      </div>
-    )}
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {page.data.map((post: any) => (
