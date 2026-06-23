@@ -65,6 +65,34 @@ export default function SettingsView() {
 
   if (loading) return <div className="p-8">Loading settings...</div>;
 
+  const now = new Date();
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const month = monthNames[now.getMonth()];
+  const day = now.getDate();
+  const year = now.getFullYear();
+  const monthPad = String(now.getMonth() + 1).padStart(2, '0');
+  const dayPad = String(day).padStart(2, '0');
+  
+  const dateFormats = [
+    { label: `${month} ${day}, ${year}`, value: 'F j, Y' },
+    { label: `${year}-${monthPad}-${dayPad}`, value: 'Y-m-d' },
+    { label: `${monthPad}/${dayPad}/${year}`, value: 'm/d/Y' },
+    { label: `${dayPad}/${monthPad}/${year}`, value: 'd/m/Y' }
+  ];
+
+  let hours = now.getHours();
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const ampm = hours >= 12 ? 'pm' : 'am';
+  const AMPM = hours >= 12 ? 'PM' : 'AM';
+  const hours12 = hours % 12 || 12;
+  const hours24 = String(hours).padStart(2, '0');
+
+  const timeFormats = [
+    { label: `${hours12}:${minutes} ${ampm}`, value: 'g:i a' },
+    { label: `${hours12}:${minutes} ${AMPM}`, value: 'g:i A' },
+    { label: `${hours24}:${minutes}`, value: 'H:i' }
+  ];
+
   return (
     <div className="p-8 max-w-5xl mx-auto pb-24">
       <div className="flex justify-between items-center mb-8 border-b border-slate-200 pb-4">
@@ -324,12 +352,7 @@ export default function SettingsView() {
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="sm:w-1/3 font-semibold pt-1">Date Format</div>
           <div className="sm:w-2/3 space-y-2">
-            {[
-              { label: 'June 20, 2026', value: 'F j, Y' },
-              { label: '2026-06-20', value: 'Y-m-d' },
-              { label: '06/20/2026', value: 'm/d/Y' },
-              { label: '20/06/2026', value: 'd/m/Y' }
-            ].map(fmt => (
+            {dateFormats.map(fmt => (
               <label key={fmt.value} className="flex items-center gap-2">
                 <input 
                   type="radio" 
@@ -350,11 +373,7 @@ export default function SettingsView() {
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="sm:w-1/3 font-semibold pt-1">Time Format</div>
           <div className="sm:w-2/3 space-y-2">
-            {[
-              { label: '2:42 pm', value: 'g:i a' },
-              { label: '2:42 PM', value: 'g:i A' },
-              { label: '14:42', value: 'H:i' }
-            ].map(fmt => (
+            {timeFormats.map(fmt => (
               <label key={fmt.value} className="flex items-center gap-2">
                 <input 
                   type="radio" 
