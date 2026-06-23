@@ -27,9 +27,9 @@ allWebinars.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
               </div>
             )}
             
-            {post.data.banner ? (
+            {post.data.featuredImage || post.data.banner ? (
               <img 
-                src={post.data.banner} 
+                src={post.data.featuredImage || post.data.banner} 
                 alt={post.data.title} 
                 class="w-full h-48 object-cover"
               />

@@ -195,6 +195,7 @@ const webinars = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     banner: z.string().optional(),
+    featuredImage: z.string().optional(),
     speaker: z.string(),
     speakerBio: z.string().optional(),
     date: z.date(),
@@ -240,6 +241,7 @@ const publications = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     thumbnail: z.string().optional(),
+    featuredImage: z.string().optional(),
     pdfUpload: z.string().optional(),
     category: z.string(),
     publishDate: z.date(),
