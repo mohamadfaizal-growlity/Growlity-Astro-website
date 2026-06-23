@@ -157,6 +157,9 @@ const experts = defineCollection({
 const caseStudies = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/case-studies" }),
   schema: ({ image }) => z.object({
+    title: z.string(),
+    featuredImage: z.string().optional(),
+    category: z.string().optional(),
     clientName: z.string(),
     industry: z.string(),
     clientLogo: z.string().optional(),

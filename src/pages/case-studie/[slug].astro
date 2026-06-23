@@ -7,6 +7,7 @@ import YouTube from '../../components/mdx/YouTube.astro';
 import CTA from '../../components/mdx/CTA.astro';
 import MarkdownLink from '../../components/mdx/MarkdownLink.astro';
 import Layout from '../../layouts/Layout.astro';
+import { Calendar, User, Building, MapPin, Tag } from 'lucide-react';
 
 export async function getStaticPaths() {
   const cases = await getCollection('caseStudies');
@@ -18,79 +19,174 @@ export async function getStaticPaths() {
 
 const { study } = Astro.props;
 const { Content } = await render(study);
+
+// Background Image logic
+const heroBg = study.data.featuredImage || study.data.bannerSection?.image || 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80';
 ---
 
 <Layout title={study.data.seoSettings?.title || `${study.data.clientName} Case Study`} description={study.data.seoSettings?.description || `Read how we helped ${study.data.clientName} in the ${study.data.industry} industry.`}>
-    <!-- Hero Section -->
-    <header class="bg-brand-green text-white py-24 px-6 text-center">
-      <div class="max-w-4xl mx-auto">
-        <span class="text-sm font-bold text-brand-light-green uppercase tracking-wider block mb-2">Case Study • {study.data.industry}</span>
-        <h1 class="text-4xl md:text-6xl font-bold mb-6">
-          How we helped {study.data.clientName}
+    <!-- Premium Hero Section -->
+    <header class="relative w-full h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <!-- Background Image with Overlay -->
+      <div class="absolute inset-0 z-0">
+        <img src={heroBg} alt={study.data.title} class="w-full h-full object-cover object-center scale-105" />
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-green/90 to-[#000000]/70 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#000000]/60"></div>
+      </div>
+      
+      <!-- Hero Content -->
+      <div class="relative z-10 max-w-5xl mx-auto px-6 w-full text-center mt-16">
+        <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs font-bold text-white uppercase tracking-widest mb-6">
+          Case Study • {study.data.industry}
+        </span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+          {study.data.title}
         </h1>
       </div>
     </header>
 
-    <!-- Challenge, Solution, Results Summary -->
-    <div class="max-w-5xl mx-auto -mt-10 bg-white rounded-xl shadow-lg p-8 grid grid-cols-1 md:grid-cols-3 gap-8 border border-gray-100">
-      <div>
-        <h3 class="text-xl font-bold text-gray-900 mb-3 border-b-2 border-red-500 pb-2 inline-block">The Challenge</h3>
-        <p class="text-gray-600">{study.data.challenge || "Detailed inside."}</p>
+    <!-- Smart Conditional Blocks (Challenge, Solution, Results) -->
+    { (study.data.challenge || study.data.solution || study.data.results) && (
+      <div class="max-w-6xl mx-auto -mt-16 relative z-20 bg-white/80 backdrop-blur-xl rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-8 md:p-10 mb-16 grid grid-cols-1 md:grid-cols-3 gap-10 border border-white/50">
+        {study.data.challenge && (
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900">The Challenge</h3>
+            </div>
+            <p class="text-gray-600 leading-relaxed">{study.data.challenge}</p>
+          </div>
+        )}
+        
+        {study.data.solution && (
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900">Our Solution</h3>
+            </div>
+            <p class="text-gray-600 leading-relaxed">{study.data.solution}</p>
+          </div>
+        )}
+        
+        {study.data.results && (
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900">The Results</h3>
+            </div>
+            <p class="text-gray-600 leading-relaxed">{study.data.results}</p>
+          </div>
+        )}
       </div>
-      <div>
-        <h3 class="text-xl font-bold text-gray-900 mb-3 border-b-2 border-brand-green pb-2 inline-block">Our Solution</h3>
-        <p class="text-gray-600">{study.data.solution || "Detailed inside."}</p>
-      </div>
-      <div>
-        <h3 class="text-xl font-bold text-gray-900 mb-3 border-b-2 border-blue-500 pb-2 inline-block">The Results</h3>
-        <p class="text-gray-600">{study.data.results || "Detailed inside."}</p>
-      </div>
+    )}
+
+    <!-- Main Content Area: 2-Column Layout -->
+    <div class="max-w-7xl mx-auto px-6 py-12 md:py-20 flex flex-col lg:flex-row gap-12">
+      
+      <!-- Main Article (Markdown Content) -->
+      <main class="lg:w-2/3 prose prose-lg md:prose-xl max-w-none
+        prose-headings:font-bold prose-headings:text-gray-900 
+        prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
+        prose-h3:text-2xl prose-h3:mt-8
+        prose-p:text-gray-600 prose-p:leading-relaxed 
+        prose-a:text-brand-green prose-a:no-underline hover:prose-a:underline
+        prose-img:rounded-2xl prose-img:shadow-xl prose-img:border prose-img:border-gray-100 prose-img:mx-auto prose-img:my-10
+        prose-ul:text-gray-600 prose-ol:text-gray-600
+        prose-strong:text-gray-900">
+        
+        <div class="bg-white rounded-3xl md:p-10">
+          <Content components={{ Callout, YouTube, CTA, a: MarkdownLink }} />
+        </div>
+        
+      </main>
+
+      <!-- Sticky Metadata Sidebar -->
+      <aside class="lg:w-1/3">
+        <div class="sticky top-24 bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 p-8">
+          <h3 class="text-xl font-bold text-gray-900 mb-6 pb-4 border-b border-gray-100">Project Overview</h3>
+          
+          <ul class="space-y-6">
+            {study.data.clientName && (
+              <li class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0">
+                  <User className="w-5 h-5 text-brand-green" />
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-gray-500 mb-1">Client</p>
+                  <p class="text-gray-900 font-semibold">{study.data.clientName}</p>
+                </div>
+              </li>
+            )}
+            
+            {study.data.industry && (
+              <li class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0">
+                  <Building className="w-5 h-5 text-brand-green" />
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-gray-500 mb-1">Industry</p>
+                  <p class="text-gray-900 font-semibold">{study.data.industry}</p>
+                </div>
+              </li>
+            )}
+
+            {study.data.category && (
+              <li class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center shrink-0">
+                  <Tag className="w-5 h-5 text-brand-green" />
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-gray-500 mb-1">Category</p>
+                  <p class="text-gray-900 font-semibold">{study.data.category}</p>
+                </div>
+              </li>
+            )}
+            
+          </ul>
+
+          <!-- Small CTA in sidebar -->
+          <div class="mt-10 p-6 bg-slate-50 rounded-2xl border border-slate-100 text-center">
+            <h4 class="font-bold text-gray-900 mb-2">Need similar results?</h4>
+            <p class="text-sm text-gray-500 mb-4">Let's discuss how we can help your business grow sustainably.</p>
+            <a href="/contact" class="inline-block w-full py-3 px-4 bg-brand-green text-white font-medium rounded-xl hover:bg-brand-dark-green transition-colors">
+              Talk to an Expert
+            </a>
+          </div>
+        </div>
+      </aside>
+
     </div>
 
-    <!-- Main Content from Sitepins -->
-    <main class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-green">
-      <!-- Renders the main rich text article -->
-      <Content components={{ Callout, YouTube, CTA, a: MarkdownLink }} />
-    </main>
-
     <!-- Static Fields Section -->
-    <section class="w-full">
+    <section class="w-full bg-slate-50 border-t border-slate-100 mt-12">
       
-      {/* BANNER IMAGE BLOCK */}
-      {study.data.bannerSection?.image && (
-        <div class="w-full my-12 relative overflow-hidden group border-y border-gray-100">
-          <div class="w-full aspect-[4/3] md:aspect-video max-h-[600px] overflow-hidden bg-gray-100 flex items-center justify-center">
-            <img src={study.data.bannerSection.image} alt={study.data.bannerSection.caption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          </div>
-          {study.data.bannerSection.caption && (
-            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24">
-              <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">{study.data.bannerSection.caption}</p>
-            </div>
-          )}
-        </div>
-      )}
-
       {/* BOTTOM TEXT BLOCK */}
       {study.data.bottomSection?.text && (
-        <div class="max-w-4xl mx-auto py-8 px-6 prose prose-lg prose-green text-center">
-          <h2 class="text-2xl font-bold text-gray-900">{study.data.bottomSection.text}</h2>
+        <div class="max-w-4xl mx-auto py-16 px-6 text-center">
+          <h2 class="text-3xl font-bold text-gray-900">{study.data.bottomSection.text}</h2>
         </div>
       )}
 
       {/* FAQ BLOCK */}
       {study.data.faqSection && study.data.faqSection.length > 0 && (
-        <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
+        <div class="max-w-4xl mx-auto py-16 px-6">
           <FAQAccordion faqList={study.data.faqSection} />
         </div>
       )}
 
       {/* CTA BLOCK */}
       {study.data.ctaSection?.reference && (
-        <div class="bg-brand-green text-white py-16 px-6 text-center my-8">
-          <h2 class="text-3xl font-bold mb-4">Want similar results?</h2>
-          <p class="text-xl mb-8">Contact us about {study.data.ctaSection.reference}</p>
-          <a href="/contact" class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors inline-block">
-            Contact Us
+        <div class="bg-gradient-to-r from-brand-green to-[#005533] text-white py-20 px-6 text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to start your journey?</h2>
+          <p class="text-xl mb-10 text-white/90 max-w-2xl mx-auto">Contact us about {study.data.ctaSection.reference} and discover how Growlity can transform your operations.</p>
+          <a href="/contact" class="bg-white text-brand-green px-10 py-4 rounded-xl font-bold hover:bg-gray-100 transition-colors inline-block shadow-xl shadow-black/10">
+            Get in Touch Today
           </a>
         </div>
       )}
