@@ -20,48 +20,48 @@ export function Header({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
     {
       category: "Strategy and Advisory",
       items: [
-        { name: "ESG Assessment", href: "/services" },
-        { name: "Net Zero & Decarbonisation", href: "/services" },
-        { name: "Science Based Targets Initiative (SBTi)", href: "/services" },
-        { name: "Lifecycle Assessment (LCA)", href: "/services" },
-        { name: "Product Carbon Footprint (PCF)", href: "/services" },
-        { name: "Sustainable Development Goals", href: "/services" },
-        { name: "Carbon Credits", href: "/services" },
+        { name: "ESG Assessment", href: "/solutions" },
+        { name: "Net Zero & Decarbonisation", href: "/solutions" },
+        { name: "Science Based Targets Initiative (SBTi)", href: "/solutions" },
+        { name: "Lifecycle Assessment (LCA)", href: "/solutions" },
+        { name: "Product Carbon Footprint (PCF)", href: "/solutions" },
+        { name: "Sustainable Development Goals", href: "/solutions" },
+        { name: "Carbon Credits", href: "/solutions" },
       ]
     },
     {
       category: "Ratings and Disclosures",
       items: [
-        { name: "EcoVadis Assessment", href: "/services" },
-        { name: "Carbon Disclosure Project (CDP)", href: "/services" },
-        { name: "Environmental Product Declaration (EPD)", href: "/services" },
-        { name: "S&P ESG Score", href: "/services" },
-        { name: "Sustainalytics ESG Rating Support", href: "/services" },
+        { name: "EcoVadis Assessment", href: "/solutions" },
+        { name: "Carbon Disclosure Project (CDP)", href: "/solutions" },
+        { name: "Environmental Product Declaration (EPD)", href: "/solutions" },
+        { name: "S&P ESG Score", href: "/solutions" },
+        { name: "Sustainalytics ESG Rating Support", href: "/solutions" },
       ]
     },
     {
       category: "Certifications",
       items: [
-        { name: "RJC Certification", href: "/services" },
-        { name: "SCS-007 (Diamonds)", href: "/services" },
-        { name: "ISO Certification", href: "/services" },
-        { name: "Green Building Certification", href: "/services" },
-        { name: "B-Corporation", href: "/services" },
-        { name: "SA8000 Consulting Services", href: "/services" },
+        { name: "RJC Certification", href: "/solutions" },
+        { name: "SCS-007 (Diamonds)", href: "/solutions" },
+        { name: "ISO Certification", href: "/solutions" },
+        { name: "Green Building Certification", href: "/solutions" },
+        { name: "B-Corporation", href: "/solutions" },
+        { name: "SA8000 Consulting Services", href: "/solutions" },
       ]
     },
     {
       category: "Reporting and Training",
       items: [
-        { name: "Annual Sustainability Report (ASR)", href: "/services" },
-        { name: "ESG Reporting", href: "/services" },
-        { name: "BRSR", href: "/services" },
-        { name: "Materiality Assessment", href: "/services" },
-        { name: "GHG Emissions & Inventory Accounting", href: "/services" },
-        { name: "CBAM Reporting", href: "/services" },
-        { name: "ESG Assurance", href: "/services" },
-        { name: "Value Chain Partner Assessment", href: "/services" },
-        { name: "Climate Risk Assessment", href: "/services" },
+        { name: "Annual Sustainability Report (ASR)", href: "/solutions" },
+        { name: "ESG Reporting", href: "/solutions" },
+        { name: "BRSR", href: "/solutions" },
+        { name: "Materiality Assessment", href: "/solutions" },
+        { name: "GHG Emissions & Inventory Accounting", href: "/solutions" },
+        { name: "CBAM Reporting", href: "/solutions" },
+        { name: "ESG Assurance", href: "/solutions" },
+        { name: "Value Chain Partner Assessment", href: "/solutions" },
+        { name: "Climate Risk Assessment", href: "/solutions" },
       ]
     },
   ];
@@ -174,13 +174,13 @@ export function Header({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
                           <a href="/blogs" className="block text-sm text-muted-foreground hover:text-[#0066FF] transition-colors">Blogs</a>
                         </li>
                         <li>
-                          <a href="/case-studies" className="block text-sm text-muted-foreground hover:text-[#0066FF] transition-colors">Case Studies</a>
+                          <a href="/case-studie" className="block text-sm text-muted-foreground hover:text-[#0066FF] transition-colors">Case Studies</a>
                         </li>
                         <li>
                           <a href="/webinars" className="block text-sm text-muted-foreground hover:text-[#0066FF] transition-colors">Webinars</a>
                         </li>
                         <li>
-                          <a href="/publications" className="block text-sm text-muted-foreground hover:text-[#0066FF] transition-colors">Publications</a>
+                          <a href="/esg-sustainability-publications" className="block text-sm text-muted-foreground hover:text-[#0066FF] transition-colors">Publications</a>
                         </li>
                       </ul>
                     </NavigationMenuContent>
@@ -281,9 +281,9 @@ export function Header({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
                       {openMobileAccordion === 'resources' && (
                         <div className="flex flex-col gap-2 px-4 pb-4 bg-slate-50/50">
                           <a href="/blogs" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Blogs</a>
-                          <a href="/case-studies" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Case Studies</a>
+                          <a href="/case-studie" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Case Studies</a>
                           <a href="/webinars" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Webinars</a>
-                          <a href="/publications" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Publications</a>
+                          <a href="/esg-sustainability-publications" className="text-sm font-medium text-slate-600 hover:text-[#0066FF] hover:bg-white p-2 rounded-lg transition-colors" onClick={() => setIsOpen(false)}>Publications</a>
                         </div>
                       )}
                     </div>

@@ -38,12 +38,12 @@ export function Footer({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
           <div>
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li><a href="/services/esg-strategy" className="hover:text-[#0066FF] transition-colors">ESG Strategy</a></li>
-              <li><a href="/services/carbon-accounting" className="hover:text-[#0066FF] transition-colors">Carbon Accounting</a></li>
-              <li><a href="/services/net-zero" className="hover:text-[#0066FF] transition-colors">Net Zero Advisory</a></li>
-              <li><a href="/services/esg-reporting" className="hover:text-[#0066FF] transition-colors">ESG Reporting</a></li>
-              <li><a href="/services/ecovadis" className="hover:text-[#0066FF] transition-colors">EcoVadis</a></li>
-              <li><a href="/services/cdp" className="hover:text-[#0066FF] transition-colors">CDP</a></li>
+              <li><a href="/solutions/esg-strategy" className="hover:text-[#0066FF] transition-colors">ESG Strategy</a></li>
+              <li><a href="/solutions/carbon-accounting" className="hover:text-[#0066FF] transition-colors">Carbon Accounting</a></li>
+              <li><a href="/solutions/net-zero" className="hover:text-[#0066FF] transition-colors">Net Zero Advisory</a></li>
+              <li><a href="/solutions/esg-reporting" className="hover:text-[#0066FF] transition-colors">ESG Reporting</a></li>
+              <li><a href="/solutions/ecovadis" className="hover:text-[#0066FF] transition-colors">EcoVadis</a></li>
+              <li><a href="/solutions/cdp" className="hover:text-[#0066FF] transition-colors">CDP</a></li>
             </ul>
           </div>
 
@@ -65,7 +65,7 @@ export function Footer({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li><a href="/about" className="hover:text-[#0066FF] transition-colors">About Us</a></li>
-              <li><a href="/customer-success" className="hover:text-[#0066FF] transition-colors">Case Studies</a></li>
+              <li><a href="/case-studie" className="hover:text-[#0066FF] transition-colors">Case Studies</a></li>
               <li><a href="/resources" className="hover:text-[#0066FF] transition-colors">Resources</a></li>
               <li><a href="/contact" className="hover:text-[#0066FF] transition-colors">Contact Us</a></li>
               <li><a href="/careers" className="hover:text-[#0066FF] transition-colors">Careers</a></li>
