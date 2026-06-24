@@ -116,8 +116,18 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
     <div className="p-8 space-y-8 max-w-[1600px] mx-auto pb-24">
       {/* 1. Hero Welcome Banner */}
       <div className="bg-gradient-to-r from-[#0066FF] to-[#00C853] rounded-3xl p-10 text-white relative overflow-hidden shadow-xl shadow-blue-500/20">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-2xl translate-y-1/3 -translate-x-1/4"></div>
+        <style>{`
+          @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+          }
+          .animate-blob { animation: blob 7s infinite; }
+          .animation-delay-2000 { animation-delay: 2s; }
+        `}</style>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 animate-blob"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-2xl translate-y-1/3 -translate-x-1/4 animate-blob animation-delay-2000"></div>
         
         <div className="relative z-10">
           <h1 className="text-4xl font-extrabold mb-3 tracking-tight">Growlity Content Management System</h1>
@@ -153,40 +163,52 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
 
       {/* 2. Quick Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex items-center gap-5">
-          <div className="w-14 h-14 rounded-full bg-blue-50 text-[#0066FF] flex items-center justify-center">
-            <LayoutDashboard size={24} />
+        <div className="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex items-center gap-5 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100/50 text-[#0066FF] flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
+            <LayoutDashboard size={28} />
           </div>
           <div>
-            <p className="text-slate-500 text-sm font-medium">Total Content</p>
-            <h3 className="text-3xl font-bold text-slate-800">{stats.total}</h3>
+            <p className="text-slate-500 text-sm font-medium mb-1">Total Content</p>
+            <div className="flex items-end gap-2">
+              <h3 className="text-3xl font-extrabold text-slate-800">{stats.total}</h3>
+              <span className="text-xs font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full mb-1">+12%</span>
+            </div>
           </div>
         </div>
-        <div className="bg-white rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex items-center gap-5">
-          <div className="w-14 h-14 rounded-full bg-indigo-50 text-indigo-500 flex items-center justify-center">
-            <FileText size={24} />
+        <div className="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex items-center gap-5 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-50 to-indigo-100/50 text-indigo-500 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
+            <FileText size={28} />
           </div>
           <div>
-            <p className="text-slate-500 text-sm font-medium">Published Posts</p>
-            <h3 className="text-3xl font-bold text-slate-800">{stats.posts}</h3>
+            <p className="text-slate-500 text-sm font-medium mb-1">Published Posts</p>
+            <div className="flex items-end gap-2">
+              <h3 className="text-3xl font-extrabold text-slate-800">{stats.posts}</h3>
+              <span className="text-xs font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full mb-1">+5%</span>
+            </div>
           </div>
         </div>
-        <div className="bg-white rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex items-center gap-5">
-          <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center">
-            <FolderOpen size={24} />
+        <div className="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex items-center gap-5 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/50 text-emerald-500 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
+            <FolderOpen size={28} />
           </div>
           <div>
-            <p className="text-slate-500 text-sm font-medium">Case Studies</p>
-            <h3 className="text-3xl font-bold text-slate-800">{stats.caseStudies}</h3>
+            <p className="text-slate-500 text-sm font-medium mb-1">Case Studies</p>
+            <div className="flex items-end gap-2">
+              <h3 className="text-3xl font-extrabold text-slate-800">{stats.caseStudies}</h3>
+              <span className="text-xs font-bold text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded-full mb-1">+2%</span>
+            </div>
           </div>
         </div>
-        <div className="bg-white rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex items-center gap-5">
-          <div className="w-14 h-14 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center">
-            <Activity size={24} />
+        <div className="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex items-center gap-5 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 group">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100/50 text-purple-500 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
+            <Activity size={28} />
           </div>
           <div>
-            <p className="text-slate-500 text-sm font-medium">Pages</p>
-            <h3 className="text-3xl font-bold text-slate-800">{stats.pages}</h3>
+            <p className="text-slate-500 text-sm font-medium mb-1">Pages</p>
+            <div className="flex items-end gap-2">
+              <h3 className="text-3xl font-extrabold text-slate-800">{stats.pages}</h3>
+              <span className="text-xs font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-full mb-1">0%</span>
+            </div>
           </div>
         </div>
       </div>
