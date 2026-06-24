@@ -29,10 +29,10 @@ const uniqueCategories = [...new Set(allPosts.map((post: any) => post.data.categ
     </div>
 
     <div class="mb-10">
-      <div class="flex flex-wrap gap-3 mb-6">
-        <a href="/blogs" class="px-6 py-2 rounded-full bg-[#0066FF] text-white font-medium text-sm transition-colors">All articles</a>
+      <div class="flex overflow-x-auto pb-4 mb-2 sm:pb-0 sm:mb-6 sm:flex-wrap gap-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <a href="/blogs" class="px-6 py-2 rounded-full bg-[#0066FF] text-white font-medium text-sm transition-colors whitespace-nowrap shrink-0">All articles</a>
         {uniqueCategories.map(category => (
-          <a href={`/blogs/category/${category.toLowerCase().replace(/\s+/g, '-')}`} class="px-6 py-2 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium text-sm transition-colors">{category}</a>
+          <a href={`/blogs/category/${category.toLowerCase().replace(/\s+/g, '-')}`} class="px-6 py-2 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium text-sm transition-colors whitespace-nowrap shrink-0">{category}</a>
         ))}
       </div>
       <div class="max-w-md">
