@@ -13,7 +13,8 @@ import {
   User,
   Eye,
   EyeOff,
-  ShieldCheck
+  ShieldCheck,
+  Check
 } from 'lucide-react';
 import CollectionList from './CollectionList';
 import ContentEditor from './ContentEditor';
@@ -189,6 +190,7 @@ export default function AdminApp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
   const [schemas, setSchemas] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [siteLogo, setSiteLogo] = useState<string>("");
@@ -311,10 +313,9 @@ const blobStyles = `
             </div>
 
             <div className="flex items-center justify-between mb-8">
-              <label className="flex items-center gap-2 cursor-pointer group/cb">
-                <div className="relative flex items-center justify-center w-5 h-5 rounded border border-slate-300 bg-white group-hover/cb:border-[#0066FF] transition-colors">
-                  <input type="checkbox" className="opacity-0 absolute inset-0 cursor-pointer w-full h-full" defaultChecked />
-                  <div className="w-2.5 h-2.5 bg-[#0066FF] rounded-sm"></div>
+              <label className="flex items-center gap-2 cursor-pointer group/cb" onClick={() => setRememberMe(!rememberMe)}>
+                <div className={`relative flex items-center justify-center w-5 h-5 rounded border transition-colors ${rememberMe ? 'bg-[#0066FF] border-[#0066FF]' : 'bg-white border-slate-300 group-hover/cb:border-[#0066FF]'}`}>
+                  {rememberMe && <Check size={14} className="text-white" strokeWidth={3} />}
                 </div>
                 <span className="text-sm font-medium text-slate-600 select-none">Remember me for 30 days</span>
               </label>
