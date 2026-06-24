@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Save, ArrowLeft } from 'lucide-react';
-
-export default function ContentEditor() {
+import MDEditor from '@uiw/react-md-editor';
+import SeoAnalyzer from './SeoAnalyzer';export default function ContentEditor() {
   const { collection } = useParams();
   let { slug } = useParams();
   if (slug) slug = decodeURIComponent(slug);
@@ -128,6 +128,18 @@ export default function ContentEditor() {
               </div>
             ))}
           </div>
+          
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-4">
+            <h2 className="text-lg font-semibold text-slate-800 border-b pb-2">Content (Markdown)</h2>
+            <div data-color-mode="light" className="prose-editor">
+              <MDEditor
+                value={content}
+                onChange={(val) => setContent(val || '')}
+                height={500}
+                className="w-full !border-slate-300 shadow-none rounded-lg overflow-hidden"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="col-span-1 space-y-6">
@@ -138,11 +150,18 @@ export default function ContentEditor() {
             </div>
             <button 
               onClick={() => navigate(`/collections/${collection}/${encodeURIComponent(slug || '')}/builder`)}
-              className="w-full mt-4 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-200 py-2 rounded-lg font-medium transition-colors"
+              className="w-full mt-4 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-200 py-2 rounded-lg font-medium transition-colors mb-6"
             >
               Open Bricks Visual Editor
             </button>
           </div>
+          
+          <SeoAnalyzer 
+            title={data.title || ''}
+            description={data.description || ''}
+            slug={slug || ''}
+            content={content || ''}
+          />
         </div>
       </div>
     </div>
