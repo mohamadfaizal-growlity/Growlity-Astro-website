@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { Plus, Edit, Trash2, Search } from 'lucide-react';
+import { Plus, Edit, Trash2, Search, FileText } from 'lucide-react';
 
 export default function CollectionList() {
   const { collection } = useParams();
@@ -67,50 +67,54 @@ export default function CollectionList() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-sm">
-              <th className="px-6 py-4 font-medium">Title/Slug</th>
-              <th className="px-6 py-4 font-medium">File</th>
-              <th className="px-6 py-4 font-medium text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredItems.length === 0 ? (
-              <tr>
-                <td colSpan={3} className="px-6 py-8 text-center text-slate-500">
-                  No items found. Create your first one!
-                </td>
-              </tr>
-            ) : (
-              filteredItems.map((item) => (
-                <tr key={item.slug} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-medium text-slate-800">
+      <div className="space-y-4">
+        {filteredItems.length === 0 ? (
+          <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-12 text-center text-slate-500">
+            <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
+              <FileText size={24} className="text-slate-400" />
+            </div>
+            <p className="text-lg font-medium text-slate-800 mb-2">No items found</p>
+            <p>Create your first one to get started!</p>
+          </div>
+        ) : (
+          filteredItems.map((item) => (
+            <div 
+              key={item.slug} 
+              className="bg-white p-5 rounded-2xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-slate-100 hover:shadow-[0_8px_30px_rgb(0,102,255,0.08)] hover:border-[#0066FF]/30 transition-all duration-300 group flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+            >
+              <div className="flex items-start sm:items-center gap-4 flex-1 min-w-0">
+                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-[#0066FF]/10 to-[#00C853]/10 text-[#0066FF] flex flex-shrink-0 items-center justify-center font-bold text-lg border border-[#0066FF]/10 group-hover:scale-105 transition-transform">
+                  {(item.data?.title || item.slug).charAt(0).toUpperCase()}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-bold text-slate-800 text-lg group-hover:text-[#0066FF] transition-colors truncate">
                     {item.data?.title || item.slug}
-                  </td>
-                  <td className="px-6 py-4 text-slate-500 text-sm">
-                    {item.file}
-                  </td>
-                  <td className="px-6 py-4 flex justify-end gap-3">
-                    <Link 
-                      to={`/collections/${collection}/${encodeURIComponent(item.slug)}`}
-                      className="text-blue-500 hover:text-blue-700 transition-colors"
-                    >
-                      <Edit size={18} />
-                    </Link>
-                    <button 
-                      onClick={() => handleDelete(item.slug)}
-                      className="text-red-500 hover:text-red-700 transition-colors"
-                    >
-                      <Trash2 size={18} />
-                    </button>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+                  </h3>
+                  <div className="flex items-center gap-2 text-slate-400 text-sm mt-1">
+                    <FileText size={14} className="flex-shrink-0" />
+                    <span className="truncate">{item.file}</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity justify-end">
+                <Link 
+                  to={`/collections/${collection}/${encodeURIComponent(item.slug)}`}
+                  className="p-2.5 bg-slate-50 hover:bg-blue-50 text-slate-500 hover:text-blue-600 rounded-xl transition-colors shadow-sm"
+                  title="Edit"
+                >
+                  <Edit size={18} />
+                </Link>
+                <button 
+                  onClick={() => handleDelete(item.slug)}
+                  className="p-2.5 bg-slate-50 hover:bg-red-50 text-slate-500 hover:text-red-600 rounded-xl transition-colors shadow-sm"
+                  title="Delete"
+                >
+                  <Trash2 size={18} />
+                </button>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
