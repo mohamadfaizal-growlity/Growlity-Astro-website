@@ -268,8 +268,8 @@ const blobStyles = `
           <form 
             onSubmit={(e) => {
               e.preventDefault();
-              if (password === 'admin') setIsAuthenticated(true);
-              else alert('Incorrect password (hint: admin)');
+              if (password === 'Growlity@Admin2026') setIsAuthenticated(true);
+              else alert('Incorrect password (hint: Growlity@Admin2026)');
             }}
           >
             <div className="space-y-5 mb-6">
