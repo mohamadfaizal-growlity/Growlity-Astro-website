@@ -216,16 +216,35 @@ export default function AdminApp() {
     return () => window.removeEventListener('settings-updated', handleSettingsUpdate as EventListener);
   }, []);
 
+const blobStyles = `
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+`;
+
   if (!isAuthenticated) {
     // ... authentication UI remains same ...
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 relative overflow-hidden">
+        <style>{blobStyles}</style>
         {/* Glorious Background Effects */}
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#0066FF] rounded-full mix-blend-multiply filter blur-[100px] opacity-20"></div>
-        <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] bg-[#00C853] rounded-full mix-blend-multiply filter blur-[100px] opacity-20"></div>
-        <div className="absolute bottom-[-20%] left-[20%] w-[40%] h-[40%] bg-purple-500 rounded-full mix-blend-multiply filter blur-[100px] opacity-20"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#0066FF] rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob"></div>
+        <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] bg-[#00C853] rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-[-20%] left-[20%] w-[40%] h-[40%] bg-purple-500 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-4000"></div>
 
-        <div className="bg-white/80 backdrop-blur-2xl p-10 sm:p-12 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.08)] max-w-md w-full border border-white relative z-10 mx-4 overflow-hidden">
+        <div className="bg-white/80 backdrop-blur-2xl p-10 sm:p-12 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.08)] max-w-md w-full border border-white relative z-10 mx-4 overflow-hidden group">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
           
           <div className="mb-8 text-center">
@@ -253,16 +272,18 @@ export default function AdminApp() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] outline-none transition-all text-slate-800 font-medium"
+                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] outline-none transition-all text-slate-800 font-medium group-hover:border-blue-200/50"
                   placeholder="Enter your password..."
                 />
               </div>
             </div>
             <button
               type="submit"
-              className="w-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-bold py-3.5 px-4 rounded-xl transition-all shadow-[0_4px_14px_0_rgba(0,102,255,0.39)] hover:shadow-[0_6px_20px_rgba(0,102,255,0.23)] hover:-translate-y-0.5 flex justify-center items-center gap-2"
+              className="relative overflow-hidden w-full bg-slate-900 hover:bg-black text-white font-bold py-4 px-4 rounded-xl transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)] hover:-translate-y-1 flex justify-center items-center gap-2 group/btn"
             >
-              Access Dashboard <ChevronRight size={18} />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover/btn:animate-[shimmer_1.5s_infinite]"></div>
+              <span className="relative z-10 flex items-center gap-2">Access Dashboard <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" /></span>
+              <style>{`@keyframes shimmer { 100% { transform: translateX(100%); } }`}</style>
             </button>
           </form>
         </div>
