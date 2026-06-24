@@ -8,7 +8,8 @@ import {
   Settings, 
   LogOut,
   Mail,
-  FolderOpen
+  FolderOpen,
+  Lock
 } from 'lucide-react';
 import CollectionList from './CollectionList';
 import ContentEditor from './ContentEditor';
@@ -218,19 +219,25 @@ export default function AdminApp() {
   if (!isAuthenticated) {
     // ... authentication UI remains same ...
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="bg-white p-12 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] max-w-md w-full border border-slate-100 relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 relative overflow-hidden">
+        {/* Glorious Background Effects */}
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#0066FF] rounded-full mix-blend-multiply filter blur-[100px] opacity-20"></div>
+        <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] bg-[#00C853] rounded-full mix-blend-multiply filter blur-[100px] opacity-20"></div>
+        <div className="absolute bottom-[-20%] left-[20%] w-[40%] h-[40%] bg-purple-500 rounded-full mix-blend-multiply filter blur-[100px] opacity-20"></div>
+
+        <div className="bg-white/80 backdrop-blur-2xl p-10 sm:p-12 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.08)] max-w-md w-full border border-white relative z-10 mx-4">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
-            <div className="mb-8">
-              {siteLogo ? (
-                <img src={siteLogo} alt="Site Logo" className="h-10 mx-auto w-auto object-contain mb-4" />
-              ) : (
-                <img src="/growlity-logo.png" alt="Growlity Logo" className="h-10 mx-auto w-auto object-contain mb-4" />
-              )}
-            </div>
-            <div className="text-center mb-8">
-              <p className="text-slate-500">Please authenticate to continue</p>
-            </div>
+          
+          <div className="mb-8 text-center">
+            {siteLogo ? (
+              <img src={siteLogo} alt="Site Logo" className="h-12 mx-auto w-auto object-contain mb-6 drop-shadow-sm" />
+            ) : (
+              <img src="/growlity-logo.png" alt="Growlity Logo" className="h-12 mx-auto w-auto object-contain mb-6 drop-shadow-sm" />
+            )}
+            <h1 className="text-2xl font-bold text-slate-800 tracking-tight mb-2">Welcome to Growlity</h1>
+            <p className="text-slate-500 text-sm">Sign in to your enterprise command center</p>
+          </div>
+
           <form 
             onSubmit={(e) => {
               e.preventDefault();
@@ -238,21 +245,24 @@ export default function AdminApp() {
               else alert('Incorrect password (hint: admin)');
             }}
           >
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-slate-700 mb-2">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0066FF] focus:border-[#0066FF] outline-none transition-all"
-                placeholder="Enter admin password"
-              />
+            <div className="mb-8 relative">
+              <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Admin Password</label>
+              <div className="relative">
+                <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] outline-none transition-all text-slate-800 font-medium"
+                  placeholder="Enter your password..."
+                />
+              </div>
             </div>
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-white font-bold py-3 px-4 rounded-xl transition-colors shadow-lg shadow-blue-500/30"
+              className="w-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-bold py-3.5 px-4 rounded-xl transition-all shadow-[0_4px_14px_0_rgba(0,102,255,0.39)] hover:shadow-[0_6px_20px_rgba(0,102,255,0.23)] hover:-translate-y-0.5 flex justify-center items-center gap-2"
             >
-              Login to Dashboard
+              Access Dashboard <ChevronRight size={18} />
             </button>
           </form>
         </div>
