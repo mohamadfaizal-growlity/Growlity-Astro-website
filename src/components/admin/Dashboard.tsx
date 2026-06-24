@@ -16,6 +16,7 @@ import {
 
 export default function Dashboard({ schemas }: { schemas: any[] }) {
   const [stats, setStats] = useState({ posts: 0, caseStudies: 0, pages: 0, total: 0 });
+  const [schemaStats, setSchemaStats] = useState<{name: string, count: number}[]>([]);
   const [recentActivity, setRecentActivity] = useState<any[]>([]);
   const [mediaCount, setMediaCount] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -34,19 +35,29 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
       let pages = 0;
       let total = 0;
       let allItems: any[] = [];
+      let schemaCounts: {name: string, count: number}[] = [];
 
       results.forEach((collectionData, index) => {
         const schemaName = schemas[index].name;
         const items = Array.isArray(collectionData) ? collectionData : [];
-        total += items.length;
-        if (schemaName === 'Posts') posts += items.length;
-        if (schemaName === 'Case Studies') caseStudies += items.length;
-        if (schemaName === 'Pages') pages += items.length;
+        const count = items.length;
+        
+        total += count;
+        if (schemaName === 'Posts') posts += count;
+        if (schemaName === 'Case Studies') caseStudies += count;
+        if (schemaName === 'Pages') pages += count;
+        
+        if (count > 0) {
+          schemaCounts.push({ name: schemaName, count });
+        }
         
         items.forEach(i => allItems.push({ ...i, collection: schemaName }));
       });
 
+      schemaCounts.sort((a, b) => b.count - a.count);
+
       setStats({ posts, caseStudies, pages, total });
+      setSchemaStats(schemaCounts);
       
       // Take the last 5 items to simulate "Recent Activity"
       setRecentActivity(allItems.reverse().slice(0, 5));
@@ -74,23 +85,17 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-2xl translate-y-1/3 -translate-x-1/4"></div>
         
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="bg-white p-2 rounded-xl">
-              <img src="/growlity-logo.png" alt="Growlity" className="h-6 w-auto" />
-            </div>
-            <span className="font-semibold text-blue-50 tracking-wide uppercase text-sm">Command Center</span>
-          </div>
-          <h1 className="text-4xl font-extrabold mb-3 tracking-tight">Welcome to Growlity CMS! 🚀</h1>
-          <p className="text-blue-50 text-lg max-w-2xl">
-            Empowering your ESG, Sustainability, and Business narratives. Manage your Case Studies, Publications, and EcoVadis updates right from this dashboard.
+          <h1 className="text-4xl font-extrabold mb-3 tracking-tight">Growlity Content Management System</h1>
+          <p className="text-blue-50 text-lg max-w-xl">
+            Your enterprise command center is ready. Here is an overview of your website content and system health.
           </p>
           
           <div className="mt-8 flex gap-4">
             <Link to="/collections/Posts/new" className="bg-white text-[#0066FF] px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all hover:-translate-y-0.5">
-              <Plus size={20} /> Write New Post
+              <Plus size={20} /> New Post
             </Link>
             <Link to="/collections/Case Studies/new" className="bg-white/20 text-white backdrop-blur-md border border-white/30 px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-white/30 transition-all hover:-translate-y-0.5">
-              <FileText size={20} /> Publish Case Study
+              <FileText size={20} /> New Case Study
             </Link>
           </div>
         </div>
@@ -223,47 +228,24 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
               <PieChart className="text-orange-500" /> Content Breakdown
             </h2>
             <div className="space-y-4">
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-slate-600">Posts</span>
-                  <span className="font-bold">{stats.posts}</span>
-                </div>
-                <div className="w-full bg-slate-100 rounded-full h-1.5">
-                  <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: `${stats.total > 0 ? (stats.posts / stats.total) * 100 : 0}%` }}></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-slate-600">Case Studies</span>
-                  <span className="font-bold">{stats.caseStudies}</span>
-                </div>
-                <div className="w-full bg-slate-100 rounded-full h-1.5">
-                  <div className="bg-emerald-500 h-1.5 rounded-full" style={{ width: `${stats.total > 0 ? (stats.caseStudies / stats.total) * 100 : 0}%` }}></div>
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-slate-600">Pages</span>
-                  <span className="font-bold">{stats.pages}</span>
-                </div>
-                <div className="w-full bg-slate-100 rounded-full h-1.5">
-                  <div className="bg-purple-500 h-1.5 rounded-full" style={{ width: `${stats.total > 0 ? (stats.pages / stats.total) * 100 : 0}%` }}></div>
-                </div>
-              </div>
+              {schemaStats.map((schema, index) => {
+                const colors = ['bg-[#0066FF]', 'bg-[#00C853]', 'bg-purple-500', 'bg-orange-500', 'bg-pink-500', 'bg-teal-500'];
+                const colorClass = colors[index % colors.length];
+                const percentage = stats.total > 0 ? (schema.count / stats.total) * 100 : 0;
+                
+                return (
+                  <div key={schema.name}>
+                    <div className="flex justify-between text-sm mb-1">
+                      <span className="text-slate-600">{schema.name}</span>
+                      <span className="font-bold">{schema.count}</span>
+                    </div>
+                    <div className="w-full bg-slate-100 rounded-full h-1.5">
+                      <div className={`${colorClass} h-1.5 rounded-full`} style={{ width: `${percentage}%` }}></div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-
-          {/* SEO & Growth Tips */}
-          <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-indigo-100 p-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 opacity-10 text-indigo-500">
-              <PieChart size={64} />
-            </div>
-            <h2 className="text-xl font-bold text-indigo-900 flex items-center gap-2 mb-3 relative z-10">
-              💡 Growlity Growth Tip
-            </h2>
-            <p className="text-indigo-700 text-sm leading-relaxed relative z-10">
-              <strong>Optimize your EcoVadis content:</strong> Make sure to use the RankMath SEO Analyzer when creating new Case Studies. Aim for a score of 80+ to rank higher on Google for ESG consulting keywords.
-            </p>
           </div>
 
         </div>
