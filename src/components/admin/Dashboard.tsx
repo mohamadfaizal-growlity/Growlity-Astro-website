@@ -116,7 +116,15 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
   }
 
   return (
-    <div className="p-8 space-y-8 max-w-[1600px] mx-auto pb-24">
+    <div className="relative min-h-full pb-24">
+      {/* Global Dashboard Background Mesh */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-blue-200/20 rounded-full blur-[120px] mix-blend-multiply"></div>
+        <div className="absolute top-[40%] right-[10%] w-[400px] h-[400px] bg-emerald-200/20 rounded-full blur-[120px] mix-blend-multiply"></div>
+        <div className="absolute bottom-[-10%] left-[10%] w-[600px] h-[600px] bg-purple-200/20 rounded-full blur-[120px] mix-blend-multiply"></div>
+      </div>
+      
+      <div className="relative z-10 p-8 space-y-8 max-w-[1600px] mx-auto">
       {/* 1. Hero Welcome Banner */}
       <div className="bg-gradient-to-r from-[#0066FF] to-[#00C853] rounded-3xl p-10 text-white relative overflow-hidden shadow-xl shadow-blue-500/20">
         <style>{`
@@ -220,37 +228,37 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
         {/* Main Column */}
         <div className="lg:col-span-2 space-y-8">
           {/* AI Insights Card (New & Exclusive) */}
-          <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl shadow-[0_20px_40px_rgb(0,0,0,0.2)] p-8 relative overflow-hidden group border border-slate-700/50">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-500/30 transition-colors duration-700"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:bg-emerald-500/20 transition-colors duration-700"></div>
+          <div className="bg-gradient-to-br from-indigo-50 via-white to-purple-50 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 relative overflow-hidden group border border-white">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-200/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-200/50 transition-colors duration-700"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-200/40 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:bg-emerald-200/40 transition-colors duration-700"></div>
             
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                  <Sparkles className="text-amber-400" /> Growlity AI Insights
+                <h2 className="text-xl font-bold text-indigo-900 flex items-center gap-2">
+                  <Sparkles className="text-indigo-500" /> Growlity AI Insights
                 </h2>
-                <span className="bg-white/10 text-white/80 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-inner">BETA</span>
+                <span className="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full shadow-sm">BETA</span>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-all hover:-translate-y-1 duration-300 backdrop-blur-sm group/card cursor-default">
+                <div className="bg-white/60 border border-white/80 rounded-2xl p-5 hover:bg-white transition-all hover:-translate-y-1 duration-300 backdrop-blur-md shadow-sm group/card cursor-default">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover/card:scale-110 transition-transform">
+                    <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center group-hover/card:scale-110 transition-transform">
                       <TrendingUp size={16} />
                     </div>
-                    <h4 className="text-white font-bold text-sm">SEO Opportunity</h4>
+                    <h4 className="text-slate-800 font-bold text-sm">SEO Opportunity</h4>
                   </div>
-                  <p className="text-slate-300 text-sm leading-relaxed">Your recent case studies are performing 24% better than average. Consider publishing more content in this category to boost traffic.</p>
+                  <p className="text-slate-600 text-sm leading-relaxed">Your recent case studies are performing 24% better than average. Consider publishing more content in this category to boost traffic.</p>
                 </div>
                 
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-all hover:-translate-y-1 duration-300 backdrop-blur-sm group/card cursor-default">
+                <div className="bg-white/60 border border-white/80 rounded-2xl p-5 hover:bg-white transition-all hover:-translate-y-1 duration-300 backdrop-blur-md shadow-sm group/card cursor-default">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center group-hover/card:scale-110 transition-transform">
+                    <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center group-hover/card:scale-110 transition-transform">
                       <Zap size={16} />
                     </div>
-                    <h4 className="text-white font-bold text-sm">Action Required</h4>
+                    <h4 className="text-slate-800 font-bold text-sm">Action Required</h4>
                   </div>
-                  <p className="text-slate-300 text-sm leading-relaxed">3 images in your media library are missing alt-tags. Fixing this could improve your accessibility score and search rankings.</p>
+                  <p className="text-slate-600 text-sm leading-relaxed">3 images in your media library are missing alt-tags. Fixing this could improve your accessibility score and search rankings.</p>
                 </div>
               </div>
             </div>
@@ -361,6 +369,7 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
           </div>
 
         </div>
+      </div>
       </div>
     </div>
   );
