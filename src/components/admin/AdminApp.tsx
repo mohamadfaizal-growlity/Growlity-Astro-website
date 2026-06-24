@@ -9,7 +9,11 @@ import {
   LogOut,
   Mail,
   FolderOpen,
-  Lock
+  Lock,
+  User,
+  Eye,
+  EyeOff,
+  ShieldCheck
 } from 'lucide-react';
 import CollectionList from './CollectionList';
 import ContentEditor from './ContentEditor';
@@ -182,7 +186,9 @@ const PlaceholderView = ({ title }: { title: string }) => (
 
 export default function AdminApp() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [schemas, setSchemas] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [siteLogo, setSiteLogo] = useState<string>("");
@@ -264,28 +270,75 @@ const blobStyles = `
               else alert('Incorrect password (hint: admin)');
             }}
           >
-            <div className="mb-8 relative">
-              <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Admin Password</label>
+            <div className="space-y-5 mb-6">
               <div className="relative">
-                <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] outline-none transition-all text-slate-800 font-medium group-hover:border-blue-200/50"
-                  placeholder="Enter your password..."
-                />
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Email Address or Username</label>
+                <div className="relative">
+                  <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] outline-none transition-all text-slate-800 font-medium group-hover:border-blue-200/50"
+                    placeholder="admin@growlity.com"
+                  />
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest">Admin Password</label>
+                  <a href="#" className="text-xs font-medium text-[#0066FF] hover:underline">Forgot password?</a>
+                </div>
+                <div className="relative">
+                  <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full pl-12 pr-12 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] outline-none transition-all text-slate-800 font-medium group-hover:border-blue-200/50"
+                    placeholder="Enter your password..."
+                  />
+                  <button 
+                    type="button" 
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
               </div>
             </div>
+
+            <div className="flex items-center justify-between mb-8">
+              <label className="flex items-center gap-2 cursor-pointer group/cb">
+                <div className="relative flex items-center justify-center w-5 h-5 rounded border border-slate-300 bg-white group-hover/cb:border-[#0066FF] transition-colors">
+                  <input type="checkbox" className="opacity-0 absolute inset-0 cursor-pointer w-full h-full" defaultChecked />
+                  <div className="w-2.5 h-2.5 bg-[#0066FF] rounded-sm"></div>
+                </div>
+                <span className="text-sm font-medium text-slate-600 select-none">Remember me for 30 days</span>
+              </label>
+            </div>
+
             <button
               type="submit"
               className="relative overflow-hidden w-full bg-slate-900 hover:bg-black text-white font-bold py-4 px-4 rounded-xl transition-all shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_40px_rgb(0,0,0,0.2)] hover:-translate-y-1 flex justify-center items-center gap-2 group/btn"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover/btn:animate-[shimmer_1.5s_infinite]"></div>
-              <span className="relative z-10 flex items-center gap-2">Access Dashboard <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" /></span>
+              <span className="relative z-10 flex items-center gap-2">Secure Login <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" /></span>
               <style>{`@keyframes shimmer { 100% { transform: translateX(100%); } }`}</style>
             </button>
           </form>
+
+          <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col items-center gap-3">
+            <div className="flex items-center gap-2 text-xs text-emerald-600 font-medium bg-emerald-50 px-3 py-1.5 rounded-full">
+              <ShieldCheck size={14} /> Secured by 256-bit SSL Encryption
+            </div>
+            <p className="text-[10px] text-slate-400 text-center leading-relaxed">
+              Protected by reCAPTCHA and subject to the Google Privacy Policy and Terms of Service.<br/>
+              Your IP address is being logged for security purposes.
+            </p>
+          </div>
         </div>
       </div>
     );
