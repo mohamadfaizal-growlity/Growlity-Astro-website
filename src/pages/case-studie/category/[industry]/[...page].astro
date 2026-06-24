@@ -38,14 +38,14 @@ const { page, uniqueIndustries, currentIndustry } = Astro.props as any;
     </div>
 
     <div class="mb-10">
-      <div class="flex flex-wrap gap-3 mb-6">
-        <a href="/case-studie" class="px-6 py-2 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium text-sm transition-colors">All articles</a>
+      <div class="flex overflow-x-auto pb-4 mb-2 sm:pb-0 sm:mb-6 sm:flex-wrap gap-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <a href="/case-studie" class="px-6 py-2 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium text-sm transition-colors whitespace-nowrap shrink-0">All articles</a>
         {uniqueIndustries.map((industry: string) => {
           const isActive = industry === currentIndustry;
           return (
             <a 
               href={`/case-studie/category/${industry.toLowerCase().replace(/\s+/g, '-')}`} 
-              class={`px-6 py-2 rounded-full font-medium text-sm transition-colors ${isActive ? 'bg-[#0066FF] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+              class={`px-6 py-2 rounded-full font-medium text-sm transition-colors whitespace-nowrap shrink-0 ${isActive ? 'bg-[#0066FF] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
             >
               {industry}
             </a>
