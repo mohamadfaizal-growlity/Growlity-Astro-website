@@ -14,8 +14,31 @@ import {
   ArrowRight,
   Settings,
   ExternalLink,
-  RefreshCw
+  RefreshCw,
+  Box
 } from 'lucide-react';
+
+const getCollectionIcon = (collection: string) => {
+  const name = collection.toLowerCase();
+  if (name.includes('post')) return <FileText size={20} className="text-blue-600" />;
+  if (name.includes('case')) return <FolderOpen size={20} className="text-emerald-600" />;
+  if (name.includes('page')) return <LayoutDashboard size={20} className="text-purple-600" />;
+  if (name.includes('form')) return <Activity size={20} className="text-pink-600" />;
+  if (name.includes('setting')) return <Settings size={20} className="text-slate-600" />;
+  if (name.includes('event') || name.includes('webinar')) return <Globe size={20} className="text-orange-600" />;
+  return <Box size={20} className="text-indigo-600" />;
+};
+
+const getCollectionBg = (collection: string) => {
+  const name = collection.toLowerCase();
+  if (name.includes('post')) return 'bg-blue-50 border-blue-100';
+  if (name.includes('case')) return 'bg-emerald-50 border-emerald-100';
+  if (name.includes('page')) return 'bg-purple-50 border-purple-100';
+  if (name.includes('form')) return 'bg-pink-50 border-pink-100';
+  if (name.includes('setting')) return 'bg-slate-50 border-slate-200';
+  if (name.includes('event') || name.includes('webinar')) return 'bg-orange-50 border-orange-100';
+  return 'bg-indigo-50 border-indigo-100';
+};
 
 export default function Dashboard({ schemas }: { schemas: any[] }) {
   const [stats, setStats] = useState({ posts: 0, caseStudies: 0, pages: 0, total: 0 });
@@ -186,8 +209,8 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
                 {recentActivity.map((item, idx) => (
                   <div key={idx} className="flex items-center justify-between p-4 rounded-2xl border border-slate-100 hover:border-blue-100 hover:bg-blue-50/50 transition-colors group">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-bold text-sm">
-                        {item.collection.charAt(0)}
+                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-sm ${getCollectionBg(item.collection)} group-hover:scale-110 transition-transform duration-300`}>
+                        {getCollectionIcon(item.collection)}
                       </div>
                       <div>
                         <h4 className="font-bold text-slate-800 group-hover:text-[#0066FF] transition-colors">{item.data?.title || item.slug}</h4>
