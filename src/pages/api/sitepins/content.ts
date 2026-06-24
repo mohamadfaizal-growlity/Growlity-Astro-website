@@ -35,7 +35,7 @@ function getContentDir(collection: string): string {
 export async function GET({ request }: { request: Request }) {
   try {
     const url = new URL(request.url);
-    const collection = url.searchParams.get('collection'); // e.g., 'pages', 'blog'
+    const collection = url.searchParams.get('collection');
     
     if (!collection) {
       return new Response(JSON.stringify({ error: 'Collection is required' }), { status: 400 });
@@ -92,19 +92,65 @@ export async function POST({ request }: { request: Request }) {
 
     const contentDir = getContentDir(collection);
     const filePath = path.join(contentDir, `${slug}.mdx`);
+    const fileContent = matter.stringify(content || '', data || {});
+
+    // GITHUB INTEGRATION
+    const githubToken = process.env.GITHUB_TOKEN;
+    const repoOwner = process.env.GITHUB_REPO_OWNER;
+    const repoName = process.env.GITHUB_REPO_NAME;
+    const branch = 'Admin_Panel'; 
+
+    if (githubToken && repoOwner && repoName) {
+      const relativeDir = path.relative(process.cwd(), contentDir).replace(/\\/g, '/');
+      const githubPath = `${relativeDir}/${slug}.mdx`;
+      const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${githubPath}?ref=${branch}`;
+
+      // Get SHA first to overwrite existing files
+      let sha = undefined;
+      const getRes = await fetch(apiUrl, {
+        headers: { Authorization: `Bearer ${githubToken}`, 'User-Agent': 'Growlity-CMS' }
+      });
+      if (getRes.ok) {
+        const fileData = await getRes.json();
+        sha = fileData.sha;
+      }
+
+      // PUT file to GitHub
+      const encodedContent = Buffer.from(fileContent).toString('base64');
+      const putRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${githubPath}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${githubToken}`,
+          'Content-Type': 'application/json',
+          'User-Agent': 'Growlity-CMS'
+        },
+        body: JSON.stringify({
+          message: `CMS Update: ${slug}`,
+          content: encodedContent,
+          branch: branch,
+          ...(sha && { sha })
+        })
+      });
+
+      if (!putRes.ok) {
+        const errorText = await putRes.text();
+        throw new Error(`GitHub API Error: ${errorText}`);
+      }
+
+      return new Response(JSON.stringify({ success: true, slug, github: true }), { 
+        status: 200, headers: { 'Content-Type': 'application/json' } 
+      });
+    }
+
+    // LOCAL FALLBACK
     const fileDir = path.dirname(filePath);
-    
     if (!fs.existsSync(fileDir)) {
       fs.mkdirSync(fileDir, { recursive: true });
     }
-
-    const fileContent = matter.stringify(content || '', data || {});
-    
     fs.writeFileSync(filePath, fileContent, 'utf-8');
 
-    return new Response(JSON.stringify({ success: true, slug }), { 
-      status: 200, 
-      headers: { 'Content-Type': 'application/json' } 
+    return new Response(JSON.stringify({ success: true, slug, local: true }), { 
+      status: 200, headers: { 'Content-Type': 'application/json' } 
     });
   } catch (error) {
     return new Response(JSON.stringify({ error: (error as Error).message }), { status: 500 });
@@ -122,19 +168,47 @@ export async function DELETE({ request }: { request: Request }) {
     }
 
     const contentDir = getContentDir(collection);
-    const mdxPath = path.join(contentDir, `${slug}.mdx`);
-    const mdPath = path.join(contentDir, `${slug}.md`);
-    
-    if (fs.existsSync(mdxPath)) {
-      fs.unlinkSync(mdxPath);
-    } else if (fs.existsSync(mdPath)) {
-      fs.unlinkSync(mdPath);
+    const githubToken = process.env.GITHUB_TOKEN;
+    const repoOwner = process.env.GITHUB_REPO_OWNER;
+    const repoName = process.env.GITHUB_REPO_NAME;
+    const branch = 'Admin_Panel';
+
+    if (githubToken && repoOwner && repoName) {
+      const relativeDir = path.relative(process.cwd(), contentDir).replace(/\\/g, '/');
+      const githubPathMdx = `${relativeDir}/${slug}.mdx`;
+      
+      const getRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${githubPathMdx}?ref=${branch}`, {
+        headers: { Authorization: `Bearer ${githubToken}`, 'User-Agent': 'Growlity-CMS' }
+      });
+      
+      if (getRes.ok) {
+        const fileData = await getRes.json();
+        const deleteRes = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${githubPathMdx}`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${githubToken}`,
+            'Content-Type': 'application/json',
+            'User-Agent': 'Growlity-CMS'
+          },
+          body: JSON.stringify({
+            message: `CMS Delete: ${slug}`,
+            branch: branch,
+            sha: fileData.sha
+          })
+        });
+
+        if (!deleteRes.ok) throw new Error('Failed to delete on GitHub');
+        
+        return new Response(JSON.stringify({ success: true, github: true }), { status: 200 });
+      }
     }
 
-    return new Response(JSON.stringify({ success: true }), { 
-      status: 200, 
-      headers: { 'Content-Type': 'application/json' } 
-    });
+    const mdxPath = path.join(contentDir, `${slug}.mdx`);
+    const mdPath = path.join(contentDir, `${slug}.md`);
+    if (fs.existsSync(mdxPath)) fs.unlinkSync(mdxPath);
+    else if (fs.existsSync(mdPath)) fs.unlinkSync(mdPath);
+
+    return new Response(JSON.stringify({ success: true, local: true }), { status: 200 });
   } catch (error) {
     return new Response(JSON.stringify({ error: (error as Error).message }), { status: 500 });
   }
