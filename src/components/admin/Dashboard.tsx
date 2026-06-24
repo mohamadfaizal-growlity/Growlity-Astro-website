@@ -74,17 +74,23 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-2xl translate-y-1/3 -translate-x-1/4"></div>
         
         <div className="relative z-10">
-          <h1 className="text-4xl font-extrabold mb-3 tracking-tight">Welcome back, Admin! 👋</h1>
-          <p className="text-blue-50 text-lg max-w-xl">
-            Your CMS command center is ready. Here is an overview of what's happening with your website today.
+          <div className="flex items-center gap-3 mb-4">
+            <div className="bg-white p-2 rounded-xl">
+              <img src="/growlity-logo.png" alt="Growlity" className="h-6 w-auto" />
+            </div>
+            <span className="font-semibold text-blue-50 tracking-wide uppercase text-sm">Command Center</span>
+          </div>
+          <h1 className="text-4xl font-extrabold mb-3 tracking-tight">Welcome to Growlity CMS! 🚀</h1>
+          <p className="text-blue-50 text-lg max-w-2xl">
+            Empowering your ESG, Sustainability, and Business narratives. Manage your Case Studies, Publications, and EcoVadis updates right from this dashboard.
           </p>
           
           <div className="mt-8 flex gap-4">
             <Link to="/collections/Posts/new" className="bg-white text-[#0066FF] px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all hover:-translate-y-0.5">
-              <Plus size={20} /> New Post
+              <Plus size={20} /> Write New Post
             </Link>
             <Link to="/collections/Case Studies/new" className="bg-white/20 text-white backdrop-blur-md border border-white/30 px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-white/30 transition-all hover:-translate-y-0.5">
-              <FileText size={20} /> New Case Study
+              <FileText size={20} /> Publish Case Study
             </Link>
           </div>
         </div>
@@ -245,6 +251,19 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* SEO & Growth Tips */}
+          <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-indigo-100 p-8 relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-10 text-indigo-500">
+              <PieChart size={64} />
+            </div>
+            <h2 className="text-xl font-bold text-indigo-900 flex items-center gap-2 mb-3 relative z-10">
+              💡 Growlity Growth Tip
+            </h2>
+            <p className="text-indigo-700 text-sm leading-relaxed relative z-10">
+              <strong>Optimize your EcoVadis content:</strong> Make sure to use the RankMath SEO Analyzer when creating new Case Studies. Aim for a score of 80+ to rank higher on Google for ESG consulting keywords.
+            </p>
           </div>
 
         </div>
