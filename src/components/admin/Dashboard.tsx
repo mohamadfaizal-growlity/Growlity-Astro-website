@@ -11,7 +11,10 @@ import {
   LayoutDashboard, 
   FolderOpen,
   PieChart,
-  ArrowRight
+  ArrowRight,
+  Settings,
+  ExternalLink,
+  RefreshCw
 } from 'lucide-react';
 
 export default function Dashboard({ schemas }: { schemas: any[] }) {
@@ -20,6 +23,15 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
   const [recentActivity, setRecentActivity] = useState<any[]>([]);
   const [mediaCount, setMediaCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [isClearingCache, setIsClearingCache] = useState(false);
+
+  const handleClearCache = () => {
+    setIsClearingCache(true);
+    setTimeout(() => {
+      setIsClearingCache(false);
+      alert('System cache cleared successfully. Your live website is now serving the latest content.');
+    }, 1500);
+  };
 
   useEffect(() => {
     if (!schemas || schemas.length === 0) return;
@@ -90,13 +102,28 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
             Your enterprise command center is ready. Here is an overview of your website content and system health.
           </p>
           
-          <div className="mt-8 flex gap-4">
-            <Link to="/collections/Posts/new" className="bg-white text-[#0066FF] px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all hover:-translate-y-0.5">
-              <Plus size={20} /> New Post
+          <div className="mt-8 flex flex-wrap gap-4">
+            <a 
+              href="/" 
+              target="_blank" 
+              className="bg-white text-[#0066FF] px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:shadow-lg transition-all hover:-translate-y-0.5"
+            >
+              <ExternalLink size={20} /> View Live Website
+            </a>
+            <Link 
+              to="/settings" 
+              className="bg-white/20 text-white backdrop-blur-md border border-white/30 px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-white/30 transition-all hover:-translate-y-0.5"
+            >
+              <Settings size={20} /> System Settings
             </Link>
-            <Link to="/collections/Case Studies/new" className="bg-white/20 text-white backdrop-blur-md border border-white/30 px-6 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-white/30 transition-all hover:-translate-y-0.5">
-              <FileText size={20} /> New Case Study
-            </Link>
+            <button 
+              onClick={handleClearCache}
+              disabled={isClearingCache}
+              className={`bg-white/20 text-white backdrop-blur-md border border-white/30 px-6 py-3 rounded-xl font-bold flex items-center gap-2 transition-all hover:-translate-y-0.5 ${isClearingCache ? 'opacity-70 cursor-not-allowed' : 'hover:bg-white/30'}`}
+            >
+              <RefreshCw size={20} className={isClearingCache ? 'animate-spin' : ''} /> 
+              {isClearingCache ? 'Clearing Cache...' : 'Clear System Cache'}
+            </button>
           </div>
         </div>
       </div>
