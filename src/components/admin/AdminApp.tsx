@@ -225,7 +225,7 @@ export default function AdminApp() {
         <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] bg-[#00C853] rounded-full mix-blend-multiply filter blur-[100px] opacity-20"></div>
         <div className="absolute bottom-[-20%] left-[20%] w-[40%] h-[40%] bg-purple-500 rounded-full mix-blend-multiply filter blur-[100px] opacity-20"></div>
 
-        <div className="bg-white/80 backdrop-blur-2xl p-10 sm:p-12 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.08)] max-w-md w-full border border-white relative z-10 mx-4">
+        <div className="bg-white/80 backdrop-blur-2xl p-10 sm:p-12 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.08)] max-w-md w-full border border-white relative z-10 mx-4 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
           
           <div className="mb-8 text-center">
