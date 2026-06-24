@@ -15,6 +15,7 @@ import ContentEditor from './ContentEditor';
 import VisualEditor from './VisualEditor';
 import SettingsView from './SettingsView';
 import MediaLibrary from './MediaLibrary';
+import Dashboard from './Dashboard';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 
 const CollectionNavItem = ({ schema }: { schema: any }) => {
@@ -168,23 +169,6 @@ const Sidebar = ({ schemas, siteLogo, onLogout }: { schemas: any[], siteLogo?: s
   );
 };
 
-const Dashboard = () => (
-  <div className="p-8">
-    <h1 className="text-3xl font-bold text-slate-800 mb-2">Welcome to Growlity Admin</h1>
-    <p className="text-slate-500 mb-8">Select a collection from the sidebar to start managing your content.</p>
-    
-    <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,102,255,0.08)] border border-slate-100 p-12 text-center relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
-      <div className="w-20 h-20 bg-[#0066FF]/10 text-[#0066FF] rounded-full flex items-center justify-center mx-auto mb-6">
-        <LayoutDashboard size={40} />
-      </div>
-      <h2 className="text-2xl font-bold text-slate-800 mb-3">Your Dashboard is Ready</h2>
-      <p className="text-slate-500 max-w-md mx-auto text-lg leading-relaxed">
-        You can now easily create pages, write blog posts, and use the Bricks-style visual editor to design your site.
-      </p>
-    </div>
-  </div>
-);
 
 const PlaceholderView = ({ title }: { title: string }) => (
   <div className="p-8">
@@ -284,7 +268,7 @@ export default function AdminApp() {
         <Sidebar schemas={schemas} siteLogo={siteLogo} onLogout={() => setIsAuthenticated(false)} />
         <main className="flex-1 overflow-x-hidden ml-[72px] transition-all duration-300">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard schemas={schemas} />} />
             <Route path="/collections/:collection" element={<CollectionList />} />
             <Route path="/collections/:collection/:slug" element={<ContentEditor />} />
             <Route path="/collections/:collection/:slug/builder" element={<VisualEditor />} />
