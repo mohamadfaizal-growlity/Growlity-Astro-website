@@ -40,7 +40,7 @@ const { page, uniqueIndustries, currentIndustry } = Astro.props as any;
     <div class="mb-10">
       <div class="flex flex-wrap gap-3 mb-6">
         <a href="/case-studie" class="px-6 py-2 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium text-sm transition-colors">All articles</a>
-        {uniqueIndustries.map(industry => {
+        {uniqueIndustries.map((industry: string) => {
           const isActive = industry === currentIndustry;
           return (
             <a 
