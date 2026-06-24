@@ -72,5 +72,13 @@ try {
 		
 		{/* Custom Footer Scripts (from Sitepins) */}
 		{footerScripts && <Fragment set:html={footerScripts} />}
+
+		<script>
+			import Lenis from 'lenis';
+			
+			const lenis = new Lenis({
+				autoRaf: true,
+			});
+		</script>
 	</body>
 </html>
