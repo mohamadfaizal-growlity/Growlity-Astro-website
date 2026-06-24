@@ -15,7 +15,10 @@ import {
   Settings,
   ExternalLink,
   RefreshCw,
-  Box
+  Box,
+  Sparkles,
+  Zap,
+  TrendingUp
 } from 'lucide-react';
 
 const getCollectionIcon = (collection: string) => {
@@ -216,6 +219,43 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Column */}
         <div className="lg:col-span-2 space-y-8">
+          {/* AI Insights Card (New & Exclusive) */}
+          <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl shadow-[0_20px_40px_rgb(0,0,0,0.2)] p-8 relative overflow-hidden group border border-slate-700/50">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-500/30 transition-colors duration-700"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:bg-emerald-500/20 transition-colors duration-700"></div>
+            
+            <div className="relative z-10">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  <Sparkles className="text-amber-400" /> Growlity AI Insights
+                </h2>
+                <span className="bg-white/10 text-white/80 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-inner">BETA</span>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-all hover:-translate-y-1 duration-300 backdrop-blur-sm group/card cursor-default">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover/card:scale-110 transition-transform">
+                      <TrendingUp size={16} />
+                    </div>
+                    <h4 className="text-white font-bold text-sm">SEO Opportunity</h4>
+                  </div>
+                  <p className="text-slate-300 text-sm leading-relaxed">Your recent case studies are performing 24% better than average. Consider publishing more content in this category to boost traffic.</p>
+                </div>
+                
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-all hover:-translate-y-1 duration-300 backdrop-blur-sm group/card cursor-default">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center group-hover/card:scale-110 transition-transform">
+                      <Zap size={16} />
+                    </div>
+                    <h4 className="text-white font-bold text-sm">Action Required</h4>
+                  </div>
+                  <p className="text-slate-300 text-sm leading-relaxed">3 images in your media library are missing alt-tags. Fixing this could improve your accessibility score and search rankings.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Recent Activity */}
           <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
             <div className="flex items-center justify-between mb-6">
