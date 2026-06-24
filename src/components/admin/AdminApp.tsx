@@ -190,7 +190,7 @@ export default function AdminApp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
+  const [rememberMe, setRememberMe] = useState(false);
   const [schemas, setSchemas] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [siteLogo, setSiteLogo] = useState<string>("");
