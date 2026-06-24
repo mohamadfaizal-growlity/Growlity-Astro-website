@@ -16,6 +16,9 @@ export async function getStaticPaths({ paginate }: any) {
 }
 
 const { page } = Astro.props as any;
+// Fetch all publications again just for the categories
+const allPosts = await getCollection('publications', (post) => !post.data.draft);
+const uniqueCategories = [...new Set(allPosts.map((post: any) => post.data.category || 'Report'))];
 ---
 
 <Layout title={`Publications | Growlity ${page.currentPage > 1 ? `| Page ${page.currentPage}` : ''}`}>
@@ -25,7 +28,14 @@ const { page } = Astro.props as any;
       <p class="text-xl text-slate-500">Global sustainability perspectives, reports, and insights.</p>
     </div>
 
-
+    <div class="mb-10">
+      <div class="flex flex-wrap gap-3 mb-6">
+        <a href="/esg-sustainability-publications" class="px-6 py-2 rounded-full bg-[#0066FF] text-white font-medium text-sm transition-colors">All Publications</a>
+        {uniqueCategories.map(category => (
+          <a href={`/esg-sustainability-publications/category/${category.toLowerCase().replace(/\s+/g, '-')}`} class="px-6 py-2 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 font-medium text-sm transition-colors">{category}</a>
+        ))}
+      </div>
+    </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {page.data.map((post: any) => (
