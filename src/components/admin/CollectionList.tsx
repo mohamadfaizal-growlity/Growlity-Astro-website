@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
-import { Plus, Edit, Trash2 } from 'lucide-react';
+import { Plus, Edit, Trash2, Search } from 'lucide-react';
 
 export default function CollectionList() {
   const { collection } = useParams();
   const location = useLocation();
   const [items, setItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const searchParams = new URLSearchParams(location.search);
   const group = searchParams.get('group');
@@ -29,8 +30,14 @@ export default function CollectionList() {
   if (loading) return <div className="p-8">Loading...</div>;
 
   const filteredItems = items.filter(item => {
-    if (!group) return true;
-    return item.slug.startsWith(`${group}/`);
+    if (group && !item.slug.startsWith(`${group}/`)) return false;
+    if (searchTerm) {
+      const term = searchTerm.toLowerCase();
+      const titleMatch = item.data?.title?.toLowerCase().includes(term);
+      const slugMatch = item.slug.toLowerCase().includes(term);
+      if (!titleMatch && !slugMatch) return false;
+    }
+    return true;
   });
 
   return (
@@ -39,13 +46,25 @@ export default function CollectionList() {
         <h1 className="text-3xl font-bold text-slate-800 capitalize">
           {collection} {group && <span className="text-[#0066FF] font-medium">/ {group}</span>}
         </h1>
-        <Link 
-          to={`/collections/${collection}/new${group ? `?group=${group}` : ''}`}
-          className="flex items-center gap-2 bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-white px-4 py-2 rounded-lg font-medium transition-colors shadow-sm"
-        >
-          <Plus size={20} />
-          Create New
-        </Link>
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+            <input 
+              type="text" 
+              placeholder="Search content..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 pr-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#0066FF] outline-none text-sm w-64 shadow-sm"
+            />
+          </div>
+          <Link 
+            to={`/collections/${collection}/new${group ? `?group=${group}` : ''}`}
+            className="flex items-center gap-2 bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-white px-4 py-2.5 rounded-xl font-medium transition-colors shadow-sm"
+          >
+            <Plus size={20} />
+            Create New
+          </Link>
+        </div>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
