@@ -22,6 +22,7 @@ export default function ContentEditor() {
   const [isUploading, setIsUploading] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<'post' | 'block' | 'seo'>('post');
+  const [activeBlock, setActiveBlock] = useState<'Image' | 'FAQ Section' | null>(null);
   const [customSlug, setCustomSlug] = useState('');
 
   useEffect(() => {
@@ -294,6 +295,13 @@ export default function ContentEditor() {
                       setIsUploading(false);
                     }
                   }}
+                  onBlockSelect={(blockType) => {
+                    if (blockType) {
+                      setActiveBlock(blockType);
+                      setActiveTab('block');
+                      if (!isPanelOpen) setIsPanelOpen(true);
+                    }
+                  }}
                 />
               </Suspense>
             </ErrorBoundary>
@@ -545,8 +553,58 @@ export default function ContentEditor() {
               )}
 
               {activeTab === 'block' && (
-                <div className="p-5">
-                   <p className="text-[13px] text-slate-500">Block settings will appear here when a block is selected.</p>
+                <div className="p-4">
+                  {activeBlock === 'Image' ? (
+                    <div className="space-y-4 text-sm text-slate-700">
+                      <div className="flex items-center gap-2 font-medium border-b border-slate-200 pb-2">
+                        <ImageIcon size={16} className="text-slate-500" /> Image
+                      </div>
+                      <p className="text-xs text-slate-500">Insert an image to make a visual statement.</p>
+                      
+                      <div className="space-y-3 pt-4">
+                         <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">Alternative Text</div>
+                         <textarea 
+                           className="w-full border border-slate-200 p-2 text-[13px] rounded outline-none focus:border-blue-500 bg-white shadow-sm resize-none" 
+                           rows={3} 
+                           placeholder="Describe the purpose of the image. Leave empty if decorative."
+                         ></textarea>
+                         <a href="#" className="text-[11px] text-blue-600 hover:underline">Describe the purpose of the image.</a>
+                      </div>
+                    </div>
+                  ) : activeBlock === 'FAQ Section' ? (
+                    <div className="space-y-4 text-sm text-slate-700">
+                      <div className="flex items-center gap-2 font-medium border-b border-slate-200 pb-2">
+                        <FileText size={16} className="text-slate-500" /> FAQ Section
+                      </div>
+                      
+                      <div className="space-y-2 pt-2">
+                         <div className="flex items-center gap-1 text-[13px] font-semibold text-[#0073AA] mb-2 cursor-pointer hover:underline">
+                           Bricks Builder <span className="text-blue-500"><Settings size={12}/></span>
+                         </div>
+                         <button className="w-full bg-[#ffb800] hover:bg-[#e6a600] text-black font-bold text-[11px] px-3 py-2 uppercase tracking-wide rounded transition-colors">
+                           Edit Template with Bricks
+                         </button>
+                         <a href="#" className="text-blue-600 hover:underline text-[11px] block mt-1">Edit Template Post</a>
+                      </div>
+
+                      <div className="pt-6 space-y-0">
+                         <button className="w-full flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 border-t border-slate-200 hover:bg-slate-50">
+                           ACF Settings <ChevronDown size={16} className="text-slate-400"/>
+                         </button>
+                         <button className="w-full flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 border-t border-slate-200 hover:bg-slate-50">
+                           Popup Controls <span className="text-emerald-500"><Settings size={14}/></span>
+                         </button>
+                         <button className="w-full flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 border-t border-slate-200 hover:bg-slate-50">
+                           Visibility <ChevronDown size={16} className="text-slate-400"/>
+                         </button>
+                         <button className="w-full flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 border-t border-slate-200 hover:bg-slate-50">
+                           Advanced <ChevronDown size={16} className="text-slate-400"/>
+                         </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="text-[13px] text-slate-500">Block settings will appear here when a block is selected.</p>
+                  )}
                 </div>
               )}
 

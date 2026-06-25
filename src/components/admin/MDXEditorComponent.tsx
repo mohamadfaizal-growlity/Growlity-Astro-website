@@ -27,9 +27,10 @@ interface MDXEditorComponentProps {
   markdown: string;
   onChange: (markdown: string) => void;
   onUploadImage?: (file: File) => Promise<string>;
+  onBlockSelect?: (blockType: 'Image' | 'FAQ Section' | null) => void;
 }
 
-export default function MDXEditorComponent({ markdown, onChange, onUploadImage }: MDXEditorComponentProps) {
+export default function MDXEditorComponent({ markdown, onChange, onUploadImage, onBlockSelect }: MDXEditorComponentProps) {
   
   async function imageUploadHandler(image: File) {
     if (onUploadImage) {
@@ -112,13 +113,14 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage }
       hasChildren: true,
       Editor: ({ children }: any) => {
         return (
-          <div className="p-4 border border-green-200 rounded-lg bg-green-50 my-4 relative">
-            <div className="absolute -top-3 left-4 bg-green-600 text-white text-xs px-2 py-1 rounded font-bold">
-              FAQ Section
-            </div>
-            <div className="mt-4">
-              {children}
-            </div>
+          <div className="faq-block my-6 border border-blue-400 rounded-sm bg-white relative p-8 cursor-text">
+             <div className="text-center mb-8">
+               <h3 className="text-[#0073AA] font-bold text-xl mb-2">FAQs</h3>
+               <div className="text-gray-400 text-3xl font-medium">Add Content...</div>
+             </div>
+             <div className="text-left w-full mx-auto max-w-3xl">
+               {children}
+             </div>
           </div>
         );
       }
@@ -133,27 +135,42 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage }
       hasChildren: true,
       Editor: ({ properties, setProperties, children }: any) => {
         return (
-          <div className="p-3 border rounded bg-white my-2">
-            <label className="block text-xs font-semibold text-gray-700 mb-1">Question:</label>
-            <input 
-              type="text" 
-              value={properties.q || ''} 
-              onChange={(e) => setProperties({ ...properties, q: e.target.value })}
-              className="w-full px-3 py-2 border rounded-md text-sm mb-3 bg-gray-50"
-              placeholder="Enter question here..."
-            />
-            <label className="block text-xs font-semibold text-gray-700 mb-1">Answer:</label>
-            <div className="border border-dashed border-gray-300 p-2 rounded">
-              {children}
-            </div>
+          <div className="border-b border-gray-300 py-3 mb-2 bg-white flex flex-col group faq-item">
+             <div className="flex items-center justify-between mb-2">
+               <input 
+                 type="text" 
+                 value={properties.q || ''} 
+                 onChange={(e) => setProperties({ ...properties, q: e.target.value })}
+                 className="w-full text-gray-800 text-base font-medium border-none outline-none focus:ring-0 px-0 bg-transparent placeholder-gray-400"
+                 placeholder="What is the question?"
+               />
+               <div className="w-8 h-8 rounded-full bg-[#EFEFEF] flex items-center justify-center text-gray-500 font-bold text-lg flex-shrink-0 ml-4 cursor-pointer hover:bg-gray-200">
+                 +
+               </div>
+             </div>
+             <div className="text-gray-600 text-[14px] mt-1 pl-2 border-l-2 border-gray-200 ml-1">
+               {children}
+             </div>
           </div>
         );
       }
     }
   ];
 
+  const handleEditorClick = (e: React.MouseEvent) => {
+    if (!onBlockSelect) return;
+    const target = e.target as HTMLElement;
+    if (target.tagName.toLowerCase() === 'img') {
+      onBlockSelect('Image');
+    } else if (target.closest('.faq-block')) {
+      onBlockSelect('FAQ Section');
+    } else {
+      // maybe onBlockSelect(null) to deselect? No, let's keep it simple as asked.
+    }
+  };
+
   return (
-    <div className="mdx-editor-wrapper prose-editor">
+    <div className="mdx-editor-wrapper prose-editor" onClick={handleEditorClick}>
       <MDXEditor
         markdown={markdown}
         onChange={onChange}
