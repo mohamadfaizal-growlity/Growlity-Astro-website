@@ -187,7 +187,7 @@ const PlaceholderView = ({ title }: { title: string }) => (
 
 const AdminLayout = ({ schemas, siteLogo, setIsAuthenticated }: any) => {
   const location = useLocation();
-  const isEditorRoute = location.pathname.match(/^\/collections\/[^\/]+\/[^\/]+$/) && !location.pathname.endsWith('/builder');
+  const isEditorRoute = location.pathname.match(/^\/collections\/[^\/]+\/[^\/]+/) && !location.pathname.endsWith('/builder');
 
   return (
     <div className="flex min-h-screen bg-[#F8FAFC]">
