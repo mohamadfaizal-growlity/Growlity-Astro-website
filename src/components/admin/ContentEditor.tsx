@@ -29,6 +29,34 @@ export default function ContentEditor() {
   const [isUnlistOpen, setIsUnlistOpen] = useState(true);
   const [isLinkSuggestionsOpen, setIsLinkSuggestionsOpen] = useState(true);
 
+  // Tags auto-complete state
+  const [tags, setTags] = useState<string[]>(['Blog']);
+  const [tagInput, setTagInput] = useState('');
+  const [tagSuggestions, setTagSuggestions] = useState<string[]>([]);
+  const allAvailableTags = ['Blog', 'Ecovadis', 'Sustainability', 'Uncategorized', 'ESG', 'Reporting', 'Compliance', 'Events'];
+  
+  const handleTagInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setTagInput(val);
+    if (val.trim()) {
+       setTagSuggestions(allAvailableTags.filter(t => t.toLowerCase().includes(val.toLowerCase()) && !tags.includes(t)));
+    } else {
+       setTagSuggestions([]);
+    }
+  };
+
+  const addTag = (tag: string) => {
+    if (tag && !tags.includes(tag)) {
+       setTags([...tags, tag]);
+    }
+    setTagInput('');
+    setTagSuggestions([]);
+  };
+
+  const removeTag = (tagToRemove: string) => {
+    setTags(tags.filter(t => t !== tagToRemove));
+  };
+
   const isNew = slug === 'new';
 
   useEffect(() => {
@@ -312,11 +340,41 @@ export default function ContentEditor() {
                      {isTagsOpen && (
                        <div className="px-4 pb-4">
                           <label className="text-[11px] font-medium text-slate-500 mb-1.5 block uppercase tracking-wide">ADD TAG</label>
-                          <div className="flex flex-wrap gap-1.5 mb-2 border border-slate-300 p-1.5 rounded focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
-                             <span className="bg-slate-100 text-slate-700 text-[13px] px-2 py-0.5 rounded-sm flex items-center gap-1.5">Blog <button className="text-slate-400 hover:text-slate-600 leading-none mb-0.5">×</button></span>
-                             <input type="text" className="flex-1 min-w-[100px] outline-none bg-transparent text-[13px]" placeholder="" />
+                          <div className="relative">
+                            <div className="flex flex-wrap gap-1.5 mb-2 border border-slate-300 p-1.5 rounded focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
+                               {tags.map(tag => (
+                                 <span key={tag} className="bg-slate-100 text-slate-700 text-[13px] px-2 py-0.5 rounded-sm flex items-center gap-1.5">
+                                   {tag} <button onClick={() => removeTag(tag)} className="text-slate-400 hover:text-slate-600 leading-none mb-0.5">×</button>
+                                 </span>
+                               ))}
+                               <input 
+                                 type="text" 
+                                 value={tagInput}
+                                 onChange={handleTagInputChange}
+                                 onKeyDown={(e) => {
+                                   if (e.key === 'Enter' || e.key === ',') {
+                                     e.preventDefault();
+                                     if (tagInput.trim()) addTag(tagInput.trim());
+                                   }
+                                 }}
+                                 className="flex-1 min-w-[100px] outline-none bg-transparent text-[13px]" 
+                               />
+                            </div>
+                            {tagSuggestions.length > 0 && (
+                               <div className="absolute top-full left-0 w-full mt-1 bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md z-50 py-1 overflow-hidden">
+                                 {tagSuggestions.map(suggestion => (
+                                   <button 
+                                     key={suggestion}
+                                     onClick={() => addTag(suggestion)}
+                                     className="w-full text-left px-3 py-2 text-[13px] text-slate-700 hover:bg-blue-600 hover:text-white transition-colors"
+                                   >
+                                     {suggestion}
+                                   </button>
+                                 ))}
+                               </div>
+                            )}
                           </div>
-                          <p className="text-[11px] text-slate-500 italic">Separate with commas or the Enter key.</p>
+                          <p className="text-[11px] text-slate-500 italic mt-2">Separate with commas or the Enter key.</p>
                        </div>
                      )}
                   </div>
