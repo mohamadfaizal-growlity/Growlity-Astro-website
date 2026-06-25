@@ -64,11 +64,12 @@ export async function GET({ request }: { request: Request }) {
     const items = files.map(file => {
       const filePath = path.join(contentDir, file);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
-      const { data } = matter(fileContent);
+      const { data, content } = matter(fileContent);
       return {
         slug: file.replace(/\\/g, '/').replace(/\.mdx?$/, ''),
         file,
         data,
+        content,
       };
     });
 
