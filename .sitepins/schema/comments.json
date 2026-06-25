@@ -4,9 +4,25 @@
   "fileType": "mdx",
   "fmType": "yaml",
   "template": [
-    { "name": "title", "label": "Title", "type": "string" },
-    { "name": "author", "label": "Author", "type": "string" },
-    { "name": "content", "label": "Content", "type": "string" },
-    { "name": "date", "label": "Date", "type": "string" }
+    {
+      "name": "title",
+      "label": "Title",
+      "type": "string"
+    },
+    {
+      "name": "author",
+      "label": "Author",
+      "type": "string"
+    },
+    {
+      "name": "content",
+      "label": "Content",
+      "type": "string"
+    },
+    {
+      "name": "date",
+      "label": "Date",
+      "type": "string"
+    }
   ]
 }

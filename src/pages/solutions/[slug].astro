@@ -4,6 +4,8 @@ import { getCollection, render } from 'astro:content';
 import FAQAccordion from '../../components/shared/FAQAccordion.astro';
 import Callout from '../../components/mdx/Callout.astro';
 import YouTube from '../../components/mdx/YouTube.astro';
+import FAQ from "../../components/mdx/FAQ.astro";
+import FAQItem from "../../components/mdx/FAQItem.astro";
 import CTA from '../../components/mdx/CTA.astro';
 import MarkdownLink from '../../components/mdx/MarkdownLink.astro';
 import Layout from '../../layouts/Layout.astro';
@@ -38,7 +40,7 @@ const { Content } = await render(solution);
 
     <!-- Main Content from Sitepins -->
     <main class="max-w-4xl mx-auto py-16 px-6 prose prose-lg prose-green">
-      <Content components={{ Callout, YouTube, CTA, a: MarkdownLink }} />
+      <Content components={{ Callout, YouTube, CTA, FAQ, FAQItem, a: MarkdownLink }} />
     </main>
 
     <!-- Static Fields Section -->
@@ -65,23 +67,9 @@ const { Content } = await render(solution);
         </div>
       )}
 
-      {/* FAQ BLOCK */}
-      {solution.data.faqSection && solution.data.faqSection.length > 0 && (
-        <div class="bg-gray-50 py-16 px-6 mt-8 mb-8 border-y border-gray-200">
-          <FAQAccordion faqList={solution.data.faqSection} />
-        </div>
-      )}
+      
 
-      {/* CTA BLOCK */}
-      {solution.data.ctaSection?.reference && (
-        <div class="bg-brand-green text-white py-16 px-6 text-center my-8">
-          <h2 class="text-3xl font-bold mb-4">Ready to get started?</h2>
-          <p class="text-xl mb-8">Contact us about {solution.data.ctaSection.reference}</p>
-          <a href="/contact" class="bg-white text-brand-green px-8 py-3 rounded font-bold hover:bg-gray-100 transition-colors inline-block">
-            Contact Us
-          </a>
-        </div>
-      )}
+      
       
     </section>
 

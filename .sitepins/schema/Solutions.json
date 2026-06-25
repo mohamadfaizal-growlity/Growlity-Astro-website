@@ -97,38 +97,6 @@
       ]
     },
     {
-      "name": "ctaSection",
-      "label": "Call To Action (CTA)",
-      "type": "object",
-      "fields": [
-        {
-          "name": "reference",
-          "label": "CTA Reference Text",
-          "type": "string",
-          "value": ""
-        }
-      ]
-    },
-    {
-      "name": "faqSection",
-      "label": "FAQ Section",
-      "type": "Array",
-      "fields": [
-        {
-          "name": "question",
-          "label": "Question",
-          "type": "string",
-          "value": ""
-        },
-        {
-          "name": "answer",
-          "label": "Answer",
-          "type": "string",
-          "value": ""
-        }
-      ]
-    },
-    {
       "name": "draft",
       "label": "Draft",
       "type": "boolean",
