@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, Trash2, Image as ImageIcon, Settings } from 'lucide-react';
+import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X } from 'lucide-react';
 import ErrorBoundary from './ErrorBoundary';
 import SeoAnalyzer from './SeoAnalyzer';
 
@@ -21,7 +21,12 @@ export default function ContentEditor() {
   const [loading, setLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(true);
-  const [activeTab, setActiveTab] = useState<'post' | 'block'>('post');
+  const [activeTab, setActiveTab] = useState<'post' | 'block' | 'seo'>('post');
+  const [customSlug, setCustomSlug] = useState('');
+
+  useEffect(() => {
+    if (slug) setCustomSlug(slug);
+  }, [slug]);
   
   // WordPress UI states
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(true);
@@ -30,6 +35,7 @@ export default function ContentEditor() {
   const [isLinkSuggestionsOpen, setIsLinkSuggestionsOpen] = useState(true);
 
   const [isPostMenuOpen, setIsPostMenuOpen] = useState(false);
+  const [isSnippetModalOpen, setIsSnippetModalOpen] = useState(false);
   const featuredImageInputRef = useRef<HTMLInputElement>(null);
 
   const handleFeaturedImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,8 +119,8 @@ export default function ContentEditor() {
   }, [collection, slug]);
 
   const handleSave = async () => {
-    let targetSlug = slug;
-    if (isNew) {
+    let targetSlug = customSlug || slug;
+    if (isNew && (!customSlug || customSlug === slug)) {
       targetSlug = data.title ? data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'new-post';
       if (group) {
         targetSlug = `${group}/${targetSlug}`;
@@ -135,21 +141,53 @@ export default function ContentEditor() {
   };
 
   const getPreviewUrl = () => {
-    if (isNew) return '#';
+    if (isNew && !customSlug) return '#';
     const c = collection?.toLowerCase() || '';
-    if (c === 'posts') return `/blogs/${slug}`;
-    if (c === 'case studies') return `/case-studie/${slug}`;
-    if (c === 'publications') return `/esg-sustainability-publications/${slug}`;
-    if (c === 'webinar') return `/webinars/${slug}`;
-    if (c === 'pages') return `/${slug}`;
-    return `/${c}/${slug}`;
+    const s = customSlug || slug;
+    if (c === 'posts') return `/blogs/${s}`;
+    if (c === 'case studies') return `/case-studie/${s}`;
+    if (c === 'publications') return `/esg-sustainability-publications/${s}`;
+    if (c === 'webinar') return `/webinars/${s}`;
+    if (c === 'pages') return `/${s}`;
+    return `/${c}/${s}`;
   };
 
   if (loading) return <div className="p-8">Loading editor...</div>;
 
   // Mock word count
-  const wordCount = content.split(/\s+/).filter(w => w.length > 0).length;
-  const readTime = Math.max(1, Math.ceil(wordCount / 200));
+  const wordCountRaw = content.split(/\s+/).filter(w => w.length > 0).length;
+  const readTime = Math.max(1, Math.ceil(wordCountRaw / 200));
+
+  // Real SEO Score Calculation
+  const seoKeyword = (data.seoKeyword || '').toLowerCase().trim();
+  let seoScore = 0;
+  let seoChecks = { title: false, desc: false, url: false, content: false, length: false, density: false };
+  
+  if (seoKeyword) {
+    const t = (data.title || '').toLowerCase();
+    const d = (data.excerpt || data.description || '').toLowerCase();
+    const s = (slug || '').toLowerCase();
+    const c = (content || '').toLowerCase();
+
+    const keywordMatches = (c.match(new RegExp(seoKeyword, 'g')) || []).length;
+    const density = wordCountRaw > 0 ? (keywordMatches / wordCountRaw) * 100 : 0;
+
+    seoChecks = {
+      title: t.includes(seoKeyword),
+      desc: d.includes(seoKeyword),
+      url: s.includes(seoKeyword.replace(/\s+/g, '-')),
+      content: c.indexOf(seoKeyword) > -1 && c.indexOf(seoKeyword) < 500,
+      length: wordCountRaw > 300,
+      density: density >= 0.5 && density <= 2.5,
+    };
+
+    if (seoChecks.title) seoScore += 20;
+    if (seoChecks.desc) seoScore += 20;
+    if (seoChecks.url) seoScore += 15;
+    if (seoChecks.content) seoScore += 15;
+    if (seoChecks.length) seoScore += 15;
+    if (seoChecks.density) seoScore += 15;
+  }
 
   return (
     <div className="flex flex-col h-screen bg-white">
@@ -196,9 +234,9 @@ export default function ContentEditor() {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
           </a>
 
-          <div className="flex items-center border border-slate-200 rounded-md mx-1 overflow-hidden h-8">
-             <button className="px-3 bg-white text-emerald-600 font-bold text-xs h-full flex items-center border-r border-slate-200 hover:bg-slate-50">90 / 100</button>
-             <button className="px-3 bg-white text-pink-500 font-bold text-xs h-full flex items-center hover:bg-slate-50">0 / 100</button>
+          <div className="flex items-center border border-slate-200 rounded-md mx-1 overflow-hidden h-8 cursor-pointer hover:bg-slate-50 transition-colors" onClick={() => { setIsPanelOpen(true); setActiveTab('seo'); }}>
+             <button className={`px-3 bg-white ${seoScore >= 80 ? 'text-emerald-600' : seoScore >= 50 ? 'text-yellow-500' : 'text-rose-500'} font-bold text-xs h-full flex items-center border-r border-slate-200 hover:bg-slate-50`}>{seoScore} / 100</button>
+             <button className="px-3 bg-white text-pink-500 font-bold text-xs h-full flex items-center hover:bg-slate-50">15 / 100</button>
           </div>
 
           <button 
@@ -333,14 +371,14 @@ export default function ContentEditor() {
                       )}
                     </div>
 
-                    <div className="text-[13px] text-slate-500 mt-2">
-                       <a href="#" className="text-blue-600 hover:underline">Add an excerpt...</a>
-                    </div>
-                    
-                    <div className="text-[13px] text-slate-500">
-                       {wordCount} words, {readTime} minutes read time.<br/>
-                       Last edited a day ago.
-                    </div>
+                     <div className="text-[13px] text-slate-500 mt-2">
+                        <a href="#" className="text-blue-600 hover:underline">Add an excerpt...</a>
+                     </div>
+                     
+                     <div className="text-[13px] text-slate-500">
+                        {wordCountRaw} words, {readTime} minutes read time.<br/>
+                        Last edited a day ago.
+                     </div>
                      
                     <div className="space-y-3 pt-2">
                         <div className="flex justify-between items-center text-[13px]">
@@ -502,10 +540,155 @@ export default function ContentEditor() {
                    <p className="text-[13px] text-slate-500">Block settings will appear here when a block is selected.</p>
                 </div>
               )}
+
+              {activeTab === 'seo' && (
+                <div className="p-4 space-y-6">
+                  {/* RankMath Header */}
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                    <h3 className="text-sm font-semibold text-slate-800">Rank Math SEO</h3>
+                  </div>
+                  
+                  {/* Preview Snippet */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-semibold text-slate-500 uppercase">Preview</span>
+                    </div>
+                    <div className="p-3 border border-slate-200 rounded-md bg-white">
+                      <div className="text-xs text-slate-500 truncate mb-1">https://growlity.com{getPreviewUrl()}</div>
+                      <div className="text-[15px] text-[#1a0dab] font-medium leading-tight mb-1 truncate cursor-pointer hover:underline">{data.title || 'Add Title...'}</div>
+                      <div className="text-xs text-slate-600 line-clamp-2">{data.excerpt || data.description || 'Add an excerpt or description to preview how it will appear in search results.'}</div>
+                    </div>
+                    <button 
+                      onClick={() => setIsSnippetModalOpen(true)}
+                      className="mt-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium px-3 py-1.5 rounded transition-colors"
+                    >
+                      Edit Snippet
+                    </button>
+                  </div>
+
+                  {/* Focus Keyword */}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold text-slate-800">Focus Keyword</span>
+                      <span className="bg-rose-100 text-rose-700 text-[10px] px-1.5 rounded font-medium">Content AI</span>
+                    </div>
+                    <div className="relative">
+                       <input 
+                         type="text" 
+                         value={data.seoKeyword || ''}
+                         onChange={(e) => updateField('seoKeyword', e.target.value)}
+                         placeholder="Enter focus keyword..."
+                         className="w-full text-[13px] px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500"
+                       />
+                       {data.seoKeyword && (
+                         <div className="mt-2 inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded-full">
+                           <CheckCircle2 size={12}/> {data.seoKeyword}
+                         </div>
+                       )}
+                    </div>
+                  </div>
+
+                  {/* Basic SEO Checks */}
+                  <div className="space-y-3 pt-4 border-t border-slate-200">
+                    <div className="flex items-center justify-between cursor-pointer">
+                      <h4 className="text-[13px] font-semibold text-slate-800">Basic SEO</h4>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${seoScore >= 80 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+                        {seoScore >= 80 ? '✓ All Good' : 'Errors'}
+                      </span>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-start gap-2 text-xs">
+                        {seoChecks.title ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
+                        <span className="text-slate-600">Focus Keyword in the SEO Title.</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-xs">
+                        {seoChecks.desc ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
+                        <span className="text-slate-600">Focus Keyword used inside SEO Meta Description.</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-xs">
+                        {seoChecks.url ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
+                        <span className="text-slate-600">Focus Keyword used in the URL.</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-xs">
+                        {seoChecks.content ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
+                        <span className="text-slate-600">Focus Keyword appears in the first 10% of the content.</span>
+                      </div>
+                      <div className="flex items-start gap-2 text-xs">
+                        {seoChecks.length ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
+                        <span className="text-slate-600">Content is {wordCountRaw} words long. {seoChecks.length ? 'Good job!' : 'Add more words.'}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </aside>
         )}
       </div>
+
+      {/* Preview Snippet Editor Modal */}
+      {isSnippetModalOpen && (
+        <div className="fixed inset-0 bg-slate-900/40 z-50 flex items-center justify-center backdrop-blur-sm p-4">
+          <div className="bg-slate-50 rounded-lg shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-white">
+              <h2 className="text-lg font-semibold text-slate-800">Preview Snippet Editor</h2>
+              <button onClick={() => setIsSnippetModalOpen(false)} className="text-slate-400 hover:text-slate-700"><X size={20}/></button>
+            </div>
+            <div className="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-6">
+              
+              {/* Preview Block */}
+              <div>
+                <h3 className="text-xs font-semibold text-slate-500 uppercase mb-3">Preview</h3>
+                <div className="p-4 border border-slate-200 rounded-md bg-white shadow-sm">
+                  <div className="text-xs text-slate-600 truncate mb-1">https://growlity.com{getPreviewUrl()}</div>
+                  <div className="text-xl text-[#1a0dab] font-medium leading-tight mb-1 truncate hover:underline cursor-pointer">{data.title || 'Add Title...'}</div>
+                  <div className="text-[13px] text-slate-700 line-clamp-2">{data.excerpt || data.description || 'Add an excerpt or description to preview how it will appear in search results.'}</div>
+                </div>
+              </div>
+
+              {/* Edit Fields */}
+              <div className="space-y-4">
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                     <label className="text-[13px] font-semibold text-slate-700">Title</label>
+                     <span className={`text-[10px] ${data.title?.length > 60 ? 'text-rose-500' : 'text-emerald-500'}`}>{data.title?.length || 0} / 60</span>
+                  </div>
+                  <input 
+                    type="text" 
+                    value={data.title || ''} 
+                    onChange={(e) => updateField('title', e.target.value)}
+                    className="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500 text-[13px] bg-white shadow-sm"
+                  />
+                </div>
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                     <label className="text-[13px] font-semibold text-slate-700">Permalink</label>
+                  </div>
+                  <input 
+                    type="text" 
+                    value={customSlug || ''} 
+                    onChange={(e) => setCustomSlug(e.target.value)}
+                    className="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500 text-[13px] bg-white shadow-sm"
+                  />
+                </div>
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                     <label className="text-[13px] font-semibold text-slate-700">Description</label>
+                     <span className={`text-[10px] ${(data.excerpt || data.description || '').length > 160 ? 'text-rose-500' : 'text-emerald-500'}`}>{(data.excerpt || data.description || '').length} / 160</span>
+                  </div>
+                  <textarea 
+                    value={data.excerpt || data.description || ''} 
+                    onChange={(e) => updateField('excerpt', e.target.value)}
+                    rows={3}
+                    className="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500 text-[13px] resize-none bg-white shadow-sm"
+                  ></textarea>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
