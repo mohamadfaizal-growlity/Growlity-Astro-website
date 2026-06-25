@@ -29,6 +29,25 @@ export default function ContentEditor() {
   const [isMediaMenuOpen, setIsMediaMenuOpen] = useState(false);
   const [isFileBoxMenuOpen, setIsFileBoxMenuOpen] = useState(false);
   const [isVisibilityMenuOpen, setIsVisibilityMenuOpen] = useState(false);
+  
+  const mediaMenuRef = useRef<HTMLDivElement>(null);
+  const fileBoxMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mediaMenuRef.current && !mediaMenuRef.current.contains(event.target as Node)) {
+        setIsMediaMenuOpen(false);
+      }
+      if (fileBoxMenuRef.current && !fileBoxMenuRef.current.contains(event.target as Node)) {
+        setIsFileBoxMenuOpen(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const [customSlug, setCustomSlug] = useState('');
 
@@ -594,8 +613,14 @@ export default function ContentEditor() {
                         <div className="space-y-4">
                            <div className="flex items-center justify-between">
                               <span className="text-xs font-semibold text-slate-500">Media</span>
-                              <div className="relative">
-                                <button onClick={() => setIsMediaMenuOpen(!isMediaMenuOpen)} className="p-1 text-slate-400 hover:text-slate-700">
+                              <div className="relative" ref={mediaMenuRef}>
+                                <button 
+                                  onClick={() => {
+                                    setIsMediaMenuOpen(!isMediaMenuOpen);
+                                    if (!isMediaMenuOpen) setIsFileBoxMenuOpen(false);
+                                  }} 
+                                  className="p-1 text-slate-400 hover:text-slate-700"
+                                >
                                   <MoreVertical size={16} />
                                 </button>
                                 {isMediaMenuOpen && (
@@ -620,9 +645,12 @@ export default function ContentEditor() {
                               </div>
                            </div>
                            
-                           <div className="relative">
+                           <div className="relative" ref={fileBoxMenuRef}>
                              <button 
-                               onClick={() => setIsFileBoxMenuOpen(!isFileBoxMenuOpen)}
+                               onClick={() => {
+                                 setIsFileBoxMenuOpen(!isFileBoxMenuOpen);
+                                 if (!isFileBoxMenuOpen) setIsMediaMenuOpen(false);
+                               }}
                                className={`w-full border p-2 rounded flex items-center gap-2 hover:border-blue-400 transition-colors ${isFileBoxMenuOpen ? 'border-blue-500' : 'border-slate-200'}`}
                              >
                                 <div className="w-6 h-6 bg-slate-100 flex items-center justify-center shrink-0">
