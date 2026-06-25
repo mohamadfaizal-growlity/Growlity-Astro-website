@@ -260,7 +260,7 @@ export default function ContentEditor() {
             </span>
           )}
           
-          <button className="text-slate-600 font-medium px-3 py-1.5 hover:bg-slate-100 rounded transition-colors">
+          <button className="text-slate-600 font-medium px-3 py-1.5 hover:bg-slate-100 rounded transition-colors cursor-pointer">
             Save draft
           </button>
           
@@ -268,20 +268,20 @@ export default function ContentEditor() {
             href={getPreviewUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-1.5 text-slate-600 hover:bg-slate-100 rounded transition-colors" 
+            className="p-1.5 text-slate-600 hover:bg-slate-100 rounded transition-colors cursor-pointer" 
             title="Preview"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
           </a>
 
           <div className="flex items-center border border-slate-200 rounded-md mx-1 overflow-hidden h-8 cursor-pointer hover:bg-slate-50 transition-colors" onClick={() => { setIsPanelOpen(true); setActiveTab('seo'); }}>
-             <button className={`px-3 bg-white ${seoScore >= 80 ? 'text-emerald-600' : seoScore >= 50 ? 'text-yellow-500' : 'text-rose-500'} font-bold text-xs h-full flex items-center border-r border-slate-200 hover:bg-slate-50`}>{seoScore} / 100</button>
-             <button className="px-3 bg-white text-pink-500 font-bold text-xs h-full flex items-center hover:bg-slate-50">15 / 100</button>
+             <button className={`px-3 bg-white ${seoScore >= 80 ? 'text-emerald-600' : seoScore >= 50 ? 'text-yellow-500' : 'text-rose-500'} font-bold text-xs h-full flex items-center border-r border-slate-200 hover:bg-slate-50 cursor-pointer`}>{seoScore} / 100</button>
+             <button className="px-3 bg-white text-pink-500 font-bold text-xs h-full flex items-center hover:bg-slate-50 cursor-pointer">15 / 100</button>
           </div>
 
           <button 
             onClick={() => setIsPanelOpen(!isPanelOpen)}
-            className={`p-1.5 rounded transition-colors ${isPanelOpen ? 'bg-slate-800 text-white hover:bg-slate-700' : 'text-slate-600 hover:bg-slate-100'}`}
+            className={`p-1.5 rounded transition-colors cursor-pointer ${isPanelOpen ? 'bg-slate-800 text-white hover:bg-slate-700' : 'text-slate-600 hover:bg-slate-100'}`}
             title="Settings"
           >
             <Settings size={20} />
@@ -289,7 +289,7 @@ export default function ContentEditor() {
           
           <button 
             onClick={handleSave}
-            className="ml-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded text-sm font-medium transition-colors"
+            className="ml-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded text-sm font-medium transition-colors cursor-pointer"
           >
             {isNew ? 'Publish' : 'Update'}
           </button>
@@ -344,18 +344,18 @@ export default function ContentEditor() {
             <div className="flex border-b border-slate-200 px-2 pt-2 gap-2">
               <button 
                 onClick={() => setActiveTab('post')}
-                className={`px-3 py-2 text-[13px] font-medium border-b-2 transition-colors ${activeTab === 'post' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
+                className={`px-3 py-2 text-[13px] font-medium border-b-2 transition-colors cursor-pointer ${activeTab === 'post' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
               >
                 Post
               </button>
               <button 
                 onClick={() => setActiveTab('block')}
-                className={`px-3 py-2 text-[13px] font-medium border-b-2 transition-colors ${activeTab === 'block' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
+                className={`px-3 py-2 text-[13px] font-medium border-b-2 transition-colors cursor-pointer ${activeTab === 'block' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
               >
                 Block
               </button>
               <div className="flex-1"></div>
-              <button onClick={() => setIsPanelOpen(false)} className="p-2 text-slate-400 hover:text-slate-800">
+              <button onClick={() => setIsPanelOpen(false)} className="p-2 text-slate-400 hover:text-slate-800 cursor-pointer">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
               </button>
             </div>
@@ -595,19 +595,19 @@ export default function ContentEditor() {
                       <div className="flex items-center border-b border-slate-200 mb-4">
                         <button 
                           onClick={() => setImageBlockTab('media')}
-                          className={`flex-1 py-2 flex justify-center border-b-2 transition-colors ${imageBlockTab === 'media' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+                          className={`flex-1 py-2 flex justify-center border-b-2 transition-colors cursor-pointer ${imageBlockTab === 'media' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
                         >
                           <List size={16} />
                         </button>
                         <button 
                           onClick={() => setImageBlockTab('settings')}
-                          className={`flex-1 py-2 flex justify-center border-b-2 transition-colors ${imageBlockTab === 'settings' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+                          className={`flex-1 py-2 flex justify-center border-b-2 transition-colors cursor-pointer ${imageBlockTab === 'settings' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
                         >
                           <Settings size={16} />
                         </button>
                         <button 
                           onClick={() => setImageBlockTab('styles')}
-                          className={`flex-1 py-2 flex justify-center border-b-2 transition-colors ${imageBlockTab === 'styles' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+                          className={`flex-1 py-2 flex justify-center border-b-2 transition-colors cursor-pointer ${imageBlockTab === 'styles' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
                         >
                           <Moon size={16} />
                         </button>
