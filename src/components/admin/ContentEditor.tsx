@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Save, ArrowLeft, Image as ImageIcon, Loader2 } from 'lucide-react';
-import MDEditor, { commands, ICommand } from '@uiw/react-md-editor';
+import MDEditor, { commands, type ICommand } from '@uiw/react-md-editor';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 
 export default function ContentEditor() {
@@ -117,6 +117,32 @@ export default function ContentEditor() {
     }
   };
 
+  const faqCommand: ICommand = {
+    name: 'insert-faq',
+    keyCommand: 'insert-faq',
+    buttonProps: { 'aria-label': 'Insert FAQ', title: 'Insert FAQ' },
+    icon: (
+      <span className="font-bold text-xs">FAQ</span>
+    ),
+    execute: (state, api) => {
+      const faqText = `\n<FAQ>\n  <FAQItem q="What is your question?">\n    Write your answer here.\n  </FAQItem>\n  <FAQItem q="Another question?">\n    Write another answer here.\n  </FAQItem>\n</FAQ>\n`;
+      api.replaceSelection(faqText);
+    }
+  };
+
+  const ctaCommand: ICommand = {
+    name: 'insert-cta',
+    keyCommand: 'insert-cta',
+    buttonProps: { 'aria-label': 'Insert CTA', title: 'Insert CTA' },
+    icon: (
+      <span className="font-bold text-xs">CTA</span>
+    ),
+    execute: (state, api) => {
+      const ctaText = `\n<CTA text="Ready to get started?" link="/contact" buttonText="Contact Us" />\n`;
+      api.replaceSelection(ctaText);
+    }
+  };
+
   if (loading) return <div className="p-8">Loading...</div>;
 
   return (
@@ -207,6 +233,8 @@ export default function ContentEditor() {
                 commands.codeBlock,
                 commands.divider,
                 uploadImageCommand,
+                faqCommand,
+                ctaCommand,
                 commands.unorderedListCommand,
                 commands.orderedListCommand,
                 commands.checkedListCommand,
