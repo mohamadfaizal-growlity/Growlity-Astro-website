@@ -29,6 +29,30 @@ export default function ContentEditor() {
   const [isUnlistOpen, setIsUnlistOpen] = useState(true);
   const [isLinkSuggestionsOpen, setIsLinkSuggestionsOpen] = useState(true);
 
+  const [isPostMenuOpen, setIsPostMenuOpen] = useState(false);
+  const featuredImageInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFeaturedImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const response = await fetch('/api/sitepins/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!response.ok) throw new Error('Upload failed');
+      const resData = await response.json();
+      updateField('featuredImage', resData.url);
+    } catch (err) {
+      console.error('Error uploading image:', err);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   // Tags auto-complete state
   const [tags, setTags] = useState<string[]>(['Blog']);
   const [tagInput, setTagInput] = useState('');
@@ -110,6 +134,17 @@ export default function ContentEditor() {
     setData((prev: any) => ({ ...prev, [path]: value }));
   };
 
+  const getPreviewUrl = () => {
+    if (isNew) return '#';
+    const c = collection?.toLowerCase() || '';
+    if (c === 'posts') return `/blogs/${slug}`;
+    if (c === 'case studies') return `/case-studie/${slug}`;
+    if (c === 'publications') return `/esg-sustainability-publications/${slug}`;
+    if (c === 'webinar') return `/webinars/${slug}`;
+    if (c === 'pages') return `/${slug}`;
+    return `/${c}/${slug}`;
+  };
+
   if (loading) return <div className="p-8">Loading editor...</div>;
 
   // Mock word count
@@ -151,9 +186,15 @@ export default function ContentEditor() {
             Save draft
           </button>
           
-          <button className="p-1.5 text-slate-600 hover:bg-slate-100 rounded transition-colors" title="Preview">
+          <a 
+            href={getPreviewUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-1.5 text-slate-600 hover:bg-slate-100 rounded transition-colors" 
+            title="Preview"
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-          </button>
+          </a>
 
           <div className="flex items-center border border-slate-200 rounded-md mx-1 overflow-hidden h-8">
              <button className="px-3 bg-white text-emerald-600 font-bold text-xs h-full flex items-center border-r border-slate-200 hover:bg-slate-50">90 / 100</button>
@@ -239,7 +280,7 @@ export default function ContentEditor() {
                 <>
                   {/* Summary Section */}
                   <div className="p-4 space-y-5">
-                    <div className="flex items-start justify-between">
+                    <div className="flex items-start justify-between relative">
                       <div className="flex items-start gap-2">
                          <div className="mt-0.5 w-4 h-4 bg-slate-200 rounded-full flex items-center justify-center">
                             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
@@ -248,14 +289,49 @@ export default function ContentEditor() {
                            {data.title || 'Add title...'}
                          </div>
                       </div>
-                      <button className="text-slate-400 hover:text-slate-700">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                      </button>
+                      <div className="relative">
+                        <button onClick={() => setIsPostMenuOpen(!isPostMenuOpen)} className="text-slate-400 hover:text-slate-700 p-1 rounded-sm hover:bg-slate-100 transition-colors">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                        </button>
+                        {isPostMenuOpen && (
+                          <div className="absolute right-0 top-full mt-1 w-32 bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md z-50 py-1">
+                            <a 
+                              href={getPreviewUrl()} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="block px-4 py-2 text-[13px] text-slate-700 hover:bg-blue-50 transition-colors"
+                              onClick={() => setIsPostMenuOpen(false)}
+                            >
+                              View
+                            </a>
+                            <button className="w-full text-left px-4 py-2 text-[13px] text-slate-700 hover:bg-blue-50 transition-colors" onClick={() => setIsPostMenuOpen(false)}>Rename</button>
+                            <button className="w-full text-left px-4 py-2 text-[13px] text-slate-700 hover:bg-blue-50 transition-colors" onClick={() => setIsPostMenuOpen(false)}>Trash</button>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
-                    <button className="w-full py-6 border border-slate-200 bg-slate-50 hover:bg-slate-100 rounded text-[13px] font-medium text-slate-700 transition-colors">
-                      Set featured image
-                    </button>
+                    <div>
+                      <input 
+                        type="file" 
+                        ref={featuredImageInputRef}
+                        onChange={handleFeaturedImageUpload}
+                        className="hidden"
+                        accept="image/*"
+                      />
+                      {data.featuredImage || data.heroImage ? (
+                        <div className="relative group rounded overflow-hidden border border-slate-200 cursor-pointer" onClick={() => featuredImageInputRef.current?.click()}>
+                          <img src={data.featuredImage || data.heroImage} alt="Featured" className="w-full h-auto object-cover" />
+                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                            <span className="text-white text-xs font-medium">Replace Image</span>
+                          </div>
+                        </div>
+                      ) : (
+                        <button onClick={() => featuredImageInputRef.current?.click()} className="w-full py-6 border border-slate-200 bg-slate-50 hover:bg-slate-100 rounded text-[13px] font-medium text-slate-700 transition-colors">
+                          Set featured image
+                        </button>
+                      )}
+                    </div>
 
                     <div className="text-[13px] text-slate-500 mt-2">
                        <a href="#" className="text-blue-600 hover:underline">Add an excerpt...</a>
