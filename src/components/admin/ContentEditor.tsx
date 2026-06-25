@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Save, ArrowLeft } from 'lucide-react';
 import MDEditor from '@uiw/react-md-editor';
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 
 export default function ContentEditor() {
   const { collection } = useParams();
@@ -140,6 +141,21 @@ export default function ContentEditor() {
               value={content}
               onChange={(val) => setContent(val || '')}
               height={700}
+              previewOptions={{
+                rehypePlugins: [
+                  [
+                    rehypeSanitize,
+                    {
+                      ...defaultSchema,
+                      attributes: {
+                        ...defaultSchema.attributes,
+                        img: ['src', 'alt', 'title', 'width', 'height', 'style', 'className']
+                      },
+                      tagNames: [...(defaultSchema.tagNames || []), 'img']
+                    }
+                  ]
+                ]
+              }}
               className="w-full !border-none shadow-none"
             />
           </div>
