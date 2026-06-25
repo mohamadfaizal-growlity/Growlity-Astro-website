@@ -4,7 +4,8 @@ import {
   Pilcrow, ChevronUp, AlignLeft, AtSign, ListEnd, 
   Droplet, Code, Image as ImageIcon, Keyboard, Languages, 
   FunctionSquare, MousePointer2, Strikethrough, Subscript, Superscript,
-  ChevronsLeft
+  ChevronsLeft, Heading, Quote, Square, Columns, 
+  MenuSquare, LayoutTemplate, TextQuote, PenLine
 } from 'lucide-react';
 import {
   MDXEditor,
@@ -40,17 +41,23 @@ interface MDXEditorComponentProps {
 export default function MDXEditorComponent({ markdown, onChange, onUploadImage, onBlockSelect }: MDXEditorComponentProps) {
   
   const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState(false);
-  const [isRichTextMenuOpen, setIsRichTextMenuOpen] = useState(false);
   const optionsMenuRef = useRef<HTMLDivElement>(null);
+  const [isRichTextMenuOpen, setIsRichTextMenuOpen] = useState(false);
   const richTextMenuRef = useRef<HTMLDivElement>(null);
+  const [isBlockTransformMenuOpen, setIsBlockTransformMenuOpen] = useState(false);
+  const blockTransformMenuRef = useRef<HTMLDivElement>(null);
 
+  // Close menus when clicking outside
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (optionsMenuRef.current && !optionsMenuRef.current.contains(e.target as Node)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (optionsMenuRef.current && !optionsMenuRef.current.contains(event.target as Node)) {
         setIsOptionsMenuOpen(false);
       }
-      if (richTextMenuRef.current && !richTextMenuRef.current.contains(e.target as Node)) {
+      if (richTextMenuRef.current && !richTextMenuRef.current.contains(event.target as Node)) {
         setIsRichTextMenuOpen(false);
+      }
+      if (blockTransformMenuRef.current && !blockTransformMenuRef.current.contains(event.target as Node)) {
+        setIsBlockTransformMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -234,17 +241,50 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                 
                 <div className="w-px h-4 bg-gray-300 mx-1" />
                 
-                {/* Paragraph/block type mock */}
-                <button 
-                  className="flex items-center justify-center h-7 px-1.5 mx-0.5 text-slate-600 cursor-pointer hover:bg-slate-200 rounded transition-colors"
-                  onClick={() => alert('Block type settings coming soon.')}
-                >
-                   <Pilcrow size={16} />
-                   <div className="flex flex-col ml-0.5">
-                      <ChevronUp size={10} className="-mb-1 text-slate-400" />
-                      <ChevronDown size={10} className="text-slate-400" />
-                   </div>
-                </button>
+                {/* Block Transform Menu */}
+                <div className="relative mx-0.5" ref={blockTransformMenuRef}>
+                   <button 
+                     onClick={() => setIsBlockTransformMenuOpen(!isBlockTransformMenuOpen)} 
+                     className="w-7 h-7 flex items-center justify-center rounded hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer"
+                     title="Transform To"
+                   >
+                      <Pilcrow size={16} />
+                   </button>
+                   {isBlockTransformMenuOpen && (
+                     <div className="absolute left-0 top-full mt-1 w-56 bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md z-50 py-1 text-sm text-slate-700">
+                        <div className="px-3 py-1.5 text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Transform to</div>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Heading size={14} className="text-slate-400"/> Heading</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><ListIcon size={14} className="text-slate-400"/> List</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Quote size={14} className="text-slate-400"/> Quote</button>
+                        <div className="border-t border-slate-100 my-1"></div>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Square size={14} className="text-slate-400"/> Preformatted</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Code size={14} className="text-slate-400"/> Code</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Columns size={14} className="text-slate-400"/> Columns</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><MenuSquare size={14} className="text-slate-400"/> Details</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><LayoutTemplate size={14} className="text-slate-400"/> Group</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><TextQuote size={14} className="text-slate-400"/> Pullquote</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><PenLine size={14} className="text-slate-400"/> Poetry</button>
+                     </div>
+                   )}
+                </div>
+
+                {/* Move Block Up/Down */}
+                <div className="flex flex-col justify-center items-center h-7 mx-0.5 border border-slate-200 rounded text-slate-600 bg-white">
+                   <button 
+                     className="flex-1 px-1 hover:bg-slate-200 transition-colors cursor-pointer rounded-t"
+                     title="Move Up"
+                     onClick={() => alert('Move block up coming soon.')}
+                   >
+                     <ChevronUp size={10} className="text-slate-500" />
+                   </button>
+                   <button 
+                     className="flex-1 px-1 hover:bg-slate-200 transition-colors cursor-pointer rounded-b"
+                     title="Move Down"
+                     onClick={() => alert('Move block down coming soon.')}
+                   >
+                     <ChevronDown size={10} className="text-slate-500" />
+                   </button>
+                </div>
                 
                 <div className="w-px h-4 bg-gray-300 mx-1" />
                 
