@@ -32,6 +32,7 @@ export default function ContentEditor() {
   
   const mediaMenuRef = useRef<HTMLDivElement>(null);
   const fileBoxMenuRef = useRef<HTMLDivElement>(null);
+  const visibilityMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -40,6 +41,9 @@ export default function ContentEditor() {
       }
       if (fileBoxMenuRef.current && !fileBoxMenuRef.current.contains(event.target as Node)) {
         setIsFileBoxMenuOpen(false);
+      }
+      if (visibilityMenuRef.current && !visibilityMenuRef.current.contains(event.target as Node)) {
+        setIsVisibilityMenuOpen(false);
       }
     };
     
@@ -617,7 +621,10 @@ export default function ContentEditor() {
                                 <button 
                                   onClick={() => {
                                     setIsMediaMenuOpen(!isMediaMenuOpen);
-                                    if (!isMediaMenuOpen) setIsFileBoxMenuOpen(false);
+                                    if (!isMediaMenuOpen) {
+                                      setIsFileBoxMenuOpen(false);
+                                      setIsVisibilityMenuOpen(false);
+                                    }
                                   }} 
                                   className="p-1 text-slate-400 hover:text-slate-700"
                                 >
@@ -649,7 +656,10 @@ export default function ContentEditor() {
                              <button 
                                onClick={() => {
                                  setIsFileBoxMenuOpen(!isFileBoxMenuOpen);
-                                 if (!isFileBoxMenuOpen) setIsMediaMenuOpen(false);
+                                 if (!isFileBoxMenuOpen) {
+                                   setIsMediaMenuOpen(false);
+                                   setIsVisibilityMenuOpen(false);
+                                 }
                                }}
                                className={`w-full border p-2 rounded flex items-center gap-2 hover:border-blue-400 transition-colors ${isFileBoxMenuOpen ? 'border-blue-500' : 'border-slate-200'}`}
                              >
@@ -751,9 +761,15 @@ export default function ContentEditor() {
                            <div className="border-t border-slate-200"></div>
 
                            {/* Visibility */}
-                           <div className="relative">
+                           <div className="relative" ref={visibilityMenuRef}>
                               <button 
-                                onClick={() => setIsVisibilityMenuOpen(!isVisibilityMenuOpen)}
+                                onClick={() => {
+                                  setIsVisibilityMenuOpen(!isVisibilityMenuOpen);
+                                  if (!isVisibilityMenuOpen) {
+                                    setIsMediaMenuOpen(false);
+                                    setIsFileBoxMenuOpen(false);
+                                  }
+                                }}
                                 className="w-full flex items-center justify-between text-[13px] font-semibold text-slate-800 hover:text-blue-600 transition-colors group"
                               >
                                  Visibility <Plus size={16} className="text-slate-400 group-hover:text-blue-500"/>
