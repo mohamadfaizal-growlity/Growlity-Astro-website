@@ -387,6 +387,13 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
         ]}
         contentEditableClassName="prose max-w-none min-h-[400px] p-4 bg-white"
       />
+      <style>{`
+        .mdxeditor-wrapper [role="toolbar"] {
+          height: auto !important;
+          overflow: visible !important;
+          flex-wrap: wrap !important;
+        }
+      `}</style>
     </div>
   );
 }
