@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X } from 'lucide-react';
+import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X, Briefcase, FileBadge, Share2, Facebook, Twitter, Star, UserCircle2 } from 'lucide-react';
 import ErrorBoundary from './ErrorBoundary';
 import SeoAnalyzer from './SeoAnalyzer';
 
@@ -36,6 +36,8 @@ export default function ContentEditor() {
 
   const [isPostMenuOpen, setIsPostMenuOpen] = useState(false);
   const [isSnippetModalOpen, setIsSnippetModalOpen] = useState(false);
+  const [seoActiveTab, setSeoActiveTab] = useState<'general' | 'advanced' | 'schema' | 'social'>('general');
+  const [snippetModalTab, setSnippetModalTab] = useState<'general' | 'social'>('general');
   const featuredImageInputRef = useRef<HTMLInputElement>(null);
 
   const handleFeaturedImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -551,100 +553,224 @@ export default function ContentEditor() {
               {activeTab === 'seo' && (
                 <div className="p-4 space-y-6">
                   {/* RankMath Header */}
-                  <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-                    <h3 className="text-sm font-semibold text-slate-800">Rank Math SEO</h3>
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                    <h3 className="text-sm font-semibold text-slate-800">Rank Math</h3>
+                    <div className="flex items-center gap-1">
+                      <button className="p-1 rounded bg-slate-800 text-white"><Star size={14}/></button>
+                      <button className="p-1 rounded text-slate-500 hover:bg-slate-100"><X size={16}/></button>
+                    </div>
                   </div>
-                  
-                  {/* Preview Snippet */}
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-semibold text-slate-500 uppercase">Preview</span>
-                    </div>
-                    <div className="p-3 border border-slate-200 rounded-md bg-white">
-                      <div className="text-xs text-slate-500 truncate mb-1">https://growlity.com{getPreviewUrl()}</div>
-                      <div className="text-[15px] text-[#1a0dab] font-medium leading-tight mb-1 truncate cursor-pointer hover:underline">{data.title || 'Add Title...'}</div>
-                      <div className="text-xs text-slate-600 line-clamp-2">{data.excerpt || data.description || 'Add an excerpt or description to preview how it will appear in search results.'}</div>
-                    </div>
-                    <button 
-                      onClick={() => setIsSnippetModalOpen(true)}
-                      className="mt-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium px-3 py-1.5 rounded transition-colors"
-                    >
-                      Edit Snippet
+
+                  {/* Tabs */}
+                  <div className="flex items-center border-b border-slate-200 mt-0">
+                    <button onClick={() => setSeoActiveTab('general')} className={`flex-1 flex justify-center py-2 border-b-2 transition-colors ${seoActiveTab === 'general' ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700'}`}>
+                      <Settings size={18} />
+                    </button>
+                    <button onClick={() => setSeoActiveTab('advanced')} className={`flex-1 flex items-center justify-center gap-1.5 py-2 border-b-2 transition-colors ${seoActiveTab === 'advanced' ? 'border-blue-500 text-blue-600 font-medium' : 'border-transparent text-slate-500 hover:text-slate-700'}`}>
+                      <Briefcase size={18} />
+                      <span className="text-[13px]">Advanced</span>
+                    </button>
+                    <button onClick={() => setSeoActiveTab('schema')} className={`flex-1 flex justify-center py-2 border-b-2 transition-colors ${seoActiveTab === 'schema' ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700'}`}>
+                      <FileBadge size={18} />
+                    </button>
+                    <button onClick={() => setSeoActiveTab('social')} className={`flex-1 flex justify-center py-2 border-b-2 transition-colors ${seoActiveTab === 'social' ? 'border-blue-500 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-700'}`}>
+                      <Share2 size={18} />
                     </button>
                   </div>
+                  
+                  {seoActiveTab === 'general' && (
+                    <div className="space-y-6">
+                      {/* Preview Snippet */}
+                      <div className="space-y-2 mt-4">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-semibold text-slate-500 uppercase">Preview</span>
+                        </div>
+                        <div className="p-3 border border-slate-200 rounded-md bg-white">
+                          <div className="text-xs text-slate-500 truncate mb-1">https://growlity.com{getPreviewUrl()}</div>
+                          <div className="text-[15px] text-[#1a0dab] font-medium leading-tight mb-1 truncate cursor-pointer hover:underline">{data.title || 'Add Title...'}</div>
+                          <div className="text-xs text-slate-600 line-clamp-2">{data.excerpt || data.description || 'Add an excerpt or description to preview how it will appear in search results.'}</div>
+                        </div>
+                        <button 
+                          onClick={() => setIsSnippetModalOpen(true)}
+                          className="mt-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium px-3 py-1.5 rounded transition-colors"
+                        >
+                          Edit Snippet
+                        </button>
+                      </div>
 
-                  {/* Focus Keyword */}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold text-slate-800">Focus Keyword</span>
-                      <span className="bg-rose-100 text-rose-700 text-[10px] px-1.5 rounded font-medium">Content AI</span>
-                    </div>
-                    <div className="relative">
-                       <input 
-                         type="text" 
-                         value={data.seoKeyword || ''}
-                         onChange={(e) => updateField('seoKeyword', e.target.value)}
-                         placeholder="Enter focus keyword..."
-                         className="w-full text-[13px] px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500"
-                       />
-                       {data.seoKeyword && (
-                         <div className="mt-2 inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded-full">
-                           <CheckCircle2 size={12}/> {data.seoKeyword}
-                         </div>
-                       )}
-                    </div>
-                  </div>
+                      {/* Focus Keyword */}
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-semibold text-slate-800">Focus Keyword</span>
+                          <span className="bg-rose-100 text-rose-700 text-[10px] px-1.5 rounded font-medium">Content AI</span>
+                        </div>
+                        <div className="relative">
+                           <input 
+                             type="text" 
+                             value={data.seoKeyword || ''}
+                             onChange={(e) => updateField('seoKeyword', e.target.value)}
+                             placeholder="Enter focus keyword..."
+                             className="w-full text-[13px] px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500"
+                           />
+                           {data.seoKeyword && (
+                             <div className="mt-2 inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded-full">
+                               <CheckCircle2 size={12}/> {data.seoKeyword}
+                             </div>
+                           )}
+                        </div>
+                      </div>
 
-                  {/* Manual SEO Score Override */}
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold text-slate-800">Manual Score Override (Optional)</span>
-                    </div>
-                    <div className="relative">
-                       <input 
-                         type="number" 
-                         min="0"
-                         max="100"
-                         value={data.seoScoreOverride !== undefined ? data.seoScoreOverride : ''}
-                         onChange={(e) => updateField('seoScoreOverride', e.target.value)}
-                         placeholder="e.g. 95 (leave empty for dynamic)"
-                         className="w-full text-[13px] px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500"
-                       />
-                       <p className="text-[10px] text-slate-500 mt-1">If you want to keep your old website's score, enter it here.</p>
-                    </div>
-                  </div>
+                      {/* Manual SEO Score Override */}
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-semibold text-slate-800">Manual Score Override (Optional)</span>
+                        </div>
+                        <div className="relative">
+                           <input 
+                             type="number" 
+                             min="0"
+                             max="100"
+                             value={data.seoScoreOverride !== undefined ? data.seoScoreOverride : ''}
+                             onChange={(e) => updateField('seoScoreOverride', e.target.value)}
+                             placeholder="e.g. 95 (leave empty for dynamic)"
+                             className="w-full text-[13px] px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500"
+                           />
+                           <p className="text-[10px] text-slate-500 mt-1">If you want to keep your old website's score, enter it here.</p>
+                        </div>
+                      </div>
 
-                  {/* Basic SEO Checks */}
-                  <div className="space-y-3 pt-4 border-t border-slate-200">
-                    <div className="flex items-center justify-between cursor-pointer">
-                      <h4 className="text-[13px] font-semibold text-slate-800">Basic SEO</h4>
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${seoScore >= 80 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
-                        {seoScore >= 80 ? '✓ All Good' : 'Errors'}
-                      </span>
+                      {/* Basic SEO Checks */}
+                      <div className="space-y-3 pt-4 border-t border-slate-200">
+                        <div className="flex items-center justify-between cursor-pointer">
+                          <h4 className="text-[13px] font-semibold text-slate-800">Basic SEO</h4>
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${seoScore >= 80 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+                            {seoScore >= 80 ? '✓ All Good' : 'Errors'}
+                          </span>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="flex items-start gap-2 text-xs">
+                            {seoChecks.title ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
+                            <span className="text-slate-600">Focus Keyword in the SEO Title.</span>
+                          </div>
+                          <div className="flex items-start gap-2 text-xs">
+                            {seoChecks.desc ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
+                            <span className="text-slate-600">Focus Keyword used inside SEO Meta Description.</span>
+                          </div>
+                          <div className="flex items-start gap-2 text-xs">
+                            {seoChecks.url ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
+                            <span className="text-slate-600">Focus Keyword used in the URL.</span>
+                          </div>
+                          <div className="flex items-start gap-2 text-xs">
+                            {seoChecks.content ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
+                            <span className="text-slate-600">Focus Keyword appears in the first 10% of the content.</span>
+                          </div>
+                          <div className="flex items-start gap-2 text-xs">
+                            {seoChecks.length ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
+                            <span className="text-slate-600">Content is {wordCountRaw} words long. {seoChecks.length ? 'Good job!' : 'Add more words.'}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <div className="flex items-start gap-2 text-xs">
-                        {seoChecks.title ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
-                        <span className="text-slate-600">Focus Keyword in the SEO Title.</span>
+                  )}
+
+                  {seoActiveTab === 'advanced' && (
+                    <div className="space-y-6 text-[13px] text-slate-700 mt-4">
+                      <div>
+                        <h4 className="font-semibold text-[11px] text-slate-500 uppercase tracking-wider mb-3">Robots Meta</h4>
+                        <div className="grid grid-cols-2 gap-2">
+                           <label className="flex items-center gap-2"><input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-blue-500" checked /> Index</label>
+                           <label className="flex items-center gap-2"><input type="checkbox" className="rounded border-slate-300" /> No Index</label>
+                           <label className="flex items-center gap-2"><input type="checkbox" className="rounded border-slate-300" /> Nofollow</label>
+                           <label className="flex items-center gap-2"><input type="checkbox" className="rounded border-slate-300" /> No Archive</label>
+                           <label className="flex items-center gap-2"><input type="checkbox" className="rounded border-slate-300" /> No Image Index</label>
+                           <label className="flex items-center gap-2"><input type="checkbox" className="rounded border-slate-300" /> No Snippet</label>
+                        </div>
                       </div>
-                      <div className="flex items-start gap-2 text-xs">
-                        {seoChecks.desc ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
-                        <span className="text-slate-600">Focus Keyword used inside SEO Meta Description.</span>
+
+                      <div className="pt-4 border-t border-slate-200">
+                        <h4 className="font-semibold text-[11px] text-slate-500 uppercase tracking-wider mb-3">Advanced Robots Meta</h4>
+                        <div className="space-y-3">
+                           <div className="flex items-center justify-between">
+                              <label className="flex items-center gap-2"><input type="checkbox" className="rounded border-slate-300" /> Max Snippet</label>
+                              <input type="text" value="-1" className="w-20 px-2 py-1 border border-slate-200 rounded text-center outline-none" readOnly/>
+                           </div>
+                           <div className="flex items-center justify-between">
+                              <label className="flex items-center gap-2"><input type="checkbox" className="rounded border-slate-300" /> Max Video Preview</label>
+                              <input type="text" value="-1" className="w-20 px-2 py-1 border border-slate-200 rounded text-center outline-none" readOnly/>
+                           </div>
+                           <div className="flex items-center justify-between">
+                              <label className="flex items-center gap-2"><input type="checkbox" className="rounded border-slate-300" /> Max Image Preview</label>
+                              <select className="w-24 px-2 py-1 border border-blue-500 rounded text-slate-700 outline-none">
+                                <option>Large</option>
+                                <option>Standard</option>
+                                <option>None</option>
+                              </select>
+                           </div>
+                        </div>
                       </div>
-                      <div className="flex items-start gap-2 text-xs">
-                        {seoChecks.url ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
-                        <span className="text-slate-600">Focus Keyword used in the URL.</span>
+
+                      <div className="pt-4 border-t border-slate-200 space-y-2">
+                        <label className="block text-[12px] font-semibold text-slate-800">Canonical URL</label>
+                        <input type="text" placeholder={`https://growlity.com${getPreviewUrl()}`} className="w-full px-3 py-2 border border-slate-200 rounded outline-none" />
                       </div>
-                      <div className="flex items-start gap-2 text-xs">
-                        {seoChecks.content ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
-                        <span className="text-slate-600">Focus Keyword appears in the first 10% of the content.</span>
+
+                      <div className="pt-4 border-t border-slate-200 space-y-2">
+                        <label className="block text-[12px] font-semibold text-slate-800">Breadcrumb Title</label>
+                        <input type="text" className="w-full px-3 py-2 border border-slate-200 rounded outline-none" />
                       </div>
-                      <div className="flex items-start gap-2 text-xs">
-                        {seoChecks.length ? <CheckCircle2 size={14} className="text-emerald-500 mt-0.5 shrink-0" /> : <XCircle size={14} className="text-rose-500 mt-0.5 shrink-0" />}
-                        <span className="text-slate-600">Content is {wordCountRaw} words long. {seoChecks.length ? 'Good job!' : 'Add more words.'}</span>
+
+                      <div className="pt-4 border-t border-slate-200 flex items-center gap-3">
+                        <div className="w-9 h-5 bg-slate-200 rounded-full relative"><div className="w-4 h-4 bg-white rounded-full absolute top-0.5 left-0.5 border border-slate-300"></div></div>
+                        <span className="font-semibold text-slate-800">Redirect</span>
                       </div>
                     </div>
-                  </div>
+                  )}
+
+                  {seoActiveTab === 'schema' && (
+                    <div className="space-y-4 mt-4">
+                      <p className="text-[13px] text-slate-600">
+                        Configure Schema Markup for your pages. Search engines, use structured data to display rich results in SERPs. <a href="#" className="text-blue-600 hover:underline">Learn more</a>
+                      </p>
+                      
+                      <div>
+                        <h4 className="font-semibold text-[12px] text-slate-800 mb-2">Schema in Use</h4>
+                        <div className="p-3 bg-orange-50 border-l-2 border-orange-400 text-[12px] text-slate-700 rounded-r mb-3">
+                          Multiple Schemas are allowed in the <a href="#" className="text-blue-600 hover:underline border-b border-dashed border-blue-600">PRO Version</a>
+                        </div>
+                        <div className="flex items-center justify-between p-3 border border-blue-200 bg-blue-50/50 rounded-md">
+                          <div className="flex items-center gap-2 text-[13px] text-slate-700 font-medium">
+                            <FileBadge size={16} className="text-slate-500" /> Article
+                          </div>
+                          <div className="flex items-center gap-2 text-slate-400">
+                            <button className="hover:text-slate-600"><Settings size={14}/></button>
+                            <button className="hover:text-slate-600"><Trash2 size={14}/></button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <button className="bg-[#0073AA] hover:bg-[#005177] text-white text-[13px] font-medium px-4 py-2 rounded transition-colors">
+                        Schema Generator
+                      </button>
+                    </div>
+                  )}
+
+                  {seoActiveTab === 'social' && (
+                    <div className="space-y-4 text-[13px] text-slate-600 mt-4">
+                      <h4 className="font-semibold text-[13px] text-slate-800">Social Media Preview</h4>
+                      <p>
+                        Here you can view and edit the thumbnail, title and description that will be displayed when your site is shared on social media.
+                      </p>
+                      <p>
+                        Click on the button below to view and edit the preview.
+                      </p>
+                      <button 
+                        onClick={() => { setIsSnippetModalOpen(true); setSnippetModalTab('social'); }}
+                        className="bg-[#0073AA] hover:bg-[#005177] text-white text-[13px] font-medium px-4 py-2 rounded transition-colors"
+                      >
+                        Edit Snippet
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -660,56 +786,110 @@ export default function ContentEditor() {
               <h2 className="text-lg font-semibold text-slate-800">Preview Snippet Editor</h2>
               <button onClick={() => setIsSnippetModalOpen(false)} className="text-slate-400 hover:text-slate-700"><X size={20}/></button>
             </div>
-            <div className="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-6">
-              
-              {/* Preview Block */}
-              <div>
-                <h3 className="text-xs font-semibold text-slate-500 uppercase mb-3">Preview</h3>
-                <div className="p-4 border border-slate-200 rounded-md bg-white shadow-sm">
-                  <div className="text-xs text-slate-600 truncate mb-1">https://growlity.com{getPreviewUrl()}</div>
-                  <div className="text-xl text-[#1a0dab] font-medium leading-tight mb-1 truncate hover:underline cursor-pointer">{data.title || 'Add Title...'}</div>
-                  <div className="text-[13px] text-slate-700 line-clamp-2">{data.excerpt || data.description || 'Add an excerpt or description to preview how it will appear in search results.'}</div>
-                </div>
-              </div>
+            {/* Modal Tabs */}
+            <div className="flex items-center border-b border-slate-200 px-6 bg-white gap-6">
+               <button onClick={() => setSnippetModalTab('general')} className={`py-3 border-b-2 flex items-center gap-2 transition-colors ${snippetModalTab === 'general' ? 'border-blue-500 text-blue-600 font-medium' : 'border-transparent text-slate-500 hover:text-slate-700'}`}>
+                 <Settings size={16} /> General
+               </button>
+               <button onClick={() => setSnippetModalTab('social')} className={`py-3 border-b-2 flex items-center gap-2 transition-colors ${snippetModalTab === 'social' ? 'border-blue-500 text-blue-600 font-medium' : 'border-transparent text-slate-500 hover:text-slate-700'}`}>
+                 <Share2 size={16} /> Social
+               </button>
+            </div>
 
-              {/* Edit Fields */}
-              <div className="space-y-4">
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                     <label className="text-[13px] font-semibold text-slate-700">Title</label>
-                     <span className={`text-[10px] ${data.title?.length > 60 ? 'text-rose-500' : 'text-emerald-500'}`}>{data.title?.length || 0} / 60</span>
+            <div className="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-6 bg-slate-50">
+              
+              {snippetModalTab === 'general' && (
+                <>
+                  {/* Preview Block */}
+                  <div>
+                    <h3 className="text-xs font-semibold text-slate-500 uppercase mb-3">Preview</h3>
+                    <div className="p-4 border border-slate-200 rounded-md bg-white shadow-sm">
+                      <div className="text-xs text-slate-600 truncate mb-1">https://growlity.com{getPreviewUrl()}</div>
+                      <div className="text-xl text-[#1a0dab] font-medium leading-tight mb-1 truncate hover:underline cursor-pointer">{data.title || 'Add Title...'}</div>
+                      <div className="text-[13px] text-slate-700 line-clamp-2">{data.excerpt || data.description || 'Add an excerpt or description to preview how it will appear in search results.'}</div>
+                    </div>
                   </div>
-                  <input 
-                    type="text" 
-                    value={data.title || ''} 
-                    onChange={(e) => updateField('title', e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500 text-[13px] bg-white shadow-sm"
-                  />
-                </div>
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                     <label className="text-[13px] font-semibold text-slate-700">Permalink</label>
+
+                  {/* Edit Fields */}
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                         <label className="text-[13px] font-semibold text-slate-700">Title</label>
+                         <span className={`text-[10px] ${data.title?.length > 60 ? 'text-rose-500' : 'text-emerald-500'}`}>{data.title?.length || 0} / 60</span>
+                      </div>
+                      <input 
+                        type="text" 
+                        value={data.title || ''} 
+                        onChange={(e) => updateField('title', e.target.value)}
+                        className="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500 text-[13px] bg-white shadow-sm"
+                      />
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                         <label className="text-[13px] font-semibold text-slate-700">Permalink</label>
+                      </div>
+                      <input 
+                        type="text" 
+                        value={customSlug || ''} 
+                        onChange={(e) => setCustomSlug(e.target.value)}
+                        className="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500 text-[13px] bg-white shadow-sm"
+                      />
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                         <label className="text-[13px] font-semibold text-slate-700">Description</label>
+                         <span className={`text-[10px] ${(data.excerpt || data.description || '').length > 160 ? 'text-rose-500' : 'text-emerald-500'}`}>{(data.excerpt || data.description || '').length} / 160</span>
+                      </div>
+                      <textarea 
+                        value={data.excerpt || data.description || ''} 
+                        onChange={(e) => updateField('excerpt', e.target.value)}
+                        rows={3}
+                        className="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500 text-[13px] resize-none bg-white shadow-sm"
+                      ></textarea>
+                    </div>
                   </div>
-                  <input 
-                    type="text" 
-                    value={customSlug || ''} 
-                    onChange={(e) => setCustomSlug(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500 text-[13px] bg-white shadow-sm"
-                  />
-                </div>
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                     <label className="text-[13px] font-semibold text-slate-700">Description</label>
-                     <span className={`text-[10px] ${(data.excerpt || data.description || '').length > 160 ? 'text-rose-500' : 'text-emerald-500'}`}>{(data.excerpt || data.description || '').length} / 160</span>
+                </>
+              )}
+
+              {snippetModalTab === 'social' && (
+                <div className="space-y-6">
+                  <div className="flex items-center justify-center gap-4 border-b border-slate-200 pb-4">
+                    <button className="px-6 py-2 bg-[#1877F2] text-white rounded font-medium flex items-center gap-2"><Facebook size={16}/> Facebook</button>
+                    <button className="px-6 py-2 bg-[#1DA1F2] text-white rounded font-medium flex items-center gap-2"><Twitter size={16}/> Twitter</button>
                   </div>
-                  <textarea 
-                    value={data.excerpt || data.description || ''} 
-                    onChange={(e) => updateField('excerpt', e.target.value)}
-                    rows={3}
-                    className="w-full px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500 text-[13px] resize-none bg-white shadow-sm"
-                  ></textarea>
+                  
+                  <div className="border border-slate-200 rounded bg-white overflow-hidden shadow-sm max-w-lg mx-auto">
+                    <div className="h-48 bg-slate-200 flex items-center justify-center relative overflow-hidden group">
+                      {data.image ? (
+                        <img src={data.image} alt="Social Preview" className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="text-slate-400 flex flex-col items-center">
+                          <ImageIcon size={32} className="mb-2" />
+                          <span className="text-xs">Add Image</span>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-black/50 hidden group-hover:flex items-center justify-center transition-all">
+                        <button className="bg-white text-slate-800 text-xs font-medium px-3 py-1.5 rounded shadow-sm hover:bg-slate-50 transition-colors">
+                          Add Image
+                        </button>
+                      </div>
+                    </div>
+                    <div className="p-4 bg-slate-50/50">
+                      <div className="text-[11px] text-slate-500 uppercase font-semibold tracking-wider mb-1">growlity.com</div>
+                      <div className="text-[15px] font-bold text-slate-800 mb-1 leading-tight">{data.title || 'Your Title Here'}</div>
+                      <div className="text-[13px] text-slate-600 line-clamp-1">{data.excerpt || data.description || 'Your description here...'}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center gap-4 text-xs text-slate-500">
+                    <label className="flex items-center gap-1.5 cursor-pointer">
+                      <input type="radio" name="cardType" className="text-blue-500" defaultChecked /> Summary Card with Large Image
+                    </label>
+                    <label className="flex items-center gap-1.5 cursor-pointer">
+                      <input type="radio" name="cardType" className="text-blue-500" /> Summary Card
+                    </label>
+                  </div>
                 </div>
-              </div>
+              )}
 
             </div>
           </div>
