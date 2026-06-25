@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { MoreVertical } from 'lucide-react';
 import {
   MDXEditor,
   headingsPlugin,
@@ -32,6 +33,19 @@ interface MDXEditorComponentProps {
 
 export default function MDXEditorComponent({ markdown, onChange, onUploadImage, onBlockSelect }: MDXEditorComponentProps) {
   
+  const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState(false);
+  const optionsMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (optionsMenuRef.current && !optionsMenuRef.current.contains(e.target as Node)) {
+        setIsOptionsMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   async function imageUploadHandler(image: File) {
     if (onUploadImage) {
       return await onUploadImage(image);
@@ -215,11 +229,34 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                   onClick={() => {
                     onChange(markdown + '\n<CTA text="Ready to get started?" link="/contact" buttonText="Contact Us" variant="light" />\n');
                   }}
-                  className="px-2 py-1 text-sm font-semibold text-blue-700 hover:bg-blue-100 rounded"
+                  className="px-2 py-1 text-sm font-semibold text-blue-700 hover:bg-blue-100 rounded cursor-pointer"
                   title="Insert CTA"
                 >
                   CTA
                 </button>
+                <div className="flex-1" />
+                {/* 3-dots options menu */}
+                <div className="relative" ref={optionsMenuRef}>
+                   <button onClick={() => setIsOptionsMenuOpen(!isOptionsMenuOpen)} className="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer">
+                      <MoreVertical size={16} />
+                   </button>
+                   {isOptionsMenuOpen && (
+                     <div className="absolute right-0 top-full mt-1 w-56 bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md z-50 py-1 text-sm text-slate-700">
+                        <div className="px-4 py-2 text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Options</div>
+                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Settings</span><span className="text-[10px] text-slate-400">Ctrl+Shift+D</span></button>
+                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Duplicate</span><span className="text-[10px] text-slate-400">Ctrl+Shift+D</span></button>
+                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Insert before</span><span className="text-[10px] text-slate-400">Ctrl+Alt+T</span></button>
+                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Insert after</span><span className="text-[10px] text-slate-400">Ctrl+Alt+Y</span></button>
+                        <div className="border-t border-slate-100 my-1"></div>
+                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}>Edit as HTML</button>
+                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}>Lock</button>
+                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}>Add to Reusable blocks</button>
+                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}>Group</button>
+                        <div className="border-t border-slate-100 my-1"></div>
+                        <button className="w-full text-left px-4 py-1.5 hover:bg-red-50 text-red-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Remove block</span><span className="text-[10px] text-red-400">Del</span></button>
+                     </div>
+                   )}
+                </div>
               </div>
             )
           })
