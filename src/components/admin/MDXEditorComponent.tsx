@@ -1,5 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MoreVertical } from 'lucide-react';
+import { 
+  MoreVertical, ChevronDown, List as ListIcon, Plus, 
+  Pilcrow, ChevronUp, AlignLeft, AtSign, ListEnd, 
+  Droplet, Code, Image as ImageIcon, Keyboard, Languages, 
+  FunctionSquare, MousePointer2, Strikethrough, Subscript, Superscript,
+  ChevronsLeft
+} from 'lucide-react';
 import {
   MDXEditor,
   headingsPlugin,
@@ -34,12 +40,17 @@ interface MDXEditorComponentProps {
 export default function MDXEditorComponent({ markdown, onChange, onUploadImage, onBlockSelect }: MDXEditorComponentProps) {
   
   const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState(false);
+  const [isRichTextMenuOpen, setIsRichTextMenuOpen] = useState(false);
   const optionsMenuRef = useRef<HTMLDivElement>(null);
+  const richTextMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (optionsMenuRef.current && !optionsMenuRef.current.contains(e.target as Node)) {
         setIsOptionsMenuOpen(false);
+      }
+      if (richTextMenuRef.current && !richTextMenuRef.current.contains(e.target as Node)) {
+        setIsRichTextMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -202,15 +213,69 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
           toolbarPlugin({
             toolbarContents: () => (
               <div className="flex flex-wrap items-center gap-1 p-1">
+                {/* WordPress-like Left Icons */}
+                <button className="w-6 h-6 rounded flex items-center justify-center bg-blue-600 text-white hover:bg-blue-700 transition-colors cursor-pointer mr-1">
+                   <Plus size={14} />
+                </button>
                 <UndoRedo />
-                <div className="w-px h-4 bg-gray-300 mx-1" />
+                <button className="p-1.5 rounded text-slate-600 hover:bg-slate-200 transition-colors cursor-pointer" title="Document Overview">
+                   <ListIcon size={16} />
+                </button>
+                <button className="px-2 py-1 ml-1 bg-[#ffb800] hover:bg-[#e6a600] text-black font-bold text-[10px] uppercase rounded transition-colors cursor-pointer">
+                   Edit with Bricks
+                </button>
+                
+                <div className="w-px h-4 bg-gray-300 mx-2" />
+                
+                {/* Paragraph/block type mock */}
+                <div className="flex items-center text-slate-600 cursor-pointer hover:bg-slate-200 px-1 py-1 rounded">
+                   <Pilcrow size={16} />
+                   <div className="flex flex-col ml-0.5">
+                      <ChevronUp size={10} className="-mb-1 text-slate-400" />
+                      <ChevronDown size={10} className="text-slate-400" />
+                   </div>
+                </div>
+                
+                <div className="w-px h-4 bg-gray-300 mx-2" />
+                
+                {/* Align and AtSign */}
+                <button className="p-1.5 rounded text-slate-600 hover:bg-slate-200 transition-colors cursor-pointer">
+                   <AlignLeft size={16} />
+                </button>
+                <button className="p-1.5 rounded hover:bg-slate-200 transition-colors cursor-pointer text-[#a533a1]">
+                   <AtSign size={16} />
+                </button>
+                
+                <div className="w-px h-4 bg-gray-300 mx-2" />
+                
                 <BoldItalicUnderlineToggles />
-                <div className="w-px h-4 bg-gray-300 mx-1" />
-                <BlockTypeSelect />
-                <div className="w-px h-4 bg-gray-300 mx-1" />
-                <ListsToggle />
-                <div className="w-px h-4 bg-gray-300 mx-1" />
                 <CreateLink />
+
+                {/* Rich text options dropdown */}
+                <div className="relative" ref={richTextMenuRef}>
+                   <button onClick={() => setIsRichTextMenuOpen(!isRichTextMenuOpen)} className="p-1 rounded hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer flex items-center h-[26px]">
+                      <ChevronDown size={14} />
+                   </button>
+                   {isRichTextMenuOpen && (
+                     <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-48 bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md z-50 py-1 text-sm text-slate-700">
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsRichTextMenuOpen(false)}><ListEnd size={14} className="text-slate-400"/> Footnote</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsRichTextMenuOpen(false)}><Droplet size={14} className="text-slate-400"/> Highlight</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsRichTextMenuOpen(false)}><Code size={14} className="text-slate-400"/> Inline code</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsRichTextMenuOpen(false)}><ImageIcon size={14} className="text-slate-400"/> Inline image</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsRichTextMenuOpen(false)}><Keyboard size={14} className="text-slate-400"/> Keyboard input</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsRichTextMenuOpen(false)}><Languages size={14} className="text-slate-400"/> Language</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsRichTextMenuOpen(false)}><FunctionSquare size={14} className="text-slate-400"/> Math</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px] text-emerald-600" onClick={() => setIsRichTextMenuOpen(false)}><MousePointer2 size={14} className="text-emerald-500"/> Popup Trigger</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsRichTextMenuOpen(false)}><Strikethrough size={14} className="text-slate-400"/> Strikethrough</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsRichTextMenuOpen(false)}><Subscript size={14} className="text-slate-400"/> Subscript</button>
+                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsRichTextMenuOpen(false)}><Superscript size={14} className="text-slate-400"/> Superscript</button>
+                     </div>
+                   )}
+                </div>
+
+                <div className="w-px h-4 bg-gray-300 mx-2" />
+                <BlockTypeSelect />
+                <ListsToggle />
                 <InsertImage />
                 <InsertTable />
                 <InsertThematicBreak />
@@ -220,7 +285,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                   onClick={() => {
                     onChange(markdown + '\n<FAQ>\n  <FAQItem q="New Question?">\n    Answer goes here.\n  </FAQItem>\n</FAQ>\n');
                   }}
-                  className="px-2 py-1 text-sm font-semibold text-green-700 hover:bg-green-100 rounded"
+                  className="px-2 py-1 text-sm font-semibold text-green-700 hover:bg-green-100 rounded cursor-pointer"
                   title="Insert FAQ"
                 >
                   FAQ
@@ -236,7 +301,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                 </button>
                 <div className="flex-1" />
                 {/* 3-dots options menu */}
-                <div className="relative" ref={optionsMenuRef}>
+                <div className="relative flex items-center gap-1" ref={optionsMenuRef}>
                    <button onClick={() => setIsOptionsMenuOpen(!isOptionsMenuOpen)} className="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer">
                       <MoreVertical size={16} />
                    </button>
@@ -256,6 +321,9 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                         <button className="w-full text-left px-4 py-1.5 hover:bg-red-50 text-red-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Remove block</span><span className="text-[10px] text-red-400">Del</span></button>
                      </div>
                    )}
+                   <button className="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer ml-1">
+                      <ChevronsLeft size={16} />
+                   </button>
                 </div>
               </div>
             )
