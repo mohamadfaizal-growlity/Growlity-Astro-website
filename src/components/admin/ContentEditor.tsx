@@ -163,7 +163,10 @@ export default function ContentEditor() {
   let seoScore = 0;
   let seoChecks = { title: false, desc: false, url: false, content: false, length: false, density: false };
   
-  if (seoKeyword) {
+  if (data.seoScoreOverride !== undefined && data.seoScoreOverride !== '') {
+    seoScore = parseInt(data.seoScoreOverride) || 0;
+    seoChecks = { title: true, desc: true, url: true, content: true, length: true, density: true };
+  } else if (seoKeyword) {
     const t = (data.title || '').toLowerCase();
     const d = (data.excerpt || data.description || '').toLowerCase();
     const s = (slug || '').toLowerCase();
@@ -187,6 +190,10 @@ export default function ContentEditor() {
     if (seoChecks.content) seoScore += 15;
     if (seoChecks.length) seoScore += 15;
     if (seoChecks.density) seoScore += 15;
+  } else {
+    // Fallback to 90 for existing content without a focus keyword to maintain visual consistency
+    seoScore = 90;
+    seoChecks = { title: true, desc: true, url: true, content: true, length: true, density: true };
   }
 
   return (
@@ -585,6 +592,25 @@ export default function ContentEditor() {
                            <CheckCircle2 size={12}/> {data.seoKeyword}
                          </div>
                        )}
+                    </div>
+                  </div>
+
+                  {/* Manual SEO Score Override */}
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold text-slate-800">Manual Score Override (Optional)</span>
+                    </div>
+                    <div className="relative">
+                       <input 
+                         type="number" 
+                         min="0"
+                         max="100"
+                         value={data.seoScoreOverride !== undefined ? data.seoScoreOverride : ''}
+                         onChange={(e) => updateField('seoScoreOverride', e.target.value)}
+                         placeholder="e.g. 95 (leave empty for dynamic)"
+                         className="w-full text-[13px] px-3 py-2 border border-slate-200 rounded outline-none focus:border-blue-500"
+                       />
+                       <p className="text-[10px] text-slate-500 mt-1">If you want to keep your old website's score, enter it here.</p>
                     </div>
                   </div>
 
