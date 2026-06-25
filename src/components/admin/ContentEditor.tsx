@@ -27,6 +27,7 @@ export default function ContentEditor() {
   // Image Block States
   const [imageBlockTab, setImageBlockTab] = useState<'media' | 'settings' | 'styles'>('settings');
   const [isMediaMenuOpen, setIsMediaMenuOpen] = useState(false);
+  const [isFileBoxMenuOpen, setIsFileBoxMenuOpen] = useState(false);
   const [isVisibilityMenuOpen, setIsVisibilityMenuOpen] = useState(false);
 
   const [customSlug, setCustomSlug] = useState('');
@@ -598,40 +599,64 @@ export default function ContentEditor() {
                                   <MoreVertical size={16} />
                                 </button>
                                 {isMediaMenuOpen && (
-                                  <div className="absolute right-0 top-full mt-1 w-64 bg-white border border-slate-200 rounded-md shadow-lg z-50 py-1">
-                                    <button className="w-full flex items-center justify-between px-4 py-2 text-[13px] hover:bg-slate-50 text-blue-600">
-                                      Open Media Library <ImageIcon size={14} />
-                                    </button>
-                                    <button className="w-full flex items-center justify-between px-4 py-2 text-[13px] hover:bg-slate-50 text-slate-700">
-                                      Upload <Upload size={14} />
-                                    </button>
-                                    <button className="w-full flex items-center justify-between px-4 py-2 text-[13px] hover:bg-slate-50 text-slate-700">
-                                      Reset
-                                    </button>
-                                    <div className="border-t border-slate-100 my-1"></div>
-                                    <div className="px-4 py-2">
-                                      <div className="text-[11px] text-slate-500 mb-1">Current media URL:</div>
-                                      <div className="flex items-center gap-2 bg-slate-50 p-2 rounded">
-                                        <div className="w-6 h-6 bg-slate-200 rounded shrink-0 flex items-center justify-center">
-                                          <ImageIcon size={12} className="text-slate-400"/>
-                                        </div>
-                                        <div className="text-[11px] text-blue-600 truncate flex-1">
-                                          ...026/05/CBAM-Sectors.webp
-                                        </div>
-                                        <button className="text-slate-400 hover:text-slate-700"><Pencil size={12}/></button>
-                                        <button className="text-slate-400 hover:text-slate-700"><Copy size={12}/></button>
+                                  <div className="absolute right-0 top-full mt-1 w-56 bg-white border border-slate-200 rounded-md shadow-xl z-50">
+                                    <div className="py-2">
+                                      <div className="px-4 py-1 text-[10px] font-semibold text-slate-400 tracking-wider">MEDIA</div>
+                                      <div className="px-4 py-1.5 flex items-center justify-between text-[13px] text-slate-700 hover:bg-slate-50">
+                                        <span>Image</span>
+                                        <button className="text-[10px] font-semibold text-blue-600 uppercase tracking-wider hover:underline">Reset</button>
                                       </div>
+                                      <div className="px-4 py-1.5 flex items-center justify-between text-[13px] text-slate-700 hover:bg-slate-50">
+                                        <span>Alternative text</span>
+                                        <button className="text-[10px] font-semibold text-blue-600 uppercase tracking-wider hover:underline">Reset</button>
+                                      </div>
+                                      <div className="border-t border-slate-100 my-1"></div>
+                                      <button className="w-full text-left px-4 py-2 text-[13px] text-blue-600 hover:bg-slate-50">
+                                        Reset all
+                                      </button>
                                     </div>
                                   </div>
                                 )}
                               </div>
                            </div>
                            
-                           <div className="border border-slate-200 p-2 rounded flex items-center gap-2">
-                              <div className="w-6 h-6 bg-slate-100 flex items-center justify-center shrink-0">
-                                <ImageIcon size={12} className="text-slate-400"/>
-                              </div>
-                              <div className="text-[13px] text-blue-600 truncate flex-1">CBAM-Sectors.webp</div>
+                           <div className="relative">
+                             <button 
+                               onClick={() => setIsFileBoxMenuOpen(!isFileBoxMenuOpen)}
+                               className={`w-full border p-2 rounded flex items-center gap-2 hover:border-blue-400 transition-colors ${isFileBoxMenuOpen ? 'border-blue-500' : 'border-slate-200'}`}
+                             >
+                                <div className="w-6 h-6 bg-slate-100 flex items-center justify-center shrink-0">
+                                  <ImageIcon size={12} className="text-slate-400"/>
+                                </div>
+                                <div className="text-[13px] text-blue-600 truncate flex-1 text-left">CBAM-Sectors.webp</div>
+                             </button>
+                             {isFileBoxMenuOpen && (
+                                <div className="absolute left-0 top-full mt-1 w-full bg-white border border-blue-500 rounded-md shadow-xl z-50 py-1">
+                                  <button className="w-full flex items-center justify-between px-4 py-2 text-[13px] hover:bg-slate-50 text-blue-600">
+                                    Open Media Library <ImageIcon size={14} />
+                                  </button>
+                                  <button className="w-full flex items-center justify-between px-4 py-2 text-[13px] hover:bg-slate-50 text-slate-700">
+                                    Upload <Upload size={14} />
+                                  </button>
+                                  <button className="w-full flex items-center justify-between px-4 py-2 text-[13px] hover:bg-slate-50 text-slate-700">
+                                    Reset
+                                  </button>
+                                  <div className="border-t border-slate-100 my-1"></div>
+                                  <div className="px-4 py-2">
+                                    <div className="text-[11px] text-slate-500 mb-1">Current media URL:</div>
+                                    <div className="flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-100">
+                                      <div className="w-6 h-6 bg-slate-200 rounded shrink-0 flex items-center justify-center">
+                                        <ImageIcon size={12} className="text-slate-400"/>
+                                      </div>
+                                      <div className="text-[11px] text-blue-600 truncate flex-1">
+                                        ...026/05/CBAM-Sectors.webp
+                                      </div>
+                                      <button className="text-slate-400 hover:text-slate-700"><Pencil size={12}/></button>
+                                      <button className="text-slate-400 hover:text-slate-700"><Copy size={12}/></button>
+                                    </div>
+                                  </div>
+                                </div>
+                             )}
                            </div>
 
                            <div className="pt-2">
