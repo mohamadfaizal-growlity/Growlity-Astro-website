@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Save, ArrowLeft, Image as ImageIcon, Loader2 } from 'lucide-react';
-import MDEditor, { commands, type ICommand } from '@uiw/react-md-editor';
-import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
+import { Save, ArrowLeft, Loader2 } from 'lucide-react';
+import MDXEditorComponent from './MDXEditorComponent';
 
 export default function ContentEditor() {
   const { collection } = useParams();
@@ -72,76 +71,7 @@ export default function ContentEditor() {
     setData((prev: any) => ({ ...prev, [path]: value }));
   };
 
-  const uploadImageCommand: ICommand = {
-    name: 'image-upload',
-    keyCommand: 'image-upload',
-    buttonProps: { 'aria-label': 'Upload Image', title: 'Upload Image' },
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 20 20">
-        <path d="M15 9c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4-7H1C.5 2 0 2.5 0 3v14c0 .5.5 1 1 1h18c.5 0 1-.5 1-1V3c0-.5-.5-1-1-1zM2 16V4h16v12H2zm5.7-4.3l2.6 3.1 3.3-4.1 4.2 5.3H2.2l3.5-4.3z" fill="currentColor" />
-      </svg>
-    ),
-    execute: (state, api) => {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.onchange = async (e: any) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
 
-        setIsUploading(true);
-        const formData = new FormData();
-        formData.append('file', file);
-
-        try {
-          const res = await fetch('/api/sitepins/upload', {
-            method: 'POST',
-            body: formData
-          });
-          const resultData = await res.json();
-          
-          if (resultData.success && resultData.result?.secure_url) {
-            const modifyText = `\n![${file.name}](${resultData.result.secure_url})\n`;
-            api.replaceSelection(modifyText);
-          } else {
-            alert('Image upload failed');
-          }
-        } catch (err) {
-          console.error('Upload error', err);
-          alert('Upload failed');
-        } finally {
-          setIsUploading(false);
-        }
-      };
-      input.click();
-    }
-  };
-
-  const faqCommand: ICommand = {
-    name: 'insert-faq',
-    keyCommand: 'insert-faq',
-    buttonProps: { 'aria-label': 'Insert FAQ', title: 'Insert FAQ' },
-    icon: (
-      <span className="font-bold text-xs">FAQ</span>
-    ),
-    execute: (state, api) => {
-      const faqText = `\n<FAQ>\n  <FAQItem q="What is your question?">\n    Write your answer here.\n  </FAQItem>\n  <FAQItem q="Another question?">\n    Write another answer here.\n  </FAQItem>\n</FAQ>\n`;
-      api.replaceSelection(faqText);
-    }
-  };
-
-  const ctaCommand: ICommand = {
-    name: 'insert-cta',
-    keyCommand: 'insert-cta',
-    buttonProps: { 'aria-label': 'Insert CTA', title: 'Insert CTA' },
-    icon: (
-      <span className="font-bold text-xs">CTA</span>
-    ),
-    execute: (state, api) => {
-      const ctaText = `\n<CTA text="Ready to get started?" link="/contact" buttonText="Contact Us" />\n`;
-      api.replaceSelection(ctaText);
-    }
-  };
 
   if (loading) return <div className="p-8">Loading...</div>;
 
@@ -215,48 +145,29 @@ export default function ContentEditor() {
               </span>
             )}
           </div>
-          <div data-color-mode="light" className="prose-editor mt-4 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
-            <MDEditor
-              value={content}
+          <div data-color-mode="light" className="prose-editor mt-4 rounded-xl overflow-hidden border border-slate-200 shadow-sm bg-white">
+            <MDXEditorComponent
+              markdown={content}
               onChange={(val) => setContent(val || '')}
-              height={700}
-              commands={[
-                commands.bold,
-                commands.italic,
-                commands.strikethrough,
-                commands.hr,
-                commands.title,
-                commands.divider,
-                commands.link,
-                commands.quote,
-                commands.code,
-                commands.codeBlock,
-                commands.divider,
-                uploadImageCommand,
-                faqCommand,
-                ctaCommand,
-                commands.unorderedListCommand,
-                commands.orderedListCommand,
-                commands.checkedListCommand,
-                commands.divider,
-                commands.help
-              ]}
-              previewOptions={{
-                rehypePlugins: [
-                  [
-                    rehypeSanitize,
-                    {
-                      ...defaultSchema,
-                      attributes: {
-                        ...defaultSchema.attributes,
-                        img: ['src', 'alt', 'title', 'width', 'height', 'style', 'className']
-                      },
-                      tagNames: [...(defaultSchema.tagNames || []), 'img']
-                    }
-                  ]
-                ]
+              onUploadImage={async (file) => {
+                setIsUploading(true);
+                try {
+                  const formData = new FormData();
+                  formData.append('file', file);
+                  const response = await fetch('/api/sitepins/upload', {
+                    method: 'POST',
+                    body: formData,
+                  });
+                  if (!response.ok) throw new Error('Upload failed');
+                  const data = await response.json();
+                  return data.url;
+                } catch (err) {
+                  console.error('Error uploading image:', err);
+                  return '';
+                } finally {
+                  setIsUploading(false);
+                }
               }}
-              className="w-full !border-none shadow-none"
             />
           </div>
         </div>
