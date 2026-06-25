@@ -101,7 +101,7 @@ export default function SeoAnalyzer({ title = '', description = '', slug = '', c
   );
 
   return (
-    <div className={`rounded-xl shadow-sm border p-6 space-y-6 transition-colors duration-300 ${getScoreBg()}`}>
+    <div className={`p-6 space-y-6 transition-colors duration-300 min-h-full ${getScoreBg()}`}>
       <div className="flex items-center justify-between border-b border-slate-200/50 pb-4">
         <h2 className="text-lg font-bold text-slate-800">SEO Analyzer</h2>
         

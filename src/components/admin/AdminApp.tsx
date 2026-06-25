@@ -185,6 +185,30 @@ const PlaceholderView = ({ title }: { title: string }) => (
   </div>
 );
 
+const AdminLayout = ({ schemas, siteLogo, setIsAuthenticated }: any) => {
+  const location = useLocation();
+  const isEditorRoute = location.pathname.match(/^\/collections\/[^\/]+\/[^\/]+$/) && !location.pathname.endsWith('/builder');
+
+  return (
+    <div className="flex min-h-screen bg-[#F8FAFC]">
+      {!isEditorRoute && (
+        <Sidebar schemas={schemas} siteLogo={siteLogo} onLogout={() => setIsAuthenticated(false)} />
+      )}
+      <main className={`flex-1 overflow-x-hidden transition-all duration-300 ${!isEditorRoute ? 'ml-[72px]' : ''}`}>
+        <Routes>
+          <Route path="/" element={<Dashboard schemas={schemas} />} />
+          <Route path="/collections/:collection" element={<CollectionList />} />
+          <Route path="/collections/:collection/:slug" element={<ContentEditor />} />
+          <Route path="/collections/:collection/:slug/builder" element={<VisualEditor />} />
+          <Route path="/media" element={<MediaLibrary />} />
+          <Route path="/emails" element={<PlaceholderView title="Email Campaigns" />} />
+          <Route path="/settings" element={<SettingsView />} />
+        </Routes>
+      </main>
+    </div>
+  );
+};
+
 export default function AdminApp() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [email, setEmail] = useState('');
@@ -203,7 +227,6 @@ export default function AdminApp() {
         setLoading(false);
       });
 
-    // Fetch initial settings for logo
     fetch('/api/sitepins/settings')
       .then(res => res.json())
       .then(data => {
@@ -213,7 +236,6 @@ export default function AdminApp() {
       })
       .catch(console.error);
 
-    // Listen for live updates from SettingsView
     const handleSettingsUpdate = (e: any) => {
       if (e.detail && typeof e.detail.siteLogo !== 'undefined') {
         setSiteLogo(e.detail.siteLogo);
@@ -224,7 +246,7 @@ export default function AdminApp() {
     return () => window.removeEventListener('settings-updated', handleSettingsUpdate as EventListener);
   }, []);
 
-const blobStyles = `
+  const blobStyles = `
   @keyframes blob {
     0% { transform: translate(0px, 0px) scale(1); }
     33% { transform: translate(30px, -50px) scale(1.1); }
@@ -240,14 +262,12 @@ const blobStyles = `
   .animation-delay-4000 {
     animation-delay: 4s;
   }
-`;
+  `;
 
   if (!isAuthenticated) {
-    // ... authentication UI remains same ...
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 relative overflow-hidden">
         <style>{blobStyles}</style>
-        {/* Glorious Background Effects */}
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#0066FF] rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob"></div>
         <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] bg-[#00C853] rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-2000"></div>
         <div className="absolute bottom-[-20%] left-[20%] w-[40%] h-[40%] bg-purple-500 rounded-full mix-blend-multiply filter blur-[100px] opacity-30 animate-blob animation-delay-4000"></div>
@@ -349,20 +369,7 @@ const blobStyles = `
 
   return (
     <Router>
-      <div className="flex min-h-screen bg-[#F8FAFC]">
-        <Sidebar schemas={schemas} siteLogo={siteLogo} onLogout={() => setIsAuthenticated(false)} />
-        <main className="flex-1 overflow-x-hidden ml-[72px] transition-all duration-300">
-          <Routes>
-            <Route path="/" element={<Dashboard schemas={schemas} />} />
-            <Route path="/collections/:collection" element={<CollectionList />} />
-            <Route path="/collections/:collection/:slug" element={<ContentEditor />} />
-            <Route path="/collections/:collection/:slug/builder" element={<VisualEditor />} />
-            <Route path="/media" element={<MediaLibrary />} />
-            <Route path="/emails" element={<PlaceholderView title="Email Campaigns" />} />
-            <Route path="/settings" element={<SettingsView />} />
-          </Routes>
-        </main>
-      </div>
+      <AdminLayout schemas={schemas} siteLogo={siteLogo} setIsAuthenticated={setIsAuthenticated} />
     </Router>
   );
 }
