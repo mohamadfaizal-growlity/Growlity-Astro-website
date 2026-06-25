@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Save, ArrowLeft } from 'lucide-react';
 import MDEditor from '@uiw/react-md-editor';
-import SeoAnalyzer from './SeoAnalyzer';export default function ContentEditor() {
+
+export default function ContentEditor() {
   const { collection } = useParams();
   let { slug } = useParams();
   if (slug) slug = decodeURIComponent(slug);
@@ -92,8 +93,8 @@ import SeoAnalyzer from './SeoAnalyzer';export default function ContentEditor() 
       </div>
 
       <div className="space-y-8 max-w-[1600px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 gap-8">
+          <div className="space-y-6">
             <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8 space-y-6">
               <h2 className="text-xl font-bold text-slate-800 border-b border-slate-100 pb-3">Metadata & Fields</h2>
               {schema?.template?.map((field: any) => (
@@ -129,29 +130,6 @@ import SeoAnalyzer from './SeoAnalyzer';export default function ContentEditor() 
                 </div>
               ))}
             </div>
-          </div>
-          
-          <div className="lg:col-span-1 space-y-8">
-            <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8 space-y-4">
-              <h2 className="text-xl font-bold text-slate-800 border-b border-slate-100 pb-3">Publish Settings</h2>
-              <div className="text-sm text-slate-600 flex items-center justify-between bg-slate-50 p-4 rounded-xl">
-                <span className="font-medium">Status</span>
-                <span className="text-[#00C853] font-bold bg-[#00C853]/10 px-3 py-1 rounded-full">Draft</span>
-              </div>
-              <button 
-                onClick={() => navigate(`/collections/${collection}/${encodeURIComponent(slug || '')}/builder`)}
-                className="w-full mt-4 bg-gradient-to-r from-indigo-50 to-blue-50 hover:from-indigo-100 hover:to-blue-100 text-indigo-700 border border-indigo-200 py-3 rounded-xl font-bold transition-colors mb-6 shadow-sm flex items-center justify-center gap-2"
-              >
-                <span>✨</span> Open Bricks Visual Editor
-              </button>
-            </div>
-            
-            <SeoAnalyzer 
-              title={data.title || ''}
-              description={data.description || ''}
-              slug={slug || ''}
-              content={content || ''}
-            />
           </div>
         </div>
 
