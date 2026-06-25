@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X, Briefcase, FileBadge, Share2, Facebook, Twitter, Star, UserCircle2 } from 'lucide-react';
+import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X, Briefcase, FileBadge, Share2, Facebook, Twitter, Star, UserCircle2, List, Moon, MoreVertical, Upload, Copy, Pencil, Sparkles, Plus } from 'lucide-react';
 import ErrorBoundary from './ErrorBoundary';
 import SeoAnalyzer from './SeoAnalyzer';
 
@@ -23,6 +23,12 @@ export default function ContentEditor() {
   const [isPanelOpen, setIsPanelOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<'post' | 'block' | 'seo'>('post');
   const [activeBlock, setActiveBlock] = useState<'Image' | 'FAQ Section' | null>(null);
+  
+  // Image Block States
+  const [imageBlockTab, setImageBlockTab] = useState<'media' | 'settings' | 'styles'>('settings');
+  const [isMediaMenuOpen, setIsMediaMenuOpen] = useState(false);
+  const [isVisibilityMenuOpen, setIsVisibilityMenuOpen] = useState(false);
+
   const [customSlug, setCustomSlug] = useState('');
 
   useEffect(() => {
@@ -555,21 +561,209 @@ export default function ContentEditor() {
               {activeTab === 'block' && (
                 <div className="p-4">
                   {activeBlock === 'Image' ? (
-                    <div className="space-y-4 text-sm text-slate-700">
-                      <div className="flex items-center gap-2 font-medium border-b border-slate-200 pb-2">
+                    <div className="text-sm text-slate-800">
+                      <div className="flex items-center gap-2 font-medium pb-2 border-b border-slate-200">
                         <ImageIcon size={16} className="text-slate-500" /> Image
                       </div>
-                      <p className="text-xs text-slate-500">Insert an image to make a visual statement.</p>
+                      <p className="text-[13px] text-slate-500 mt-2 mb-4">Insert an image to make a visual statement.</p>
                       
-                      <div className="space-y-3 pt-4">
-                         <div className="text-xs font-semibold uppercase tracking-wider text-slate-500">Alternative Text</div>
-                         <textarea 
-                           className="w-full border border-slate-200 p-2 text-[13px] rounded outline-none focus:border-blue-500 bg-white shadow-sm resize-none" 
-                           rows={3} 
-                           placeholder="Describe the purpose of the image. Leave empty if decorative."
-                         ></textarea>
-                         <a href="#" className="text-[11px] text-blue-600 hover:underline">Describe the purpose of the image.</a>
+                      {/* Sub features navigation */}
+                      <div className="flex items-center border-b border-slate-200 mb-4">
+                        <button 
+                          onClick={() => setImageBlockTab('media')}
+                          className={`flex-1 py-2 flex justify-center border-b-2 transition-colors ${imageBlockTab === 'media' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+                        >
+                          <List size={16} />
+                        </button>
+                        <button 
+                          onClick={() => setImageBlockTab('settings')}
+                          className={`flex-1 py-2 flex justify-center border-b-2 transition-colors ${imageBlockTab === 'settings' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+                        >
+                          <Settings size={16} />
+                        </button>
+                        <button 
+                          onClick={() => setImageBlockTab('styles')}
+                          className={`flex-1 py-2 flex justify-center border-b-2 transition-colors ${imageBlockTab === 'styles' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-400 hover:text-slate-600'}`}
+                        >
+                          <Moon size={16} />
+                        </button>
                       </div>
+
+                      {imageBlockTab === 'media' && (
+                        <div className="space-y-4">
+                           <div className="flex items-center justify-between">
+                              <span className="text-xs font-semibold text-slate-500">Media</span>
+                              <div className="relative">
+                                <button onClick={() => setIsMediaMenuOpen(!isMediaMenuOpen)} className="p-1 text-slate-400 hover:text-slate-700">
+                                  <MoreVertical size={16} />
+                                </button>
+                                {isMediaMenuOpen && (
+                                  <div className="absolute right-0 top-full mt-1 w-64 bg-white border border-slate-200 rounded-md shadow-lg z-50 py-1">
+                                    <button className="w-full flex items-center justify-between px-4 py-2 text-[13px] hover:bg-slate-50 text-blue-600">
+                                      Open Media Library <ImageIcon size={14} />
+                                    </button>
+                                    <button className="w-full flex items-center justify-between px-4 py-2 text-[13px] hover:bg-slate-50 text-slate-700">
+                                      Upload <Upload size={14} />
+                                    </button>
+                                    <button className="w-full flex items-center justify-between px-4 py-2 text-[13px] hover:bg-slate-50 text-slate-700">
+                                      Reset
+                                    </button>
+                                    <div className="border-t border-slate-100 my-1"></div>
+                                    <div className="px-4 py-2">
+                                      <div className="text-[11px] text-slate-500 mb-1">Current media URL:</div>
+                                      <div className="flex items-center gap-2 bg-slate-50 p-2 rounded">
+                                        <div className="w-6 h-6 bg-slate-200 rounded shrink-0 flex items-center justify-center">
+                                          <ImageIcon size={12} className="text-slate-400"/>
+                                        </div>
+                                        <div className="text-[11px] text-blue-600 truncate flex-1">
+                                          ...026/05/CBAM-Sectors.webp
+                                        </div>
+                                        <button className="text-slate-400 hover:text-slate-700"><Pencil size={12}/></button>
+                                        <button className="text-slate-400 hover:text-slate-700"><Copy size={12}/></button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                           </div>
+                           
+                           <div className="border border-slate-200 p-2 rounded flex items-center gap-2">
+                              <div className="w-6 h-6 bg-slate-100 flex items-center justify-center shrink-0">
+                                <ImageIcon size={12} className="text-slate-400"/>
+                              </div>
+                              <div className="text-[13px] text-blue-600 truncate flex-1">CBAM-Sectors.webp</div>
+                           </div>
+
+                           <div className="pt-2">
+                             <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-2">Alternative Text</div>
+                             <textarea 
+                               className="w-full border border-slate-300 p-2 text-[13px] rounded outline-none focus:border-blue-500 bg-white resize-none" 
+                               rows={3}
+                               defaultValue="CBAM Sectors"
+                             ></textarea>
+                             <a href="#" className="text-[11px] text-blue-600 hover:underline">Describe the purpose of the image.</a>
+                             <div className="text-[11px] text-slate-500">Leave empty if decorative.</div>
+                           </div>
+                        </div>
+                      )}
+
+                      {imageBlockTab === 'settings' && (
+                        <div className="space-y-4">
+                           {/* Settings */}
+                           <div>
+                              <div className="flex items-center justify-between mb-3">
+                                 <span className="text-[13px] font-semibold text-slate-800">Settings</span>
+                                 <ChevronDown size={16} className="text-slate-400"/>
+                              </div>
+                              <div className="space-y-1">
+                                <div className="flex items-center justify-between">
+                                  <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Resolution</span>
+                                  <button className="text-blue-600 text-[11px] flex items-center gap-1 font-medium hover:underline">
+                                    <Sparkles size={10} /> Generate Alt
+                                  </button>
+                                </div>
+                                <select className="w-full border border-slate-300 p-2 text-[13px] rounded outline-none bg-white">
+                                  <option>Full Size</option>
+                                  <option>Large</option>
+                                  <option>Medium</option>
+                                  <option>Thumbnail</option>
+                                </select>
+                                <div className="text-[11px] text-slate-500 mt-1">Select the size of the source image.</div>
+                              </div>
+                           </div>
+
+                           <div className="border-t border-slate-200"></div>
+
+                           {/* Popup Controls */}
+                           <div>
+                              <div className="flex items-center justify-between mb-3">
+                                 <div className="flex items-center gap-1">
+                                   <span className="text-[13px] font-semibold text-slate-800">Popup Controls</span>
+                                   <span className="text-emerald-500"><Settings size={14}/></span>
+                                 </div>
+                                 <ChevronDown size={16} className="text-slate-400"/>
+                              </div>
+                              <p className="text-[12px] text-slate-600 mb-3">These settings allow you to control popups with this block.</p>
+                              <div className="space-y-1">
+                                <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1">
+                                  Open Popup <span className="w-3 h-3 bg-blue-600 text-white rounded-full flex items-center justify-center text-[8px]">?</span>
+                                </div>
+                                <select className="w-full border border-slate-300 p-2 text-[13px] rounded outline-none bg-white">
+                                  <option>Choose a popup</option>
+                                </select>
+                                <div className="text-[11px] text-slate-500 mt-1">Open a popup when clicking this block</div>
+                              </div>
+                           </div>
+                           
+                           <div className="border-t border-slate-200"></div>
+
+                           {/* Visibility */}
+                           <div className="relative">
+                              <button 
+                                onClick={() => setIsVisibilityMenuOpen(!isVisibilityMenuOpen)}
+                                className="w-full flex items-center justify-between text-[13px] font-semibold text-slate-800 hover:text-blue-600 transition-colors group"
+                              >
+                                 Visibility <Plus size={16} className="text-slate-400 group-hover:text-blue-500"/>
+                              </button>
+                              {isVisibilityMenuOpen && (
+                                <div className="absolute right-0 top-full mt-1 w-56 bg-white border border-slate-200 rounded shadow-xl z-50">
+                                  <div className="py-2">
+                                    <div className="px-4 py-1 text-[10px] font-semibold text-slate-400 tracking-wider">CONTROLS</div>
+                                    {['Browser & Device', 'Cookie', 'Date & Time', 'Hide Block', 'Location', 'Metadata', 'Query String', 'Referral Source', 'Screen Size', 'URL Path', 'User Role', 'Visibility Presets'].map(item => (
+                                      <button key={item} className="w-full text-left px-4 py-1.5 text-[12px] text-slate-600 hover:bg-slate-50 hover:text-blue-600">
+                                        {item}
+                                      </button>
+                                    ))}
+                                    <div className="border-t border-slate-100 my-2"></div>
+                                    <div className="px-4 py-1 text-[10px] font-semibold text-slate-400 tracking-wider">INTEGRATIONS</div>
+                                    <button className="w-full flex items-center gap-2 px-4 py-1.5 text-[12px] text-slate-600 hover:bg-slate-50 hover:text-blue-600">
+                                      <span className="w-4 h-4 bg-emerald-100 text-emerald-600 rounded flex items-center justify-center text-[10px] font-bold">ACF</span>
+                                      Advanced Custom Fields
+                                    </button>
+                                    <div className="border-t border-slate-100 my-2"></div>
+                                    <button className="w-full text-left px-4 py-1.5 text-[12px] text-slate-600 hover:bg-slate-50">Copy</button>
+                                    <button className="w-full text-left px-4 py-1.5 text-[12px] text-slate-600 hover:bg-slate-50">Import</button>
+                                    <button className="w-full text-left px-4 py-1.5 text-[12px] text-slate-400 hover:bg-slate-50">Reset all</button>
+                                  </div>
+                                </div>
+                              )}
+                           </div>
+                           
+                           <div className="border-t border-slate-200"></div>
+
+                           {/* Advanced */}
+                           <div>
+                              <div className="flex items-center justify-between mb-3">
+                                 <span className="text-[13px] font-semibold text-slate-800">Advanced</span>
+                                 <ChevronDown size={16} className="text-slate-400"/>
+                              </div>
+                              <div className="space-y-4">
+                                <div>
+                                  <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">HTML Anchor</div>
+                                  <input type="text" className="w-full border border-slate-300 p-2 text-[13px] rounded outline-none" />
+                                  <p className="text-[11px] text-slate-500 mt-1">Enter a word or two — without spaces — to make a unique web address just for this block, called an "anchor". Then, you'll be able to link directly to this section of your page. <a href="#" className="text-blue-600 hover:underline">Learn more about anchors</a></p>
+                                </div>
+                                <div>
+                                  <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Additional CSS Class(es)</div>
+                                  <input type="text" className="w-full border border-slate-300 p-2 text-[13px] rounded outline-none" />
+                                  <p className="text-[11px] text-slate-500 mt-1">Separate multiple classes with spaces.</p>
+                                </div>
+                                <div>
+                                  <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Title Attribute</div>
+                                  <textarea rows={2} className="w-full border border-slate-300 p-2 text-[13px] rounded outline-none resize-none"></textarea>
+                                  <p className="text-[11px] text-slate-500 mt-1">Describe the role of this image on the page. <a href="#" className="text-blue-600 hover:underline">Note: many devices and browsers do not display this text</a></p>
+                                </div>
+                              </div>
+                           </div>
+                        </div>
+                      )}
+
+                      {imageBlockTab === 'styles' && (
+                        <div className="py-8 text-center text-[13px] text-slate-500">
+                          <Moon size={24} className="mx-auto text-slate-300 mb-2" />
+                          <p>Style options will appear here.</p>
+                        </div>
+                      )}
                     </div>
                   ) : activeBlock === 'FAQ Section' ? (
                     <div className="space-y-4 text-sm text-slate-700">
