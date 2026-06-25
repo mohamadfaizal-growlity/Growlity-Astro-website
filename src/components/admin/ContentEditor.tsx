@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Save, ArrowLeft } from 'lucide-react';
-import MDEditor from '@uiw/react-md-editor';
+import { Save, ArrowLeft, Image as ImageIcon, Loader2 } from 'lucide-react';
+import MDEditor, { commands, ICommand } from '@uiw/react-md-editor';
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 
 export default function ContentEditor() {
@@ -17,6 +17,7 @@ export default function ContentEditor() {
   const [data, setData] = useState<any>({});
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isUploading, setIsUploading] = useState(false);
 
   const isNew = slug === 'new';
 
@@ -69,6 +70,51 @@ export default function ContentEditor() {
 
   const updateField = (path: string, value: any) => {
     setData((prev: any) => ({ ...prev, [path]: value }));
+  };
+
+  const uploadImageCommand: ICommand = {
+    name: 'image-upload',
+    keyCommand: 'image-upload',
+    buttonProps: { 'aria-label': 'Upload Image', title: 'Upload Image' },
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 20 20">
+        <path d="M15 9c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4-7H1C.5 2 0 2.5 0 3v14c0 .5.5 1 1 1h18c.5 0 1-.5 1-1V3c0-.5-.5-1-1-1zM2 16V4h16v12H2zm5.7-4.3l2.6 3.1 3.3-4.1 4.2 5.3H2.2l3.5-4.3z" fill="currentColor" />
+      </svg>
+    ),
+    execute: (state, api) => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = async (e: any) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setIsUploading(true);
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+          const res = await fetch('/api/sitepins/upload', {
+            method: 'POST',
+            body: formData
+          });
+          const resultData = await res.json();
+          
+          if (resultData.success && resultData.result?.secure_url) {
+            const modifyText = `\n![${file.name}](${resultData.result.secure_url})\n`;
+            api.replaceSelection(modifyText);
+          } else {
+            alert('Image upload failed');
+          }
+        } catch (err) {
+          console.error('Upload error', err);
+          alert('Upload failed');
+        } finally {
+          setIsUploading(false);
+        }
+      };
+      input.click();
+    }
   };
 
   if (loading) return <div className="p-8">Loading...</div>;
@@ -135,12 +181,38 @@ export default function ContentEditor() {
         </div>
 
         <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8 space-y-4">
-          <h2 className="text-xl font-bold text-slate-800 border-b border-slate-100 pb-3">Main Content</h2>
+          <div className="flex items-center gap-3 border-b border-slate-100 pb-3">
+            <h2 className="text-xl font-bold text-slate-800">Main Content</h2>
+            {isUploading && (
+              <span className="flex items-center gap-2 text-sm text-blue-600 bg-blue-50 px-3 py-1 rounded-full font-medium">
+                <Loader2 className="animate-spin w-4 h-4" /> Uploading image...
+              </span>
+            )}
+          </div>
           <div data-color-mode="light" className="prose-editor mt-4 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
             <MDEditor
               value={content}
               onChange={(val) => setContent(val || '')}
               height={700}
+              commands={[
+                commands.bold,
+                commands.italic,
+                commands.strikethrough,
+                commands.hr,
+                commands.title,
+                commands.divider,
+                commands.link,
+                commands.quote,
+                commands.code,
+                commands.codeBlock,
+                commands.divider,
+                uploadImageCommand,
+                commands.unorderedListCommand,
+                commands.orderedListCommand,
+                commands.checkedListCommand,
+                commands.divider,
+                commands.help
+              ]}
               previewOptions={{
                 rehypePlugins: [
                   [
