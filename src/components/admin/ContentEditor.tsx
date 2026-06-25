@@ -33,6 +33,7 @@ export default function ContentEditor() {
   const mediaMenuRef = useRef<HTMLDivElement>(null);
   const fileBoxMenuRef = useRef<HTMLDivElement>(null);
   const visibilityMenuRef = useRef<HTMLDivElement>(null);
+  const postMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -44,6 +45,9 @@ export default function ContentEditor() {
       }
       if (visibilityMenuRef.current && !visibilityMenuRef.current.contains(event.target as Node)) {
         setIsVisibilityMenuOpen(false);
+      }
+      if (postMenuRef.current && !postMenuRef.current.contains(event.target as Node)) {
+        setIsPostMenuOpen(false);
       }
     };
     
@@ -374,8 +378,8 @@ export default function ContentEditor() {
                            {data.title || 'Add title...'}
                          </div>
                       </div>
-                      <div className="relative">
-                        <button onClick={() => setIsPostMenuOpen(!isPostMenuOpen)} className="text-slate-400 hover:text-slate-700 p-1 rounded-sm hover:bg-slate-100 transition-colors">
+                      <div className="relative" ref={postMenuRef}>
+                        <button onClick={() => setIsPostMenuOpen(!isPostMenuOpen)} className="text-slate-400 hover:text-slate-700 p-1 rounded-sm hover:bg-slate-100 transition-colors cursor-pointer">
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
                         </button>
                         {isPostMenuOpen && (
@@ -468,7 +472,7 @@ export default function ContentEditor() {
                   {/* Categories Accordion */}
                   <div>
                      <button 
-                       className="w-full flex justify-between items-center p-4 hover:bg-slate-50 transition-colors"
+                       className="w-full flex justify-between items-center p-4 hover:bg-slate-50 transition-colors cursor-pointer"
                        onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
                      >
                         <h3 className="text-[13px] font-medium text-slate-800">Categories</h3>
@@ -479,12 +483,12 @@ export default function ContentEditor() {
                           <div className="space-y-2.5 max-h-48 overflow-y-auto custom-scrollbar pr-2 mb-4">
                              {['Blog', 'Ecovadis', 'Sustainability', 'Uncategorized'].map(cat => (
                                 <label key={cat} className="flex items-center gap-2 cursor-pointer group">
-                                   <input type="checkbox" defaultChecked={cat === 'Blog'} className="w-4 h-4 rounded-sm border-slate-300 text-blue-600 focus:ring-blue-500 checked:bg-blue-600" />
+                                   <input type="checkbox" defaultChecked={cat === 'Blog'} className="w-4 h-4 rounded-sm border-slate-300 text-blue-600 focus:ring-blue-500 checked:bg-blue-600 cursor-pointer" />
                                    <span className="text-[13px] text-slate-700 group-hover:text-slate-900">{cat}</span>
                                 </label>
                              ))}
                           </div>
-                          <button className="text-blue-600 text-[13px] hover:underline font-medium">Add Category</button>
+                          <button className="text-blue-600 text-[13px] hover:underline font-medium cursor-pointer">Add Category</button>
                        </div>
                      )}
                   </div>
@@ -492,7 +496,7 @@ export default function ContentEditor() {
                   {/* Tags Accordion */}
                   <div>
                      <button 
-                       className="w-full flex justify-between items-center p-4 hover:bg-slate-50 transition-colors"
+                       className="w-full flex justify-between items-center p-4 hover:bg-slate-50 transition-colors cursor-pointer"
                        onClick={() => setIsTagsOpen(!isTagsOpen)}
                      >
                         <h3 className="text-[13px] font-medium text-slate-800">Tags</h3>
@@ -505,7 +509,7 @@ export default function ContentEditor() {
                             <div className="flex flex-wrap gap-1.5 mb-2 border border-slate-300 p-1.5 rounded focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
                                {tags.map(tag => (
                                  <span key={tag} className="bg-slate-100 text-slate-700 text-[13px] px-2 py-0.5 rounded-sm flex items-center gap-1.5">
-                                   {tag} <button onClick={() => removeTag(tag)} className="text-slate-400 hover:text-slate-600 leading-none mb-0.5">×</button>
+                                   {tag} <button onClick={() => removeTag(tag)} className="text-slate-400 hover:text-slate-600 leading-none mb-0.5 cursor-pointer">×</button>
                                  </span>
                                ))}
                                <input 
@@ -527,7 +531,7 @@ export default function ContentEditor() {
                                    <button 
                                      key={suggestion}
                                      onClick={() => addTag(suggestion)}
-                                     className="w-full text-left px-3 py-2 text-[13px] text-slate-700 hover:bg-blue-600 hover:text-white transition-colors"
+                                     className="w-full text-left px-3 py-2 text-[13px] text-slate-700 hover:bg-blue-600 hover:text-white transition-colors cursor-pointer"
                                    >
                                      {suggestion}
                                    </button>
@@ -543,7 +547,7 @@ export default function ContentEditor() {
                   {/* Unlist Post Accordion */}
                   <div>
                      <button 
-                       className="w-full flex justify-between items-center p-4 hover:bg-slate-50 transition-colors"
+                       className="w-full flex justify-between items-center p-4 hover:bg-slate-50 transition-colors cursor-pointer"
                        onClick={() => setIsUnlistOpen(!isUnlistOpen)}
                      >
                         <h3 className="text-[13px] font-medium text-slate-800">Unlist Post</h3>
@@ -552,7 +556,7 @@ export default function ContentEditor() {
                      {isUnlistOpen && (
                        <div className="px-4 pb-4">
                           <label className="flex items-start gap-2 cursor-pointer group mb-2">
-                             <input type="checkbox" className="w-4 h-4 mt-0.5 rounded-sm border-slate-300 text-blue-600 focus:ring-blue-500" />
+                             <input type="checkbox" className="w-4 h-4 mt-0.5 rounded-sm border-slate-300 text-blue-600 focus:ring-blue-500 cursor-pointer" />
                              <span className="text-[13px] font-medium text-slate-700">Unlist this post?</span>
                           </label>
                           <p className="text-[12px] text-slate-500 pl-6">
@@ -565,7 +569,7 @@ export default function ContentEditor() {
                   {/* Link Suggestions Accordion */}
                   <div>
                      <button 
-                       className="w-full flex justify-between items-center p-4 hover:bg-slate-50 transition-colors"
+                       className="w-full flex justify-between items-center p-4 hover:bg-slate-50 transition-colors cursor-pointer"
                        onClick={() => setIsLinkSuggestionsOpen(!isLinkSuggestionsOpen)}
                      >
                         <h3 className="text-[13px] font-medium text-slate-800">Link Suggestions</h3>
@@ -714,18 +718,18 @@ export default function ContentEditor() {
                         <div className="space-y-4">
                            {/* Settings */}
                            <div>
-                              <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center justify-between mb-3 cursor-pointer">
                                  <span className="text-[13px] font-semibold text-slate-800">Settings</span>
                                  <ChevronDown size={16} className="text-slate-400"/>
                               </div>
                               <div className="space-y-1">
                                 <div className="flex items-center justify-between">
                                   <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Resolution</span>
-                                  <button className="text-blue-600 text-[11px] flex items-center gap-1 font-medium hover:underline">
+                                  <button className="text-blue-600 text-[11px] flex items-center gap-1 font-medium hover:underline cursor-pointer">
                                     <Sparkles size={10} /> Generate Alt
                                   </button>
                                 </div>
-                                <select className="w-full border border-slate-300 p-2 text-[13px] rounded outline-none bg-white">
+                                <select className="w-full border border-slate-300 p-2 text-[13px] rounded outline-none bg-white cursor-pointer">
                                   <option>Full Size</option>
                                   <option>Large</option>
                                   <option>Medium</option>
@@ -739,7 +743,7 @@ export default function ContentEditor() {
 
                            {/* Popup Controls */}
                            <div>
-                              <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center justify-between mb-3 cursor-pointer">
                                  <div className="flex items-center gap-1">
                                    <span className="text-[13px] font-semibold text-slate-800">Popup Controls</span>
                                    <span className="text-emerald-500"><Settings size={14}/></span>
@@ -770,7 +774,7 @@ export default function ContentEditor() {
                                     setIsFileBoxMenuOpen(false);
                                   }
                                 }}
-                                className="w-full flex items-center justify-between text-[13px] font-semibold text-slate-800 hover:text-blue-600 transition-colors group"
+                                className="w-full flex items-center justify-between text-[13px] font-semibold text-slate-800 hover:text-blue-600 transition-colors group cursor-pointer"
                               >
                                  Visibility <Plus size={16} className="text-slate-400 group-hover:text-blue-500"/>
                               </button>
@@ -802,7 +806,7 @@ export default function ContentEditor() {
 
                            {/* Advanced */}
                            <div>
-                              <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center justify-between mb-3 cursor-pointer">
                                  <span className="text-[13px] font-semibold text-slate-800">Advanced</span>
                                  <ChevronDown size={16} className="text-slate-400"/>
                               </div>
