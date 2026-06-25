@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Save, ArrowLeft, Loader2 } from 'lucide-react';
-import MDXEditorComponent from './MDXEditorComponent';
+import ErrorBoundary from './ErrorBoundary';
+
+const MDXEditorComponent = lazy(() => import('./MDXEditorComponent'));
 
 export default function ContentEditor() {
   const { collection } = useParams();
@@ -146,29 +148,33 @@ export default function ContentEditor() {
             )}
           </div>
           <div data-color-mode="light" className="prose-editor mt-4 rounded-xl overflow-hidden border border-slate-200 shadow-sm bg-white">
-            <MDXEditorComponent
-              markdown={content}
-              onChange={(val) => setContent(val || '')}
-              onUploadImage={async (file) => {
-                setIsUploading(true);
-                try {
-                  const formData = new FormData();
-                  formData.append('file', file);
-                  const response = await fetch('/api/sitepins/upload', {
-                    method: 'POST',
-                    body: formData,
-                  });
-                  if (!response.ok) throw new Error('Upload failed');
-                  const data = await response.json();
-                  return data.url;
-                } catch (err) {
-                  console.error('Error uploading image:', err);
-                  return '';
-                } finally {
-                  setIsUploading(false);
-                }
-              }}
-            />
+            <ErrorBoundary>
+              <Suspense fallback={<div className="p-8 text-center text-gray-500">Loading editor...</div>}>
+                <MDXEditorComponent
+                  markdown={content}
+                  onChange={(val) => setContent(val || '')}
+                  onUploadImage={async (file) => {
+                    setIsUploading(true);
+                    try {
+                      const formData = new FormData();
+                      formData.append('file', file);
+                      const response = await fetch('/api/sitepins/upload', {
+                        method: 'POST',
+                        body: formData,
+                      });
+                      if (!response.ok) throw new Error('Upload failed');
+                      const data = await response.json();
+                      return data.url;
+                    } catch (err) {
+                      console.error('Error uploading image:', err);
+                      return '';
+                    } finally {
+                      setIsUploading(false);
+                    }
+                  }}
+                />
+              </Suspense>
+            </ErrorBoundary>
           </div>
         </div>
       </div>
