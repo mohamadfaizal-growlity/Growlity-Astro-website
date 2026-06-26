@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, ChevronUp, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X, Briefcase, FileBadge, Share2, Facebook, Twitter, Star, UserCircle2, List, Moon, MoreVertical, Upload, Copy, Pencil, Sparkles, Plus } from 'lucide-react';
+import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, ChevronUp, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X, Briefcase, FileBadge, Share2, Facebook, Twitter, Star, UserCircle2, List, Moon, MoreVertical, Upload, Copy, Pencil, Sparkles, Plus, Minus } from 'lucide-react';
 import ErrorBoundary from './ErrorBoundary';
 import SeoAnalyzer from './SeoAnalyzer';
 
@@ -862,14 +862,47 @@ export default function ContentEditor() {
                           <div className="flex items-center gap-2">Popup Controls <span className="text-emerald-500"><Settings size={14}/></span></div>
                           {openPanels.popupControls ? <ChevronUp size={16} className="text-slate-400"/> : <ChevronDown size={16} className="text-slate-400"/>}
                         </div>
-                        {openPanels.popupControls && <div className="p-4 text-xs text-slate-500 border-t border-slate-100">Popup controls content goes here...</div>}
+                        {openPanels.popupControls && (
+                          <div className="p-4 bg-white border-t border-slate-100">
+                             <p className="text-[12px] text-slate-600 mb-4 leading-relaxed">
+                               These settings allow you to control popups with this block.
+                             </p>
+                             <div className="mb-2 flex items-center gap-1 text-[11px] font-semibold text-slate-500 tracking-wider">
+                               OPEN POPUP <span className="text-blue-500 rounded-full w-3 h-3 flex items-center justify-center border border-blue-500 text-[9px] cursor-help">?</span>
+                             </div>
+                             <select className="w-full text-[13px] border border-slate-300 rounded p-2 outline-none mb-1 text-slate-600 bg-white">
+                               <option>Choose a popup</option>
+                             </select>
+                             <p className="text-[11px] text-slate-400 mt-1">Open a popup when clicking this block</p>
+                          </div>
+                        )}
                       </div>
                       
-                      <div>
-                        <div onClick={() => togglePanel('visibility1')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
-                          Visibility {openPanels.visibility1 ? <Minus size={16} className="text-slate-400"/> : <Plus size={16} className="text-slate-400"/>}
+                      <div className="relative">
+                        <div onClick={() => togglePanel('visibility1')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer border-t border-slate-100">
+                          Visibility {openPanels.visibility1 ? <Minus size={16} className="text-red-400"/> : <Plus size={16} className="text-slate-400"/>}
                         </div>
-                        {openPanels.visibility1 && <div className="p-4 text-xs text-slate-500 border-t border-slate-100">Visibility settings...</div>}
+                        {openPanels.visibility1 && (
+                          <div className="absolute top-0 right-[calc(100%+8px)] w-[240px] bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded z-50 overflow-hidden flex flex-col max-h-[400px]">
+                            <div className="overflow-y-auto custom-scrollbar">
+                               <div className="p-3">
+                                 <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-2 px-2">CONTROLS</div>
+                                 <div className="space-y-0.5">
+                                   {['Browser & Device', 'Cookie', 'Date & Time', 'Hide Block', 'Location', 'Metadata', 'Query String', 'Referral Source', 'Screen Size', 'URL Path', 'User Role', 'Visibility Presets'].map(item => (
+                                      <div key={item} className="px-2 py-1.5 text-[12px] text-slate-700 hover:bg-blue-50 cursor-pointer rounded">{item}</div>
+                                   ))}
+                                 </div>
+                               </div>
+                               <div className="border-t border-slate-100 p-3">
+                                 <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-2 px-2">INTEGRATIONS</div>
+                                 <div className="px-2 py-1.5 text-[12px] text-slate-700 hover:bg-blue-50 cursor-pointer rounded flex items-center gap-2">
+                                    <div className="w-4 h-4 bg-emerald-100 text-emerald-600 rounded flex items-center justify-center text-[10px] font-bold">A</div>
+                                    Advanced Custom Fields
+                                 </div>
+                               </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
 
                       <div className="bg-slate-50 border-y border-slate-200">
