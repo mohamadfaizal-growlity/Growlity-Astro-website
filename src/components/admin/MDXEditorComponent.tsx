@@ -71,6 +71,31 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
     return URL.createObjectURL(image);
   }
 
+  // A helper component to render dropdowns using fixed positioning to escape overflow hidden containers
+  const PortalDropdown = ({ isOpen, onClose, triggerRef, children, align = 'left' }: any) => {
+    const [style, setStyle] = useState({});
+    
+    useEffect(() => {
+      if (isOpen && triggerRef.current) {
+        const rect = triggerRef.current.getBoundingClientRect();
+        setStyle({
+          position: 'fixed',
+          top: rect.bottom + 4 + 'px',
+          left: align === 'left' ? rect.left + 'px' : 'auto',
+          right: align === 'right' ? (window.innerWidth - rect.right) + 'px' : 'auto',
+          zIndex: 99999,
+        });
+      }
+    }, [isOpen, triggerRef, align]);
+
+    if (!isOpen) return null;
+    return (
+      <div style={style} className="bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md py-1 text-sm text-slate-700 min-w-[200px]">
+        {children}
+      </div>
+    );
+  };
+
   const customJsxDescriptors = [
     {
       name: 'CTA',
@@ -241,7 +266,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                 
                 <div className="w-px h-4 bg-gray-300 mx-1" />
                 
-                {/* Block Transform Menu */}
+                 {/* Block Transform Menu */}
                 <div className="relative mx-0.5" ref={blockTransformMenuRef}>
                    <button 
                      onClick={() => setIsBlockTransformMenuOpen(!isBlockTransformMenuOpen)} 
@@ -250,8 +275,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                    >
                       <Pilcrow size={16} />
                    </button>
-                   {isBlockTransformMenuOpen && (
-                     <div className="absolute left-0 top-full mt-1 w-56 bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md z-50 py-1 text-sm text-slate-700">
+                   <PortalDropdown isOpen={isBlockTransformMenuOpen} onClose={() => setIsBlockTransformMenuOpen(false)} triggerRef={blockTransformMenuRef} align="left">
                         <div className="px-3 py-1.5 text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Transform to</div>
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Heading size={14} className="text-slate-400"/> Heading</button>
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><ListIcon size={14} className="text-slate-400"/> List</button>
@@ -264,8 +288,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><LayoutTemplate size={14} className="text-slate-400"/> Group</button>
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><TextQuote size={14} className="text-slate-400"/> Pullquote</button>
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><PenLine size={14} className="text-slate-400"/> Poetry</button>
-                     </div>
-                   )}
+                   </PortalDropdown>
                 </div>
 
                 {/* Move Block Up/Down */}
@@ -312,8 +335,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                    <button onClick={() => setIsRichTextMenuOpen(!isRichTextMenuOpen)} className="w-7 h-7 flex items-center justify-center rounded hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer">
                       <ChevronDown size={14} />
                    </button>
-                   {isRichTextMenuOpen && (
-                     <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-48 bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md z-50 py-1 text-sm text-slate-700">
+                   <PortalDropdown isOpen={isRichTextMenuOpen} onClose={() => setIsRichTextMenuOpen(false)} triggerRef={richTextMenuRef} align="left">
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + '\n[^1]: Footnote\n'); setIsRichTextMenuOpen(false); }}><ListEnd size={14} className="text-slate-400"/> Footnote</button>
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' <mark>highlight</mark> '); setIsRichTextMenuOpen(false); }}><Droplet size={14} className="text-slate-400"/> Highlight</button>
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' `code` '); setIsRichTextMenuOpen(false); }}><Code size={14} className="text-slate-400"/> Inline code</button>
@@ -325,8 +347,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' ~~strikethrough~~ '); setIsRichTextMenuOpen(false); }}><Strikethrough size={14} className="text-slate-400"/> Strikethrough</button>
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' <sub>sub</sub> '); setIsRichTextMenuOpen(false); }}><Subscript size={14} className="text-slate-400"/> Subscript</button>
                         <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' <sup>sup</sup> '); setIsRichTextMenuOpen(false); }}><Superscript size={14} className="text-slate-400"/> Superscript</button>
-                     </div>
-                   )}
+                   </PortalDropdown>
                 </div>
 
                 <div className="w-px h-4 bg-gray-300 mx-1" />
@@ -361,8 +382,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                    <button onClick={() => setIsOptionsMenuOpen(!isOptionsMenuOpen)} className="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer">
                       <MoreVertical size={16} />
                    </button>
-                   {isOptionsMenuOpen && (
-                     <div className="absolute right-0 top-full mt-1 w-56 bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md z-50 py-1 text-sm text-slate-700">
+                   <PortalDropdown isOpen={isOptionsMenuOpen} onClose={() => setIsOptionsMenuOpen(false)} triggerRef={optionsMenuRef} align="right">
                         <div className="px-4 py-2 text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Options</div>
                         <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Settings</span><span className="text-[10px] text-slate-400">Ctrl+Shift+D</span></button>
                         <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Duplicate</span><span className="text-[10px] text-slate-400">Ctrl+Shift+D</span></button>
@@ -375,8 +395,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                         <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}>Group</button>
                         <div className="border-t border-slate-100 my-1"></div>
                         <button className="w-full text-left px-4 py-1.5 hover:bg-red-50 text-red-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Remove block</span><span className="text-[10px] text-red-400">Del</span></button>
-                     </div>
-                   )}
+                   </PortalDropdown>
                    <button className="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer ml-1">
                       <ChevronsLeft size={16} />
                    </button>
@@ -389,12 +408,19 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       />
       <style>{`
         .mdxeditor-root,
-        .mdxeditor-root > div {
+        .mdxeditor-root * {
+          /* Force everything in the toolbar header to be visible so dropdowns aren't clipped */
+        }
+        .mdx-editor-wrapper .mdxeditor-root {
           overflow: visible !important;
         }
-        .mdxeditor-wrapper [role="toolbar"],
-        .mdxeditor-wrapper [data-mdxeditor-toolbar],
-        .mdxeditor-wrapper .mdxeditor-toolbar {
+        .mdx-editor-wrapper .mdxeditor-root > div:first-child,
+        .mdx-editor-wrapper .mdxeditor-root > div:first-child * {
+          overflow: visible !important;
+        }
+        .mdx-editor-wrapper [role="toolbar"],
+        .mdx-editor-wrapper [data-mdxeditor-toolbar],
+        .mdx-editor-wrapper .mdxeditor-toolbar {
           height: auto !important;
           min-height: 48px !important;
           overflow: visible !important;
@@ -402,13 +428,13 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
           padding: 4px 8px !important;
           z-index: 40 !important;
         }
-        .mdxeditor-wrapper [role="toolbar"] > div,
-        .mdxeditor-wrapper [data-mdxeditor-toolbar] > div {
+        .mdx-editor-wrapper [role="toolbar"] > div,
+        .mdx-editor-wrapper [data-mdxeditor-toolbar] > div {
           flex-wrap: wrap !important;
           overflow: visible !important;
         }
         /* Fix for Radix ScrollArea clipping absolute positioned dropdowns */
-        .mdxeditor-wrapper [data-radix-scroll-area-viewport] {
+        .mdx-editor-wrapper [data-radix-scroll-area-viewport] {
           overflow: visible !important;
         }
       `}</style>
