@@ -24,6 +24,19 @@ export default function ContentEditor() {
   const [activeTab, setActiveTab] = useState<'post' | 'block' | 'seo'>('post');
   const [activeBlock, setActiveBlock] = useState<'Image' | 'FAQ Section' | null>(null);
   
+  const [openPanels, setOpenPanels] = useState({
+    popupControls: false,
+    visibility1: false,
+    bricksBuilder: true,
+    acfSettings: true,
+    visibility2: false,
+    advanced: false
+  });
+  
+  const togglePanel = (panel: keyof typeof openPanels) => {
+    setOpenPanels(prev => ({ ...prev, [panel]: !prev[panel] }));
+  };
+  
   // Image Block States
   const [imageBlockTab, setImageBlockTab] = useState<'media' | 'settings' | 'styles'>('settings');
   const [isMediaMenuOpen, setIsMediaMenuOpen] = useState(false);
@@ -844,54 +857,70 @@ export default function ContentEditor() {
                         <FileText size={16} className="text-slate-500" /> FAQ Section
                       </div>
                       
-                      <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
-                        <div className="flex items-center gap-2">Popup Controls <span className="text-emerald-500"><Settings size={14}/></span></div>
-                        <ChevronDown size={16} className="text-slate-400"/>
+                      <div>
+                        <div onClick={() => togglePanel('popupControls')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
+                          <div className="flex items-center gap-2">Popup Controls <span className="text-emerald-500"><Settings size={14}/></span></div>
+                          {openPanels.popupControls ? <ChevronUp size={16} className="text-slate-400"/> : <ChevronDown size={16} className="text-slate-400"/>}
+                        </div>
+                        {openPanels.popupControls && <div className="p-4 text-xs text-slate-500 border-t border-slate-100">Popup controls content goes here...</div>}
                       </div>
                       
-                      <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
-                        Visibility <Plus size={16} className="text-slate-400"/>
+                      <div>
+                        <div onClick={() => togglePanel('visibility1')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
+                          Visibility {openPanels.visibility1 ? <Minus size={16} className="text-slate-400"/> : <Plus size={16} className="text-slate-400"/>}
+                        </div>
+                        {openPanels.visibility1 && <div className="p-4 text-xs text-slate-500 border-t border-slate-100">Visibility settings...</div>}
                       </div>
 
                       <div className="bg-slate-50 border-y border-slate-200">
-                         <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 cursor-pointer">
+                         <div onClick={() => togglePanel('bricksBuilder')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 cursor-pointer">
                            <div className="flex items-center gap-2">Bricks Builder <span className="text-blue-500"><Settings size={12}/></span></div>
-                           <ChevronUp size={16} className="text-slate-400"/>
+                           {openPanels.bricksBuilder ? <ChevronUp size={16} className="text-slate-400"/> : <ChevronDown size={16} className="text-slate-400"/>}
                          </div>
-                         <div className="px-4 pb-4 space-y-2">
-                           <button className="w-full bg-[#ffb800] hover:bg-[#e6a600] text-black font-bold text-[11px] px-3 py-2 uppercase tracking-wide rounded transition-colors text-center">
-                             EDIT TEMPLATE WITH BRICKS
-                           </button>
-                           <a href="#" className="text-blue-600 hover:underline text-[12px] block text-left">Edit Template Post</a>
-                         </div>
+                         {openPanels.bricksBuilder && (
+                           <div className="px-4 pb-4 space-y-2">
+                             <button className="w-full bg-[#ffb800] hover:bg-[#e6a600] text-black font-bold text-[11px] px-3 py-2 uppercase tracking-wide rounded transition-colors text-center">
+                               EDIT TEMPLATE WITH BRICKS
+                             </button>
+                             <a href="#" className="text-blue-600 hover:underline text-[12px] block text-left">Edit Template Post</a>
+                           </div>
+                         )}
                       </div>
 
                       <div>
-                         <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 cursor-pointer">
-                           ACF Settings <ChevronUp size={16} className="text-slate-400"/>
+                         <div onClick={() => togglePanel('acfSettings')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 cursor-pointer">
+                           ACF Settings {openPanels.acfSettings ? <ChevronUp size={16} className="text-slate-400"/> : <ChevronDown size={16} className="text-slate-400"/>}
                          </div>
-                         <div className="px-4 pb-4 space-y-4">
-                           <div>
-                             <div className="text-[10px] text-slate-500 mb-2 uppercase tracking-wider">PARTNER DATA CARD</div>
-                             <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-4 py-1.5 rounded transition-colors">0 items</button>
+                         {openPanels.acfSettings && (
+                           <div className="px-4 pb-4 space-y-4">
+                             <div>
+                               <div className="text-[10px] text-slate-500 mb-2 uppercase tracking-wider">PARTNER DATA CARD</div>
+                               <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-4 py-1.5 rounded transition-colors">0 items</button>
+                             </div>
+                             <div>
+                               <div className="text-[10px] text-slate-500 mb-2 uppercase tracking-wider">CONSULTING SERVICES</div>
+                               <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-4 py-1.5 rounded transition-colors">0 items</button>
+                             </div>
+                             <div>
+                               <div className="text-[10px] text-slate-500 mb-2 uppercase tracking-wider">FAQ</div>
+                               <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-4 py-1.5 rounded transition-colors">0 items</button>
+                             </div>
                            </div>
-                           <div>
-                             <div className="text-[10px] text-slate-500 mb-2 uppercase tracking-wider">CONSULTING SERVICES</div>
-                             <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-4 py-1.5 rounded transition-colors">0 items</button>
-                           </div>
-                           <div>
-                             <div className="text-[10px] text-slate-500 mb-2 uppercase tracking-wider">FAQ</div>
-                             <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-4 py-1.5 rounded transition-colors">0 items</button>
-                           </div>
-                         </div>
+                         )}
                       </div>
                       
-                      <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
-                        Visibility <ChevronDown size={16} className="text-slate-400"/>
+                      <div>
+                        <div onClick={() => togglePanel('visibility2')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
+                          Visibility {openPanels.visibility2 ? <ChevronUp size={16} className="text-slate-400"/> : <ChevronDown size={16} className="text-slate-400"/>}
+                        </div>
+                        {openPanels.visibility2 && <div className="p-4 text-xs text-slate-500 border-t border-slate-100">Visibility settings...</div>}
                       </div>
                       
-                      <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
-                        Advanced <ChevronDown size={16} className="text-slate-400"/>
+                      <div>
+                        <div onClick={() => togglePanel('advanced')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
+                          Advanced {openPanels.advanced ? <ChevronUp size={16} className="text-slate-400"/> : <ChevronDown size={16} className="text-slate-400"/>}
+                        </div>
+                        {openPanels.advanced && <div className="p-4 text-xs text-slate-500 border-t border-slate-100">Advanced settings...</div>}
                       </div>
                     </div>
                   ) : (
