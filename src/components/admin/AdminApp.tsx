@@ -14,7 +14,18 @@ import {
   Eye,
   EyeOff,
   ShieldCheck,
-  Check
+  Check,
+  Briefcase,
+  MessageSquare,
+  Calendar,
+  File,
+  PenTool,
+  Book,
+  Lightbulb,
+  Video,
+  Database,
+  ClipboardList,
+  Globe
 } from 'lucide-react';
 import CollectionList from './CollectionList';
 import ContentEditor from './ContentEditor';
@@ -23,6 +34,23 @@ import SettingsView from './SettingsView';
 import MediaLibrary from './MediaLibrary';
 import Dashboard from './Dashboard';
 import { ChevronDown, ChevronRight } from 'lucide-react';
+
+const getIconForSchema = (name: string) => {
+  switch (name.toLowerCase()) {
+    case 'case studies': return <Briefcase size={20} className="min-w-[20px]" />;
+    case 'comments': return <MessageSquare size={20} className="min-w-[20px]" />;
+    case 'events': return <Calendar size={20} className="min-w-[20px]" />;
+    case 'pages': return <Files size={20} className="min-w-[20px]" />;
+    case 'posts': return <PenTool size={20} className="min-w-[20px]" />;
+    case 'publications': return <Book size={20} className="min-w-[20px]" />;
+    case 'solutions': return <Lightbulb size={20} className="min-w-[20px]" />;
+    case 'webinar': return <Video size={20} className="min-w-[20px]" />;
+    case 'entries': return <Database size={20} className="min-w-[20px]" />;
+    case 'forms': return <ClipboardList size={20} className="min-w-[20px]" />;
+    case 'global settings': return <Globe size={20} className="min-w-[20px]" />;
+    default: return <FolderOpen size={20} className="min-w-[20px]" />;
+  }
+};
 
 const CollectionNavItem = ({ schema }: { schema: any }) => {
   const location = useLocation();
@@ -43,7 +71,7 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
         title={schema.label || schema.name}
       >
         <div className="flex items-center gap-3 overflow-hidden">
-          <FolderOpen size={20} className="min-w-[20px]" />
+          {getIconForSchema(schema.label || schema.name)}
           <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">
             {schema.label || schema.name}
           </span>
