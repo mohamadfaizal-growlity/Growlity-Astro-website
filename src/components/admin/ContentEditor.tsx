@@ -870,8 +870,10 @@ export default function ContentEditor() {
                              <div className="mb-2 flex items-center gap-1 text-[11px] font-semibold text-slate-500 tracking-wider">
                                OPEN POPUP <span className="text-blue-500 rounded-full w-3 h-3 flex items-center justify-center border border-blue-500 text-[9px] cursor-help">?</span>
                              </div>
-                             <select className="w-full text-[13px] border border-slate-300 rounded p-2 outline-none mb-1 text-slate-600 bg-white">
+                             <select className="w-full text-[13px] border border-slate-300 rounded p-2 outline-none mb-1 text-slate-600 bg-white cursor-pointer">
                                <option>Choose a popup</option>
+                               <option>Lead Form Popup</option>
+                               <option>Example: Auto-opening announcement popup</option>
                              </select>
                              <p className="text-[11px] text-slate-400 mt-1">Open a popup when clicking this block</p>
                           </div>
