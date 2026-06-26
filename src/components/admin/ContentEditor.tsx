@@ -963,17 +963,55 @@ export default function ContentEditor() {
                       </div>
                       
                       <div>
-                        <div onClick={() => togglePanel('visibility2')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 px-4 hover:bg-slate-50 cursor-pointer">
+                        <div onClick={() => togglePanel('visibility2')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 px-4 hover:bg-slate-50 cursor-pointer border-t border-slate-100">
                           Visibility {openPanels.visibility2 ? <ChevronUp size={16} className="text-slate-400"/> : <ChevronDown size={16} className="text-slate-400"/>}
                         </div>
-                        {openPanels.visibility2 && <div className="py-2 px-4 text-xs text-slate-500 border-t border-slate-100">Visibility settings...</div>}
+                        {openPanels.visibility2 && (
+                          <div className="px-4 pb-4 space-y-3">
+                            <label className="flex items-center gap-3 cursor-pointer">
+                              <div className="relative">
+                                <input type="checkbox" className="sr-only peer" defaultChecked />
+                                <div className="w-8 h-4 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-blue-600"></div>
+                              </div>
+                              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">DESCRIPTION</span>
+                            </label>
+                            <label className="flex items-center gap-3 cursor-pointer">
+                              <div className="relative">
+                                <input type="checkbox" className="sr-only peer" defaultChecked />
+                                <div className="w-8 h-4 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-blue-600"></div>
+                              </div>
+                              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">TITLE</span>
+                            </label>
+                          </div>
+                        )}
                       </div>
                       
                       <div>
-                        <div onClick={() => togglePanel('advanced')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 px-4 hover:bg-slate-50 cursor-pointer">
+                        <div onClick={() => togglePanel('advanced')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 px-4 hover:bg-slate-50 cursor-pointer border-t border-slate-100">
                           Advanced {openPanels.advanced ? <ChevronUp size={16} className="text-slate-400"/> : <ChevronDown size={16} className="text-slate-400"/>}
                         </div>
-                        {openPanels.advanced && <div className="py-2 px-4 text-xs text-slate-500 border-t border-slate-100">Advanced settings...</div>}
+                        {openPanels.advanced && (
+                          <div className="px-4 pb-4 space-y-4">
+                            <div>
+                              <div className="text-[10px] text-slate-500 mb-1 uppercase tracking-wider">ADDITIONAL CSS CLASS(ES)</div>
+                              <input 
+                                type="text" 
+                                className="w-full px-2 py-1.5 border border-slate-300 rounded text-sm text-slate-700 focus:outline-none focus:border-blue-500" 
+                                placeholder="blog-faq"
+                              />
+                              <p className="text-[10px] text-slate-400 mt-1">Separate multiple classes with spaces.</p>
+                            </div>
+                            <div>
+                              <div className="text-[10px] text-slate-500 mb-1 uppercase tracking-wider">ADDITIONAL CSS</div>
+                              <textarea 
+                                className="w-full px-2 py-1.5 border border-slate-300 rounded text-sm text-slate-700 min-h-[100px] resize-y focus:outline-none focus:border-blue-500"
+                              ></textarea>
+                              <p className="text-[10px] text-slate-400 mt-1 leading-tight">
+                                Add your own CSS to customize the appearance of the FAQ Section block. You do not need to include a CSS selector, just add the property and value, e.g. color: red;.
+                              </p>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ) : (
