@@ -47,6 +47,7 @@ export default function ContentEditor() {
   const fileBoxMenuRef = useRef<HTMLDivElement>(null);
   const visibilityMenuRef = useRef<HTMLDivElement>(null);
   const postMenuRef = useRef<HTMLDivElement>(null);
+  const faqVisibilityRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -61,6 +62,9 @@ export default function ContentEditor() {
       }
       if (postMenuRef.current && !postMenuRef.current.contains(event.target as Node)) {
         setIsPostMenuOpen(false);
+      }
+      if (faqVisibilityRef.current && !faqVisibilityRef.current.contains(event.target as Node)) {
+        setOpenPanels(prev => ({ ...prev, visibility1: false }));
       }
     };
     
@@ -880,7 +884,7 @@ export default function ContentEditor() {
                         )}
                       </div>
                       
-                      <div>
+                      <div ref={faqVisibilityRef}>
                         <div onClick={() => togglePanel('visibility1')} className="relative flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer border-t border-slate-100">
                           Visibility <Plus size={16} className="text-slate-400"/>
                         </div>
