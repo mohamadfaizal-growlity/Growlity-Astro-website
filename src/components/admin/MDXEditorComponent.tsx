@@ -202,11 +202,12 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       hasChildren: true,
       Editor: ({ children }: any) => {
         return (
-          <div className="faq-block my-6 border border-blue-400 rounded-sm bg-white relative p-8 cursor-text">
-             <div className="text-center mb-4">
-               <h3 className="text-[#0073AA] font-bold text-xl mb-2">FAQs</h3>
+          <div className="faq-block my-6 bg-white relative py-12 px-8 cursor-text">
+             <div className="text-center mb-10">
+               <h3 className="text-[#0073AA] font-bold text-lg mb-2">FAQs</h3>
+               <h2 className="text-4xl font-bold text-gray-500">Add Content...</h2>
              </div>
-             <div className="text-left w-full mx-auto max-w-3xl min-h-[100px] border border-dashed border-gray-300 rounded p-4 bg-gray-50 focus-within:bg-white focus-within:border-blue-400 transition-colors">
+             <div className="text-left w-full mx-auto max-w-4xl min-h-[100px]">
                {children}
              </div>
           </div>
@@ -223,20 +224,20 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       hasChildren: true,
       Editor: ({ properties, setProperties, children }: any) => {
         return (
-          <div className="border-b border-gray-300 py-3 mb-2 bg-white flex flex-col group faq-item">
+          <div className="border-b border-gray-400 py-4 mb-2 bg-white flex flex-col group faq-item focus-within:border-[#0073AA] transition-colors">
              <div className="flex items-center justify-between mb-2">
                <input 
                  type="text" 
                  value={properties.q || ''} 
                  onChange={(e) => setProperties({ ...properties, q: e.target.value })}
-                 className="w-full text-gray-800 text-base font-medium border-none outline-none focus:ring-0 px-0 bg-transparent placeholder-gray-400"
+                 className="w-full text-gray-700 focus:text-[#0073AA] text-lg font-medium border-none outline-none focus:ring-0 px-0 bg-transparent placeholder-gray-400 transition-colors"
                  placeholder="What is the question?"
                />
-               <div className="w-8 h-8 rounded-full bg-[#EFEFEF] flex items-center justify-center text-gray-500 font-bold text-lg flex-shrink-0 ml-4 cursor-pointer hover:bg-gray-200">
-                 +
+               <div className="w-8 h-8 rounded-full bg-gray-200 group-focus-within:bg-[#0073AA] flex items-center justify-center text-gray-600 group-focus-within:text-white font-medium flex-shrink-0 ml-4 cursor-pointer transition-colors shadow-sm">
+                 <Plus size={16} />
                </div>
              </div>
-             <div className="text-gray-600 text-[14px] mt-1 pl-2 border-l-2 border-gray-200 ml-1">
+             <div className="text-gray-600 text-[13px] mt-2 leading-relaxed opacity-50 group-focus-within:opacity-100 transition-opacity">
                {children}
              </div>
           </div>
