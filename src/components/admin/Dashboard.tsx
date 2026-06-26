@@ -379,10 +379,10 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
               ))}
             </div>
             <div className="mt-4 flex flex-wrap gap-4 text-sm font-medium border-t border-slate-100 pt-4">
-              <span className="text-slate-500 cursor-pointer hover:text-slate-800">All (124)</span>
-              <span className="text-[#0066FF] cursor-pointer hover:text-blue-800">Pending (1)</span>
-              <span className="text-slate-500 cursor-pointer hover:text-slate-800">Approved (120)</span>
-              <span className="text-slate-500 cursor-pointer hover:text-slate-800">Spam (3)</span>
+              <Link to="/comments" className="text-slate-500 cursor-pointer hover:text-slate-800">All (124)</Link>
+              <Link to="/comments" className="text-[#0066FF] cursor-pointer hover:text-blue-800">Pending (1)</Link>
+              <Link to="/comments" className="text-slate-500 cursor-pointer hover:text-slate-800">Approved (120)</Link>
+              <Link to="/comments" className="text-slate-500 cursor-pointer hover:text-slate-800">Spam (3)</Link>
             </div>
           </div>
         </div>
