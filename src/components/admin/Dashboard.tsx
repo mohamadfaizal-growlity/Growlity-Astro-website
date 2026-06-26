@@ -236,44 +236,21 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
         {/* Main Column */}
-        <div className="lg:col-span-2 space-y-8">
-          {/* AI Insights Card (New & Exclusive) */}
-          <div className="bg-gradient-to-br from-indigo-50 via-white to-purple-50 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 relative overflow-hidden group border border-white">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-200/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-200/50 transition-colors duration-700"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-200/40 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 group-hover:bg-emerald-200/40 transition-colors duration-700"></div>
-            
-            <div className="relative z-10">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-indigo-900 flex items-center gap-2">
-                  <Sparkles className="text-indigo-500" /> Growlity AI Insights
-                </h2>
-                <span className="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full shadow-sm">BETA</span>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white/60 border border-white/80 rounded-2xl p-5 hover:bg-white transition-all hover:-translate-y-1 duration-300 backdrop-blur-md shadow-sm group/card cursor-default">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center group-hover/card:scale-110 transition-transform">
-                      <TrendingUp size={16} />
-                    </div>
-                    <h4 className="text-slate-800 font-bold text-sm">SEO Opportunity</h4>
-                  </div>
-                  <p className="text-slate-600 text-sm leading-relaxed">Your recent case studies are performing 24% better than average. Consider publishing more content in this category to boost traffic.</p>
-                </div>
-                
-                <div className="bg-white/60 border border-white/80 rounded-2xl p-5 hover:bg-white transition-all hover:-translate-y-1 duration-300 backdrop-blur-md shadow-sm group/card cursor-default">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center group-hover/card:scale-110 transition-transform">
-                      <Zap size={16} />
-                    </div>
-                    <h4 className="text-slate-800 font-bold text-sm">Action Required</h4>
-                  </div>
-                  <p className="text-slate-600 text-sm leading-relaxed">3 images in your media library are missing alt-tags. Fixing this could improve your accessibility score and search rankings.</p>
-                </div>
+        <div className="xl:col-span-8 space-y-8">
+          {/* AI Insights Slim Banner */}
+          <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-3xl shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-indigo-100/60 p-5 flex flex-wrap gap-4 items-center justify-between hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all hover:-translate-y-0.5">
+            <div className="flex items-center gap-4">
+              <div className="bg-white p-3 rounded-2xl shadow-sm text-indigo-500"><Sparkles size={24} /></div>
+              <div>
+                <h3 className="font-bold text-indigo-950 text-lg flex items-center gap-2">Growlity AI Insights <span className="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Beta</span></h3>
+                <p className="text-sm text-indigo-800/80 font-medium mt-0.5">Your recent case studies are performing 24% better than average. 3 images need alt-tags.</p>
               </div>
             </div>
+            <button className="text-sm font-bold text-indigo-600 bg-white px-5 py-2.5 rounded-xl shadow-sm hover:shadow transition-all flex items-center gap-2">
+              View Full Report <ArrowRight size={16} />
+            </button>
           </div>
 
           {/* Recent Activity */}
@@ -386,7 +363,7 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
         </div>
 
         {/* Sidebar Column */}
-        <div className="lg:col-span-1 space-y-8">
+        <div className="xl:col-span-4 space-y-8">
           
           {/* Website Status */}
           <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
@@ -402,52 +379,6 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
                 <h4 className="font-bold text-slate-800">All Systems Operational</h4>
                 <p className="text-xs text-slate-500 mt-1">Vercel Deployment: Healthy</p>
               </div>
-            </div>
-          </div>
-
-          {/* Media Storage Tracker */}
-          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
-            <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2 mb-6">
-              <HardDrive className="text-purple-500" /> Media Storage
-            </h2>
-            <div className="space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-600 font-medium">Cloudinary Usage</span>
-                <span className="text-slate-800 font-bold">{mediaCount} Assets</span>
-              </div>
-              <div className="w-full bg-slate-100 rounded-full h-2.5">
-                <div className="bg-gradient-to-r from-purple-500 to-indigo-500 h-2.5 rounded-full" style={{ width: '15%' }}></div>
-              </div>
-              <p className="text-xs text-slate-400 text-right">~15% of Free Tier</p>
-            </div>
-            <Link to="/media" className="mt-6 w-full flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 font-medium py-3 rounded-xl transition-colors">
-              <ImageIcon size={18} /> Open Media Library
-            </Link>
-          </div>
-
-          {/* Content Breakdown */}
-          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
-            <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2 mb-6">
-              <PieChart className="text-orange-500" /> Content Breakdown
-            </h2>
-            <div className="space-y-4">
-              {schemaStats.map((schema, index) => {
-                const colors = ['bg-[#0066FF]', 'bg-[#00C853]', 'bg-purple-500', 'bg-orange-500', 'bg-pink-500', 'bg-teal-500'];
-                const colorClass = colors[index % colors.length];
-                const percentage = stats.total > 0 ? (schema.count / stats.total) * 100 : 0;
-                
-                return (
-                  <div key={schema.name}>
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-slate-600">{schema.name}</span>
-                      <span className="font-bold">{schema.count}</span>
-                    </div>
-                    <div className="w-full bg-slate-100 rounded-full h-1.5">
-                      <div className={`${colorClass} h-1.5 rounded-full`} style={{ width: `${percentage}%` }}></div>
-                    </div>
-                  </div>
-                );
-              })}
             </div>
           </div>
 
@@ -500,27 +431,6 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
                   <span className="truncate pr-2">admin (Non-existent)</span>
                   <span className="flex-shrink-0">44 attempts</span>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Email Analytics */}
-          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
-            <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2 mb-6">
-              <MailCheck className="text-teal-500" /> Email Analytics
-            </h2>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center text-sm p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <span className="text-slate-600 font-medium">All Time Sent</span>
-                <span className="text-slate-800 font-bold">9,930</span>
-              </div>
-              <div className="flex justify-between items-center text-sm p-3 bg-emerald-50 rounded-xl border border-emerald-100 text-emerald-700">
-                <span className="font-medium flex items-center gap-2"><CheckCircle2 size={16}/> Confirmed</span>
-                <span className="font-bold">9,850</span>
-              </div>
-              <div className="flex justify-between items-center text-sm p-3 bg-red-50 rounded-xl border border-red-100 text-red-700">
-                <span className="font-medium flex items-center gap-2"><AlertCircle size={16}/> Failed</span>
-                <span className="font-bold">80</span>
               </div>
             </div>
           </div>
