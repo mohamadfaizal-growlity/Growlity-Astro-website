@@ -33,6 +33,7 @@ import VisualEditor from './VisualEditor';
 import SettingsView from './SettingsView';
 import MediaLibrary from './MediaLibrary';
 import Dashboard from './Dashboard';
+import CommentsView from './CommentsView';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 
 const getIconForSchema = (name: string) => {
@@ -119,6 +120,7 @@ const Sidebar = ({ schemas, siteLogo, onLogout, onHoverChange }: { schemas: any[
 
   const staticNavItems = [
     { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
+    { name: 'Comments', path: '/comments', icon: <MessageSquare size={20} /> },
     { name: 'Media', path: '/media', icon: <ImageIcon size={20} /> },
     { name: 'Emails', path: '/emails', icon: <Mail size={20} /> },
     { name: 'Settings', path: '/settings', icon: <Settings size={20} /> },
@@ -222,6 +224,7 @@ const AdminLayout = ({ schemas, siteLogo, setIsAuthenticated }: any) => {
       <main className={`flex-1 overflow-x-hidden transition-all duration-300 ${!isEditorRoute ? (isSidebarHovered ? 'ml-56' : 'ml-24') : ''}`}>
         <Routes>
           <Route path="/" element={<Dashboard schemas={schemas} />} />
+          <Route path="/comments" element={<CommentsView />} />
           <Route path="/collections/:collection" element={<CollectionList />} />
           <Route path="/collections/:collection/:slug" element={<ContentEditor />} />
           <Route path="/collections/:collection/:slug/builder" element={<VisualEditor />} />
