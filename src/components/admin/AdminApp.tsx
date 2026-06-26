@@ -131,7 +131,7 @@ const Sidebar = ({ schemas, siteLogo, onLogout, onHoverChange }: { schemas: any[
       onMouseLeave={() => onHoverChange && onHoverChange(false)}
     >
       <div className="h-16 flex items-center px-4 border-b border-slate-200/50 flex-shrink-0 overflow-hidden">
-        <Link to="/" className="flex items-center w-full h-full" title="Dashboard">
+        <Link to="/" className="flex items-center justify-center w-full h-full" title="Dashboard">
           {siteLogo ? (
             <img src={siteLogo} alt="Site Logo" className="h-8 w-auto max-w-[200px] object-contain flex-shrink-0" />
           ) : (
