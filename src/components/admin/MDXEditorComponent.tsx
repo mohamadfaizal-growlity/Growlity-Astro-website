@@ -431,18 +431,18 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
           border-bottom: 1px solid #e2e8f0 !important;
           overflow: visible !important;
           flex-wrap: wrap !important;
-          padding: 4px 8px !important;
+          padding: 6px 10px !important;
           z-index: 40 !important;
         }
         .mdx-editor-wrapper [role="toolbar"] > div,
         .mdx-editor-wrapper [data-mdxeditor-toolbar] > div {
           flex-wrap: wrap !important;
           overflow: visible !important;
-          gap: 2px !important;
+          gap: 4px !important;
           align-items: center !important;
         }
-        .mdx-editor-wrapper button[class*="mdxeditor-toolbar-button"],
-        .mdx-editor-wrapper button[aria-label] {
+        .mdx-editor-wrapper button[class*="mdxeditor-toolbar-button"]:not([role="combobox"]),
+        .mdx-editor-wrapper button[aria-label]:not([role="combobox"]) {
           width: 28px !important;
           height: 28px !important;
           border-radius: 4px !important;
@@ -453,18 +453,32 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
           justify-content: center !important;
           padding: 0 !important;
         }
-        .mdx-editor-wrapper button[class*="mdxeditor-toolbar-button"]:hover,
-        .mdx-editor-wrapper button[aria-label]:hover {
+        .mdx-editor-wrapper button[class*="mdxeditor-toolbar-button"]:hover:not([role="combobox"]),
+        .mdx-editor-wrapper button[aria-label]:hover:not([role="combobox"]) {
           background-color: #f1f5f9 !important;
           color: #0f172a !important;
+        }
+        .mdx-editor-wrapper button[role="combobox"] {
+          height: 28px !important;
+          border-radius: 4px !important;
+          border: 1px solid #cbd5e1 !important;
+          color: #334155 !important;
+          font-size: 11px !important;
+          padding: 0 6px !important;
+          background-color: white !important;
+          cursor: pointer !important;
+          display: flex !important;
+          align-items: center !important;
+          gap: 4px !important;
+          min-width: 90px !important;
         }
         .mdx-editor-wrapper select {
           height: 28px !important;
           border-radius: 4px !important;
           border: 1px solid #cbd5e1 !important;
           color: #334155 !important;
-          font-size: 12px !important;
-          padding: 0 24px 0 8px !important;
+          font-size: 11px !important;
+          padding: 0 20px 0 6px !important;
           line-height: 28px !important;
           background-color: white !important;
           cursor: pointer !important;
