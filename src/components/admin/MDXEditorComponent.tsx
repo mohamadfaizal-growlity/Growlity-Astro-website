@@ -388,7 +388,8 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
         contentEditableClassName="prose max-w-none min-h-[400px] p-4 bg-white"
       />
       <style>{`
-        .mdxeditor-root {
+        .mdxeditor-root,
+        .mdxeditor-root > div {
           overflow: visible !important;
         }
         .mdxeditor-wrapper [role="toolbar"],
@@ -404,6 +405,10 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
         .mdxeditor-wrapper [role="toolbar"] > div,
         .mdxeditor-wrapper [data-mdxeditor-toolbar] > div {
           flex-wrap: wrap !important;
+          overflow: visible !important;
+        }
+        /* Fix for Radix ScrollArea clipping absolute positioned dropdowns */
+        .mdxeditor-wrapper [data-radix-scroll-area-viewport] {
           overflow: visible !important;
         }
       `}</style>
