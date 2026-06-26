@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import SeoReportModal from './SeoReportModal';
 import { 
   FileText, 
   Image as ImageIcon, 
@@ -62,6 +63,24 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
   const [mediaCount, setMediaCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [isClearingCache, setIsClearingCache] = useState(false);
+  const [isSeoModalOpen, setIsSeoModalOpen] = useState(false);
+  const [seoReport, setSeoReport] = useState<any>(null);
+  const [isSeoLoading, setIsSeoLoading] = useState(false);
+
+  const fetchSeoReport = async () => {
+    setIsSeoModalOpen(true);
+    if (seoReport) return;
+    setIsSeoLoading(true);
+    try {
+      const res = await fetch('/api/admin/seo-scan');
+      const data = await res.json();
+      setSeoReport(data);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsSeoLoading(false);
+    }
+  };
 
   const handleClearCache = () => {
     setIsClearingCache(true);
@@ -129,6 +148,12 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
 
   return (
     <div className="relative min-h-full pb-24">
+      <SeoReportModal 
+        isOpen={isSeoModalOpen} 
+        onClose={() => setIsSeoModalOpen(false)} 
+        report={seoReport} 
+        loading={isSeoLoading} 
+      />
       {/* Global Dashboard Background Mesh */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-blue-200/20 rounded-full blur-[120px] mix-blend-multiply"></div>
@@ -244,12 +269,12 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
             <div className="flex items-center gap-4">
               <div className="bg-white p-3 rounded-2xl shadow-sm text-indigo-500"><Sparkles size={24} /></div>
               <div>
-                <h3 className="font-bold text-indigo-950 text-lg flex items-center gap-2">Growlity AI Insights <span className="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Beta</span></h3>
-                <p className="text-sm text-indigo-800/80 font-medium mt-0.5">Your recent case studies are performing 24% better than average. 3 images need alt-tags.</p>
+                <h3 className="font-bold text-indigo-950 text-lg flex items-center gap-2">Local SEO Scanner <span className="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Active</span></h3>
+                <p className="text-sm text-indigo-800/80 font-medium mt-0.5">Your local content SEO scanner is ready. Click below to analyze your markdown files for SEO issues.</p>
               </div>
             </div>
-            <button className="text-sm font-bold text-indigo-600 bg-white px-5 py-2.5 rounded-xl shadow-sm hover:shadow transition-all flex items-center gap-2">
-              View Full Report <ArrowRight size={16} />
+            <button onClick={fetchSeoReport} className="text-sm font-bold text-indigo-600 bg-white px-5 py-2.5 rounded-xl shadow-sm hover:shadow transition-all flex items-center gap-2">
+              Scan & View Report <ArrowRight size={16} />
             </button>
           </div>
 
