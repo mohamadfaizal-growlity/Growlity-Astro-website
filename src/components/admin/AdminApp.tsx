@@ -219,7 +219,11 @@ const AdminLayout = ({ schemas, siteLogo, setIsAuthenticated }: any) => {
   return (
     <div className="flex min-h-screen bg-[#F8FAFC]">
       {!isEditorRoute && (
-        <Sidebar schemas={schemas} siteLogo={siteLogo} onLogout={() => setIsAuthenticated(false)} onHoverChange={setIsSidebarHovered} />
+        <Sidebar schemas={schemas} siteLogo={siteLogo} onLogout={() => {
+          setIsAuthenticated(false);
+          localStorage.removeItem('growlity_admin_auth');
+          sessionStorage.removeItem('growlity_admin_auth');
+        }} onHoverChange={setIsSidebarHovered} />
       )}
       <main className={`flex-1 overflow-x-hidden transition-all duration-300 ${!isEditorRoute ? (isSidebarHovered ? 'ml-56' : 'ml-24') : ''}`}>
         <Routes>
@@ -238,7 +242,9 @@ const AdminLayout = ({ schemas, siteLogo, setIsAuthenticated }: any) => {
 };
 
 export default function AdminApp() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('growlity_admin_auth') === 'true' || sessionStorage.getItem('growlity_admin_auth') === 'true';
+  });
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -316,7 +322,14 @@ export default function AdminApp() {
           <form 
             onSubmit={(e) => {
               e.preventDefault();
-              if (password === 'Growlity@Admin2026') setIsAuthenticated(true);
+              if (password === 'Growlity@Admin2026') {
+                setIsAuthenticated(true);
+                if (rememberMe) {
+                  localStorage.setItem('growlity_admin_auth', 'true');
+                } else {
+                  sessionStorage.setItem('growlity_admin_auth', 'true');
+                }
+              }
               else alert('Incorrect password (hint: Growlity@Admin2026)');
             }}
           >
