@@ -839,34 +839,59 @@ export default function ContentEditor() {
                       )}
                     </div>
                   ) : activeBlock === 'FAQ Section' ? (
-                    <div className="space-y-4 text-sm text-slate-700">
-                      <div className="flex items-center gap-2 font-medium border-b border-slate-200 pb-2">
+                    <div className="text-sm text-slate-700 divide-y divide-slate-200">
+                      <div className="flex items-center gap-2 font-medium p-4">
                         <FileText size={16} className="text-slate-500" /> FAQ Section
                       </div>
                       
-                      <div className="space-y-2 pt-2">
-                         <div className="flex items-center gap-1 text-[13px] font-semibold text-[#0073AA] mb-2 cursor-pointer hover:underline">
-                           Bricks Builder <span className="text-blue-500"><Settings size={12}/></span>
-                         </div>
-                         <button className="w-full bg-[#ffb800] hover:bg-[#e6a600] text-black font-bold text-[11px] px-3 py-2 uppercase tracking-wide rounded transition-colors">
-                           Edit Template with Bricks
-                         </button>
-                         <a href="#" className="text-blue-600 hover:underline text-[11px] block mt-1">Edit Template Post</a>
+                      <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
+                        <div className="flex items-center gap-2">Popup Controls <span className="text-emerald-500"><Settings size={14}/></span></div>
+                        <ChevronDown size={16} className="text-slate-400"/>
+                      </div>
+                      
+                      <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
+                        Visibility <Plus size={16} className="text-slate-400"/>
                       </div>
 
-                      <div className="pt-6 space-y-0">
-                         <button className="w-full flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 border-t border-slate-200 hover:bg-slate-50">
-                           ACF Settings <ChevronDown size={16} className="text-slate-400"/>
-                         </button>
-                         <button className="w-full flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 border-t border-slate-200 hover:bg-slate-50">
-                           Popup Controls <span className="text-emerald-500"><Settings size={14}/></span>
-                         </button>
-                         <button className="w-full flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 border-t border-slate-200 hover:bg-slate-50">
-                           Visibility <ChevronDown size={16} className="text-slate-400"/>
-                         </button>
-                         <button className="w-full flex items-center justify-between font-medium text-[13px] text-slate-800 py-3 border-t border-slate-200 hover:bg-slate-50">
-                           Advanced <ChevronDown size={16} className="text-slate-400"/>
-                         </button>
+                      <div className="bg-slate-50 border-y border-slate-200">
+                         <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 cursor-pointer">
+                           <div className="flex items-center gap-2">Bricks Builder <span className="text-blue-500"><Settings size={12}/></span></div>
+                           <ChevronUp size={16} className="text-slate-400"/>
+                         </div>
+                         <div className="px-4 pb-4 space-y-2">
+                           <button className="w-full bg-[#ffb800] hover:bg-[#e6a600] text-black font-bold text-[11px] px-3 py-2 uppercase tracking-wide rounded transition-colors text-center">
+                             EDIT TEMPLATE WITH BRICKS
+                           </button>
+                           <a href="#" className="text-blue-600 hover:underline text-[12px] block text-left">Edit Template Post</a>
+                         </div>
+                      </div>
+
+                      <div>
+                         <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 cursor-pointer">
+                           ACF Settings <ChevronUp size={16} className="text-slate-400"/>
+                         </div>
+                         <div className="px-4 pb-4 space-y-4">
+                           <div>
+                             <div className="text-[10px] text-slate-500 mb-2 uppercase tracking-wider">PARTNER DATA CARD</div>
+                             <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-4 py-1.5 rounded transition-colors">0 items</button>
+                           </div>
+                           <div>
+                             <div className="text-[10px] text-slate-500 mb-2 uppercase tracking-wider">CONSULTING SERVICES</div>
+                             <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-4 py-1.5 rounded transition-colors">0 items</button>
+                           </div>
+                           <div>
+                             <div className="text-[10px] text-slate-500 mb-2 uppercase tracking-wider">FAQ</div>
+                             <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-4 py-1.5 rounded transition-colors">0 items</button>
+                           </div>
+                         </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
+                        Visibility <ChevronDown size={16} className="text-slate-400"/>
+                      </div>
+                      
+                      <div className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer">
+                        Advanced <ChevronDown size={16} className="text-slate-400"/>
                       </div>
                     </div>
                   ) : (

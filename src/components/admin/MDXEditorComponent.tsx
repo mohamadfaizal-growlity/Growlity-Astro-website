@@ -29,8 +29,36 @@ import {
   linkDialogPlugin,
   tablePlugin,
   InsertTable,
+  usePublisher,
+  insertMarkdown$
 } from '@mdxeditor/editor';
 import '@mdxeditor/editor/style.css';
+
+const CustomInsertButtons = () => {
+  const insertMarkdown = usePublisher(insertMarkdown$);
+  return (
+    <>
+      <button 
+        onClick={() => {
+          insertMarkdown('\n<FAQ>\n  <FAQItem q="New Question?">\n    Answer goes here.\n  </FAQItem>\n</FAQ>\n');
+        }}
+        className="px-2 h-7 text-[11px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded transition-all cursor-pointer mx-0.5"
+        title="Insert FAQ Block"
+      >
+        FAQ
+      </button>
+      <button 
+        onClick={() => {
+          insertMarkdown('\n<CTA text="Ready to get started?" link="/contact" buttonText="Contact Us" variant="light" />\n');
+        }}
+        className="px-2 h-7 text-[11px] font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded transition-all cursor-pointer mx-0.5"
+        title="Insert CTA Block"
+      >
+        CTA
+      </button>
+    </>
+  );
+};
 
 interface MDXEditorComponentProps {
   markdown: string;
@@ -362,24 +390,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                 <InsertThematicBreak />
                 <div className="w-px h-4 bg-slate-300 mx-0.5" />
                 {/* Custom Insert Buttons for JSX Components */}
-                <button 
-                  onClick={() => {
-                    onChange(markdown + '\n<FAQ>\n  <FAQItem q="New Question?">\n    Answer goes here.\n  </FAQItem>\n</FAQ>\n');
-                  }}
-                  className="px-2 h-7 text-[11px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded transition-all cursor-pointer mx-0.5"
-                  title="Insert FAQ Block"
-                >
-                  FAQ
-                </button>
-                <button 
-                  onClick={() => {
-                    onChange(markdown + '\n<CTA text="Ready to get started?" link="/contact" buttonText="Contact Us" variant="light" />\n');
-                  }}
-                  className="px-2 h-7 text-[11px] font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded transition-all cursor-pointer mx-0.5"
-                  title="Insert CTA Block"
-                >
-                  CTA
-                </button>
+                <CustomInsertButtons />
 
                 {/* 3-dots options menu */}
                 <div className="relative flex items-center gap-0.5 mx-0.5" ref={optionsMenuRef}>
