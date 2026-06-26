@@ -438,8 +438,9 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
         .mdx-editor-wrapper [data-mdxeditor-toolbar] > div {
           flex-wrap: wrap !important;
           overflow: visible !important;
-          gap: 4px !important;
+          gap: 10px !important;
           align-items: center !important;
+          justify-content: flex-start !important;
         }
         .mdx-editor-wrapper button[class*="mdxeditor-toolbar-button"]:not([role="combobox"]),
         .mdx-editor-wrapper button[aria-label]:not([role="combobox"]) {
