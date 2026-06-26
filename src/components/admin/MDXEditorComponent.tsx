@@ -389,12 +389,19 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       />
       <style>{`
         .mdxeditor-root,
-        .mdxeditor-root > div {
+        .mdxeditor-root * {
+          /* Force everything in the toolbar header to be visible so dropdowns aren't clipped */
+        }
+        .mdx-editor-wrapper .mdxeditor-root {
           overflow: visible !important;
         }
-        .mdxeditor-wrapper [role="toolbar"],
-        .mdxeditor-wrapper [data-mdxeditor-toolbar],
-        .mdxeditor-wrapper .mdxeditor-toolbar {
+        .mdx-editor-wrapper .mdxeditor-root > div:first-child,
+        .mdx-editor-wrapper .mdxeditor-root > div:first-child * {
+          overflow: visible !important;
+        }
+        .mdx-editor-wrapper [role="toolbar"],
+        .mdx-editor-wrapper [data-mdxeditor-toolbar],
+        .mdx-editor-wrapper .mdxeditor-toolbar {
           height: auto !important;
           min-height: 48px !important;
           overflow: visible !important;
@@ -402,13 +409,13 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
           padding: 4px 8px !important;
           z-index: 40 !important;
         }
-        .mdxeditor-wrapper [role="toolbar"] > div,
-        .mdxeditor-wrapper [data-mdxeditor-toolbar] > div {
+        .mdx-editor-wrapper [role="toolbar"] > div,
+        .mdx-editor-wrapper [data-mdxeditor-toolbar] > div {
           flex-wrap: wrap !important;
           overflow: visible !important;
         }
         /* Fix for Radix ScrollArea clipping absolute positioned dropdowns */
-        .mdxeditor-wrapper [data-radix-scroll-area-viewport] {
+        .mdx-editor-wrapper [data-radix-scroll-area-viewport] {
           overflow: visible !important;
         }
       `}</style>
