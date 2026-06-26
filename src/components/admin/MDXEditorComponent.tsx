@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   MoreVertical, ChevronDown, List as ListIcon, Plus, 
   Pilcrow, ChevronUp, AlignLeft, AtSign, ListEnd, 
@@ -74,8 +75,10 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
   // A helper component to render dropdowns using fixed positioning to escape overflow hidden containers
   const PortalDropdown = ({ isOpen, onClose, triggerRef, children, align = 'left' }: any) => {
     const [style, setStyle] = useState({});
+    const [mounted, setMounted] = useState(false);
     
     useEffect(() => {
+      setMounted(true);
       if (isOpen && triggerRef.current) {
         const rect = triggerRef.current.getBoundingClientRect();
         setStyle({
@@ -88,11 +91,12 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       }
     }, [isOpen, triggerRef, align]);
 
-    if (!isOpen) return null;
-    return (
+    if (!isOpen || !mounted) return null;
+    return createPortal(
       <div style={style} className="bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md py-1 text-sm text-slate-700 min-w-[200px]">
         {children}
-      </div>
+      </div>,
+      document.body
     );
   };
 
