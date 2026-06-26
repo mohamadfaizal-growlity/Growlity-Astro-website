@@ -203,11 +203,10 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       Editor: ({ children }: any) => {
         return (
           <div className="faq-block my-6 border border-blue-400 rounded-sm bg-white relative p-8 cursor-text">
-             <div className="text-center mb-8">
+             <div className="text-center mb-4">
                <h3 className="text-[#0073AA] font-bold text-xl mb-2">FAQs</h3>
-               <div className="text-gray-400 text-3xl font-medium">Add Content...</div>
              </div>
-             <div className="text-left w-full mx-auto max-w-3xl">
+             <div className="text-left w-full mx-auto max-w-3xl min-h-[100px] border border-dashed border-gray-300 rounded p-4 bg-gray-50 focus-within:bg-white focus-within:border-blue-400 transition-colors">
                {children}
              </div>
           </div>
