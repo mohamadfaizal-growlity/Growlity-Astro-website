@@ -54,51 +54,21 @@ const getIconForSchema = (name: string) => {
 
 const CollectionNavItem = ({ schema }: { schema: any }) => {
   const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
   const isActive = location.pathname.startsWith(`/collections/${schema.name}`);
   const searchParams = new URLSearchParams(location.search);
   const currentGroup = searchParams.get('group');
-
-  useEffect(() => {
-    if (isActive) setIsOpen(true);
-  }, [isActive]);
 
   return (
     <div className="space-y-1">
       <Link
         to={`/collections/${schema.name}`}
-        className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 capitalize ${isActive && !currentGroup ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium' : 'hover:bg-slate-50 text-slate-600 hover:text-[#0066FF]'}`}
+        className={`flex items-center justify-center p-3 rounded-lg transition-all duration-200 capitalize ${isActive && !currentGroup ? 'bg-[#0066FF]/10 text-[#0066FF] font-medium' : 'hover:bg-slate-50 text-slate-600 hover:text-[#0066FF]'}`}
         title={schema.label || schema.name}
       >
-        <div className="flex items-center gap-3 overflow-hidden">
+        <div className="flex items-center justify-center overflow-hidden">
           {getIconForSchema(schema.label || schema.name)}
-          <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-300">
-            {schema.label || schema.name}
-          </span>
         </div>
-        {schema.groups && schema.groups.length > 0 && (
-          <button 
-            onClick={(e) => { e.preventDefault(); setIsOpen(!isOpen); }}
-            className="p-1 hover:bg-slate-200 rounded opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            {isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-          </button>
-        )}
       </Link>
-      
-      {schema.groups && schema.groups.length > 0 && isOpen && (
-        <div className="ml-6 mt-1 space-y-1 border-l border-slate-200 pl-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {schema.groups.map((group: string) => (
-            <Link
-              key={group}
-              to={`/collections/${schema.name}?group=${group}`}
-              className={`block px-3 py-1.5 rounded-lg text-sm transition-colors whitespace-nowrap ${currentGroup === group ? 'text-[#0066FF] font-medium bg-[#0066FF]/5' : 'text-slate-500 hover:text-[#0066FF] hover:bg-slate-50'}`}
-            >
-              {group}
-            </Link>
-          ))}
-        </div>
-      )}
     </div>
   );
 };
@@ -124,8 +94,8 @@ const Sidebar = ({ schemas, siteLogo, onLogout }: { schemas: any[], siteLogo?: s
   ];
 
   return (
-    <div className="w-[72px] hover:w-64 group bg-white/80 backdrop-blur-md border-r border-slate-200/50 text-slate-600 h-screen flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)] fixed top-0 left-0 z-50 transition-all duration-300 overflow-hidden hover:shadow-2xl">
-      <div className="h-16 flex items-center px-4 border-b border-slate-200/50 flex-shrink-0">
+    <div className="w-[72px] bg-white/80 backdrop-blur-md border-r border-slate-200/50 text-slate-600 h-screen flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)] fixed top-0 left-0 z-50 transition-all duration-300 overflow-hidden">
+      <div className="h-16 flex items-center justify-center border-b border-slate-200/50 flex-shrink-0">
         <div className="w-10 flex-shrink-0 flex items-center justify-center">
           {siteLogo ? (
             <img src={siteLogo} alt="Site Logo" className="h-8 w-8 object-contain" />
@@ -133,58 +103,47 @@ const Sidebar = ({ schemas, siteLogo, onLogout }: { schemas: any[], siteLogo?: s
             <img src="/growlity-logo.png" alt="Growlity" className="h-8 w-8 object-contain" />
           )}
         </div>
-        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ml-2 font-bold text-slate-800 tracking-tight whitespace-nowrap">
-          Growlity CMS
-        </div>
       </div>
       <div className="flex-1 overflow-y-auto overflow-x-hidden py-6 custom-scrollbar">
-        <div className="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 opacity-0 group-hover:opacity-100 transition-opacity">Core</div>
-        <nav className="space-y-1 px-3 mb-6">
+        <nav className="space-y-1 px-2 mb-6">
           <Link
             to="/"
-            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
+            className={`flex items-center justify-center p-3 rounded-lg transition-all duration-200 ${
               isActive('/') && location.pathname === '/' ? 'bg-gradient-to-r from-[#0066FF]/10 to-transparent text-[#0066FF] font-medium border-l-2 border-[#0066FF]' : 'hover:bg-slate-50/80 text-slate-600 hover:text-[#0066FF] border-l-2 border-transparent'
             }`}
             title="Dashboard"
           >
-            <LayoutDashboard size={20} className="min-w-[20px]" /> 
-            <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">Dashboard</span>
+            <div className="flex items-center justify-center"><LayoutDashboard size={20} /></div>
           </Link>
         </nav>
 
-        <div className="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 opacity-0 group-hover:opacity-100 transition-opacity">Content</div>
-        <nav className="space-y-1 px-3 mb-6">
+        <nav className="space-y-1 px-2 mb-6">
           {primarySchemas.map((schema) => (
             <CollectionNavItem key={schema.name} schema={schema} />
           ))}
         </nav>
 
         {otherSchemas.length > 0 && (
-          <>
-            <div className="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 opacity-0 group-hover:opacity-100 transition-opacity">Other</div>
-            <nav className="space-y-1 px-3 mb-6">
-              {otherSchemas.map((schema) => (
-                <CollectionNavItem key={schema.name} schema={schema} />
-              ))}
-            </nav>
-          </>
+          <nav className="space-y-1 px-2 mb-6">
+            {otherSchemas.map((schema) => (
+              <CollectionNavItem key={schema.name} schema={schema} />
+            ))}
+          </nav>
         )}
 
-        <div className="px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 opacity-0 group-hover:opacity-100 transition-opacity">System</div>
-        <nav className="space-y-1 px-3">
+        <nav className="space-y-1 px-2">
           {staticNavItems.slice(1).map((item) => (
             <Link
               key={item.name}
               to={item.path}
               title={item.name}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 ${
+              className={`flex items-center justify-center p-3 rounded-lg transition-all duration-200 ${
                 isActive(item.path)
                   ? 'bg-gradient-to-r from-[#0066FF]/10 to-transparent text-[#0066FF] font-medium border-l-2 border-[#0066FF]'
                   : 'hover:bg-slate-50/80 text-slate-600 hover:text-[#0066FF] border-l-2 border-transparent'
               }`}
             >
-              <div className="min-w-[20px]">{item.icon}</div>
-              <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">{item.name}</span>
+              <div className="flex items-center justify-center">{item.icon}</div>
             </Link>
           ))}
         </nav>
@@ -192,11 +151,10 @@ const Sidebar = ({ schemas, siteLogo, onLogout }: { schemas: any[], siteLogo?: s
       <div className="p-4 border-t border-slate-200/50">
         <button 
           onClick={onLogout}
-          className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors text-left"
+          className="flex items-center justify-center p-3 w-full rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors"
           title="Logout"
         >
-          <LogOut size={20} className="min-w-[20px]" />
-          <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity font-medium">Logout</span>
+          <LogOut size={20} />
         </button>
       </div>
     </div>
