@@ -93,7 +93,7 @@ const Sidebar = ({ schemas, siteLogo, onLogout }: { schemas: any[], siteLogo?: s
   ];
 
   return (
-    <div className="w-[88px] bg-white/80 backdrop-blur-md border-r border-slate-200/50 text-slate-600 h-screen flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)] fixed top-0 left-0 z-50 transition-all duration-300 overflow-hidden">
+    <div className="w-28 bg-white/80 backdrop-blur-md border-r border-slate-200/50 text-slate-600 h-screen flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)] fixed top-0 left-0 z-50 transition-all duration-300 overflow-hidden">
       <div className="h-16 flex items-center justify-center border-b border-slate-200/50 flex-shrink-0">
         <Link to="/" className="w-10 flex-shrink-0 flex items-center justify-center" title="Dashboard">
           <img src="/G-Icon.png" alt="Growlity Icon" className="h-8 w-8 object-contain" />
@@ -175,7 +175,7 @@ const AdminLayout = ({ schemas, siteLogo, setIsAuthenticated }: any) => {
       {!isEditorRoute && (
         <Sidebar schemas={schemas} siteLogo={siteLogo} onLogout={() => setIsAuthenticated(false)} />
       )}
-      <main className={`flex-1 overflow-x-hidden transition-all duration-300 ${!isEditorRoute ? 'ml-[88px]' : ''}`}>
+      <main className={`flex-1 overflow-x-hidden transition-all duration-300 ${!isEditorRoute ? 'ml-28' : ''}`}>
         <Routes>
           <Route path="/" element={<Dashboard schemas={schemas} />} />
           <Route path="/collections/:collection" element={<CollectionList />} />
