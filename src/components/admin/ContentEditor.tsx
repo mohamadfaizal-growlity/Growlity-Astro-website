@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, Suspense, lazy } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X, Briefcase, FileBadge, Share2, Facebook, Twitter, Star, UserCircle2, List, Moon, MoreVertical, Upload, Copy, Pencil, Sparkles, Plus } from 'lucide-react';
+import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, ChevronUp, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X, Briefcase, FileBadge, Share2, Facebook, Twitter, Star, UserCircle2, List, Moon, MoreVertical, Upload, Copy, Pencil, Sparkles, Plus } from 'lucide-react';
 import ErrorBoundary from './ErrorBoundary';
 import SeoAnalyzer from './SeoAnalyzer';
 
