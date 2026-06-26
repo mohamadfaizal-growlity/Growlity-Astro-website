@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, ChevronUp, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X, Briefcase, FileBadge, Share2, Facebook, Twitter, Star, UserCircle2, List, Moon, MoreVertical, Upload, Copy, Pencil, Sparkles, Plus, Minus } from 'lucide-react';
 import ErrorBoundary from './ErrorBoundary';
 import SeoAnalyzer from './SeoAnalyzer';
+import AcfModal, { AcfModalType } from './AcfModal';
 
 const MDXEditorComponent = lazy(() => import('./MDXEditorComponent'));
 
@@ -23,6 +24,13 @@ export default function ContentEditor() {
   const [isPanelOpen, setIsPanelOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<'post' | 'block' | 'seo'>('post');
   const [activeBlock, setActiveBlock] = useState<'Image' | 'FAQ Section' | null>(null);
+  
+  const [activeAcfModal, setActiveAcfModal] = useState<AcfModalType>(null);
+  const [acfData, setAcfData] = useState({
+    partnerDataCard: [],
+    consultingServices: [],
+    faq: []
+  });
   
   const [openPanels, setOpenPanels] = useState({
     popupControls: false,
@@ -939,15 +947,15 @@ export default function ContentEditor() {
                            <div className="px-4 pb-3 space-y-3">
                              <div>
                                <div className="text-[10px] text-slate-500 mb-1 uppercase tracking-wider">PARTNER DATA CARD</div>
-                               <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-3 py-1 rounded transition-colors cursor-pointer">0 items</button>
+                               <button onClick={() => setActiveAcfModal('partnerDataCard')} className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-3 py-1 rounded transition-colors cursor-pointer">{acfData.partnerDataCard.length} items</button>
                              </div>
                              <div>
                                <div className="text-[10px] text-slate-500 mb-1 uppercase tracking-wider">CONSULTING SERVICES</div>
-                               <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-3 py-1 rounded transition-colors cursor-pointer">0 items</button>
+                               <button onClick={() => setActiveAcfModal('consultingServices')} className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-3 py-1 rounded transition-colors cursor-pointer">{acfData.consultingServices.length} items</button>
                              </div>
                              <div>
                                <div className="text-[10px] text-slate-500 mb-1 uppercase tracking-wider">FAQ</div>
-                               <button className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-3 py-1 rounded transition-colors cursor-pointer">0 items</button>
+                               <button onClick={() => setActiveAcfModal('faq')} className="bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-semibold px-3 py-1 rounded transition-colors cursor-pointer">{acfData.faq.length} items</button>
                              </div>
                            </div>
                          )}
@@ -1318,6 +1326,18 @@ export default function ContentEditor() {
           </div>
         </div>
       )}
+
+      <AcfModal 
+        type={activeAcfModal} 
+        isOpen={activeAcfModal !== null} 
+        onClose={() => setActiveAcfModal(null)} 
+        data={activeAcfModal ? acfData[activeAcfModal] : []} 
+        onDataChange={(newData) => {
+          if (activeAcfModal) {
+            setAcfData(prev => ({ ...prev, [activeAcfModal]: newData }));
+          }
+        }} 
+      />
     </div>
   );
 }
