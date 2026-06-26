@@ -73,6 +73,21 @@ export async function GET({ request }: { request: Request }) {
       };
     });
 
+    // Sort by date descending (newest first) like WordPress
+    items.sort((a, b) => {
+      const dateA = new Date(a.data?.pubDate || a.data?.date || a.data?.created_at || 0).getTime();
+      const dateB = new Date(b.data?.pubDate || b.data?.date || b.data?.created_at || 0).getTime();
+      
+      // If both dates are invalid (0), sort alphabetically by title as fallback
+      if (dateA === 0 && dateB === 0) {
+         const titleA = (a.data?.title || a.slug || '').toLowerCase();
+         const titleB = (b.data?.title || b.slug || '').toLowerCase();
+         return titleA.localeCompare(titleB);
+      }
+      
+      return dateB - dateA;
+    });
+
     return new Response(JSON.stringify(items), { 
       status: 200, 
       headers: { 'Content-Type': 'application/json' } 
