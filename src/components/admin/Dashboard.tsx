@@ -18,7 +18,19 @@ import {
   Box,
   Sparkles,
   Zap,
-  TrendingUp
+  TrendingUp,
+  Edit3,
+  MessageSquare,
+  BarChart2,
+  ShieldAlert,
+  Search,
+  MailCheck,
+  Send,
+  Check,
+  Trash,
+  AlertCircle,
+  ThumbsUp,
+  LineChart
 } from 'lucide-react';
 
 const getCollectionIcon = (collection: string) => {
@@ -300,6 +312,77 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
               </div>
             )}
           </div>
+
+          {/* Quick Draft */}
+          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
+            <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2 mb-6">
+              <Edit3 className="text-pink-500" /> Quick Draft
+            </h2>
+            <div className="space-y-4">
+              <input type="text" placeholder="Title" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all" />
+              <textarea placeholder="What's on your mind?" rows={4} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none"></textarea>
+              <button className="bg-[#0066FF] hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl font-medium transition-colors shadow-sm flex items-center gap-2">
+                <Send size={18} /> Save Draft
+              </button>
+            </div>
+          </div>
+
+          {/* Form Submissions Overview */}
+          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
+            <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2 mb-6">
+              <LineChart className="text-indigo-500" /> Form Submissions (Last 7 Days)
+            </h2>
+            <div className="h-48 flex items-end justify-between gap-2 pt-4">
+              {[14, 22, 18, 35, 28, 42, 38].map((val, i) => (
+                <div key={i} className="w-full bg-indigo-50 rounded-t-lg relative group">
+                  <div className="absolute bottom-0 w-full bg-indigo-500 rounded-t-lg transition-all duration-500 group-hover:bg-indigo-400" style={{ height: `${(val / 50) * 100}%` }}></div>
+                  <div className="opacity-0 group-hover:opacity-100 absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs py-1 px-2 rounded font-bold transition-opacity">{val}</div>
+                </div>
+              ))}
+            </div>
+            <div className="flex justify-between text-xs text-slate-400 mt-3 font-medium uppercase tracking-wider">
+              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+          </div>
+
+          {/* Recent Comments */}
+          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
+            <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2 mb-6">
+              <MessageSquare className="text-amber-500" /> Recent Comments
+            </h2>
+            <div className="space-y-4">
+              {[
+                { author: "Alex J.", post: "SEO Best Practices 2026", text: "Great insights! Will definitely implement these.", status: "Pending" },
+                { author: "Sarah T.", post: "Case Study: EcoVadis", text: "This helped us a lot in our ESG reporting.", status: "Approved" }
+              ].map((comment, i) => (
+                <div key={i} className="flex gap-4 p-4 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex-shrink-0 flex items-center justify-center text-slate-500 font-bold">
+                    {comment.author.charAt(0)}
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm text-slate-800 font-medium">
+                      {comment.author} <span className="text-slate-400 font-normal">on</span> <span className="text-[#0066FF] hover:underline cursor-pointer">{comment.post}</span>
+                    </p>
+                    <p className="text-sm text-slate-600 mt-1 mb-3">"{comment.text}"</p>
+                    <div className="flex flex-wrap gap-3">
+                      {comment.status === 'Pending' && (
+                        <button className="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1"><Check size={14}/> Approve</button>
+                      )}
+                      <button className="text-xs font-bold text-slate-500 hover:text-slate-700 flex items-center gap-1"><MessageSquare size={14}/> Reply</button>
+                      <button className="text-xs font-bold text-amber-600 hover:text-amber-700 flex items-center gap-1"><AlertCircle size={14}/> Spam</button>
+                      <button className="text-xs font-bold text-red-500 hover:text-red-700 flex items-center gap-1"><Trash size={14}/> Trash</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 flex flex-wrap gap-4 text-sm font-medium border-t border-slate-100 pt-4">
+              <span className="text-slate-500 cursor-pointer hover:text-slate-800">All (124)</span>
+              <span className="text-[#0066FF] cursor-pointer hover:text-blue-800">Pending (1)</span>
+              <span className="text-slate-500 cursor-pointer hover:text-slate-800">Approved (120)</span>
+              <span className="text-slate-500 cursor-pointer hover:text-slate-800">Spam (3)</span>
+            </div>
+          </div>
         </div>
 
         {/* Sidebar Column */}
@@ -365,6 +448,80 @@ export default function Dashboard({ schemas }: { schemas: any[] }) {
                   </div>
                 );
               })}
+            </div>
+          </div>
+
+          {/* SEO Overview */}
+          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                <BarChart2 className="text-blue-500" /> SEO Overview
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="bg-blue-50 rounded-2xl p-4 border border-blue-100">
+                <p className="text-xs text-blue-600 font-bold uppercase tracking-wider mb-1">Redirects</p>
+                <p className="text-2xl font-extrabold text-blue-900">122</p>
+              </div>
+              <div className="bg-emerald-50 rounded-2xl p-4 border border-emerald-100">
+                <p className="text-xs text-emerald-600 font-bold uppercase tracking-wider mb-1">Total Hits</p>
+                <p className="text-2xl font-extrabold text-emerald-900">190K</p>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <h4 className="font-bold text-slate-800 text-sm">Top Performing Posts</h4>
+              <p className="text-sm text-slate-600 hover:text-[#0066FF] cursor-pointer flex items-center gap-2"><ThumbsUp size={14} className="text-emerald-500"/> ESG Compliance 2026</p>
+              <p className="text-sm text-slate-600 hover:text-[#0066FF] cursor-pointer flex items-center gap-2"><ThumbsUp size={14} className="text-emerald-500"/> Carbon Footprint Guide</p>
+            </div>
+          </div>
+
+          {/* Security Activity */}
+          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
+            <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2 mb-6">
+              <ShieldAlert className="text-red-500" /> Security Activity
+            </h2>
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Top IPs Blocked</h4>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm bg-slate-50 p-3 rounded-xl border border-slate-100">
+                    <span className="font-mono text-slate-600">124.83.53.232</span>
+                    <span className="text-red-500 font-bold">150 blocks</span>
+                  </div>
+                  <div className="flex justify-between text-sm bg-slate-50 p-3 rounded-xl border border-slate-100">
+                    <span className="font-mono text-slate-600">110.171.180.167</span>
+                    <span className="text-red-500 font-bold">150 blocks</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Failed Logins</h4>
+                <div className="flex justify-between items-center text-sm bg-orange-50 text-orange-800 p-3 rounded-xl font-medium border border-orange-100">
+                  <span className="truncate pr-2">admin (Non-existent)</span>
+                  <span className="flex-shrink-0">44 attempts</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Email Analytics */}
+          <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8">
+            <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2 mb-6">
+              <MailCheck className="text-teal-500" /> Email Analytics
+            </h2>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center text-sm p-3 bg-slate-50 rounded-xl border border-slate-100">
+                <span className="text-slate-600 font-medium">All Time Sent</span>
+                <span className="text-slate-800 font-bold">9,930</span>
+              </div>
+              <div className="flex justify-between items-center text-sm p-3 bg-emerald-50 rounded-xl border border-emerald-100 text-emerald-700">
+                <span className="font-medium flex items-center gap-2"><CheckCircle2 size={16}/> Confirmed</span>
+                <span className="font-bold">9,850</span>
+              </div>
+              <div className="flex justify-between items-center text-sm p-3 bg-red-50 rounded-xl border border-red-100 text-red-700">
+                <span className="font-medium flex items-center gap-2"><AlertCircle size={16}/> Failed</span>
+                <span className="font-bold">80</span>
+              </div>
             </div>
           </div>
 
