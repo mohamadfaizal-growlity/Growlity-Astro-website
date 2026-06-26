@@ -126,13 +126,17 @@ const Sidebar = ({ schemas, siteLogo, onLogout, onHoverChange }: { schemas: any[
 
   return (
     <div 
-      className="w-28 hover:w-64 group bg-white/80 backdrop-blur-md border-r border-slate-200/50 text-slate-600 h-screen flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)] fixed top-0 left-0 z-50 transition-all duration-300 overflow-hidden hover:shadow-2xl"
+      className="w-24 hover:w-56 group bg-white/80 backdrop-blur-md border-r border-slate-200/50 text-slate-600 h-screen flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)] fixed top-0 left-0 z-50 transition-all duration-300 overflow-hidden hover:shadow-2xl"
       onMouseEnter={() => onHoverChange && onHoverChange(true)}
       onMouseLeave={() => onHoverChange && onHoverChange(false)}
     >
-      <div className="h-16 flex items-center px-4 border-b border-slate-200/50 flex-shrink-0">
-        <Link to="/" className="w-20 flex-shrink-0 flex items-center justify-center group-hover:justify-start" title="Dashboard">
-          <img src="/G-Icon.png" alt="Growlity Icon" className="h-8 w-8 object-contain" />
+      <div className="h-16 flex items-center px-4 border-b border-slate-200/50 flex-shrink-0 overflow-hidden">
+        <Link to="/" className="flex items-center w-full h-full" title="Dashboard">
+          {siteLogo ? (
+            <img src={siteLogo} alt="Site Logo" className="h-8 w-auto max-w-[200px] object-contain flex-shrink-0" />
+          ) : (
+            <img src="/growlity-logo.png" alt="Growlity" className="h-8 w-auto max-w-[200px] object-contain flex-shrink-0" />
+          )}
         </Link>
       </div>
       <div className="flex-1 overflow-y-auto overflow-x-hidden py-6 custom-scrollbar">
@@ -215,7 +219,7 @@ const AdminLayout = ({ schemas, siteLogo, setIsAuthenticated }: any) => {
       {!isEditorRoute && (
         <Sidebar schemas={schemas} siteLogo={siteLogo} onLogout={() => setIsAuthenticated(false)} onHoverChange={setIsSidebarHovered} />
       )}
-      <main className={`flex-1 overflow-x-hidden transition-all duration-300 ${!isEditorRoute ? (isSidebarHovered ? 'ml-64' : 'ml-28') : ''}`}>
+      <main className={`flex-1 overflow-x-hidden transition-all duration-300 ${!isEditorRoute ? (isSidebarHovered ? 'ml-56' : 'ml-24') : ''}`}>
         <Routes>
           <Route path="/" element={<Dashboard schemas={schemas} />} />
           <Route path="/collections/:collection" element={<CollectionList />} />
