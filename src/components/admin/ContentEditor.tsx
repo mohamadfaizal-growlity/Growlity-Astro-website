@@ -236,7 +236,7 @@ export default function ContentEditor() {
   return (
     <div className="flex flex-col h-screen bg-white">
       {/* Top Toolbar */}
-      <header className="h-[60px] bg-white border-b border-slate-200 px-4 flex items-center justify-between shrink-0 sticky top-0 z-20">
+      <header className="h-[50px] bg-white border-b border-slate-200 px-4 flex items-center justify-between shrink-0 sticky top-0 z-20">
         <div className="flex items-center gap-4 flex-1">
           <button 
             onClick={() => navigate(-1)} 
@@ -253,7 +253,7 @@ export default function ContentEditor() {
             value={data.title || ''} 
             onChange={(e) => updateField('title', e.target.value)}
             placeholder="Add title"
-            className="text-[15px] font-medium bg-transparent outline-none placeholder:text-slate-400 w-full max-w-lg"
+            className="text-[14px] font-medium bg-transparent outline-none placeholder:text-slate-400 w-full max-w-lg"
           />
         </div>
 
@@ -293,7 +293,7 @@ export default function ContentEditor() {
           
           <button 
             onClick={handleSave}
-            className="ml-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded text-sm font-medium transition-colors cursor-pointer"
+            className="ml-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-[13px] font-medium transition-colors cursor-pointer"
           >
             {isNew ? 'Publish' : 'Update'}
           </button>
@@ -304,7 +304,7 @@ export default function ContentEditor() {
       <div className="flex flex-1 overflow-hidden bg-slate-50">
         {/* Editor Area */}
         <div className="flex-1 overflow-y-auto bg-white custom-scrollbar border-r border-slate-200">
-          <div className="max-w-[840px] mx-auto px-12 py-12">
+          <div className="max-w-[840px] mx-auto px-6 py-6">
             <ErrorBoundary>
               <Suspense fallback={<div className="p-8 text-center text-slate-400">Loading block editor...</div>}>
                 <MDXEditorComponent
@@ -344,8 +344,8 @@ export default function ContentEditor() {
 
         {/* Right Panel */}
         {isPanelOpen && (
-          <aside className="w-[340px] shrink-0 bg-white flex flex-col h-full z-10 shadow-[-4px_0_24px_rgba(0,0,0,0.02)] border-l border-slate-200 text-sm">
-            <div className="flex border-b border-slate-200 px-2 pt-2 gap-2">
+          <aside className="w-[300px] shrink-0 bg-white flex flex-col h-full z-10 shadow-[-4px_0_24px_rgba(0,0,0,0.02)] border-l border-slate-200 text-sm">
+            <div className="flex border-b border-slate-200 px-2 pt-1 gap-1">
               <button 
                 onClick={() => setActiveTab('post')}
                 className={`px-3 py-2 text-[13px] font-medium border-b-2 transition-colors cursor-pointer ${activeTab === 'post' ? 'border-slate-800 text-slate-800' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
