@@ -143,7 +143,7 @@ export default function CollectionList() {
               ) : (
                 filteredItems.map((item) => {
                   const isDraft = item.data?.draft === true;
-                  const date = item.data?.pubDate || item.data?.date || 'N/A';
+                  const date = item.data?.publishedDate || item.data?.pubDate || item.data?.date || 'N/A';
                   const isSelected = selectedItems.includes(item.slug);
 
                   return (

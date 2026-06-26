@@ -75,8 +75,8 @@ export async function GET({ request }: { request: Request }) {
 
     // Sort by date descending (newest first) like WordPress
     items.sort((a, b) => {
-      const dateA = new Date(a.data?.pubDate || a.data?.date || a.data?.created_at || 0).getTime();
-      const dateB = new Date(b.data?.pubDate || b.data?.date || b.data?.created_at || 0).getTime();
+      const dateA = new Date(a.data?.publishedDate || a.data?.pubDate || a.data?.date || a.data?.created_at || 0).getTime();
+      const dateB = new Date(b.data?.publishedDate || b.data?.pubDate || b.data?.date || b.data?.created_at || 0).getTime();
       
       // If both dates are invalid (0), sort alphabetically by title as fallback
       if (dateA === 0 && dateB === 0) {
