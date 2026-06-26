@@ -18,3 +18,24 @@ html.lenis, html.lenis body {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* ==========================================================================
+   GLOBAL CURSOR FIX FOR ADMIN PANEL & WEBSITE
+   Ensures that any interactive or clickable element transforms the cursor 
+   into a "finger" (pointer) icon.
+   ========================================================================== */
+
+button, 
+a, 
+[role="button"],
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  cursor: pointer !important;
+}
+
+/* If an element has a hover background or text color change, it is highly likely clickable */
+[class*="hover:bg-"]:hover,
+[class*="hover:text-"]:hover {
+  cursor: pointer;
+}
