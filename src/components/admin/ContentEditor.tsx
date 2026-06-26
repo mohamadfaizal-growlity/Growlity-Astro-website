@@ -880,12 +880,12 @@ export default function ContentEditor() {
                         )}
                       </div>
                       
-                      <div className="relative">
-                        <div onClick={() => togglePanel('visibility1')} className="flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer border-t border-slate-100">
-                          Visibility {openPanels.visibility1 ? <Minus size={16} className="text-red-400"/> : <Plus size={16} className="text-slate-400"/>}
+                      <div>
+                        <div onClick={() => togglePanel('visibility1')} className="relative flex items-center justify-between font-medium text-[13px] text-slate-800 p-4 hover:bg-slate-50 cursor-pointer border-t border-slate-100">
+                          Visibility <Plus size={16} className="text-slate-400"/>
                         </div>
                         {openPanels.visibility1 && (
-                          <div className="absolute top-0 right-[calc(100%+8px)] w-[240px] bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded z-50 overflow-hidden flex flex-col max-h-[400px]">
+                          <div className="fixed top-[250px] right-[308px] w-[240px] bg-white border border-slate-200 shadow-[0_12px_40px_rgb(0,0,0,0.15)] rounded z-[99999] overflow-hidden flex flex-col max-h-[400px]">
                             <div className="overflow-y-auto custom-scrollbar">
                                <div className="p-3">
                                  <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-2 px-2">CONTROLS</div>
