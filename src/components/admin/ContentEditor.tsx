@@ -906,6 +906,11 @@ export default function ContentEditor() {
                                     Advanced Custom Fields
                                  </div>
                                </div>
+                               <div className="border-t border-slate-100 p-2 space-y-0.5">
+                                 <div className="px-2 py-1.5 text-[12px] text-slate-700 hover:bg-blue-50 cursor-pointer rounded">Copy</div>
+                                 <div className="px-2 py-1.5 text-[12px] text-slate-700 hover:bg-blue-50 cursor-pointer rounded">Import</div>
+                                 <div className="px-2 py-1.5 text-[12px] text-[#0073AA] hover:bg-blue-50 cursor-pointer rounded">Reset all</div>
+                               </div>
                             </div>
                           </div>
                         )}
