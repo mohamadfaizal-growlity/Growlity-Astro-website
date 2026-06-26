@@ -93,7 +93,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
 
     if (!isOpen || !mounted) return null;
     return createPortal(
-      <div style={style} className="bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-md py-1 text-sm text-slate-700 min-w-[200px]">
+      <div style={style} className="bg-white border border-slate-200 shadow-xl rounded-md py-1 text-slate-700 min-w-[160px] max-w-[220px]">
         {children}
       </div>,
       document.body
@@ -280,18 +280,18 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                       <Pilcrow size={16} />
                    </button>
                    <PortalDropdown isOpen={isBlockTransformMenuOpen} onClose={() => setIsBlockTransformMenuOpen(false)} triggerRef={blockTransformMenuRef} align="left">
-                        <div className="px-3 py-1.5 text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Transform to</div>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Heading size={14} className="text-slate-400"/> Heading</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><ListIcon size={14} className="text-slate-400"/> List</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Quote size={14} className="text-slate-400"/> Quote</button>
+                        <div className="px-3 py-1 text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Transform to</div>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Heading size={14} className="text-slate-400"/> Heading</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => setIsBlockTransformMenuOpen(false)}><ListIcon size={14} className="text-slate-400"/> List</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Quote size={14} className="text-slate-400"/> Quote</button>
                         <div className="border-t border-slate-100 my-1"></div>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Square size={14} className="text-slate-400"/> Preformatted</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Code size={14} className="text-slate-400"/> Code</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Columns size={14} className="text-slate-400"/> Columns</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><MenuSquare size={14} className="text-slate-400"/> Details</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><LayoutTemplate size={14} className="text-slate-400"/> Group</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><TextQuote size={14} className="text-slate-400"/> Pullquote</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => setIsBlockTransformMenuOpen(false)}><PenLine size={14} className="text-slate-400"/> Poetry</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Square size={14} className="text-slate-400"/> Preformatted</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Code size={14} className="text-slate-400"/> Code</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => setIsBlockTransformMenuOpen(false)}><Columns size={14} className="text-slate-400"/> Columns</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => setIsBlockTransformMenuOpen(false)}><MenuSquare size={14} className="text-slate-400"/> Details</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => setIsBlockTransformMenuOpen(false)}><LayoutTemplate size={14} className="text-slate-400"/> Group</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => setIsBlockTransformMenuOpen(false)}><TextQuote size={14} className="text-slate-400"/> Pullquote</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => setIsBlockTransformMenuOpen(false)}><PenLine size={14} className="text-slate-400"/> Poetry</button>
                    </PortalDropdown>
                 </div>
 
@@ -340,17 +340,17 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                       <ChevronDown size={14} />
                    </button>
                    <PortalDropdown isOpen={isRichTextMenuOpen} onClose={() => setIsRichTextMenuOpen(false)} triggerRef={richTextMenuRef} align="left">
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + '\n[^1]: Footnote\n'); setIsRichTextMenuOpen(false); }}><ListEnd size={14} className="text-slate-400"/> Footnote</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' <mark>highlight</mark> '); setIsRichTextMenuOpen(false); }}><Droplet size={14} className="text-slate-400"/> Highlight</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' `code` '); setIsRichTextMenuOpen(false); }}><Code size={14} className="text-slate-400"/> Inline code</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { setIsRichTextMenuOpen(false); alert('Inline image feature coming soon.'); }}><ImageIcon size={14} className="text-slate-400"/> Inline image</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' <kbd>Ctrl</kbd> '); setIsRichTextMenuOpen(false); }}><Keyboard size={14} className="text-slate-400"/> Keyboard input</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { setIsRichTextMenuOpen(false); alert('Language feature coming soon.'); }}><Languages size={14} className="text-slate-400"/> Language</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { setIsRichTextMenuOpen(false); alert('Math feature coming soon.'); }}><FunctionSquare size={14} className="text-slate-400"/> Math</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px] text-emerald-600" onClick={() => { setIsRichTextMenuOpen(false); alert('Popup Trigger feature coming soon.'); }}><MousePointer2 size={14} className="text-emerald-500"/> Popup Trigger</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' ~~strikethrough~~ '); setIsRichTextMenuOpen(false); }}><Strikethrough size={14} className="text-slate-400"/> Strikethrough</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' <sub>sub</sub> '); setIsRichTextMenuOpen(false); }}><Subscript size={14} className="text-slate-400"/> Subscript</button>
-                        <button className="w-full text-left px-3 py-1.5 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[13px]" onClick={() => { onChange(markdown + ' <sup>sup</sup> '); setIsRichTextMenuOpen(false); }}><Superscript size={14} className="text-slate-400"/> Superscript</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { onChange(markdown + '\n[^1]: Footnote\n'); setIsRichTextMenuOpen(false); }}><ListEnd size={14} className="text-slate-400"/> Footnote</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { onChange(markdown + ' <mark>highlight</mark> '); setIsRichTextMenuOpen(false); }}><Droplet size={14} className="text-slate-400"/> Highlight</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { onChange(markdown + ' `code` '); setIsRichTextMenuOpen(false); }}><Code size={14} className="text-slate-400"/> Inline code</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { setIsRichTextMenuOpen(false); alert('Inline image feature coming soon.'); }}><ImageIcon size={14} className="text-slate-400"/> Inline image</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { onChange(markdown + ' <kbd>Ctrl</kbd> '); setIsRichTextMenuOpen(false); }}><Keyboard size={14} className="text-slate-400"/> Keyboard input</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { setIsRichTextMenuOpen(false); alert('Language feature coming soon.'); }}><Languages size={14} className="text-slate-400"/> Language</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { setIsRichTextMenuOpen(false); alert('Math feature coming soon.'); }}><FunctionSquare size={14} className="text-slate-400"/> Math</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px] text-emerald-600" onClick={() => { setIsRichTextMenuOpen(false); alert('Popup Trigger feature coming soon.'); }}><MousePointer2 size={14} className="text-emerald-500"/> Popup Trigger</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { onChange(markdown + ' ~~strikethrough~~ '); setIsRichTextMenuOpen(false); }}><Strikethrough size={14} className="text-slate-400"/> Strikethrough</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { onChange(markdown + ' <sub>sub</sub> '); setIsRichTextMenuOpen(false); }}><Subscript size={14} className="text-slate-400"/> Subscript</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { onChange(markdown + ' <sup>sup</sup> '); setIsRichTextMenuOpen(false); }}><Superscript size={14} className="text-slate-400"/> Superscript</button>
                    </PortalDropdown>
                 </div>
 
@@ -381,24 +381,24 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                   CTA
                 </button>
 
-                {/* 3-dots options menu - Removed flex-1 to keep it aligned with rest of icons */}
+                {/* 3-dots options menu */}
                 <div className="relative flex items-center gap-1 mx-1" ref={optionsMenuRef}>
                    <button onClick={() => setIsOptionsMenuOpen(!isOptionsMenuOpen)} className="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer">
                       <MoreVertical size={16} />
                    </button>
                    <PortalDropdown isOpen={isOptionsMenuOpen} onClose={() => setIsOptionsMenuOpen(false)} triggerRef={optionsMenuRef} align="right">
-                        <div className="px-4 py-2 text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Options</div>
-                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Settings</span><span className="text-[10px] text-slate-400">Ctrl+Shift+D</span></button>
-                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Duplicate</span><span className="text-[10px] text-slate-400">Ctrl+Shift+D</span></button>
-                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Insert before</span><span className="text-[10px] text-slate-400">Ctrl+Alt+T</span></button>
-                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Insert after</span><span className="text-[10px] text-slate-400">Ctrl+Alt+Y</span></button>
+                        <div className="px-3 py-1 text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Options</div>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[12px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Settings</span><span className="text-[10px] text-slate-400">Ctrl+Shift+D</span></button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[12px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Duplicate</span><span className="text-[10px] text-slate-400">Ctrl+Shift+D</span></button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[12px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Insert before</span><span className="text-[10px] text-slate-400">Ctrl+Alt+T</span></button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 hover:text-blue-600 flex justify-between items-center cursor-pointer text-[12px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Insert after</span><span className="text-[10px] text-slate-400">Ctrl+Alt+Y</span></button>
                         <div className="border-t border-slate-100 my-1"></div>
-                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}>Edit as HTML</button>
-                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}>Lock</button>
-                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}>Add to Reusable blocks</button>
-                        <button className="w-full text-left px-4 py-1.5 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}>Group</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[12px]" onClick={() => setIsOptionsMenuOpen(false)}>Edit as HTML</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[12px]" onClick={() => setIsOptionsMenuOpen(false)}>Lock</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[12px]" onClick={() => setIsOptionsMenuOpen(false)}>Add to Reusable blocks</button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-blue-50 hover:text-blue-600 cursor-pointer text-[12px]" onClick={() => setIsOptionsMenuOpen(false)}>Group</button>
                         <div className="border-t border-slate-100 my-1"></div>
-                        <button className="w-full text-left px-4 py-1.5 hover:bg-red-50 text-red-600 flex justify-between items-center cursor-pointer text-[13px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Remove block</span><span className="text-[10px] text-red-400">Del</span></button>
+                        <button className="w-full text-left px-3 py-1 hover:bg-red-50 text-red-600 flex justify-between items-center cursor-pointer text-[12px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Remove block</span><span className="text-[10px] text-red-400">Del</span></button>
                    </PortalDropdown>
                    <button className="p-1.5 rounded hover:bg-slate-200 text-slate-600 transition-colors cursor-pointer ml-1">
                       <ChevronsLeft size={16} />
