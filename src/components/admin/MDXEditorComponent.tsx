@@ -223,23 +223,53 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       ],
       hasChildren: true,
       Editor: ({ properties, setProperties, children }: any) => {
+        // Use a ref to store a unique ID for this instance
+        const idRef = useRef(Math.random().toString(36).substr(2, 9));
+        const [isOpen, setIsOpen] = useState(false);
+
+        useEffect(() => {
+          const handleOpen = (e: any) => {
+            if (e.detail.id !== idRef.current) {
+              setIsOpen(false);
+            }
+          };
+          window.addEventListener('faq-item-opened', handleOpen);
+          return () => window.removeEventListener('faq-item-opened', handleOpen);
+        }, []);
+
+        const toggleOpen = () => {
+          const newState = !isOpen;
+          setIsOpen(newState);
+          if (newState) {
+            window.dispatchEvent(new CustomEvent('faq-item-opened', { detail: { id: idRef.current } }));
+          }
+        };
+
         return (
-          <div className="border-b border-gray-400 py-4 mb-2 bg-white flex flex-col group faq-item focus-within:border-[#0073AA] transition-colors">
-             <div className="flex items-center justify-between mb-2">
+          <div className={`border-b ${isOpen ? 'border-[#0073AA]' : 'border-gray-400'} py-4 mb-2 bg-white flex flex-col group faq-item transition-colors`}>
+             <div className="flex items-center justify-between mb-2 cursor-pointer" onClick={toggleOpen}>
                <input 
                  type="text" 
                  value={properties.q || ''} 
                  onChange={(e) => setProperties({ ...properties, q: e.target.value })}
-                 className="w-full text-gray-700 focus:text-[#0073AA] text-lg font-medium border-none outline-none focus:ring-0 px-0 bg-transparent placeholder-gray-400 transition-colors"
+                 onClick={(e) => { e.stopPropagation(); if (!isOpen) toggleOpen(); }}
+                 className={`w-full ${isOpen ? 'text-[#0073AA]' : 'text-gray-700'} focus:text-[#0073AA] text-lg font-medium border-none outline-none focus:ring-0 px-0 bg-transparent placeholder-gray-400 transition-colors`}
                  placeholder="What is the question?"
                />
-               <div className="w-8 h-8 rounded-full bg-gray-200 group-focus-within:bg-[#0073AA] flex items-center justify-center text-gray-600 group-focus-within:text-white font-medium flex-shrink-0 ml-4 cursor-pointer transition-colors shadow-sm">
+               <div className={`w-8 h-8 rounded-full ${isOpen ? 'bg-[#0073AA] text-white' : 'bg-gray-200 text-gray-600'} flex items-center justify-center font-medium flex-shrink-0 ml-4 cursor-pointer transition-colors shadow-sm`}>
                  <Plus size={16} />
                </div>
              </div>
-             <div className="text-gray-600 text-[13px] mt-2 leading-relaxed opacity-50 group-focus-within:opacity-100 transition-opacity">
-               {children}
-             </div>
+             {isOpen && (
+               <div className="text-gray-600 text-[13px] mt-2 leading-relaxed opacity-100 transition-opacity">
+                 {children}
+               </div>
+             )}
+             {!isOpen && (
+               <div className="hidden">
+                 {children}
+               </div>
+             )}
           </div>
         );
       }
