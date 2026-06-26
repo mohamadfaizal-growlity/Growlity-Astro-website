@@ -248,36 +248,36 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
           markdownShortcutPlugin(),
           toolbarPlugin({
             toolbarContents: () => (
-              <div className="flex flex-wrap items-center gap-1.5 p-1 w-full">
+              <div className="flex flex-wrap items-center gap-1 p-1 w-full">
                 {/* WordPress-like Left Icons */}
-                <button className="w-8 h-8 rounded-md flex items-center justify-center bg-blue-600 text-white hover:bg-blue-700 transition-colors cursor-pointer shadow-sm mx-0.5">
-                   <Plus size={16} />
+                <button className="w-7 h-7 rounded flex items-center justify-center bg-blue-600 text-white hover:bg-blue-700 transition-colors cursor-pointer shadow-sm mx-0.5">
+                   <Plus size={14} />
                 </button>
                 <UndoRedo />
                 <button 
-                  className="w-8 h-8 flex items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all cursor-pointer mx-0.5" 
+                  className="w-7 h-7 flex items-center justify-center rounded text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all cursor-pointer mx-0.5" 
                   title="Document Overview"
                   onClick={() => alert('Document Overview feature coming soon.')}
                 >
-                   <ListIcon size={16} />
+                   <ListIcon size={14} />
                 </button>
                 <button 
-                  className="px-3 h-8 mx-1 bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold text-[11px] uppercase tracking-wide rounded-md transition-all flex items-center cursor-pointer shadow-sm"
+                  className="px-2.5 h-7 mx-0.5 bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold text-[10px] uppercase tracking-wide rounded transition-all flex items-center cursor-pointer shadow-sm"
                   onClick={() => alert('Edit with Bricks feature coming soon.')}
                 >
                    Edit with Bricks
                 </button>
                 
-                <div className="w-px h-5 bg-slate-300 mx-1" />
+                <div className="w-px h-4 bg-slate-300 mx-0.5" />
                 
                  {/* Block Transform Menu */}
                 <div className="relative mx-0.5" ref={blockTransformMenuRef}>
                    <button 
                      onClick={() => setIsBlockTransformMenuOpen(!isBlockTransformMenuOpen)} 
-                     className="w-8 h-8 flex items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all cursor-pointer"
+                     className="w-7 h-7 flex items-center justify-center rounded text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all cursor-pointer"
                      title="Transform To"
                    >
-                      <Pilcrow size={16} />
+                      <Pilcrow size={14} />
                    </button>
                    <PortalDropdown isOpen={isBlockTransformMenuOpen} onClose={() => setIsBlockTransformMenuOpen(false)} triggerRef={blockTransformMenuRef} align="left">
                         <div className="px-3 py-1 text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Transform to</div>
@@ -296,48 +296,48 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                 </div>
 
                 {/* Move Block Up/Down */}
-                <div className="flex h-8 bg-white border border-slate-200 rounded-md overflow-hidden mx-0.5 shadow-sm">
+                <div className="flex h-7 bg-white border border-slate-200 rounded overflow-hidden mx-0.5 shadow-sm">
                    <button 
-                     className="px-2 flex items-center justify-center hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+                     className="px-1.5 flex items-center justify-center hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
                      title="Move Up"
                      onClick={() => alert('Move block up coming soon.')}
                    >
-                     <ChevronUp size={14} />
+                     <ChevronUp size={12} />
                    </button>
                    <button 
-                     className="px-2 flex items-center justify-center border-l border-slate-200 hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
+                     className="px-1.5 flex items-center justify-center border-l border-slate-200 hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors cursor-pointer"
                      title="Move Down"
                      onClick={() => alert('Move block down coming soon.')}
                    >
-                     <ChevronDown size={14} />
+                     <ChevronDown size={12} />
                    </button>
                 </div>
                 
-                <div className="w-px h-5 bg-slate-300 mx-1" />
+                <div className="w-px h-4 bg-slate-300 mx-0.5" />
                 
                 {/* Align and AtSign */}
                 <button 
-                  className="w-8 h-8 flex items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all cursor-pointer mx-0.5"
+                  className="w-7 h-7 flex items-center justify-center rounded text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all cursor-pointer mx-0.5"
                   onClick={() => alert('Alignment options coming soon.')}
                 >
-                   <AlignLeft size={16} />
+                   <AlignLeft size={14} />
                 </button>
                 <button 
-                  className="w-8 h-8 flex items-center justify-center rounded-md text-[#a533a1] hover:bg-purple-50 transition-all cursor-pointer mx-0.5"
+                  className="w-7 h-7 flex items-center justify-center rounded text-[#a533a1] hover:bg-purple-50 transition-all cursor-pointer mx-0.5"
                   onClick={() => alert('Mention/AtSign feature coming soon.')}
                 >
-                   <AtSign size={16} />
+                   <AtSign size={14} />
                 </button>
                 
-                <div className="w-px h-5 bg-slate-300 mx-1" />
+                <div className="w-px h-4 bg-slate-300 mx-0.5" />
                 
                 <BoldItalicUnderlineToggles />
                 <CreateLink />
 
                 {/* Rich text options dropdown */}
                 <div className="relative mx-0.5" ref={richTextMenuRef}>
-                   <button onClick={() => setIsRichTextMenuOpen(!isRichTextMenuOpen)} className="w-8 h-8 flex items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all cursor-pointer">
-                      <ChevronDown size={16} />
+                   <button onClick={() => setIsRichTextMenuOpen(!isRichTextMenuOpen)} className="w-7 h-7 flex items-center justify-center rounded text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all cursor-pointer">
+                      <ChevronDown size={14} />
                    </button>
                    <PortalDropdown isOpen={isRichTextMenuOpen} onClose={() => setIsRichTextMenuOpen(false)} triggerRef={richTextMenuRef} align="left">
                         <button className="w-full text-left px-3 py-1 hover:bg-blue-50 flex items-center gap-2 cursor-pointer text-[12px]" onClick={() => { onChange(markdown + '\n[^1]: Footnote\n'); setIsRichTextMenuOpen(false); }}><ListEnd size={14} className="text-slate-400"/> Footnote</button>
@@ -354,19 +354,19 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                    </PortalDropdown>
                 </div>
 
-                <div className="w-px h-5 bg-slate-300 mx-1" />
+                <div className="w-px h-4 bg-slate-300 mx-0.5" />
                 <BlockTypeSelect />
                 <ListsToggle />
                 <InsertImage />
                 <InsertTable />
                 <InsertThematicBreak />
-                <div className="w-px h-5 bg-slate-300 mx-1" />
+                <div className="w-px h-4 bg-slate-300 mx-0.5" />
                 {/* Custom Insert Buttons for JSX Components */}
                 <button 
                   onClick={() => {
                     onChange(markdown + '\n<FAQ>\n  <FAQItem q="New Question?">\n    Answer goes here.\n  </FAQItem>\n</FAQ>\n');
                   }}
-                  className="px-2.5 h-8 text-[12px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-md transition-all cursor-pointer mx-0.5"
+                  className="px-2 h-7 text-[11px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded transition-all cursor-pointer mx-0.5"
                   title="Insert FAQ Block"
                 >
                   FAQ
@@ -375,16 +375,16 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                   onClick={() => {
                     onChange(markdown + '\n<CTA text="Ready to get started?" link="/contact" buttonText="Contact Us" variant="light" />\n');
                   }}
-                  className="px-2.5 h-8 text-[12px] font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-md transition-all cursor-pointer mx-0.5"
+                  className="px-2 h-7 text-[11px] font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded transition-all cursor-pointer mx-0.5"
                   title="Insert CTA Block"
                 >
                   CTA
                 </button>
 
                 {/* 3-dots options menu */}
-                <div className="relative flex items-center gap-1 mx-1 ml-auto" ref={optionsMenuRef}>
-                   <button onClick={() => setIsOptionsMenuOpen(!isOptionsMenuOpen)} className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-all cursor-pointer">
-                      <MoreVertical size={16} />
+                <div className="relative flex items-center gap-0.5 mx-0.5" ref={optionsMenuRef}>
+                   <button onClick={() => setIsOptionsMenuOpen(!isOptionsMenuOpen)} className="w-7 h-7 flex items-center justify-center rounded hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-all cursor-pointer">
+                      <MoreVertical size={14} />
                    </button>
                    <PortalDropdown isOpen={isOptionsMenuOpen} onClose={() => setIsOptionsMenuOpen(false)} triggerRef={optionsMenuRef} align="right">
                         <div className="px-3 py-1 text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Options</div>
@@ -400,8 +400,8 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                         <div className="border-t border-slate-100 my-1"></div>
                         <button className="w-full text-left px-3 py-1 hover:bg-red-50 text-red-600 flex justify-between items-center cursor-pointer text-[12px]" onClick={() => setIsOptionsMenuOpen(false)}><span>Remove block</span><span className="text-[10px] text-red-400">Del</span></button>
                    </PortalDropdown>
-                   <button className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-all cursor-pointer ml-1">
-                      <ChevronsLeft size={16} />
+                   <button className="w-7 h-7 flex items-center justify-center rounded hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-all cursor-pointer">
+                      <ChevronsLeft size={14} />
                    </button>
                 </div>
               </div>
@@ -426,30 +426,32 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
         .mdx-editor-wrapper [data-mdxeditor-toolbar],
         .mdx-editor-wrapper .mdxeditor-toolbar {
           height: auto !important;
-          min-height: 52px !important;
+          min-height: 40px !important;
           background-color: #f8fafc !important;
           border-bottom: 1px solid #e2e8f0 !important;
           overflow: visible !important;
           flex-wrap: wrap !important;
-          padding: 8px 12px !important;
+          padding: 4px 8px !important;
           z-index: 40 !important;
         }
         .mdx-editor-wrapper [role="toolbar"] > div,
         .mdx-editor-wrapper [data-mdxeditor-toolbar] > div {
           flex-wrap: wrap !important;
           overflow: visible !important;
-          gap: 6px;
+          gap: 2px !important;
+          align-items: center !important;
         }
         .mdx-editor-wrapper button[class*="mdxeditor-toolbar-button"],
         .mdx-editor-wrapper button[aria-label] {
-          width: 32px !important;
-          height: 32px !important;
-          border-radius: 6px !important;
+          width: 28px !important;
+          height: 28px !important;
+          border-radius: 4px !important;
           color: #475569 !important;
           transition: all 0.2s !important;
           display: flex !important;
           align-items: center !important;
           justify-content: center !important;
+          padding: 0 !important;
         }
         .mdx-editor-wrapper button[class*="mdxeditor-toolbar-button"]:hover,
         .mdx-editor-wrapper button[aria-label]:hover {
@@ -457,12 +459,15 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
           color: #0f172a !important;
         }
         .mdx-editor-wrapper select {
-          height: 32px !important;
-          border-radius: 6px !important;
+          height: 28px !important;
+          border-radius: 4px !important;
           border: 1px solid #cbd5e1 !important;
           color: #334155 !important;
-          font-size: 13px !important;
-          padding: 0 8px !important;
+          font-size: 12px !important;
+          padding: 0 24px 0 8px !important;
+          line-height: 28px !important;
+          background-color: white !important;
+          cursor: pointer !important;
         }
         /* Fix for Radix ScrollArea clipping absolute positioned dropdowns */
         .mdx-editor-wrapper [data-radix-scroll-area-viewport] {
