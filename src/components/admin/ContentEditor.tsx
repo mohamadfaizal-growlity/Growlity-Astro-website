@@ -3,7 +3,8 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Save, ArrowLeft, Loader2, Sidebar as SidebarIcon, FileText, Activity, ChevronDown, ChevronUp, Trash2, Image as ImageIcon, Settings, CheckCircle2, XCircle, X, Briefcase, FileBadge, Share2, Facebook, Twitter, Star, UserCircle2, List, Moon, MoreVertical, Upload, Copy, Pencil, Sparkles, Plus, Minus } from 'lucide-react';
 import ErrorBoundary from './ErrorBoundary';
 import SeoAnalyzer from './SeoAnalyzer';
-import AcfModal, { AcfModalType } from './AcfModal';
+import AcfModal from './AcfModal';
+import type { AcfModalType } from './AcfModal';
 
 const MDXEditorComponent = lazy(() => import('./MDXEditorComponent'));
 
@@ -369,7 +370,7 @@ export default function ContentEditor() {
 
         {/* Right Panel */}
         {isPanelOpen && (
-          <aside className="w-[300px] shrink-0 bg-white flex flex-col h-full z-10 shadow-[-4px_0_24px_rgba(0,0,0,0.02)] border-l border-slate-200 text-sm">
+          <aside className="w-[260px] shrink-0 bg-white flex flex-col h-full z-10 shadow-[-4px_0_24px_rgba(0,0,0,0.02)] border-l border-slate-200 text-sm">
             <div className="flex border-b border-slate-200 px-2 pt-1 gap-1">
               <button 
                 onClick={() => setActiveTab('post')}
