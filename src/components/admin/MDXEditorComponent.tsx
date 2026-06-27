@@ -208,7 +208,25 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
              </div>
              
              {/* Small editable box for children */}
-             <div className="w-full max-w-[280px] mx-auto min-h-[40px] border border-red-400 bg-gray-50 focus-within:border-blue-500 focus-within:bg-white transition-colors relative flex flex-col cursor-text rounded-sm">
+             <div 
+               className="w-full max-w-[280px] mx-auto min-h-[40px] border border-red-400 bg-gray-50 focus-within:border-blue-500 focus-within:bg-white transition-colors relative flex flex-col cursor-text rounded-sm"
+               onClick={(e) => {
+                 // Force focus on the actual editable area when the user clicks anywhere in the red box
+                 const editable = e.currentTarget.querySelector('[contenteditable="true"]') as HTMLElement;
+                 if (editable) {
+                   editable.focus();
+                   // Optionally place cursor at the end
+                   try {
+                     const selection = window.getSelection();
+                     const range = document.createRange();
+                     range.selectNodeContents(editable);
+                     range.collapse(false);
+                     selection?.removeAllRanges();
+                     selection?.addRange(range);
+                   } catch (err) {}
+                 }
+               }}
+             >
                <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
                  <span className="text-xl font-bold text-gray-500 opacity-80">Add Content...</span>
                </div>
