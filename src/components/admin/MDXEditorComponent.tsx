@@ -202,11 +202,12 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       hasChildren: true,
       Editor: ({ children }: any) => {
         return (
-          <div className="faq-block my-4 relative flex flex-col items-center group">
-             <div className="text-center mb-1">
-               <span className="text-blue-600 font-bold text-sm underline decoration-blue-600/30">FAQs</span>
+          <div className="faq-block my-6 bg-white relative py-12 px-8 cursor-default border border-gray-200 focus-within:border-[#0073AA] rounded-sm transition-colors shadow-sm">
+             <div className="text-center mb-6">
+               <h3 className="text-[#0073AA] font-bold text-lg mb-2">FAQs</h3>
              </div>
              
+             {/* Small editable area for children */}
              <div className="w-full max-w-[280px] mx-auto min-h-[40px] border border-red-400 bg-transparent focus-within:border-blue-500 focus-within:bg-white transition-colors relative flex flex-col cursor-text">
                <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
                  <span className="text-[22px] font-bold text-gray-500 opacity-80">Add Content...</span>
