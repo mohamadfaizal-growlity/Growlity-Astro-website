@@ -202,17 +202,17 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       hasChildren: true,
       Editor: ({ children }: any) => {
         return (
-          <div className="faq-block my-6 bg-white relative py-12 px-8 cursor-default border border-gray-200 focus-within:border-[#0073AA] rounded-sm transition-colors shadow-sm">
-             <div className="text-center mb-6">
-               <h3 className="text-[#0073AA] font-bold text-lg mb-2">FAQs</h3>
+          <div className="faq-block my-8 relative flex flex-col items-center">
+             <div className="mb-1 text-center">
+               <span className="text-blue-600 font-bold text-xl">FAQs</span>
              </div>
              
-             {/* Small editable area for children */}
-             <div className="w-full max-w-[280px] mx-auto min-h-[40px] border border-red-400 bg-transparent focus-within:border-blue-500 focus-within:bg-white transition-colors relative flex flex-col cursor-text">
-               <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
-                 <span className="text-[22px] font-bold text-gray-500 opacity-80">Add Content...</span>
+             <div className="faq-children-wrapper relative w-full min-h-[60px] cursor-text">
+               <div className="absolute inset-0 flex justify-center items-center pointer-events-none select-none z-0">
+                 <span className="text-4xl font-bold text-gray-400 opacity-70">Add Content...</span>
                </div>
-               <div className="faq-children-wrapper relative z-10 w-full flex-grow min-h-[40px] p-1 text-left">
+               
+               <div className="relative z-10 w-full min-h-[60px] text-center outline-none">
                  {children}
                </div>
              </div>
@@ -542,9 +542,14 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
         }
         /* Ensure the nested editor area spans the entire small box so it can be clicked */
         .faq-children-wrapper > div, .faq-children-wrapper [contenteditable] {
-          min-height: 40px !important;
+          min-height: 60px !important;
           width: 100% !important;
           cursor: text !important;
+          outline: none !important;
+        }
+        .faq-children-wrapper p {
+          margin: 0;
+          min-height: 24px;
         }
       `}</style>
     </div>
