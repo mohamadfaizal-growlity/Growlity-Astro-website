@@ -202,11 +202,14 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       hasChildren: true,
       Editor: ({ children }: any) => {
         return (
-          <div className="faq-block my-2 bg-white relative py-4 px-4 cursor-text border border-gray-200 focus-within:border-[#0073AA] rounded-sm transition-colors shadow-sm">
-             <div className="text-center mb-2">
-               <h3 className="text-[#0073AA] font-bold text-base m-0">FAQs</h3>
+          <div className="faq-block my-6 bg-white relative py-12 px-8 cursor-text border border-gray-200 focus-within:border-[#0073AA] rounded-sm transition-colors shadow-sm">
+             <div className="text-center mb-6">
+               <h3 className="text-[#0073AA] font-bold text-lg mb-2">FAQs</h3>
              </div>
-             <div className="text-left w-full mx-auto max-w-4xl min-h-[60px] border border-dashed border-gray-300 rounded p-2 bg-gray-50 focus-within:bg-white focus-within:border-[#0073AA] focus-within:border-solid transition-colors relative">
+             
+             {/* The minimized texable area for children */}
+             <div className="text-left w-full mx-auto max-w-4xl min-h-[60px] border border-dashed border-gray-300 rounded p-3 bg-gray-50 focus-within:bg-white focus-within:border-[#0073AA] focus-within:border-solid transition-colors relative flex flex-col">
+               {/* Optional placeholder, smaller and less intrusive, or omitted. I'll leave it out so it's fully editable without obstruction */}
                <div className="relative z-10 w-full h-full min-h-[60px] cursor-text">
                  {children}
                </div>
