@@ -212,7 +212,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
                  <span className="text-[22px] font-bold text-gray-500 opacity-80">Add Content...</span>
                </div>
-               <div className="relative z-10 w-full flex-grow min-h-[40px] p-1 text-left">
+               <div className="faq-children-wrapper relative z-10 w-full flex-grow min-h-[40px] p-1 text-left">
                  {children}
                </div>
              </div>
@@ -539,6 +539,12 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
         /* Fix for Radix ScrollArea clipping absolute positioned dropdowns */
         .mdx-editor-wrapper [data-radix-scroll-area-viewport] {
           overflow: visible !important;
+        }
+        /* Ensure the nested editor area spans the entire small box so it can be clicked */
+        .faq-children-wrapper > div, .faq-children-wrapper [contenteditable] {
+          min-height: 40px !important;
+          width: 100% !important;
+          cursor: text !important;
         }
       `}</style>
     </div>
