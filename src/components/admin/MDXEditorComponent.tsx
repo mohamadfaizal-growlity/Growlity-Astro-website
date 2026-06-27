@@ -202,7 +202,7 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
       hasChildren: true,
       Editor: ({ children }: any) => {
         return (
-          <div className="faq-block my-8 relative flex flex-col items-center">
+          <div className="faq-block my-8 relative flex flex-col items-center border border-blue-500 p-4 rounded-sm">
              <div className="mb-1 text-center">
                <span className="text-blue-600 font-bold text-xl">FAQs</span>
              </div>
