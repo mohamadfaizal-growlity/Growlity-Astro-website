@@ -208,19 +208,31 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
              </div>
              
              <div 
-               className="w-full max-w-[300px] mx-auto min-h-[60px] border border-red-400 bg-gray-50 focus-within:border-blue-500 focus-within:bg-white p-3 cursor-text rounded-sm"
-               onClick={(e) => {
-                 // Prevent Lexical from selecting the entire block when clicking inside the text area
+               className="w-full max-w-[300px] mx-auto min-h-[60px] border border-red-400 bg-gray-50 focus-within:border-blue-500 focus-within:bg-white p-3 cursor-text rounded-sm relative"
+               onMouseDown={(e) => {
+                 // Lexical uses mousedown for node selection. Stop it from selecting the block!
                  e.stopPropagation();
-                 // Force browser focus onto the nested text editor
-                 const editable = e.currentTarget.querySelector('[contenteditable="true"]') as HTMLElement;
+               }}
+               onClick={(e) => {
+                 e.stopPropagation();
+                 const editable = e.currentTarget.querySelector('[contenteditable]') as HTMLElement;
                  if (editable) {
                    editable.focus();
+                   try {
+                     const sel = window.getSelection();
+                     const range = document.createRange();
+                     range.selectNodeContents(editable);
+                     range.collapse(false);
+                     sel?.removeAllRanges();
+                     sel?.addRange(range);
+                   } catch(err) {}
                  }
                }}
              >
-               <div className="text-gray-400 font-bold text-sm mb-2 select-none pointer-events-none">Add Content below:</div>
-               <div className="faq-children-wrapper w-full">
+               <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
+                 <span className="text-xl font-bold text-gray-400 opacity-80 select-none">Add Content...</span>
+               </div>
+               <div className="faq-children-wrapper relative z-10 w-full flex flex-col flex-grow min-h-[40px]">
                  {children}
                </div>
              </div>
