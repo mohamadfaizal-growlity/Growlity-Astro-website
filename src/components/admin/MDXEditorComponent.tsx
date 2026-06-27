@@ -207,8 +207,19 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
                <h3 className="text-[#0073AA] font-bold text-lg mb-2">FAQs</h3>
              </div>
              
-             <div className="w-full max-w-[300px] mx-auto min-h-[60px] border border-red-400 bg-gray-50 focus-within:border-blue-500 focus-within:bg-white p-3 cursor-text rounded-sm">
-               <div className="text-gray-400 font-bold text-sm mb-2 select-none">Add Content below:</div>
+             <div 
+               className="w-full max-w-[300px] mx-auto min-h-[60px] border border-red-400 bg-gray-50 focus-within:border-blue-500 focus-within:bg-white p-3 cursor-text rounded-sm"
+               onClick={(e) => {
+                 // Prevent Lexical from selecting the entire block when clicking inside the text area
+                 e.stopPropagation();
+                 // Force browser focus onto the nested text editor
+                 const editable = e.currentTarget.querySelector('[contenteditable="true"]') as HTMLElement;
+                 if (editable) {
+                   editable.focus();
+                 }
+               }}
+             >
+               <div className="text-gray-400 font-bold text-sm mb-2 select-none pointer-events-none">Add Content below:</div>
                <div className="faq-children-wrapper w-full">
                  {children}
                </div>
