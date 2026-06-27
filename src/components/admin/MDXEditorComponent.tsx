@@ -208,29 +208,11 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
              </div>
              
              {/* Small editable box for children */}
-             <div 
-               className="w-full max-w-[280px] mx-auto min-h-[40px] border border-red-400 bg-gray-50 focus-within:border-blue-500 focus-within:bg-white transition-colors relative flex flex-col cursor-text rounded-sm"
-               onClick={(e) => {
-                 // Force focus on the actual editable area when the user clicks anywhere in the red box
-                 const editable = e.currentTarget.querySelector('[contenteditable="true"]') as HTMLElement;
-                 if (editable) {
-                   editable.focus();
-                   // Optionally place cursor at the end
-                   try {
-                     const selection = window.getSelection();
-                     const range = document.createRange();
-                     range.selectNodeContents(editable);
-                     range.collapse(false);
-                     selection?.removeAllRanges();
-                     selection?.addRange(range);
-                   } catch (err) {}
-                 }
-               }}
-             >
+             <div className="w-full max-w-[280px] mx-auto min-h-[40px] border border-red-400 bg-gray-50 focus-within:border-blue-500 focus-within:bg-white transition-colors relative flex flex-col cursor-text rounded-sm">
                <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-0">
                  <span className="text-xl font-bold text-gray-500 opacity-80">Add Content...</span>
                </div>
-               <div className="faq-children-wrapper relative z-10 w-full flex-grow min-h-[40px] p-2 text-left">
+               <div className="faq-children-wrapper relative z-10 w-full flex-grow flex flex-col min-h-[40px] p-2 text-left">
                  {children}
                </div>
              </div>
@@ -559,15 +541,26 @@ export default function MDXEditorComponent({ markdown, onChange, onUploadImage, 
           overflow: visible !important;
         }
         /* Ensure the nested editor area spans the entire small box so it can be clicked */
-        .faq-children-wrapper > div, .faq-children-wrapper [contenteditable] {
-          min-height: 60px !important;
-          width: 100% !important;
+        .faq-children-wrapper {
+          display: flex !important;
+          flex-direction: column !important;
+          flex-grow: 1 !important;
+        }
+        .faq-children-wrapper > * {
+          flex: 1 !important;
+          display: flex !important;
+          flex-direction: column !important;
+        }
+        .faq-children-wrapper [contenteditable] {
+          flex: 1 !important;
+          min-height: 100% !important;
           cursor: text !important;
           outline: none !important;
+          width: 100% !important;
         }
         .faq-children-wrapper p {
           margin: 0;
-          min-height: 24px;
+          min-height: 1.5em;
         }
       `}</style>
     </div>
