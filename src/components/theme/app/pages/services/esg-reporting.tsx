@@ -8,7 +8,7 @@ export default function ESGReportingPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <section className="bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white py-20">
+      <section className="bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white py-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">
             <Badge className="mb-4 bg-white/20 text-white">ESG Reporting</Badge>

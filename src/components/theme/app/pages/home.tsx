@@ -199,7 +199,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. About Company */}
-      <section className="py-20 bg-gray-50" data-aos="fade-up">
+      <section className="py-10 bg-gray-50" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">Who We Are</h2>
@@ -229,7 +229,7 @@ export default function HomePage() {
       </section>
 
       {/* 4. Our ESG Services */}
-      <section className="py-20 bg-white" data-aos="fade-up">
+      <section className="py-10 bg-white" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <Badge className="mb-3 bg-[#0066FF]/10 text-[#0066FF]">Our Expertise</Badge>
@@ -256,7 +256,7 @@ export default function HomePage() {
       </section>
 
       {/* 5. Industries We Serve */}
-      <section className="py-20 bg-gray-50" data-aos="fade-up">
+      <section className="py-10 bg-gray-50" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">Industries We Serve</h2>
@@ -277,7 +277,7 @@ export default function HomePage() {
       </section>
 
       {/* 6. Why Choose Us */}
-      <section className="py-20 bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white" data-aos="fade-up">
+      <section className="py-10 bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -313,7 +313,7 @@ export default function HomePage() {
       </section>
 
       {/* 7. ESG Standards We Support */}
-      <section className="py-20 bg-white border-b border-gray-100 overflow-hidden" data-aos="fade-up">
+      <section className="py-10 bg-white border-b border-gray-100 overflow-hidden" data-aos="fade-up">
         <div className="container mx-auto px-4 text-center mb-10">
           <h2 className="text-2xl font-bold text-gray-900">ESG Standards & Frameworks We Support</h2>
         </div>
@@ -329,7 +329,7 @@ export default function HomePage() {
       </section>
 
       {/* 8. Process */}
-      <section className="py-20 bg-gray-50" data-aos="fade-up">
+      <section className="py-10 bg-gray-50" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <Badge className="mb-3 bg-[#00C853]/10 text-[#00C853]">Our Methodology</Badge>
@@ -351,7 +351,7 @@ export default function HomePage() {
       </section>
 
       {/* 9. Case Studies & 10. Numbers */}
-      <section className="py-20 bg-white relative overflow-hidden" data-aos="fade-up">
+      <section className="py-10 bg-white relative overflow-hidden" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Case Studies */}
@@ -403,7 +403,7 @@ export default function HomePage() {
       </section>
 
       {/* 11. Testimonials */}
-      <section className="py-20 bg-gray-900 text-white" data-aos="fade-up">
+      <section className="py-10 bg-gray-900 text-white" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <Badge className="mb-3 bg-white/10 text-white hover:bg-white/20">Testimonials</Badge>
@@ -430,7 +430,7 @@ export default function HomePage() {
       </section>
 
       {/* 12. Resources & Insights */}
-      <section className="py-20 bg-gray-50" data-aos="fade-up">
+      <section className="py-10 bg-gray-50" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-end mb-10">
             <div>
@@ -460,7 +460,7 @@ export default function HomePage() {
       </section>
 
       {/* 13. FAQs */}
-      <section className="py-20 bg-white" data-aos="fade-up">
+      <section className="py-10 bg-white" data-aos="fade-up">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="text-center mb-10">
             <Badge className="mb-3 bg-[#00C853]/10 text-[#00C853]">Support</Badge>
@@ -482,7 +482,7 @@ export default function HomePage() {
       </section>
 
       {/* 14. Contact CTA */}
-      <section className="py-20 relative overflow-hidden" data-aos="fade-up">
+      <section className="py-10 relative overflow-hidden" data-aos="fade-up">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "32px 32px" }}></div>
         <div className="container mx-auto px-4 relative z-10 text-center">

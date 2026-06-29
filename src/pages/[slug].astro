@@ -29,7 +29,7 @@ const { Content } = await render(page);
   description={page.data.seoSettings?.description || page.data.heroSection?.description || ""}
 >
   <!-- Page Header / Hero -->
-  <header class="bg-brand-light-green py-20 px-6 text-center">
+  <header class="bg-brand-light-green py-10 px-6 text-center">
     <h1 class="text-4xl md:text-5xl font-bold text-brand-green mb-4">
       {page.data.heroSection?.title || page.data.title}
     </h1>
@@ -64,7 +64,7 @@ const { Content } = await render(page);
             />
           </div>
           {page.data.bannerSection.caption && (
-            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24">
+            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-12">
               <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">
                 {page.data.bannerSection.caption}
               </p>

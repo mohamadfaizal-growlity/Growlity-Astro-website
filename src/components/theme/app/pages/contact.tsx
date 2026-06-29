@@ -14,7 +14,7 @@ export default function ContactPage() {
       <Header />
       
       {/* Hero */}
-      <section className="bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white py-20">
+      <section className="bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white py-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-white/20 text-white">Contact Us</Badge>
@@ -27,7 +27,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {/* Contact Form */}
@@ -150,7 +150,7 @@ export default function ContactPage() {
       </section>
 
       {/* Quick Actions */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
+      <section className="py-10 bg-gradient-to-br from-blue-50 to-green-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Quick Actions</h2>
