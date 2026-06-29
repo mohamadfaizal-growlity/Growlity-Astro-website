@@ -27,13 +27,27 @@ import {
   ShoppingCart,
   Cpu,
   Pickaxe,
-  Briefcase
+  Briefcase,
+  Command,
+  Hexagon,
+  Triangle,
+  Circle,
+  Square,
+  Activity
 } from "lucide-react";
 
 export default function HomePage() {
   const [activeService, setActiveService] = useState(0);
 
-  const trustedClients = ["Fortune 500", "Global 2000", "FTSE 100", "Industry Leaders", "Innovators", "Pioneers"];
+  const trustedClients = [
+    { name: "Global Innovators", icon: Command },
+    { name: "EcoTech Systems", icon: Hexagon },
+    { name: "Pioneer Group", icon: Triangle },
+    { name: "Nexus Industries", icon: Circle },
+    { name: "Vertex Solutions", icon: Square },
+    { name: "Apex Dynamics", icon: Activity },
+    { name: "Quantum Corp", icon: Command },
+  ];
 
   const services = [
     { title: "ESG Strategy", description: "Develop practical sustainability roadmaps.", icon: Target, image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" },
@@ -179,17 +193,39 @@ export default function HomePage() {
       </section>
 
       {/* 2. Trusted By */}
-      <section className="py-10 border-b border-gray-100 bg-white" data-aos="fade-up">
+      <section className="py-10 border-b border-gray-100 bg-white overflow-hidden" data-aos="fade-up">
+        <style>{`
+          @keyframes scroll-logos {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 7)); }
+          }
+          .logo-slider-track {
+            animation: scroll-logos 30s linear infinite;
+            display: flex;
+            width: calc(250px * 14);
+          }
+          .logo-slider-track:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
         <div className="container mx-auto px-4">
           <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
             Trusted by 200+ Businesses Worldwide
           </p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            {trustedClients.map((client) => (
-              <div key={client} className="text-xl md:text-2xl font-bold text-gray-600 tracking-tight hover:text-[#0066FF] transition-colors cursor-pointer">
-                {client}
-              </div>
-            ))}
+          <div className="relative w-full overflow-hidden before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-16 md:before:w-32 before:bg-gradient-to-r before:from-white before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-16 md:after:w-32 after:bg-gradient-to-l after:from-white after:to-transparent">
+            <div className="logo-slider-track items-center py-4">
+              {[...trustedClients, ...trustedClients].map((client, idx) => {
+                const Icon = client.icon;
+                return (
+                  <div key={idx} className="flex items-center justify-center w-[250px] shrink-0 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer group">
+                    <div className="flex items-center gap-3 text-xl md:text-2xl font-bold text-gray-600 tracking-tight group-hover:text-[#0066FF] transition-colors">
+                      <Icon className="w-8 h-8 text-gray-400 group-hover:text-[#0066FF] transition-colors" />
+                      {client.name}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <p className="text-center text-sm text-gray-500 mt-8 font-medium">
             Helping businesses across manufacturing, IT, textiles, healthcare, logistics, and more.
