@@ -1,7 +1,7 @@
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../components/ui/accordion";
 import { 
   BarChart3, 
   TrendingUp, 
@@ -20,439 +20,487 @@ import {
   CloudRain,
   LineChart,
   FileText,
-  Settings,
-  Zap
+  Zap,
+  Truck,
+  Stethoscope,
+  ShoppingCart,
+  Cpu,
+  Pickaxe,
+  Briefcase
 } from "lucide-react";
 
 export default function HomePage() {
-  const stats = [
-    { value: "500+", label: "Global Clients" },
-    { value: "50+", label: "Countries Served" },
-    { value: "1000+", label: "ESG Projects Delivered" },
-    { value: "95%", label: "Client Satisfaction" },
-  ];
+  const trustedClients = ["Fortune 500", "Global 2000", "FTSE 100", "Industry Leaders", "Innovators", "Pioneers"];
 
   const services = [
-    {
-      icon: Target,
-      title: "ESG Strategy",
-      description: "Comprehensive ESG strategy development and implementation",
-      link: "/services/esg-strategy",
-      color: "from-[#0066FF] to-blue-600"
-    },
-    {
-      icon: BarChart3,
-      title: "Carbon Accounting",
-      description: "GHG emissions measurement and carbon footprint analysis",
-      link: "/services/carbon-accounting",
-      color: "from-[#00C853] to-green-600"
-    },
-    {
-      icon: Leaf,
-      title: "Net Zero Strategy",
-      description: "Science-based decarbonization roadmaps and climate action",
-      link: "/services/net-zero",
-      color: "from-[#0066FF] to-[#00C853]"
-    },
-    {
-      icon: FileText,
-      title: "ESG Reporting",
-      description: "Comprehensive sustainability reporting and disclosures",
-      link: "/services/esg-reporting",
-      color: "from-purple-600 to-[#0066FF]"
-    },
-    {
-      icon: Award,
-      title: "EcoVadis Consulting",
-      description: "Achieve Bronze, Silver, Gold, or Platinum ratings",
-      link: "/services/ecovadis",
-      color: "from-amber-500 to-orange-600"
-    },
-    {
-      icon: CloudRain,
-      title: "CDP Consulting",
-      description: "Climate, Water, and Forest disclosure excellence",
-      link: "/services/cdp",
-      color: "from-[#00C853] to-teal-600"
-    },
+    { title: "ESG Strategy", description: "Develop practical sustainability roadmaps.", icon: Target },
+    { title: "ESG Reporting", description: "GRI, BRSR, CSRD, ISSB, IFRS S1/S2.", icon: FileText },
+    { title: "Carbon Accounting", description: "Measure Scope 1, 2 & 3 emissions.", icon: CloudRain },
+    { title: "Life Cycle Assessment", description: "Product carbon footprint & environmental impact.", icon: Recycle },
+    { title: "Net Zero Strategy", description: "Roadmaps and decarbonization planning.", icon: Leaf },
+    { title: "EcoVadis Consulting", description: "Improve ESG ratings and supplier performance.", icon: Award },
+    { title: "CDP Reporting", description: "Disclosure support for climate, water, and forests.", icon: BarChart3 },
+    { title: "SBTi Target Setting", description: "Science-based targets for emission reduction.", icon: TrendingUp },
+    { title: "EPD Development", description: "Environmental Product Declarations.", icon: Shield },
+    { title: "Responsible Sourcing", description: "Supply chain sustainability and assessments.", icon: Globe },
+    { title: "ESG Software", description: "Implementation and training for ESGTech platforms.", icon: Cpu },
+    { title: "ESG Training", description: "Corporate workshops and capacity building.", icon: Users },
   ];
 
   const industries = [
-    { name: "Manufacturing", icon: Factory, link: "/industries/manufacturing" },
-    { name: "Chemicals", icon: Recycle, link: "/industries/chemicals" },
-    { name: "Pharmaceuticals", icon: Building2, link: "/industries" },
-    { name: "Metals & Steel", icon: Building2, link: "/industries" },
-    { name: "Renewable Energy", icon: Zap, link: "/industries" },
-    { name: "FMCG", icon: Building2, link: "/industries" },
+    { name: "Manufacturing", icon: Factory },
+    { name: "Textile", icon: Recycle },
+    { name: "Chemicals", icon: Zap },
+    { name: "Construction", icon: Building2 },
+    { name: "Automotive", icon: Truck },
+    { name: "FMCG", icon: ShoppingCart },
+    { name: "Healthcare", icon: Stethoscope },
+    { name: "Food & Beverage", icon: Leaf },
+    { name: "Logistics", icon: Globe },
+    { name: "IT", icon: Cpu },
+    { name: "Electronics", icon: Zap },
+    { name: "Mining", icon: Pickaxe },
   ];
 
-  const frameworks = [
-    { name: "GRI", description: "Global Reporting Initiative", link: "/frameworks/gri" },
-    { name: "ISSB", description: "International Sustainability Standards", link: "/frameworks/issb" },
-    { name: "SASB", description: "Sustainability Accounting Standards", link: "/frameworks/sasb" },
-    { name: "TCFD", description: "Task Force on Climate-related Disclosures", link: "/frameworks/tcfd" },
-    { name: "TNFD", description: "Task Force on Nature-related Disclosures", link: "/frameworks" },
-    { name: "SBTi", description: "Science Based Targets initiative", link: "/frameworks" },
-    { name: "CSRD", description: "Corporate Sustainability Reporting Directive", link: "/frameworks" },
-    { name: "BRSR", description: "Business Responsibility & Sustainability Reporting", link: "/frameworks" },
+  const whyChooseUs = [
+    "Certified ESG Experts",
+    "End-to-End Consulting",
+    "Global Reporting Standards",
+    "Industry-Specific Solutions",
+    "Customized Strategies",
+    "Regulatory Compliance",
+    "Faster Certification",
+    "Dedicated Support"
+  ];
+
+  const standards = [
+    "GRI", "BRSR", "ISSB", "IFRS", "CSRD", "CDP", 
+    "EcoVadis", "SBTi", "GHG Protocol", "ISO 14064", "ISO 14001", "SA8000", 
+    "RJC", "SMETA", "TCFD"
+  ];
+
+  const processSteps = [
+    { step: "1", title: "Consultation", desc: "Understanding your current baseline and goals." },
+    { step: "2", title: "Assessment", desc: "Gap analysis and materiality assessment." },
+    { step: "3", title: "Strategy Development", desc: "Creating a tailored ESG roadmap." },
+    { step: "4", title: "Implementation", desc: "Executing initiatives and data collection." },
+    { step: "5", title: "Reporting", desc: "Aligning with global disclosure frameworks." },
+    { step: "6", title: "Continuous Improvement", desc: "Ongoing monitoring and optimization." }
+  ];
+
+  const caseStudies = [
+    { industry: "Manufacturing Company", metrics: ["35% reduction in emissions", "EcoVadis Silver", "Scope 3 assessment completed"] },
+    { industry: "Retail Company", metrics: ["ESG Report Published", "BRSR Compliance Achieved", "Supplier assessments completed"] },
+  ];
+
+  const faqs = [
+    { q: "What is ESG consulting?", a: "ESG consulting helps businesses integrate Environmental, Social, and Governance factors into their core strategy to ensure compliance, attract investment, and drive sustainable growth." },
+    { q: "Why is ESG important?", a: "ESG is crucial for risk management, regulatory compliance, meeting stakeholder expectations, and unlocking new market opportunities." },
+    { q: "Who needs ESG reporting?", a: "Publicly listed companies, businesses in supply chains of large corporations, and organizations seeking international funding or certifications." },
+    { q: "How long does ESG implementation take?", a: "Timelines vary depending on the scope. A basic carbon footprint assessment may take weeks, while a full ESG strategy and report can take 3-6 months." },
+    { q: "What industries do you serve?", a: "We serve a wide range of industries including manufacturing, textiles, IT, healthcare, logistics, and more." },
+    { q: "Do you help with carbon accounting?", a: "Yes, we offer comprehensive Scope 1, 2, and 3 GHG emissions calculation and decarbonization planning." },
+    { q: "Can you assist with EcoVadis certification?", a: "Absolutely. We guide companies through the EcoVadis assessment process to improve their sustainability scorecards." },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-green-50 py-12 md:py-32 overflow-hidden">
+    <div className="min-h-screen flex flex-col bg-white overflow-x-hidden">
+      
+      {/* 1. Hero Section */}
+      <section className="relative bg-gradient-to-br from-blue-50 via-white to-green-50 pt-20 pb-24 md:pt-32 md:pb-32 overflow-hidden">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge className="mb-4 bg-[#0066FF]/10 text-[#0066FF] hover:bg-[#0066FF]/20">
-                <Sparkles className="h-3 w-3 mr-1" />
-                AI-Powered ESG Intelligence
+            <div data-aos="fade-up">
+              <Badge className="mb-6 bg-[#0066FF]/10 text-[#0066FF] border-[#0066FF]/20 px-4 py-1">
+                <Sparkles className="h-4 w-4 mr-2" />
+                Premium ESG Consulting
               </Badge>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.1] tracking-tight">
+                ESG Consulting That Helps Businesses Achieve{" "}
                 <span className="bg-gradient-to-r from-[#0066FF] to-[#00C853] bg-clip-text text-transparent">
-                  ESG Consulting
+                  Compliance, Sustainability & Long-Term Growth
                 </span>
-                <br />
-                & Sustainability Intelligence Platform
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-                Transform your sustainability journey with expert ESG consulting services and AI-powered ESGTech.ai platform. 
-                From strategy to execution, we help global organizations achieve their net-zero goals.
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg">
+                We help organizations simplify ESG reporting, carbon accounting, sustainability strategy, certifications, climate risk management, and regulatory compliance.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a href="/contact">
-                  <Button size="lg" className="bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-lg h-12 px-8">
-                    Request Demo
+                  <Button size="lg" className="magnetic-btn bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-lg h-14 px-8 shadow-lg shadow-blue-500/20 transition-all duration-300">
+                    Book a Free Consultation
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </a>
                 <a href="/contact">
-                  <Button size="lg" variant="outline" className="border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF] hover:text-white text-lg h-12 px-8">
-                    Book Consultation
+                  <Button size="lg" variant="outline" className="magnetic-btn border-2 border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF] hover:text-white text-lg h-14 px-8 transition-all duration-300">
+                    Talk to an ESG Expert
                   </Button>
                 </a>
               </div>
+            </div>
 
-              {/* Quick Stats */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-                {stats.map((stat, index) => (
-                  <div key={index} className="text-center sm:text-left lg:text-center">
-                    <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#0066FF] to-[#00C853] bg-clip-text text-transparent">
-                      {stat.value}
+            {/* Hero Visual */}
+            <div className="relative" data-aos="fade-left" data-aos-delay="200">
+              <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 relative z-10 transform transition-transform hover:scale-[1.02] duration-500">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h3 className="font-bold text-xl text-gray-800">Sustainability Dashboard</h3>
+                    <p className="text-sm text-gray-500">Real-time Impact Tracking</p>
+                  </div>
+                  <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                    <TrendingUp className="w-4 h-4 mr-1" /> On Track
+                  </div>
+                </div>
+                <div className="space-y-6">
+                  <div className="p-5 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-2xl border border-blue-100/50">
+                    <div className="text-sm font-medium text-blue-600 mb-1">Carbon Reduction Target</div>
+                    <div className="flex items-end gap-2">
+                      <div className="text-3xl font-extrabold text-gray-900 stat-num" data-target="45" data-suffix="%">0%</div>
+                      <div className="text-sm text-gray-500 mb-1">by 2030</div>
                     </div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="p-5 bg-green-50 rounded-2xl border border-green-100/50">
+                      <div className="text-sm font-medium text-green-600 mb-1">ESG Score</div>
+                      <div className="text-2xl font-bold text-gray-900 stat-num" data-target="85">0</div>
+                    </div>
+                    <div className="p-5 bg-purple-50 rounded-2xl border border-purple-100/50">
+                      <div className="text-sm font-medium text-purple-600 mb-1">Certifications</div>
+                      <div className="text-2xl font-bold text-gray-900 stat-num" data-target="12">0</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute -top-10 -right-10 h-64 w-64 bg-gradient-to-br from-[#0066FF] to-purple-400 rounded-full blur-[80px] opacity-30" />
+              <div className="absolute -bottom-10 -left-10 h-64 w-64 bg-gradient-to-br from-[#00C853] to-yellow-400 rounded-full blur-[80px] opacity-30" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Trusted By */}
+      <section className="py-10 border-b border-gray-100 bg-white" data-aos="fade-up">
+        <div className="container mx-auto px-4">
+          <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
+            Trusted by 200+ Businesses Worldwide
+          </p>
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+            {trustedClients.map((client) => (
+              <div key={client} className="text-xl md:text-2xl font-bold text-gray-600 tracking-tight hover:text-[#0066FF] transition-colors cursor-pointer">
+                {client}
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-sm text-gray-500 mt-8 font-medium">
+            Helping businesses across manufacturing, IT, textiles, healthcare, logistics, and more.
+          </p>
+        </div>
+      </section>
+
+      {/* 3. About Company */}
+      <section className="py-24 bg-gray-50" data-aos="fade-up">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Who We Are</h2>
+            <p className="text-xl text-gray-600 leading-relaxed mb-12">
+              We are an ESG consulting company helping organizations meet global sustainability standards through expert advisory, ESG reporting, carbon management, supply chain assessments, and certification support.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-[#0066FF]/30 hover:shadow-md transition-all">
+                <div className="text-3xl font-extrabold text-[#0066FF] mb-2 stat-num" data-target="15" data-suffix="+">0+</div>
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Years Exp.</div>
+              </div>
+              <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-[#00C853]/30 hover:shadow-md transition-all">
+                <div className="text-3xl font-extrabold text-[#00C853] mb-2 stat-num" data-target="20" data-suffix="+">0+</div>
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Industries</div>
+              </div>
+              <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-[#0066FF]/30 hover:shadow-md transition-all">
+                <div className="text-3xl font-extrabold text-[#0066FF] mb-2 stat-num" data-target="25" data-suffix="+">0+</div>
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Countries</div>
+              </div>
+              <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:border-[#00C853]/30 hover:shadow-md transition-all">
+                <div className="text-3xl font-extrabold text-[#00C853] mb-2 stat-num" data-target="50" data-suffix="+">0+</div>
+                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">Consultants</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Our ESG Services */}
+      <section className="py-24 bg-white" data-aos="fade-up">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-[#0066FF]/10 text-[#0066FF]">Our Expertise</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">Our ESG Services</h2>
+            <p className="text-lg text-gray-500 max-w-2xl mx-auto">Comprehensive solutions tailored to your sustainability journey.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((svc, i) => {
+              const Icon = svc.icon;
+              return (
+                <Card key={i} className="group hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 border-gray-100 hover:-translate-y-1 hover:border-[#0066FF]/30 cursor-pointer">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-[#0066FF] transition-all duration-300">
+                      <Icon className="w-6 h-6 text-[#0066FF] group-hover:text-white" />
+                    </div>
+                    <CardTitle className="text-xl group-hover:text-[#0066FF] transition-colors">{svc.title}</CardTitle>
+                    <CardDescription className="text-base mt-2">{svc.description}</CardDescription>
+                  </CardHeader>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Industries We Serve */}
+      <section className="py-24 bg-gray-50" data-aos="fade-up">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Industries We Serve</h2>
+            <p className="text-lg text-gray-500">Cross-sector expertise delivering specialized sustainability impact.</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {industries.map((ind, i) => {
+              const Icon = ind.icon;
+              return (
+                <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 text-center hover:border-[#00C853] hover:shadow-lg transition-all group cursor-pointer">
+                  <Icon className="w-8 h-8 mx-auto text-gray-400 group-hover:text-[#00C853] group-hover:-translate-y-1 transition-all mb-3" />
+                  <span className="font-semibold text-sm text-gray-700">{ind.name}</span>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Why Choose Us */}
+      <section className="py-24 bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white" data-aos="fade-up">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">Why Partner With Us?</h2>
+              <p className="text-xl text-white/90 mb-8 leading-relaxed">
+                We combine deep technical expertise with strategic business acumen to ensure your sustainability initiatives drive real value.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {whyChooseUs.map((reason, i) => (
+                  <div key={i} className="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
+                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-5 h-5 text-white" />
+                    </div>
+                    <span className="font-medium text-lg">{reason}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative hidden lg:block" data-aos="fade-left" data-aos-delay="200">
+              <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80" alt="Consulting Team" className="rounded-3xl shadow-2xl" />
+              <div className="absolute inset-0 bg-blue-900/20 rounded-3xl mix-blend-multiply"></div>
+              {/* Floating highlight */}
+              <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl text-gray-900 flex items-center gap-4">
+                <Award className="w-10 h-10 text-[#00C853]" />
+                <div>
+                  <div className="font-bold text-lg">Top Rated</div>
+                  <div className="text-sm text-gray-500">Global Consultants</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. ESG Standards We Support */}
+      <section className="py-20 bg-white border-b border-gray-100 overflow-hidden" data-aos="fade-up">
+        <div className="container mx-auto px-4 text-center mb-10">
+          <h2 className="text-2xl font-bold text-gray-900">ESG Standards & Frameworks We Support</h2>
+        </div>
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap justify-center gap-4">
+            {standards.map((std, i) => (
+              <div key={i} className="px-6 py-3 bg-gray-50 border border-gray-200 rounded-full font-bold text-gray-700 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-blue-50 transition-colors cursor-pointer shadow-sm">
+                {std}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Process */}
+      <section className="py-24 bg-gray-50" data-aos="fade-up">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-[#00C853]/10 text-[#00C853]">Our Methodology</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">A Proven 6-Step Process</h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {processSteps.map((step, i) => (
+              <div key={i} className="relative p-8 bg-white rounded-2xl border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-default">
+                <div className="text-7xl font-black text-gray-50 absolute top-4 right-6 pointer-events-none transition-colors group-hover:text-blue-50">{step.step}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3 relative z-10 flex items-center">
+                  <span className="w-8 h-8 rounded-full bg-[#0066FF] text-white flex items-center justify-center text-sm mr-3">{step.step}</span>
+                  {step.title}
+                </h3>
+                <p className="text-gray-600 relative z-10 pl-11">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Case Studies & 10. Numbers */}
+      <section className="py-24 bg-white relative overflow-hidden" data-aos="fade-up">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-16">
+            {/* Case Studies */}
+            <div>
+              <h2 className="text-3xl font-bold mb-8 text-gray-900">Success Stories</h2>
+              <div className="space-y-6">
+                {caseStudies.map((cs, i) => (
+                  <div key={i} className="p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-50/20 border border-blue-100 hover:shadow-lg transition-shadow cursor-pointer group">
+                    <h3 className="text-xl font-bold text-[#0066FF] mb-4 flex items-center">
+                      <Briefcase className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform"/> {cs.industry}
+                    </h3>
+                    <ul className="space-y-3">
+                      {cs.metrics.map((metric, j) => (
+                        <li key={j} className="flex items-start text-gray-700">
+                          <CheckCircle2 className="w-5 h-5 text-[#00C853] mr-3 shrink-0 mt-0.5" />
+                          <span className="font-medium">{metric}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Dashboard Preview */}
-            <div className="relative">
-              <div className="bg-white rounded-2xl shadow-2xl p-6 border border-gray-200">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="h-3 w-3 rounded-full bg-red-500" />
-                  <div className="h-3 w-3 rounded-full bg-yellow-500" />
-                  <div className="h-3 w-3 rounded-full bg-green-500" />
+            {/* Numbers */}
+            <div className="flex flex-col justify-center">
+              <h2 className="text-3xl font-bold mb-8 text-gray-900">Our Impact in Numbers</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="p-8 bg-gray-50 rounded-2xl border border-gray-100 text-center hover:bg-white hover:shadow-xl hover:border-[#0066FF]/30 transition-all">
+                  <div className="text-5xl font-black text-[#0066FF] mb-2 stat-num" data-target="500" data-suffix="+">0+</div>
+                  <div className="font-semibold text-gray-600">Projects Delivered</div>
                 </div>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#0066FF]/10 to-[#00C853]/10 rounded-lg">
-                    <span className="font-semibold">ESG Score</span>
-                    <span className="text-2xl font-bold text-[#00C853]">85/100</span>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 bg-blue-50 rounded-lg">
-                      <div className="text-sm text-muted-foreground">Carbon Footprint</div>
-                      <div className="text-xl font-bold text-[#0066FF]">12,450 tCO2e</div>
-                      <div className="text-xs text-green-600 flex items-center gap-1 mt-1">
-                        <TrendingUp className="h-3 w-3" />
-                        -15% YoY
-                      </div>
-                    </div>
-                    <div className="p-4 bg-green-50 rounded-lg">
-                      <div className="text-sm text-muted-foreground">Net Zero Target</div>
-                      <div className="text-xl font-bold text-[#00C853]">2035</div>
-                      <div className="text-xs text-muted-foreground mt-1">On Track</div>
-                    </div>
-                  </div>
-                  <div className="p-4 bg-purple-50 rounded-lg">
-                    <div className="text-sm text-muted-foreground mb-2">Framework Compliance</div>
-                    <div className="flex gap-2 flex-wrap">
-                      <Badge variant="secondary" className="bg-[#0066FF] text-white">GRI</Badge>
-                      <Badge variant="secondary" className="bg-[#00C853] text-white">TCFD</Badge>
-                      <Badge variant="secondary" className="bg-purple-600 text-white">ISSB</Badge>
-                    </div>
-                  </div>
+                <div className="p-8 bg-gray-50 rounded-2xl border border-gray-100 text-center hover:bg-white hover:shadow-xl hover:border-[#00C853]/30 transition-all">
+                  <div className="text-5xl font-black text-[#00C853] mb-2 stat-num" data-target="95" data-suffix="%">0%</div>
+                  <div className="font-semibold text-gray-600">Client Satisfaction</div>
+                </div>
+                <div className="p-8 bg-gray-50 rounded-2xl border border-gray-100 text-center hover:bg-white hover:shadow-xl hover:border-[#00C853]/30 transition-all">
+                  <div className="text-5xl font-black text-[#00C853] mb-2 stat-num" data-target="100" data-suffix="+">0+</div>
+                  <div className="font-semibold text-gray-600">Certifications</div>
+                </div>
+                <div className="p-8 bg-gray-50 rounded-2xl border border-gray-100 text-center hover:bg-white hover:shadow-xl hover:border-[#0066FF]/30 transition-all">
+                  <div className="text-5xl font-black text-[#0066FF] mb-2 stat-num" data-target="25" data-suffix="+">0+</div>
+                  <div className="font-semibold text-gray-600">Global Countries</div>
                 </div>
               </div>
-              <div className="absolute -top-6 -right-6 h-24 w-24 bg-gradient-to-br from-[#0066FF] to-[#00C853] rounded-full blur-3xl opacity-20" />
-              <div className="absolute -bottom-6 -left-6 h-24 w-24 bg-gradient-to-br from-[#00C853] to-[#0066FF] rounded-full blur-3xl opacity-20" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Client Logos */}
-      <section className="py-12 bg-white border-y">
+      {/* 11. Testimonials */}
+      <section className="py-24 bg-gray-900 text-white" data-aos="fade-up">
         <div className="container mx-auto px-4">
-          <p className="text-center text-muted-foreground mb-8">Trusted by leading organizations worldwide</p>
-          <div className="flex flex-wrap justify-center items-center gap-12 opacity-60">
-            {["Fortune 500", "Global 2000", "FTSE 100", "Industry Leaders", "Innovators"].map((name) => (
-              <div key={name} className="text-xl font-semibold text-gray-400">{name}</div>
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-white/10 text-white hover:bg-white/20">Testimonials</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[1,2,3].map((item) => (
+              <div key={item} className="p-8 rounded-2xl bg-white/5 border border-white/10 relative hover:bg-white/10 transition-colors">
+                <div className="text-6xl font-serif text-[#00C853] absolute top-4 right-6 opacity-40">"</div>
+                <p className="text-gray-300 italic mb-8 relative z-10 leading-relaxed">
+                  "Growlity transformed our approach to sustainability. Their expertise in carbon accounting and ESG strategy helped us achieve EcoVadis Gold rating in our first year."
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#0066FF] to-[#00C853] rounded-full flex items-center justify-center font-bold text-white shadow-lg">SJ</div>
+                  <div>
+                    <div className="font-bold text-white">Sarah Jenkins</div>
+                    <div className="text-sm text-gray-400">Chief Sustainability Officer</div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ESG Consulting Overview */}
-      <section className="py-12 md:py-20 bg-gradient-to-b from-white to-blue-50">
+      {/* 12. Resources & Insights */}
+      <section className="py-24 bg-gray-50" data-aos="fade-up">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-[#0066FF]/10 text-[#0066FF]">ESG Consulting Services</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Comprehensive ESG Solutions
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              End-to-end ESG consulting services to transform your sustainability strategy into measurable impact
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <a key={index} href={service.link}>
-                  <Card className="h-full hover:shadow-xl transition-all duration-300 border-2 hover:border-[#0066FF] group">
-                    <CardHeader>
-                      <div className={`h-12 w-12 rounded-lg bg-gradient-to-r ${service.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                        <Icon className="h-6 w-6 text-white" />
-                      </div>
-                      <CardTitle className="group-hover:text-[#0066FF] transition-colors">{service.title}</CardTitle>
-                      <CardDescription>{service.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-center text-[#0066FF] font-medium">
-                        Learn more
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-transform" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ESGTech.ai Platform */}
-      <section className="py-12 md:py-20 bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.05))]" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12">
             <div>
-              <Badge className="mb-4 bg-white/20 text-white hover:bg-white/30">
-                <Sparkles className="h-3 w-3 mr-1" />
-                AI-Powered Platform
-              </Badge>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                ESGTech.ai
-                <br />
-                Sustainability Intelligence Platform
-              </h2>
-              <p className="text-lg mb-8 text-white/90 leading-relaxed">
-                Streamline ESG data management, automate reporting, and accelerate your path to net-zero 
-                with our enterprise-grade AI-powered platform.
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 mt-1 text-white" />
-                  <div>
-                    <div className="font-semibold">Executive Dashboard</div>
-                    <div className="text-sm text-white/80">Real-time ESG metrics</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 mt-1 text-white" />
-                  <div>
-                    <div className="font-semibold">Carbon Accounting</div>
-                    <div className="text-sm text-white/80">Scope 1, 2, 3 tracking</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 mt-1 text-white" />
-                  <div>
-                    <div className="font-semibold">Automated Reporting</div>
-                    <div className="text-sm text-white/80">GRI, ISSB, TCFD, CSRD</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 mt-1 text-white" />
-                  <div>
-                    <div className="font-semibold">AI Insights</div>
-                    <div className="text-sm text-white/80">Actionable recommendations</div>
-                  </div>
-                </div>
-              </div>
-
-              <a href="/esgtech">
-                <Button size="lg" variant="secondary" className="bg-white text-[#0066FF] hover:bg-white/90">
-                  Explore Platform
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </a>
+              <Badge className="mb-4 bg-[#0066FF]/10 text-[#0066FF]">Insights</Badge>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Latest Resources</h2>
             </div>
-
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-white/10 rounded-lg">
-                  <span>Multi-Entity Management</span>
-                  <Settings className="h-5 w-5" />
-                </div>
-                <div className="flex items-center justify-between p-4 bg-white/10 rounded-lg">
-                  <span>ERP Integrations</span>
-                  <Zap className="h-5 w-5" />
-                </div>
-                <div className="flex items-center justify-between p-4 bg-white/10 rounded-lg">
-                  <span>Compliance Management</span>
-                  <Shield className="h-5 w-5" />
-                </div>
-                <div className="flex items-center justify-between p-4 bg-white/10 rounded-lg">
-                  <span>Supplier ESG Assessment</span>
-                  <Users className="h-5 w-5" />
-                </div>
-              </div>
-            </div>
+            <a href="/blogs" className="text-[#0066FF] font-semibold hover:underline flex items-center mt-4 md:mt-0">
+              View all resources <ArrowRight className="ml-2 w-4 h-4" />
+            </a>
           </div>
-        </div>
-      </section>
-
-      {/* Industries */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-[#00C853]/10 text-[#00C853]">Industry Expertise</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Serving Diverse Industries
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Deep industry knowledge and tailored ESG solutions for your sector
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {industries.map((industry, index) => {
-              const Icon = industry.icon;
-              return (
-                <a key={index} href={industry.link}>
-                  <Card className="h-full hover:shadow-lg transition-all hover:border-[#00C853] group text-center">
-                    <CardContent className="pt-6">
-                      <Icon className="h-10 w-10 mx-auto mb-3 text-[#00C853] group-hover:scale-110 transition-transform" />
-                      <div className="font-semibold text-sm">{industry.name}</div>
-                    </CardContent>
-                  </Card>
-                </a>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Frameworks */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <Badge className="mb-4 bg-[#0066FF]/10 text-[#0066FF]">Global Standards</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Framework Expertise
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Expert guidance on all major ESG reporting frameworks and standards
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {frameworks.map((framework, index) => (
-              <a key={index} href={framework.link}>
-                <Card className="h-full hover:shadow-lg transition-all hover:border-[#0066FF] group">
-                  <CardHeader>
-                    <CardTitle className="text-2xl font-bold bg-gradient-to-r from-[#0066FF] to-[#00C853] bg-clip-text text-transparent">
-                      {framework.name}
-                    </CardTitle>
-                    <CardDescription>{framework.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center text-[#0066FF] text-sm font-medium">
-                      Learn more
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-2 transition-transform" />
-                    </div>
-                  </CardContent>
-                </Card>
+          <div className="grid md:grid-cols-3 gap-8">
+            {['Blogs', 'Whitepapers', 'Webinars'].map((cat, i) => (
+              <a key={cat} href={`/${cat.toLowerCase()}`} className="group block">
+                <div className="h-48 bg-gray-200 rounded-2xl mb-6 overflow-hidden relative">
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                   <img src={`https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=600&h=400&sig=${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={cat} />
+                   <Badge className="absolute top-4 left-4 z-20 bg-white text-gray-900">{cat}</Badge>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#0066FF] transition-colors">
+                  Understanding the new CSRD regulations for 2024
+                </h3>
+                <p className="text-gray-500 line-clamp-2">A comprehensive guide on what businesses need to prepare for the upcoming EU corporate sustainability reporting directive.</p>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Success Metrics */}
-      <section className="py-20 bg-gradient-to-r from-[#0066FF] to-[#00C853] text-white">
-        <div className="container mx-auto px-4">
+      {/* 13. FAQs */}
+      <section className="py-24 bg-white" data-aos="fade-up">
+        <div className="container mx-auto px-4 max-w-3xl">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Proven Track Record
-            </h2>
-            <p className="text-lg text-white/90 max-w-2xl mx-auto">
-              Delivering measurable impact for organizations worldwide
-            </p>
+            <Badge className="mb-4 bg-[#00C853]/10 text-[#00C853]">Support</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Frequently Asked Questions</h2>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">500+</div>
-              <div className="text-white/80">ESG Projects Completed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">30M+</div>
-              <div className="text-white/80">Tonnes CO2 Reduced</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">200+</div>
-              <div className="text-white/80">EcoVadis Medals Achieved</div>
-            </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold mb-2">50+</div>
-              <div className="text-white/80">Countries Served</div>
-            </div>
-          </div>
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-gray-200">
+                <AccordionTrigger className="text-left text-lg font-semibold text-gray-800 hover:text-[#0066FF] py-6">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-gray-600 text-base pb-6 leading-relaxed">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Transform Your ESG Journey?
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Connect with our ESG experts to discuss your sustainability goals and discover how we can help you achieve them.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/contact">
-                <Button size="lg" className="bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844]">
-                  Schedule Consultation
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </a>
-              <a href="/resources">
-                <Button size="lg" variant="outline" className="border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF] hover:text-white">
-                  Download ESG Guide
-                </Button>
-              </a>
-            </div>
-          </div>
+      {/* 14. Contact CTA */}
+      <section className="py-24 relative overflow-hidden" data-aos="fade-up">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "32px 32px" }}></div>
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight">
+            Ready to Accelerate Your ESG Journey?
+          </h2>
+          <p className="text-xl md:text-2xl text-white/90 mb-10 max-w-3xl mx-auto font-light">
+            Let's build a sustainable, compliant, and future-ready business together. Talk to our experts today.
+          </p>
+          <a href="/contact">
+            <Button size="lg" className="magnetic-btn bg-white text-[#0066FF] hover:bg-gray-100 text-xl h-16 px-10 rounded-full shadow-2xl transition-transform hover:scale-105">
+              Book Free Consultation
+              <ArrowRight className="ml-3 h-6 w-6" />
+            </Button>
+          </a>
         </div>
       </section>
+
     </div>
   );
 }
