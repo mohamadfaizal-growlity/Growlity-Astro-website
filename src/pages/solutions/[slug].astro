@@ -24,7 +24,7 @@ const { Content } = await render(solution);
 
 <Layout title={solution.data.seoSettings?.title || `${solution.data.title} | Services`} description={solution.data.seoSettings?.description || solution.data.shortDescription || ''}>
     <!-- Service Header -->
-    <header class="bg-[#0b1b1a] text-white py-24 px-6 text-center">
+    <header class="bg-[#0b1b1a] text-white py-12 px-6 text-center">
       <div class="max-w-4xl mx-auto">
         <span class="text-brand-green font-bold uppercase tracking-widest text-sm mb-4 block">
           {solution.data.category}
@@ -53,7 +53,7 @@ const { Content } = await render(solution);
             <img src={solution.data.bannerSection.image} alt={solution.data.bannerSection.caption || "Featured Banner"} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           </div>
           {solution.data.bannerSection.caption && (
-            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-24">
+            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 pt-12">
               <p class="text-white text-xl md:text-3xl font-bold max-w-4xl mx-auto text-center drop-shadow-md">{solution.data.bannerSection.caption}</p>
             </div>
           )}

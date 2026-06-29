@@ -18,7 +18,7 @@ export default function ResourcesPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <section className="bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white py-20">
+      <section className="bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white py-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-white/20 text-white">Resources</Badge>
@@ -29,7 +29,7 @@ export default function ResourcesPage() {
           </div>
         </div>
       </section>
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {resources.map((resource, index) => {

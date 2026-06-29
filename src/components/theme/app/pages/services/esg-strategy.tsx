@@ -84,7 +84,7 @@ export default function ESGStrategyPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white py-20">
+      <section className="bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white py-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">
             <Badge className="mb-4 bg-white/20 text-white hover:bg-white/30">ESG Consulting</Badge>
@@ -111,7 +111,7 @@ export default function ESGStrategyPage() {
       </section>
 
       {/* Overview */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -179,7 +179,7 @@ export default function ESGStrategyPage() {
       </section>
 
       {/* Benefits */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-10 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Business Benefits</h2>
@@ -203,7 +203,7 @@ export default function ESGStrategyPage() {
       </section>
 
       {/* Process */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Methodology</h2>
@@ -231,7 +231,7 @@ export default function ESGStrategyPage() {
       </section>
 
       {/* Deliverables */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-green-50">
+      <section className="py-10 bg-gradient-to-br from-blue-50 to-green-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
@@ -253,7 +253,7 @@ export default function ESGStrategyPage() {
       </section>
 
       {/* FAQs */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
@@ -274,7 +274,7 @@ export default function ESGStrategyPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-[#0066FF] to-[#00C853] text-white">
+      <section className="py-10 bg-gradient-to-r from-[#0066FF] to-[#00C853] text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">

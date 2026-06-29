@@ -19,7 +19,7 @@ export default function IndustriesPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <section className="bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white py-20">
+      <section className="bg-gradient-to-br from-[#0066FF] to-[#00C853] text-white py-10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-white/20 text-white">Industry Expertise</Badge>
@@ -30,7 +30,7 @@ export default function IndustriesPage() {
           </div>
         </div>
       </section>
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {industries.map((industry, index) => {

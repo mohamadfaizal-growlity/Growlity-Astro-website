@@ -24,7 +24,7 @@ const { Content } = await render(post);
 <Layout title={`${post.data.seoTitle || post.data.title} | Growlity`}>
   
   <!-- Hero Section -->
-  <div class="relative bg-slate-900 text-white overflow-hidden py-20 lg:py-28">
+  <div class="relative bg-slate-900 text-white overflow-hidden py-10 lg:py-28">
     <div class="absolute inset-0 z-0">
       {post.data.banner ? (
         <img src={post.data.banner} alt="Background" class="w-full h-full object-cover opacity-20" />

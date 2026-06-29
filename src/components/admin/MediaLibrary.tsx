@@ -90,7 +90,7 @@ export default function MediaLibrary() {
       </div>
 
       {loading ? (
-        <div className="text-center py-20 text-slate-400">Loading images...</div>
+        <div className="text-center py-10 text-slate-400">Loading images...</div>
       ) : images.length === 0 ? (
         <div className="bg-white rounded-2xl border border-dashed border-slate-300 p-20 text-center flex flex-col items-center justify-center">
           <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 mb-4">
