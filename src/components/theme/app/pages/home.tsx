@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
@@ -30,36 +31,34 @@ import {
 } from "lucide-react";
 
 export default function HomePage() {
+  const [activeService, setActiveService] = useState(0);
+
   const trustedClients = ["Fortune 500", "Global 2000", "FTSE 100", "Industry Leaders", "Innovators", "Pioneers"];
 
   const services = [
-    { title: "ESG Strategy", description: "Develop practical sustainability roadmaps.", icon: Target },
-    { title: "ESG Reporting", description: "GRI, BRSR, CSRD, ISSB, IFRS S1/S2.", icon: FileText },
-    { title: "Carbon Accounting", description: "Measure Scope 1, 2 & 3 emissions.", icon: CloudRain },
-    { title: "Life Cycle Assessment", description: "Product carbon footprint & environmental impact.", icon: Recycle },
-    { title: "Net Zero Strategy", description: "Roadmaps and decarbonization planning.", icon: Leaf },
-    { title: "EcoVadis Consulting", description: "Improve ESG ratings and supplier performance.", icon: Award },
-    { title: "CDP Reporting", description: "Disclosure support for climate, water, and forests.", icon: BarChart3 },
-    { title: "SBTi Target Setting", description: "Science-based targets for emission reduction.", icon: TrendingUp },
-    { title: "EPD Development", description: "Environmental Product Declarations.", icon: Shield },
-    { title: "Responsible Sourcing", description: "Supply chain sustainability and assessments.", icon: Globe },
-    { title: "ESG Software", description: "Implementation and training for ESGTech platforms.", icon: Cpu },
-    { title: "ESG Training", description: "Corporate workshops and capacity building.", icon: Users },
+    { title: "ESG Strategy", description: "Develop practical sustainability roadmaps.", icon: Target, image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" },
+    { title: "ESG Reporting", description: "GRI, BRSR, CSRD, ISSB, IFRS S1/S2.", icon: FileText, image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" },
+    { title: "Carbon Accounting", description: "Measure Scope 1, 2 & 3 emissions.", icon: CloudRain, image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80" },
+    { title: "Life Cycle Assessment", description: "Product carbon footprint & environmental impact.", icon: Recycle, image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15f?w=800&q=80" },
+    { title: "Net Zero Strategy", description: "Roadmaps and decarbonization planning.", icon: Leaf, image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80" },
+    { title: "EcoVadis Consulting", description: "Improve ESG ratings and supplier performance.", icon: Award, image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" },
   ];
 
   const industries = [
-    { name: "Manufacturing", icon: Factory },
-    { name: "Textile", icon: Recycle },
-    { name: "Chemicals", icon: Zap },
-    { name: "Construction", icon: Building2 },
-    { name: "Automotive", icon: Truck },
-    { name: "FMCG", icon: ShoppingCart },
-    { name: "Healthcare", icon: Stethoscope },
-    { name: "Food & Beverage", icon: Leaf },
-    { name: "Logistics", icon: Globe },
-    { name: "IT", icon: Cpu },
-    { name: "Electronics", icon: Zap },
-    { name: "Mining", icon: Pickaxe },
+    { name: "Manufacturing", icon: Factory, image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&q=80" },
+    { name: "Textile", icon: Recycle, image: "https://images.unsplash.com/photo-1605289982774-9a6fef564df8?w=500&q=80" },
+    { name: "Chemicals", icon: Zap, image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=500&q=80" },
+    { name: "Construction", icon: Building2, image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=500&q=80" },
+    { name: "Automotive", icon: Truck, image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=500&q=80" },
+    { name: "FMCG", icon: ShoppingCart, image: "https://images.unsplash.com/photo-1604719312566-8fa2065b452b?w=500&q=80" },
+    { name: "Healthcare", icon: Stethoscope, image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=500&q=80" },
+    { name: "Food & Beverage", icon: Leaf, image: "https://images.unsplash.com/photo-1498837167922-41c53b445f9f?w=500&q=80" },
+  ];
+
+  const testimonials = [
+    { name: "Sarah Jenkins", role: "Chief Sustainability Officer", quote: "Growlity transformed our approach to sustainability. Their expertise in carbon accounting and ESG strategy helped us achieve EcoVadis Gold rating in our first year.", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&q=80" },
+    { name: "Michael Chang", role: "Director of Operations", quote: "The ESGTech platform combined with their consulting team gave us total visibility into our Scope 3 emissions. Truly a game-changer for our global supply chain.", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&q=80" },
+    { name: "Elena Rodriguez", role: "VP of Corporate Affairs", quote: "Their deep knowledge of CSRD and ISSB frameworks ensured we were not just compliant, but positioned as sustainability leaders in our sector.", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&q=80" }
   ];
 
   const whyChooseUs = [
@@ -207,7 +206,34 @@ export default function HomePage() {
               We are an ESG consulting company helping organizations meet global sustainability standards through expert advisory, ESG reporting, carbon management, supply chain assessments, and certification support.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-[#0066FF]/30 hover:shadow-md transition-all">
+              <div className="relative rounded-xl overflow-hidden group h-32 md:h-40 col-span-2 md:col-span-1 border border-gray-100 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" alt="Team" />
+                <div className="absolute inset-0 bg-white/80 p-5 flex flex-col items-center justify-center group-hover:bg-white/90 transition-colors">
+                  <div className="text-2xl font-extrabold text-[#0066FF] mb-1 stat-num" data-target="15" data-suffix="+">0+</div>
+                  <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Years Exp.</div>
+                </div>
+              </div>
+              <div className="relative rounded-xl overflow-hidden group h-32 md:h-40 border border-gray-100 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" alt="Industries" />
+                <div className="absolute inset-0 bg-white/80 p-5 flex flex-col items-center justify-center group-hover:bg-white/90 transition-colors">
+                  <div className="text-2xl font-extrabold text-[#00C853] mb-1 stat-num" data-target="20" data-suffix="+">0+</div>
+                  <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Industries</div>
+                </div>
+              </div>
+              <div className="relative rounded-xl overflow-hidden group h-32 md:h-40 border border-gray-100 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" alt="Countries" />
+                <div className="absolute inset-0 bg-white/80 p-5 flex flex-col items-center justify-center group-hover:bg-white/90 transition-colors">
+                  <div className="text-2xl font-extrabold text-[#0066FF] mb-1 stat-num" data-target="25" data-suffix="+">0+</div>
+                  <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Countries</div>
+                </div>
+              </div>
+              <div className="relative rounded-xl overflow-hidden group h-32 md:h-40 col-span-2 md:col-span-1 border border-gray-100 shadow-sm">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" alt="Consultants" />
+                <div className="absolute inset-0 bg-white/80 p-5 flex flex-col items-center justify-center group-hover:bg-white/90 transition-colors">
+                  <div className="text-2xl font-extrabold text-[#00C853] mb-1 stat-num" data-target="50" data-suffix="+">0+</div>
+                  <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Consultants</div>
+                </div>
+              </div>
                 <div className="text-2xl font-extrabold text-[#0066FF] mb-1 stat-num" data-target="15" data-suffix="+">0+</div>
                 <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Years Exp.</div>
               </div>
@@ -236,21 +262,56 @@ export default function HomePage() {
             <h2 className="text-2xl md:text-4xl font-bold mb-3 text-gray-900">Our ESG Services</h2>
             <p className="text-base text-gray-500 max-w-2xl mx-auto">Comprehensive solutions tailored to your sustainability journey.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((svc, i) => {
-              const Icon = svc.icon;
-              return (
-                <Card key={i} className="group hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 border-gray-100 hover:-translate-y-1 hover:border-[#0066FF]/30 cursor-pointer">
-                  <CardHeader className="p-5">
-                    <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center mb-3 group-hover:scale-110 group-hover:bg-[#0066FF] transition-all duration-300">
-                      <Icon className="w-5 h-5 text-[#0066FF] group-hover:text-white" />
+          <div className="grid lg:grid-cols-12 gap-8 items-start">
+            {/* Left side: Interactive Tabs */}
+            <div className="lg:col-span-5 flex flex-col gap-2">
+              {services.map((svc, i) => {
+                const Icon = svc.icon;
+                const isActive = activeService === i;
+                return (
+                  <div 
+                    key={i} 
+                    onClick={() => setActiveService(i)}
+                    className={`flex items-center p-4 rounded-xl cursor-pointer transition-all duration-300 border ${isActive ? 'bg-[#0066FF] border-[#0066FF] shadow-lg text-white transform scale-[1.02]' : 'bg-white border-gray-100 text-gray-700 hover:border-[#0066FF]/30 hover:bg-blue-50'}`}
+                  >
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center mr-4 transition-colors ${isActive ? 'bg-white/20' : 'bg-blue-50'}`}>
+                      <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-[#0066FF]'}`} />
                     </div>
-                    <CardTitle className="text-lg group-hover:text-[#0066FF] transition-colors">{svc.title}</CardTitle>
-                    <CardDescription className="text-sm mt-1">{svc.description}</CardDescription>
-                  </CardHeader>
-                </Card>
-              )
-            })}
+                    <div>
+                      <h3 className={`font-bold ${isActive ? 'text-white' : 'text-gray-900'}`}>{svc.title}</h3>
+                      <p className={`text-sm ${isActive ? 'text-white/80' : 'text-gray-500'} hidden md:block`}>{svc.description}</p>
+                    </div>
+                    <ArrowRight className={`w-5 h-5 ml-auto transition-transform ${isActive ? 'translate-x-0 opacity-100 text-white' : '-translate-x-2 opacity-0'}`} />
+                  </div>
+                );
+              })}
+              <div className="mt-4 text-center lg:text-left">
+                <a href="/solutions" className="text-[#0066FF] font-semibold hover:underline flex items-center justify-center lg:justify-start text-sm">
+                  View all 15+ services <ArrowRight className="ml-1 w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            {/* Right side: Image Display */}
+            <div className="lg:col-span-7 relative h-[400px] lg:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-2xl group">
+              {services.map((svc, i) => (
+                <div 
+                  key={i}
+                  className={`absolute inset-0 transition-opacity duration-700 ${activeService === i ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                >
+                  <img src={svc.image} alt={svc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 p-8 w-full">
+                    <Badge className="bg-[#00C853] text-white mb-3 hover:bg-[#00A844]">Featured Service</Badge>
+                    <h3 className="text-3xl font-bold text-white mb-2">{svc.title}</h3>
+                    <p className="text-white/80 text-lg max-w-lg mb-4">{svc.description}</p>
+                    <Button variant="outline" className="border-white/50 text-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
+                      Learn More
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -262,13 +323,17 @@ export default function HomePage() {
             <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">Industries We Serve</h2>
             <p className="text-base text-gray-500">Cross-sector expertise delivering specialized sustainability impact.</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {industries.map((ind, i) => {
               const Icon = ind.icon;
               return (
-                <div key={i} className="bg-white p-5 rounded-xl border border-gray-100 text-center hover:border-[#00C853] hover:shadow-md transition-all group cursor-pointer">
-                  <Icon className="w-6 h-6 mx-auto text-gray-400 group-hover:text-[#00C853] group-hover:-translate-y-1 transition-all mb-2" />
-                  <span className="font-semibold text-xs text-gray-700">{ind.name}</span>
+                <div key={i} className="relative h-40 rounded-xl overflow-hidden group cursor-pointer shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <img src={ind.image} alt={ind.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-black/50 group-hover:bg-[#0066FF]/80 transition-colors duration-300"></div>
+                  <div className="absolute inset-0 p-5 flex flex-col items-center justify-center text-white z-10">
+                    <Icon className="w-8 h-8 mx-auto mb-3 opacity-90 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="font-bold text-sm tracking-wide">{ind.name}</span>
+                  </div>
                 </div>
               )
             })}
@@ -410,17 +475,17 @@ export default function HomePage() {
             <h2 className="text-2xl md:text-3xl font-bold mb-3">What Our Clients Say</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {[1,2,3].map((item) => (
-              <div key={item} className="p-6 rounded-xl bg-white/5 border border-white/10 relative hover:bg-white/10 transition-colors">
-                <div className="text-5xl font-serif text-[#00C853] absolute top-2 right-4 opacity-40">"</div>
-                <p className="text-sm text-gray-300 italic mb-6 relative z-10 leading-relaxed">
-                  "Growlity transformed our approach to sustainability. Their expertise in carbon accounting and ESG strategy helped us achieve EcoVadis Gold rating in our first year."
+            {testimonials.map((item, i) => (
+              <div key={i} className="p-8 rounded-xl bg-white/5 border border-white/10 relative hover:bg-white/10 transition-colors shadow-2xl">
+                <div className="text-6xl font-serif text-[#00C853] absolute top-4 right-6 opacity-40 leading-none">"</div>
+                <p className="text-base text-gray-300 italic mb-8 relative z-10 leading-relaxed min-h-[100px]">
+                  "{item.quote}"
                 </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-[#0066FF] to-[#00C853] rounded-full flex items-center justify-center font-bold text-white shadow-md text-sm">SJ</div>
+                <div className="flex items-center gap-4">
+                  <img src={item.image} alt={item.name} className="w-12 h-12 rounded-full object-cover border-2 border-[#0066FF]" />
                   <div>
-                    <div className="font-bold text-white text-sm">Sarah Jenkins</div>
-                    <div className="text-xs text-gray-400">Chief Sustainability Officer</div>
+                    <div className="font-bold text-white text-base">{item.name}</div>
+                    <div className="text-xs text-gray-400 font-medium">{item.role}</div>
                   </div>
                 </div>
               </div>
