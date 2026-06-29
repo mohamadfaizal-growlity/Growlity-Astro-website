@@ -42,6 +42,7 @@ try {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 		{/* Google Analytics */}
 		{gaId && (
@@ -78,6 +79,51 @@ try {
 			
 			const lenis = new Lenis({
 				autoRaf: true,
+			});
+		</script>
+		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script is:inline>
+			// Initialize AOS Animation Library
+			if (window.AOS) {
+				window.AOS.init({
+					duration: 800,
+					once: true,
+					offset: 50,
+				});
+			}
+
+			// Number Counter Logic
+			document.addEventListener("DOMContentLoaded", () => {
+				const stats = document.querySelectorAll('.stat-num');
+				if (stats.length > 0) {
+					const statsObserver = new IntersectionObserver((entries) => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								const el = entry.target;
+								const targetAttr = el.getAttribute('data-target');
+								if (targetAttr) {
+									const target = parseFloat(targetAttr);
+									let count = 0;
+									const duration = 2000;
+									const increment = target / (duration / 16);
+									
+									const updateCount = () => {
+										count += increment;
+										if (count < target) {
+											el.innerText = target % 1 === 0 ? Math.ceil(count).toString() : count.toFixed(1);
+											requestAnimationFrame(updateCount);
+										} else {
+											el.innerText = target.toString();
+										}
+									};
+									updateCount();
+								}
+								statsObserver.unobserve(el);
+							}
+						});
+					}, { threshold: 0.5 });
+					stats.forEach(stat => statsObserver.observe(stat));
+				}
 			});
 		</script>
 	</body>
