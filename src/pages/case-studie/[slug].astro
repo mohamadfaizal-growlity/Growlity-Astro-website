@@ -4,8 +4,6 @@ import { getCollection, render } from "astro:content";
 import FAQAccordion from "../../components/shared/FAQAccordion.astro";
 import Callout from "../../components/mdx/Callout.astro";
 import YouTube from "../../components/mdx/YouTube.astro";
-import FAQ from "../../components/mdx/FAQ.astro";
-import FAQItem from "../../components/mdx/FAQItem.astro";
 import CTA from "../../components/mdx/CTA.astro";
 import MarkdownLink from "../../components/mdx/MarkdownLink.astro";
 import Layout from "../../layouts/Layout.astro";
@@ -170,7 +168,7 @@ const heroBg =
         prose-strong:text-gray-900"
     >
       <div class="bg-white rounded-3xl md:p-10">
-        <Content components={{ Callout, YouTube, CTA, FAQ, FAQItem, a: MarkdownLink }} />
+        <Content components={{ Callout, YouTube, CTA, a: MarkdownLink }} />
       </div>
     </main>
 
@@ -267,8 +265,34 @@ const heroBg =
       )
     }
 
-    
+    {/* FAQ BLOCK */}
+    {
+      study.data.faqSection && study.data.faqSection.length > 0 && (
+        <div class="max-w-4xl mx-auto py-16 px-6">
+          <FAQAccordion faqList={study.data.faqSection} />
+        </div>
+      )
+    }
 
-    
+    {/* CTA BLOCK */}
+    {
+      study.data.ctaSection?.reference && (
+        <div class="bg-gradient-to-r from-brand-green to-[#005533] text-white py-20 px-6 text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Ready to start your journey?
+          </h2>
+          <p class="text-xl mb-10 text-white/90 max-w-2xl mx-auto">
+            Contact us about {study.data.ctaSection.reference} and discover how
+            Growlity can transform your operations.
+          </p>
+          <a
+            href="/contact"
+            class="bg-white text-brand-green px-10 py-4 rounded-xl font-bold hover:bg-gray-100 transition-colors inline-block shadow-xl shadow-black/10"
+          >
+            Get in Touch Today
+          </a>
+        </div>
+      )
+    }
   </section>
 </Layout>

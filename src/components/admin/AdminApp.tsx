@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Files, 
-  Image as ImageIcon, 
-  Settings, 
+import {
+  LayoutDashboard,
+  FileText,
+  Files,
+  Image as ImageIcon,
+  Settings,
   LogOut,
   Mail,
   FolderOpen,
@@ -80,7 +80,7 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
           </span>
         </div>
         {schema.groups && schema.groups.length > 0 && (
-          <button 
+          <button
             onClick={(e) => { e.preventDefault(); setIsOpen(!isOpen); }}
             className="p-1 hover:bg-slate-200 rounded opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
           >
@@ -88,7 +88,7 @@ const CollectionNavItem = ({ schema }: { schema: any }) => {
           </button>
         )}
       </Link>
-      
+
       {schema.groups && schema.groups.length > 0 && isOpen && (
         <div className="ml-8 mt-1 space-y-1 border-l border-slate-200 pl-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           {schema.groups.map((group: string) => (
@@ -111,10 +111,10 @@ const Sidebar = ({ schemas, siteLogo, onLogout, onHoverChange }: { schemas: any[
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
   const preferredOrder = ['Case Studies', 'Comments', 'Events', 'Pages', 'Posts', 'Publications', 'Solutions', 'Webinar'];
-  
+
   const primarySchemas = schemas.filter(s => preferredOrder.includes(s.name))
     .sort((a, b) => preferredOrder.indexOf(a.name) - preferredOrder.indexOf(b.name));
-    
+
   const otherSchemas = schemas.filter(s => !preferredOrder.includes(s.name))
     .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -127,7 +127,7 @@ const Sidebar = ({ schemas, siteLogo, onLogout, onHoverChange }: { schemas: any[
   ];
 
   return (
-    <div 
+    <div
       className="w-24 hover:w-56 group bg-white/80 backdrop-blur-md border-r border-slate-200/50 text-slate-600 h-screen flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)] fixed top-0 left-0 z-50 transition-all duration-300 overflow-hidden hover:shadow-2xl"
       onMouseEnter={() => onHoverChange && onHoverChange(true)}
       onMouseLeave={() => onHoverChange && onHoverChange(false)}
@@ -145,9 +145,8 @@ const Sidebar = ({ schemas, siteLogo, onLogout, onHoverChange }: { schemas: any[
         <nav className="space-y-1 px-3 mb-6">
           <Link
             to="/"
-            className={`flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-200 ${
-              isActive('/') && location.pathname === '/' ? 'bg-gradient-to-r from-[#0066FF]/10 to-transparent text-[#0066FF] font-medium border-l-2 border-[#0066FF]' : 'hover:bg-slate-50/80 text-slate-600 hover:text-[#0066FF] border-l-2 border-transparent'
-            }`}
+            className={`flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-200 ${isActive('/') && location.pathname === '/' ? 'bg-gradient-to-r from-[#0066FF]/10 to-transparent text-[#0066FF] font-medium border-l-2 border-[#0066FF]' : 'hover:bg-slate-50/80 text-slate-600 hover:text-[#0066FF] border-l-2 border-transparent'
+              }`}
             title="Dashboard"
           >
             <div className="flex-shrink-0 flex items-center justify-center w-6"><LayoutDashboard size={20} /></div>
@@ -175,11 +174,10 @@ const Sidebar = ({ schemas, siteLogo, onLogout, onHoverChange }: { schemas: any[
               key={item.name}
               to={item.path}
               title={item.name}
-              className={`flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-200 ${
-                isActive(item.path)
+              className={`flex items-center gap-4 px-4 py-3 rounded-lg transition-all duration-200 ${isActive(item.path)
                   ? 'bg-gradient-to-r from-[#0066FF]/10 to-transparent text-[#0066FF] font-medium border-l-2 border-[#0066FF]'
                   : 'hover:bg-slate-50/80 text-slate-600 hover:text-[#0066FF] border-l-2 border-transparent'
-              }`}
+                }`}
             >
               <div className="flex-shrink-0 flex items-center justify-center w-6">{item.icon}</div>
               <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">{item.name}</span>
@@ -188,7 +186,7 @@ const Sidebar = ({ schemas, siteLogo, onLogout, onHoverChange }: { schemas: any[
         </nav>
       </div>
       <div className="p-4 border-t border-slate-200/50">
-        <button 
+        <button
           onClick={onLogout}
           className="flex items-center gap-4 px-4 py-3 w-full rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors"
           title="Logout"
@@ -275,7 +273,7 @@ export default function AdminApp() {
         setSiteLogo(e.detail.siteLogo);
       }
     };
-    
+
     window.addEventListener('settings-updated', handleSettingsUpdate as EventListener);
     return () => window.removeEventListener('settings-updated', handleSettingsUpdate as EventListener);
   }, []);
@@ -308,7 +306,7 @@ export default function AdminApp() {
 
         <div className="bg-white/80 backdrop-blur-2xl p-10 sm:p-12 rounded-[2rem] shadow-[0_8px_40px_rgb(0,0,0,0.08)] max-w-md w-full border border-white relative z-10 mx-4 overflow-hidden group">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
-          
+
           <div className="mb-8 text-center">
             {siteLogo ? (
               <img src={siteLogo} alt="Site Logo" className="h-12 mx-auto w-auto object-contain mb-6 drop-shadow-sm" />
@@ -319,7 +317,7 @@ export default function AdminApp() {
             <p className="text-slate-500 text-sm">Sign in to your enterprise command center</p>
           </div>
 
-          <form 
+          <form
             onSubmit={(e) => {
               e.preventDefault();
               if (password === 'Growlity@Admin2026') {
@@ -362,8 +360,8 @@ export default function AdminApp() {
                     className="w-full pl-12 pr-12 py-3.5 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] outline-none transition-all text-slate-800 font-medium group-hover:border-blue-200/50"
                     placeholder="Enter your password..."
                   />
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
                   >
@@ -397,7 +395,7 @@ export default function AdminApp() {
               <ShieldCheck size={14} /> Secured by 256-bit SSL Encryption
             </div>
             <p className="text-[10px] text-slate-400 text-center leading-relaxed">
-              Protected by reCAPTCHA and subject to the Google Privacy Policy and Terms of Service.<br/>
+              Protected by reCAPTCHA and subject to the Google Privacy Policy and Terms of Service.<br />
               Your IP address is being logged for security purposes.
             </p>
           </div>
