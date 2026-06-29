@@ -210,7 +210,7 @@ export default function HomePage() {
         `}</style>
         <div className="container mx-auto px-4">
           <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
-            Trusted by 200+ Businesses Worldwide
+            Trusted by 250+ Businesses Worldwide
           </p>
           <div className="relative w-full overflow-hidden before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-16 md:before:w-32 before:bg-gradient-to-r before:from-white before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-16 md:after:w-32 after:bg-gradient-to-l after:from-white after:to-transparent">
             <div className="logo-slider-track items-center py-4">
