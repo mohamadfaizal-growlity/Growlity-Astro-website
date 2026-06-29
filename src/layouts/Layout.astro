@@ -80,9 +80,38 @@ try {
 		<script>
 			import Lenis from 'lenis';
 			
-			const lenis = new Lenis({
-				autoRaf: true,
-			});
+			let lenis;
+			
+			function initSmoothScroll() {
+				// Destroy previous instance if it exists (for Astro View Transitions)
+				if (lenis) {
+					lenis.destroy();
+				}
+
+				// Premium "Buttery Smooth" Configuration
+				lenis = new Lenis({
+					duration: 1.5, // slightly longer duration for more elegance
+					easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Apple-like ease-out curve
+					orientation: 'vertical',
+					gestureOrientation: 'vertical',
+					smoothWheel: true,
+					wheelMultiplier: 1.2, // makes scrolling feel a bit more responsive
+					touchMultiplier: 2,
+				});
+
+				// Fallback loop if autoRaf isn't fully supported
+				function raf(time) {
+					lenis.raf(time);
+					requestAnimationFrame(raf);
+				}
+				requestAnimationFrame(raf);
+			}
+
+			// Initialize on first load
+			initSmoothScroll();
+			
+			// Re-initialize every time Astro changes the page
+			document.addEventListener('astro:page-load', initSmoothScroll);
 		</script>
 		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script is:inline>
