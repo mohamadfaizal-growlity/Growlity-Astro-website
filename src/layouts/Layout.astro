@@ -60,7 +60,10 @@ try {
 		{/* Custom Header Scripts (from Sitepins) */}
 		{headerScripts && <Fragment set:html={headerScripts} />}
 	</head>
-	<body class="bg-background text-foreground font-sans flex flex-col min-h-screen">
+	<body class="min-h-screen flex flex-col font-sans antialiased text-gray-900 bg-white selection:bg-[#0066FF]/20 selection:text-[#0066FF]">
+		{/* READING PROGRESS BAR */}
+		<div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-[#0066FF] to-[#00C853] z-[100] transition-all duration-150 ease-out origin-left" style="width: 0%;"></div>
+
 		<Header client:load siteLogo={siteLogo} />
 		
 		<main class="flex-grow">
@@ -87,11 +90,40 @@ try {
 				// Initialize AOS Animation Library
 				if (window.AOS) {
 					window.AOS.init({
-						duration: 800,   // The animation takes 800ms (0.8 seconds) to complete
-						once: true,      // The animation only happens once when scrolling down
-						offset: 50,      // The animation triggers when the element is 50px away from the viewport
+						duration: 800,   
+						once: true,      
+						offset: 50,      
 					});
 				}
+
+				// Scroll Progress Bar Logic
+				const progressBar = document.getElementById('scroll-progress');
+				const updateProgress = () => {
+					if (progressBar) {
+						const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+						const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+						const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+						progressBar.style.width = scrolled + '%';
+					}
+				};
+				window.addEventListener('scroll', updateProgress, { passive: true });
+				updateProgress(); // init
+
+				// Magnetic Buttons Logic
+				const magneticElements = document.querySelectorAll('.magnetic-btn');
+				magneticElements.forEach(btn => {
+					btn.addEventListener('mousemove', (e) => {
+						const rect = btn.getBoundingClientRect();
+						const x = e.clientX - rect.left - rect.width / 2;
+						const y = e.clientY - rect.top - rect.height / 2;
+						// Move button slightly towards cursor
+						btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+					});
+					btn.addEventListener('mouseleave', () => {
+						// Snap back to center
+						btn.style.transform = 'translate(0px, 0px)';
+					});
+				});
 
 				// Number Counter Logic
 				const stats = document.querySelectorAll('.stat-num');

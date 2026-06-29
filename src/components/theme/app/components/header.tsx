@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { 
   NavigationMenu,
@@ -15,6 +15,30 @@ export function Header({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
   const [isOpen, setIsOpen] = useState(false);
   const [activeService, setActiveService] = useState("Strategy and Advisory");
   const [openMobileAccordion, setOpenMobileAccordion] = useState<string | null>(null);
+  
+  // Smart Scroll Header State
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') {
+        const currentScrollY = window.scrollY;
+        
+        // Hide if scrolling down past 150px, show if scrolling up
+        if (currentScrollY > lastScrollY && currentScrollY > 150) {
+          setIsVisible(false); 
+        } else {
+          setIsVisible(true);  
+        }
+        
+        setLastScrollY(currentScrollY);
+      }
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+    return () => window.removeEventListener('scroll', controlNavbar);
+  }, [lastScrollY]);
 
   const services = [
     {
@@ -79,7 +103,7 @@ export function Header({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
       </div>
 
       {/* Main Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <header className={`sticky top-0 z-50 w-full border-b bg-white/90 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 transition-transform duration-300 ease-in-out shadow-sm ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
@@ -193,12 +217,12 @@ export function Header({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
             {/* CTA Buttons */}
             <div className="flex items-center gap-3">
               <a href="/contact" className="hidden md:block">
-                <Button variant="outline" className="border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF] hover:text-white">
+                <Button variant="outline" className="magnetic-btn border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF] hover:text-white transition-all duration-200 ease-out">
                   Login
                 </Button>
               </a>
               <a href="/contact">
-                <Button className="bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844]">
+                <Button className="magnetic-btn bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] shadow-md shadow-blue-500/20 transition-all duration-200 ease-out">
                   Contact Us
                 </Button>
               </a>
