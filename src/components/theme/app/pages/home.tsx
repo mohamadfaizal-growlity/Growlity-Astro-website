@@ -234,21 +234,7 @@ export default function HomePage() {
                   <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Consultants</div>
                 </div>
               </div>
-                <div className="text-2xl font-extrabold text-[#0066FF] mb-1 stat-num" data-target="15" data-suffix="+">0+</div>
-                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Years Exp.</div>
-              </div>
-              <div className="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-[#00C853]/30 hover:shadow-md transition-all">
-                <div className="text-2xl font-extrabold text-[#00C853] mb-1 stat-num" data-target="20" data-suffix="+">0+</div>
-                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Industries</div>
-              </div>
-              <div className="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-[#0066FF]/30 hover:shadow-md transition-all">
-                <div className="text-2xl font-extrabold text-[#0066FF] mb-1 stat-num" data-target="25" data-suffix="+">0+</div>
-                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Countries</div>
-              </div>
-              <div className="p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-[#00C853]/30 hover:shadow-md transition-all">
-                <div className="text-2xl font-extrabold text-[#00C853] mb-1 stat-num" data-target="50" data-suffix="+">0+</div>
-                <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Consultants</div>
-              </div>
+
             </div>
           </div>
         </div>
