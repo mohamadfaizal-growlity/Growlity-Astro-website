@@ -42,6 +42,7 @@ try {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 		{/* Google Analytics */}
 		{gaId && (
@@ -80,107 +81,59 @@ try {
 				autoRaf: true,
 			});
 		</script>
+		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script is:inline>
-			function initAnimations() {
-				console.log("🚀 Growlity Animations Initializing...");
-
-				// 1. SCROLL REVEAL LOGIC (Replaces AOS)
-				const revealElements = document.querySelectorAll('section, h1, h2, .card, footer');
-				console.log(`Found ${revealElements.length} elements for scroll reveal.`);
-				
-				const revealObserver = new IntersectionObserver((entries, observer) => {
-					entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							entry.target.classList.add('is-revealed');
-							observer.unobserve(entry.target); 
-						}
+			function initOriginalAnimations() {
+				// Initialize AOS Animation Library
+				if (window.AOS) {
+					window.AOS.init({
+						duration: 800,   // The animation takes 800ms (0.8 seconds) to complete
+						once: true,      // The animation only happens once when scrolling down
+						offset: 50,      // The animation triggers when the element is 50px away from the viewport
 					});
-				}, { rootMargin: "0px 0px -50px 0px", threshold: 0 });
+				}
 
-				revealElements.forEach(el => {
-					if (!el.classList.contains('reveal-on-scroll') && !el.classList.contains('is-revealed')) {
-						el.classList.add('reveal-on-scroll');
-						revealObserver.observe(el);
-					}
-				});
-
-				// 2. AUTO-DETECT NUMBERS & COUNTER LOGIC
-				const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, span, div, p, strong, b');
-				let statCount = 0;
-				
-				const statsObserver = new IntersectionObserver((entries, observer) => {
-					entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							const el = entry.target;
-							const targetAttr = el.getAttribute('data-target');
-							const prefix = el.getAttribute('data-prefix') || '';
-							const suffix = el.getAttribute('data-suffix') || '';
-							
-							if (targetAttr) {
-								const target = parseFloat(targetAttr);
-								let count = 0;
-								const duration = 2000; 
-								const increment = target / (duration / 16);
-								
-								const updateCount = () => {
-									count += increment;
-									if (count < target) {
-										const currentVal = target % 1 === 0 ? Math.ceil(count).toString() : count.toFixed(1);
-										el.innerText = prefix + currentVal + suffix;
-										requestAnimationFrame(updateCount);
-									} else {
-										el.innerText = prefix + target.toString() + suffix;
-									}
-								};
-								updateCount();
-							}
-							observer.unobserve(el);
-						}
-					});
-				}, { threshold: 0.1 });
-
-				textElements.forEach(el => {
-					// Use children.length === 0 to ensure no nested HTML tags, 
-					// but allow multiple text nodes (which React sometimes creates)
-					if (el.children.length === 0 && el.textContent) {
-						const text = el.textContent.trim();
-						const match = text.match(/^([$€£₹]?)(\d+(?:\.\d+)?)([+%KM]*)$/i);
-						
-						if (match) {
-							const numVal = parseFloat(match[2]);
-							if (numVal > 0 && !(numVal >= 1900 && numVal <= 2100 && match[2].length === 4 && match[3] === '')) {
-								if (!el.classList.contains('stat-num-initialized')) {
-									el.classList.add('stat-num-initialized');
-									el.setAttribute('data-target', match[2]);
-									el.setAttribute('data-prefix', match[1]);
-									el.setAttribute('data-suffix', match[3]);
-									el.innerText = match[1] + '0' + match[3];
-									statsObserver.observe(el);
-									statCount++;
+				// Number Counter Logic
+				const stats = document.querySelectorAll('.stat-num');
+				if (stats.length > 0) {
+					const statsObserver = new IntersectionObserver((entries) => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) { // Checks if the number is visible on screen
+								const el = entry.target;
+								const targetAttr = el.getAttribute('data-target'); // Gets the final number
+								if (targetAttr) {
+									const target = parseFloat(targetAttr);
+									let count = 0;
+									const duration = 2000; // The animation lasts exactly 2 seconds
+									const increment = target / (duration / 16); // Calculates step for ~60fps
+									
+									const updateCount = () => {
+										count += increment;
+										if (count < target) {
+											// Updates the text, keeping decimals if needed
+											el.innerText = target % 1 === 0 ? Math.ceil(count).toString() : count.toFixed(1);
+											requestAnimationFrame(updateCount); // Loops until finished smoothly
+										} else {
+											el.innerText = target.toString(); // Ensures exact final number
+										}
+									};
+									updateCount();
 								}
+								statsObserver.unobserve(el); // Stops observing once the animation has run
 							}
-						}
-					}
-				});
-				console.log(`Found ${statCount} number counters.`);
+						});
+					}, { threshold: 0.5 }); // Triggers when 50% of the number is visible
+					stats.forEach(stat => statsObserver.observe(stat));
+				}
 			}
 
-			// Wait for FULL page load (including React hydration) to avoid Hydration Mismatch errors
-			const runInit = () => {
-				setTimeout(initAnimations, 300); 
-			};
-
-			if (document.readyState === 'complete') {
-				runInit();
+			// Run on initial load and Astro View Transitions
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initOriginalAnimations);
 			} else {
-				window.addEventListener('load', runInit);
+				initOriginalAnimations();
 			}
-			
-			// For Astro view transitions
-			document.addEventListener('astro:page-load', () => {
-				// Re-run on soft navigations
-				setTimeout(initAnimations, 300);
-			});
+			document.addEventListener('astro:page-load', initOriginalAnimations);
 		</script>
 	</body>
 </html>
