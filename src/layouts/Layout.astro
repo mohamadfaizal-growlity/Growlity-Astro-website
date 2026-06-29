@@ -82,14 +82,17 @@ try {
 		</script>
 		<script is:inline>
 			function initAnimations() {
+				console.log("🚀 Growlity Animations Initializing...");
+
 				// 1. SCROLL REVEAL LOGIC (Replaces AOS)
-				const revealElements = document.querySelectorAll('main section, main h1, main h2, main .card, footer');
+				const revealElements = document.querySelectorAll('section, h1, h2, .card, footer');
+				console.log(`Found ${revealElements.length} elements for scroll reveal.`);
 				
 				const revealObserver = new IntersectionObserver((entries, observer) => {
 					entries.forEach(entry => {
 						if (entry.isIntersecting) {
 							entry.target.classList.add('is-revealed');
-							observer.unobserve(entry.target); // Animate only once
+							observer.unobserve(entry.target); 
 						}
 					});
 				}, { rootMargin: "0px 0px -50px 0px", threshold: 0 });
@@ -103,19 +106,20 @@ try {
 
 				// 2. AUTO-DETECT NUMBERS & COUNTER LOGIC
 				const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, span, div, p, strong, b');
+				let statCount = 0;
 				
 				const statsObserver = new IntersectionObserver((entries, observer) => {
 					entries.forEach(entry => {
 						if (entry.isIntersecting) {
 							const el = entry.target;
-							const targetAttr = el.getAttribute('data-target') || el.textContent.replace(/[^0-9.]/g, '');
+							const targetAttr = el.getAttribute('data-target');
 							const prefix = el.getAttribute('data-prefix') || '';
 							const suffix = el.getAttribute('data-suffix') || '';
 							
 							if (targetAttr) {
 								const target = parseFloat(targetAttr);
 								let count = 0;
-								const duration = 2000; // 2 seconds animation
+								const duration = 2000; 
 								const increment = target / (duration / 16);
 								
 								const updateCount = () => {
@@ -130,19 +134,20 @@ try {
 								};
 								updateCount();
 							}
-							observer.unobserve(el); // Count up only once
+							observer.unobserve(el);
 						}
 					});
 				}, { threshold: 0.1 });
 
 				textElements.forEach(el => {
-					if (el.childNodes.length === 1 && el.childNodes[0].nodeType === Node.TEXT_NODE) {
+					// Use children.length === 0 to ensure no nested HTML tags, 
+					// but allow multiple text nodes (which React sometimes creates)
+					if (el.children.length === 0 && el.textContent) {
 						const text = el.textContent.trim();
 						const match = text.match(/^([$€£₹]?)(\d+(?:\.\d+)?)([+%KM]*)$/i);
 						
 						if (match) {
 							const numVal = parseFloat(match[2]);
-							// Exclude typical years (1900-2100) and ignore 0
 							if (numVal > 0 && !(numVal >= 1900 && numVal <= 2100 && match[2].length === 4 && match[3] === '')) {
 								if (!el.classList.contains('stat-num-initialized')) {
 									el.classList.add('stat-num-initialized');
@@ -151,27 +156,31 @@ try {
 									el.setAttribute('data-suffix', match[3]);
 									el.innerText = match[1] + '0' + match[3];
 									statsObserver.observe(el);
+									statCount++;
 								}
 							}
 						}
 					}
 				});
+				console.log(`Found ${statCount} number counters.`);
 			}
 
-			// Initialize safely considering Astro's page lifecycle
+			// Wait for FULL page load (including React hydration) to avoid Hydration Mismatch errors
 			const runInit = () => {
-				// Short delay guarantees layout shift is done before observing
-				setTimeout(initAnimations, 50); 
+				setTimeout(initAnimations, 300); 
 			};
 
-			if (document.readyState === 'loading') {
-				document.addEventListener('DOMContentLoaded', runInit);
-			} else {
+			if (document.readyState === 'complete') {
 				runInit();
+			} else {
+				window.addEventListener('load', runInit);
 			}
 			
-			// Handle Astro View Transitions
-			document.addEventListener('astro:page-load', runInit);
+			// For Astro view transitions
+			document.addEventListener('astro:page-load', () => {
+				// Re-run on soft navigations
+				setTimeout(initAnimations, 300);
+			});
 		</script>
 	</body>
 </html>
