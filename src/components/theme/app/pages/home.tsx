@@ -107,7 +107,7 @@ export default function HomePage() {
     <div className="min-h-screen flex flex-col bg-white overflow-x-hidden">
       
       {/* 1. Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-green-50 pt-16 pb-20 md:pt-24 md:pb-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-blue-50 via-white to-green-50 pt-8 pb-16 md:pt-10 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
