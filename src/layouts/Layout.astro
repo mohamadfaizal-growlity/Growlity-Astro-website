@@ -102,6 +102,30 @@ try {
 					window.AOS.refresh();
 				}
 
+				// Auto-detect numbers to animate (elements containing only numbers with optional +, %, $, etc.)
+				const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, span, div, p, strong, b');
+				textElements.forEach(el => {
+					if (el.childNodes.length === 1 && el.childNodes[0].nodeType === Node.TEXT_NODE) {
+						const text = el.textContent.trim();
+						// Matches patterns like "100", "500+", "99.9%", "10K", "$100", "20.5M"
+						const match = text.match(/^([$€£₹]?)(\d+(?:\.\d+)?)([+%KM]*)$/i);
+						if (match) {
+							const numVal = parseFloat(match[2]);
+							// Don't animate years like "2024" or standard body text if it's not a stat
+							if (!(numVal >= 1900 && numVal <= 2100 && match[2].length === 4 && match[3] === '')) {
+								if (!el.classList.contains('stat-num')) {
+									el.classList.add('stat-num');
+									el.setAttribute('data-target', match[2]);
+									el.setAttribute('data-prefix', match[1]);
+									el.setAttribute('data-suffix', match[3]);
+									// Set initial text to 0 to prepare for animation
+									el.innerText = match[1] + '0' + match[3];
+								}
+							}
+						}
+					}
+				});
+
 				// Number Counter Logic
 				const stats = document.querySelectorAll('.stat-num');
 				if (stats.length > 0) {
@@ -109,7 +133,10 @@ try {
 						entries.forEach(entry => {
 							if (entry.isIntersecting) {
 								const el = entry.target;
-								const targetAttr = el.getAttribute('data-target');
+								const targetAttr = el.getAttribute('data-target') || el.textContent.replace(/[^0-9.]/g, '');
+								const prefix = el.getAttribute('data-prefix') || '';
+								const suffix = el.getAttribute('data-suffix') || '';
+								
 								if (targetAttr) {
 									const target = parseFloat(targetAttr);
 									let count = 0;
@@ -119,10 +146,11 @@ try {
 									const updateCount = () => {
 										count += increment;
 										if (count < target) {
-											el.innerText = target % 1 === 0 ? Math.ceil(count).toString() : count.toFixed(1);
+											const currentVal = target % 1 === 0 ? Math.ceil(count).toString() : count.toFixed(1);
+											el.innerText = prefix + currentVal + suffix;
 											requestAnimationFrame(updateCount);
 										} else {
-											el.innerText = target.toString();
+											el.innerText = prefix + target.toString() + suffix;
 										}
 									};
 									updateCount();
