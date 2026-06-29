@@ -83,84 +83,93 @@ try {
 		</script>
 		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script is:inline>
+			let aosInitialized = false;
+
 			function initAnimations() {
-				// Auto-apply AOS to major elements across the site
-				const elementsToAnimate = document.querySelectorAll('main section, main h1, main h2, main h3, main img, main .card, main .grid > div, footer');
-				elementsToAnimate.forEach((el) => {
-					if (!el.hasAttribute('data-aos')) {
-						el.setAttribute('data-aos', 'fade-up');
-					}
-				});
-
-				// Initialize AOS Animation Library
-				if (window.AOS) {
-					window.AOS.init({
-						duration: 800,
-						once: true,
-						offset: 50,
+				// Delay execution slightly to ensure DOM layout is calculated (fixes "lazy load" and hidden elements)
+				setTimeout(() => {
+					// Auto-apply AOS to safe major layout elements (excluding images to avoid conflicts with native lazy loading)
+					const elementsToAnimate = document.querySelectorAll('main section, main h1, main h2, main .card, footer');
+					elementsToAnimate.forEach((el) => {
+						if (!el.hasAttribute('data-aos')) {
+							el.setAttribute('data-aos', 'fade-up');
+						}
 					});
-					window.AOS.refresh();
-				}
 
-				// Auto-detect numbers to animate (elements containing only numbers with optional +, %, $, etc.)
-				const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, span, div, p, strong, b');
-				textElements.forEach(el => {
-					if (el.childNodes.length === 1 && el.childNodes[0].nodeType === Node.TEXT_NODE) {
-						const text = el.textContent.trim();
-						// Matches patterns like "100", "500+", "99.9%", "10K", "$100", "20.5M"
-						const match = text.match(/^([$€£₹]?)(\d+(?:\.\d+)?)([+%KM]*)$/i);
-						if (match) {
-							const numVal = parseFloat(match[2]);
-							// Don't animate years like "2024" or standard body text if it's not a stat
-							if (!(numVal >= 1900 && numVal <= 2100 && match[2].length === 4 && match[3] === '')) {
-								if (!el.classList.contains('stat-num')) {
-									el.classList.add('stat-num');
-									el.setAttribute('data-target', match[2]);
-									el.setAttribute('data-prefix', match[1]);
-									el.setAttribute('data-suffix', match[3]);
-									// Set initial text to 0 to prepare for animation
-									el.innerText = match[1] + '0' + match[3];
+					// Initialize AOS Animation Library safely
+					if (window.AOS) {
+						if (!aosInitialized) {
+							window.AOS.init({
+								duration: 800,
+								once: true,
+								offset: 50,
+							});
+							aosInitialized = true;
+						} else {
+							window.AOS.refreshHard();
+						}
+					}
+
+					// Auto-detect numbers to animate (elements containing only numbers with optional +, %, $, etc.)
+					const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, span, div, p, strong, b');
+					textElements.forEach(el => {
+						if (el.childNodes.length === 1 && el.childNodes[0].nodeType === Node.TEXT_NODE) {
+							const text = el.textContent.trim();
+							// Matches patterns like "100", "500+", "99.9%", "10K", "$100", "20.5M"
+							const match = text.match(/^([$€£₹]?)(\d+(?:\.\d+)?)([+%KM]*)$/i);
+							if (match) {
+								const numVal = parseFloat(match[2]);
+								// Don't animate years like "2024" or standard body text if it's not a stat
+								if (!(numVal >= 1900 && numVal <= 2100 && match[2].length === 4 && match[3] === '')) {
+									if (!el.classList.contains('stat-num')) {
+										el.classList.add('stat-num');
+										el.setAttribute('data-target', match[2]);
+										el.setAttribute('data-prefix', match[1]);
+										el.setAttribute('data-suffix', match[3]);
+										// Set initial text to 0 to prepare for animation
+										el.innerText = match[1] + '0' + match[3];
+									}
 								}
 							}
 						}
-					}
-				});
+					});
 
-				// Number Counter Logic
-				const stats = document.querySelectorAll('.stat-num');
-				if (stats.length > 0) {
-					const statsObserver = new IntersectionObserver((entries) => {
-						entries.forEach(entry => {
-							if (entry.isIntersecting) {
-								const el = entry.target;
-								const targetAttr = el.getAttribute('data-target') || el.textContent.replace(/[^0-9.]/g, '');
-								const prefix = el.getAttribute('data-prefix') || '';
-								const suffix = el.getAttribute('data-suffix') || '';
-								
-								if (targetAttr) {
-									const target = parseFloat(targetAttr);
-									let count = 0;
-									const duration = 2000;
-									const increment = target / (duration / 16);
+					// Number Counter Logic
+					const stats = document.querySelectorAll('.stat-num');
+					if (stats.length > 0) {
+						const statsObserver = new IntersectionObserver((entries) => {
+							entries.forEach(entry => {
+								if (entry.isIntersecting) {
+									const el = entry.target;
+									const targetAttr = el.getAttribute('data-target') || el.textContent.replace(/[^0-9.]/g, '');
+									const prefix = el.getAttribute('data-prefix') || '';
+									const suffix = el.getAttribute('data-suffix') || '';
 									
-									const updateCount = () => {
-										count += increment;
-										if (count < target) {
-											const currentVal = target % 1 === 0 ? Math.ceil(count).toString() : count.toFixed(1);
-											el.innerText = prefix + currentVal + suffix;
-											requestAnimationFrame(updateCount);
-										} else {
-											el.innerText = prefix + target.toString() + suffix;
-										}
-									};
-									updateCount();
+									if (targetAttr) {
+										const target = parseFloat(targetAttr);
+										let count = 0;
+										const duration = 2000;
+										const increment = target / (duration / 16);
+										
+										const updateCount = () => {
+											count += increment;
+											if (count < target) {
+												const currentVal = target % 1 === 0 ? Math.ceil(count).toString() : count.toFixed(1);
+												el.innerText = prefix + currentVal + suffix;
+												requestAnimationFrame(updateCount);
+											} else {
+												el.innerText = prefix + target.toString() + suffix;
+											}
+										};
+										updateCount();
+									}
+									statsObserver.unobserve(el);
 								}
-								statsObserver.unobserve(el);
-							}
-						});
-					}, { threshold: 0.1 });
-					stats.forEach(stat => statsObserver.observe(stat));
-				}
+							});
+						}, { threshold: 0.1 });
+						stats.forEach(stat => statsObserver.observe(stat));
+					}
+				}, 150); // 150ms delay gives enough time for browser paints
 			}
 
 			// Run when DOM is ready
