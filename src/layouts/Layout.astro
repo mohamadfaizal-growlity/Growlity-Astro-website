@@ -84,6 +84,14 @@ try {
 		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script is:inline>
 			function initAnimations() {
+				// Auto-apply AOS to major elements across the site
+				const elementsToAnimate = document.querySelectorAll('main section, main h1, main h2, main h3, main img, main .card, main .grid > div, footer');
+				elementsToAnimate.forEach((el) => {
+					if (!el.hasAttribute('data-aos')) {
+						el.setAttribute('data-aos', 'fade-up');
+					}
+				});
+
 				// Initialize AOS Animation Library
 				if (window.AOS) {
 					window.AOS.init({
