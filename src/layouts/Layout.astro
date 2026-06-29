@@ -83,17 +83,18 @@ try {
 		</script>
 		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script is:inline>
-			// Initialize AOS Animation Library
-			if (window.AOS) {
-				window.AOS.init({
-					duration: 800,
-					once: true,
-					offset: 50,
-				});
-			}
+			function initAnimations() {
+				// Initialize AOS Animation Library
+				if (window.AOS) {
+					window.AOS.init({
+						duration: 800,
+						once: true,
+						offset: 50,
+					});
+					window.AOS.refresh();
+				}
 
-			// Number Counter Logic
-			document.addEventListener("DOMContentLoaded", () => {
+				// Number Counter Logic
 				const stats = document.querySelectorAll('.stat-num');
 				if (stats.length > 0) {
 					const statsObserver = new IntersectionObserver((entries) => {
@@ -121,10 +122,19 @@ try {
 								statsObserver.unobserve(el);
 							}
 						});
-					}, { threshold: 0.5 });
+					}, { threshold: 0.1 });
 					stats.forEach(stat => statsObserver.observe(stat));
 				}
-			});
+			}
+
+			// Run when DOM is ready
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initAnimations);
+			} else {
+				initAnimations();
+			}
+			// Re-run for Astro view transitions
+			document.addEventListener('astro:page-load', initAnimations);
 		</script>
 	</body>
 </html>
