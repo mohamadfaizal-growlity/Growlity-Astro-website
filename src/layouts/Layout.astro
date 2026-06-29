@@ -87,13 +87,22 @@ try {
 		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
 		<script is:inline>
 			function initOriginalAnimations() {
-				// Initialize AOS Animation Library
+				// 1. AUTO-APPLY AOS ATTRIBUTES (Re-added for whole website effect)
+				const revealElements = document.querySelectorAll('section, h1, h2, .card, footer');
+				revealElements.forEach(el => {
+					if (!el.hasAttribute('data-aos')) {
+						el.setAttribute('data-aos', 'fade-up');
+					}
+				});
+
+				// Initialize AOS Animation Library safely
 				if (window.AOS) {
 					window.AOS.init({
 						duration: 800,   
 						once: true,      
 						offset: 50,      
 					});
+					window.AOS.refresh();
 				}
 
 				// Scroll Progress Bar Logic
@@ -125,47 +134,82 @@ try {
 					});
 				});
 
+				// 2. AUTO-DETECT NUMBERS & APPLY CLASSES (Re-added for whole website effect)
+				const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, span, div, p, strong, b');
+				textElements.forEach(el => {
+					if (el.children.length === 0 && el.textContent) {
+						const text = el.textContent.trim();
+						const match = text.match(/^([$€£₹]?)(\d+(?:\.\d+)?)([+%KM]*)$/i);
+						
+						if (match) {
+							const numVal = parseFloat(match[2]);
+							if (numVal > 0 && !(numVal >= 1900 && numVal <= 2100 && match[2].length === 4 && match[3] === '')) {
+								if (!el.classList.contains('stat-num-initialized')) {
+									el.classList.add('stat-num');
+									el.classList.add('stat-num-initialized');
+									el.setAttribute('data-target', match[2]);
+									if (match[1]) el.setAttribute('data-prefix', match[1]);
+									if (match[3]) el.setAttribute('data-suffix', match[3]);
+									// Start from 0
+									el.innerText = match[1] + '0' + match[3];
+								}
+							}
+						}
+					}
+				});
+
 				// Number Counter Logic
 				const stats = document.querySelectorAll('.stat-num');
 				if (stats.length > 0) {
 					const statsObserver = new IntersectionObserver((entries) => {
 						entries.forEach(entry => {
-							if (entry.isIntersecting) { // Checks if the number is visible on screen
+							if (entry.isIntersecting) { 
 								const el = entry.target;
-								const targetAttr = el.getAttribute('data-target'); // Gets the final number
+								const targetAttr = el.getAttribute('data-target'); 
+								const prefix = el.getAttribute('data-prefix') || '';
+								const suffix = el.getAttribute('data-suffix') || '';
+								
 								if (targetAttr) {
 									const target = parseFloat(targetAttr);
 									let count = 0;
-									const duration = 2000; // The animation lasts exactly 2 seconds
-									const increment = target / (duration / 16); // Calculates step for ~60fps
+									const duration = 2000; 
+									const increment = target / (duration / 16); 
 									
 									const updateCount = () => {
 										count += increment;
 										if (count < target) {
-											// Updates the text, keeping decimals if needed
-											el.innerText = target % 1 === 0 ? Math.ceil(count).toString() : count.toFixed(1);
-											requestAnimationFrame(updateCount); // Loops until finished smoothly
+											const currentVal = target % 1 === 0 ? Math.ceil(count).toString() : count.toFixed(1);
+											el.innerText = prefix + currentVal + suffix;
+											requestAnimationFrame(updateCount); 
 										} else {
-											el.innerText = target.toString(); // Ensures exact final number
+											el.innerText = prefix + target.toString() + suffix; 
 										}
 									};
 									updateCount();
 								}
-								statsObserver.unobserve(el); // Stops observing once the animation has run
+								statsObserver.unobserve(el); 
 							}
 						});
-					}, { threshold: 0.5 }); // Triggers when 50% of the number is visible
+					}, { threshold: 0.1 }); // Trigger sooner so we don't miss it
 					stats.forEach(stat => statsObserver.observe(stat));
 				}
 			}
 
-			// Run on initial load and Astro View Transitions
-			if (document.readyState === 'loading') {
-				document.addEventListener('DOMContentLoaded', initOriginalAnimations);
+			// Run after full page load to prevent React Hydration errors
+			const runInit = () => {
+				setTimeout(initOriginalAnimations, 400); 
+			};
+
+			if (document.readyState === 'complete') {
+				runInit();
 			} else {
-				initOriginalAnimations();
+				window.addEventListener('load', runInit);
 			}
-			document.addEventListener('astro:page-load', initOriginalAnimations);
+			
+			// For Astro view transitions
+			document.addEventListener('astro:page-load', () => {
+				setTimeout(initOriginalAnimations, 400);
+			});
 		</script>
 	</body>
 </html>
