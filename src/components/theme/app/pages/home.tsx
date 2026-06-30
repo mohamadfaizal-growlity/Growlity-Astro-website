@@ -37,25 +37,10 @@ import {
   Cpu as CpuIcon
 } from "lucide-react";
 
+import siteStats from "../../../../content/global-settings/stats.json";
+
 export default function HomePage() {
   const [activeService, setActiveService] = useState(0);
-
-  const siteStats = {
-    hero: {
-      carbonTarget: "45%",
-      esgScore: "85",
-      standards: "12"
-    },
-    about: {
-      yearsExp: "10",
-      regions: "7",
-      industries: "15"
-    },
-    impact: {
-      commitment: "100%",
-      regions: "7+"
-    }
-  };
 
   const services = [
     { title: "ESG Strategy & Advisory", description: "Gap analysis, net-zero roadmaps & climate risk assessment.", icon: Target, image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" },

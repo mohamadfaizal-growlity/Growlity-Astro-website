@@ -1,0 +1,78 @@
+{
+  "file": "src/content/global-settings/stats.json",
+  "name": "SiteStats",
+  "label": "Homepage Stats",
+  "fileType": "json",
+  "fmType": "json",
+  "template": [
+    {
+      "name": "hero",
+      "label": "Hero Section Stats",
+      "type": "object",
+      "fields": [
+        {
+          "name": "carbonTarget",
+          "label": "Carbon Reduction Target (e.g. 45%)",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "esgScore",
+          "label": "Global ESG Score (e.g. 85)",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "standards",
+          "label": "Standards Covered (e.g. 12)",
+          "type": "string",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "about",
+      "label": "About Section Stats",
+      "type": "object",
+      "fields": [
+        {
+          "name": "yearsExp",
+          "label": "Years Experience (e.g. 10)",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "regions",
+          "label": "Global Regions (e.g. 7)",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "industries",
+          "label": "Industries (e.g. 15)",
+          "type": "string",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "impact",
+      "label": "Global Impact Stats",
+      "type": "object",
+      "fields": [
+        {
+          "name": "commitment",
+          "label": "Commitment Percentage (e.g. 100%)",
+          "type": "string",
+          "value": ""
+        },
+        {
+          "name": "regions",
+          "label": "Operating Regions (e.g. 7+)",
+          "type": "string",
+          "value": ""
+        }
+      ]
+    }
+  ]
+}
