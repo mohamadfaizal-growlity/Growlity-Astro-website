@@ -29,7 +29,8 @@ export function Footer({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
               </div>
               <p className="text-gray-700 mb-8 leading-relaxed italic flex-grow">"This recognition aligned and unified our ESG efforts globally. Thanks to Growlity, our governance and disclosures reached new heights."</p>
               <div className="flex items-center gap-4 mt-auto pt-6 border-t border-gray-50">
-                <div className="w-12 h-12 rounded-full bg-[#0066FF]/10 flex items-center justify-center text-[#0066FF] font-bold text-lg">DS</div>
+                {/* For future: replace this URL with your actual image path like "/images/don-stover.jpg" */}
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150&h=150" alt="Mr. Don Stover" className="w-12 h-12 rounded-full object-cover border border-gray-200 shadow-sm" />
                 <div>
                   <div className="font-bold text-gray-900">Mr. Don Stover</div>
                   <div className="text-xs text-gray-500 mb-1">Director of Corporate Quality</div>
@@ -48,7 +49,8 @@ export function Footer({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
               </div>
               <p className="text-gray-700 mb-8 leading-relaxed italic flex-grow">"Rated in the top 1%, this reflects our core belief: sustainability is central to business, not separate — it's how we create lasting impact."</p>
               <div className="flex items-center gap-4 mt-auto pt-6 border-t border-gray-50">
-                <div className="w-12 h-12 rounded-full bg-[#00C853]/10 flex items-center justify-center text-[#00C853] font-bold text-lg">GC</div>
+                {/* For future: replace this URL with your actual image path like "/images/gyanesh-chaudhary.jpg" */}
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=150&h=150" alt="Mr. Gyanesh Chaudhary" className="w-12 h-12 rounded-full object-cover border border-gray-200 shadow-sm" />
                 <div>
                   <div className="font-bold text-gray-900">Mr. Gyanesh Chaudhary</div>
                   <div className="text-xs text-gray-500 mb-1">Chairman & Managing Director</div>
@@ -66,7 +68,8 @@ export function Footer({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
               </div>
               <p className="text-gray-700 mb-8 leading-relaxed italic flex-grow">"Receiving the EcoVadis Gold Medal is a proud milestone in our sustainability journey, reflecting our focused efforts to embed ESG at the core."</p>
               <div className="flex items-center gap-4 mt-auto pt-6 border-t border-gray-50">
-                <div className="w-12 h-12 rounded-full bg-[#0066FF]/10 flex items-center justify-center text-[#0066FF] font-bold text-lg">SK</div>
+                {/* For future: replace this URL with your actual image path like "/images/sanjay-kumar.jpg" */}
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150" alt="Mr. Sanjay Kumar" className="w-12 h-12 rounded-full object-cover border border-gray-200 shadow-sm" />
                 <div>
                   <div className="font-bold text-gray-900">Mr. Sanjay Kumar</div>
                   <div className="text-xs text-gray-500 mb-1">Chief Strategy & Sustainability</div>
