@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "carbonTarget": "45%",
+    "esgScore": "85",
+    "standards": "12"
+  },
+  "about": {
+    "yearsExp": "10",
+    "regions": "7",
+    "industries": "15"
+  },
+  "impact": {
+    "commitment": "100%",
+    "regions": "7+"
+  }
+}
