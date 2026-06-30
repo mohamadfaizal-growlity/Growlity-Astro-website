@@ -64,9 +64,9 @@ export default function HomePage() {
     { name: "Chemicals", icon: Zap, image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=500&q=80" },
     { name: "Construction", icon: Building2, image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=500&q=80" },
     { name: "Automotive", icon: Truck, image: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=500&q=80" },
-    { name: "FMCG", icon: ShoppingCart, image: "https://images.unsplash.com/photo-1604719312566-8fa2065b452b?w=500&q=80" },
+    { name: "FMCG", icon: ShoppingCart, image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&q=80" },
     { name: "Healthcare", icon: Stethoscope, image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=500&q=80" },
-    { name: "Food & Beverage", icon: Leaf, image: "https://images.unsplash.com/photo-1498837167922-41c53b445f9f?w=500&q=80" },
+    { name: "Food & Beverage", icon: Leaf, image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80" },
   ];
 
   const testimonials = [
