@@ -103,6 +103,30 @@ export default function HomePage() {
     { q: "Can you assist with EcoVadis certification?", a: "Absolutely. We guide companies through the EcoVadis assessment process to improve their sustainability scorecards." },
   ];
 
+  const resourcesList = [
+    { 
+      category: 'Blogs',
+      title: 'Understanding the new CSRD regulations for 2024',
+      description: 'A comprehensive guide on what businesses need to prepare for the upcoming EU corporate sustainability reporting directive.',
+      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600&h=400',
+      link: '/blogs'
+    },
+    { 
+      category: 'Whitepapers',
+      title: 'Decarbonization Pathways for Manufacturing',
+      description: 'In-depth analysis of Scope 3 emission reduction strategies and supply chain sustainability in the heavy manufacturing sector.',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600&h=400',
+      link: '/whitepapers'
+    },
+    { 
+      category: 'Webinars',
+      title: 'Navigating EU CBAM: Compliance Strategies',
+      description: 'Watch our expert panel discuss the Carbon Border Adjustment Mechanism and how exporters can ensure compliance.',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600&h=400',
+      link: '/webinars'
+    }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col bg-white overflow-x-hidden">
 
@@ -499,17 +523,17 @@ export default function HomePage() {
             </a>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {['Blogs', 'Whitepapers', 'Webinars'].map((cat, i) => (
-              <a key={cat} href={`/${cat.toLowerCase()}`} className="group block">
+            {resourcesList.map((resource, i) => (
+              <a key={resource.category} href={resource.link} className="group block">
                 <div className="h-40 bg-gray-200 rounded-xl mb-4 overflow-hidden relative">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                  <img src={`https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=600&h=400&sig=${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={cat} />
-                  <Badge className="absolute top-3 left-3 z-20 bg-white text-gray-900 text-xs">{cat}</Badge>
+                  <img src={resource.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={resource.title} />
+                  <Badge className="absolute top-3 left-3 z-20 bg-white text-gray-900 text-xs">{resource.category}</Badge>
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-[#0066FF] transition-colors">
-                  Understanding the new CSRD regulations for 2024
+                  {resource.title}
                 </h3>
-                <p className="text-sm text-gray-500 line-clamp-2">A comprehensive guide on what businesses need to prepare for the upcoming EU corporate sustainability reporting directive.</p>
+                <p className="text-sm text-gray-500 line-clamp-2">{resource.description}</p>
               </a>
             ))}
           </div>
