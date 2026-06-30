@@ -3,16 +3,16 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../components/ui/accordion";
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Shield, 
-  Target, 
-  Leaf, 
-  Globe, 
-  Award, 
-  Users, 
-  CheckCircle2, 
+import {
+  BarChart3,
+  TrendingUp,
+  Shield,
+  Target,
+  Leaf,
+  Globe,
+  Award,
+  Users,
+  CheckCircle2,
   ArrowRight,
   Sparkles,
   Building2,
@@ -87,8 +87,8 @@ export default function HomePage() {
   ];
 
   const standards = [
-    "GRI", "BRSR", "ISSB", "IFRS", "CSRD", "CDP", 
-    "EcoVadis", "SBTi", "GHG Protocol", "ISO 14064", "ISO 14001", "SA8000", 
+    "GRI", "BRSR", "ISSB", "IFRS", "CSRD", "CDP",
+    "EcoVadis", "SBTi", "GHG Protocol", "ISO 14064", "ISO 14001", "SA8000",
     "RJC", "SMETA", "TCFD"
   ];
 
@@ -118,7 +118,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white overflow-x-hidden">
-      
+
       {/* 1. Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-green-50 pt-8 pb-16 md:pt-10 md:pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
@@ -234,44 +234,91 @@ export default function HomePage() {
       </section>
 
       {/* 3. About Company */}
-      <section className="py-10 bg-gray-50" data-aos="fade-up">
+      <section className="py-16 md:py-24 bg-white relative overflow-hidden" data-aos="fade-up">
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-50/50 to-transparent -z-10" />
+        <div className="absolute -left-20 top-20 w-72 h-72 bg-green-50 rounded-full blur-3xl opacity-50 -z-10" />
+        
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">Who We Are</h2>
-            <p className="text-lg text-gray-600 leading-relaxed mb-10">
-              We are an ESG consulting company helping organizations meet global sustainability standards through expert advisory, ESG reporting, carbon management, supply chain assessments, and certification support.
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="relative rounded-xl overflow-hidden group h-32 md:h-40 col-span-2 md:col-span-1 border border-gray-100 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" alt="Team" />
-                <div className="absolute inset-0 bg-white/80 p-5 flex flex-col items-center justify-center group-hover:bg-white/90 transition-colors">
-                  <div className="text-2xl font-extrabold text-[#0066FF] mb-1 stat-num" data-target="15" data-suffix="+">0+</div>
-                  <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Years Exp.</div>
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            
+            {/* Left Content */}
+            <div className="max-w-2xl">
+              <Badge className="mb-4 bg-[#0066FF]/10 text-[#0066FF] border-none px-3 py-1">
+                About Growlity
+              </Badge>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-gray-900 leading-tight">
+                Pioneering the Future of <br className="hidden md:block" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-[#00C853]">
+                  Sustainable Business
+                </span>
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed mb-6">
+                Growlity is a premier ESG consulting firm dedicated to guiding organizations toward sustainable, compliant, and profitable futures. We bridge the gap between complex regulatory requirements and practical business strategies.
+              </p>
+              <p className="text-lg text-gray-600 leading-relaxed mb-10">
+                Our multidisciplinary team of experts empowers businesses globally to navigate sustainability frameworks, optimize supply chains, manage carbon footprints, and achieve globally recognized certifications.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button className="bg-[#0066FF] hover:bg-[#0052CC] text-white px-8 py-6 rounded-lg text-base transition-all duration-300 shadow-lg shadow-blue-500/25">
+                  Discover Our Journey
+                </Button>
+                <div className="flex items-center gap-4 text-gray-700 font-medium">
+                  <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
+                    <Leaf className="text-[#00C853] w-6 h-6" />
+                  </div>
+                  EcoVadis Partner
                 </div>
               </div>
-              <div className="relative rounded-xl overflow-hidden group h-32 md:h-40 border border-gray-100 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" alt="Industries" />
-                <div className="absolute inset-0 bg-white/80 p-5 flex flex-col items-center justify-center group-hover:bg-white/90 transition-colors">
-                  <div className="text-2xl font-extrabold text-[#00C853] mb-1 stat-num" data-target="20" data-suffix="+">0+</div>
-                  <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Industries</div>
+            </div>
+
+            {/* Right Stats Grid */}
+            <div className="grid grid-cols-2 gap-4 md:gap-6 relative">
+              {/* Decorative dotted pattern */}
+              <div className="absolute -top-8 -right-8 w-32 h-32 bg-[radial-gradient(#e5e7eb_2px,transparent_2px)] [background-size:16px_16px] -z-10" />
+              
+              <div className="space-y-4 md:space-y-6 mt-0 md:mt-12">
+                {/* Stat Card 1 */}
+                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-1 transition-transform duration-300 group">
+                  <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Briefcase className="w-6 h-6 text-[#0066FF]" />
+                  </div>
+                  <div className="text-4xl font-extrabold text-gray-900 mb-2">10<span className="text-[#0066FF]">+</span></div>
+                  <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Years Exp.</div>
                 </div>
-              </div>
-              <div className="relative rounded-xl overflow-hidden group h-32 md:h-40 border border-gray-100 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" alt="Countries" />
-                <div className="absolute inset-0 bg-white/80 p-5 flex flex-col items-center justify-center group-hover:bg-white/90 transition-colors">
-                  <div className="text-2xl font-extrabold text-[#0066FF] mb-1 stat-num" data-target="25" data-suffix="+">0+</div>
-                  <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Countries</div>
-                </div>
-              </div>
-              <div className="relative rounded-xl overflow-hidden group h-32 md:h-40 col-span-2 md:col-span-1 border border-gray-100 shadow-sm">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&q=80" className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" alt="Consultants" />
-                <div className="absolute inset-0 bg-white/80 p-5 flex flex-col items-center justify-center group-hover:bg-white/90 transition-colors">
-                  <div className="text-2xl font-extrabold text-[#00C853] mb-1 stat-num" data-target="50" data-suffix="+">0+</div>
-                  <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Consultants</div>
+                
+                {/* Stat Card 2 */}
+                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-1 transition-transform duration-300 group">
+                  <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Globe className="w-6 h-6 text-[#00C853]" />
+                  </div>
+                  <div className="text-4xl font-extrabold text-gray-900 mb-2">25<span className="text-[#00C853]">+</span></div>
+                  <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Countries</div>
                 </div>
               </div>
 
+              <div className="space-y-4 md:space-y-6">
+                {/* Stat Card 3 */}
+                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-1 transition-transform duration-300 group">
+                  <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Factory className="w-6 h-6 text-purple-500" />
+                  </div>
+                  <div className="text-4xl font-extrabold text-gray-900 mb-2">50<span className="text-purple-500">+</span></div>
+                  <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Industries</div>
+                </div>
+                
+                {/* Stat Card 4 */}
+                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-1 transition-transform duration-300 group">
+                  <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Users className="w-6 h-6 text-orange-500" />
+                  </div>
+                  <div className="text-4xl font-extrabold text-gray-900 mb-2">100<span className="text-orange-500">+</span></div>
+                  <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Consultants</div>
+                </div>
+              </div>
             </div>
+            
           </div>
         </div>
       </section>
@@ -291,8 +338,8 @@ export default function HomePage() {
                 const Icon = svc.icon;
                 const isActive = activeService === i;
                 return (
-                  <div 
-                    key={i} 
+                  <div
+                    key={i}
                     onClick={() => setActiveService(i)}
                     className={`flex items-center p-4 rounded-xl cursor-pointer transition-all duration-300 border ${isActive ? 'bg-[#0066FF] border-[#0066FF] shadow-lg text-white transform scale-[1.02]' : 'bg-white border-gray-100 text-gray-700 hover:border-[#0066FF]/30 hover:bg-blue-50'}`}
                   >
@@ -317,7 +364,7 @@ export default function HomePage() {
             {/* Right side: Image Display */}
             <div className="lg:col-span-7 relative h-[400px] lg:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-2xl group">
               {services.map((svc, i) => (
-                <div 
+                <div
                   key={i}
                   className={`absolute inset-0 transition-opacity duration-700 ${activeService === i ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                 >
@@ -448,7 +495,7 @@ export default function HomePage() {
                 {caseStudies.map((cs, i) => (
                   <div key={i} className="p-6 rounded-xl bg-gradient-to-br from-blue-50 to-blue-50/20 border border-blue-100 hover:shadow-md transition-shadow cursor-pointer group">
                     <h3 className="text-lg font-bold text-[#0066FF] mb-3 flex items-center">
-                      <Briefcase className="mr-2 w-4 h-4 group-hover:scale-110 transition-transform"/> {cs.industry}
+                      <Briefcase className="mr-2 w-4 h-4 group-hover:scale-110 transition-transform" /> {cs.industry}
                     </h3>
                     <ul className="space-y-2">
                       {cs.metrics.map((metric, j) => (
@@ -532,9 +579,9 @@ export default function HomePage() {
             {['Blogs', 'Whitepapers', 'Webinars'].map((cat, i) => (
               <a key={cat} href={`/${cat.toLowerCase()}`} className="group block">
                 <div className="h-40 bg-gray-200 rounded-xl mb-4 overflow-hidden relative">
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                   <img src={`https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=600&h=400&sig=${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={cat} />
-                   <Badge className="absolute top-3 left-3 z-20 bg-white text-gray-900 text-xs">{cat}</Badge>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                  <img src={`https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=600&h=400&sig=${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={cat} />
+                  <Badge className="absolute top-3 left-3 z-20 bg-white text-gray-900 text-xs">{cat}</Badge>
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-[#0066FF] transition-colors">
                   Understanding the new CSRD regulations for 2024
