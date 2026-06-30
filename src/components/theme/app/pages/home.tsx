@@ -154,18 +154,18 @@ export default function HomePage() {
                   <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-xl border border-blue-100/50">
                     <div className="text-xs font-medium text-blue-600 mb-1">Carbon Reduction Target</div>
                     <div className="flex items-end gap-2">
-                      <div className="text-2xl font-extrabold text-gray-900 stat-num" data-target="45" data-suffix="%">0%</div>
+                      <div className="text-2xl font-extrabold text-gray-900">45%</div>
                       <div className="text-xs text-gray-500 mb-1">by 2030</div>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="p-4 bg-green-50 rounded-xl border border-green-100/50">
                       <div className="text-xs font-medium text-green-600 mb-1">Global ESG Score</div>
-                      <div className="text-xl font-bold text-gray-900 stat-num" data-target="85">0</div>
+                      <div className="text-xl font-bold text-gray-900">85</div>
                     </div>
                     <div className="p-4 bg-purple-50 rounded-xl border border-purple-100/50">
                       <div className="text-xs font-medium text-purple-600 mb-1">Standards Covered</div>
-                      <div className="text-xl font-bold text-gray-900 stat-num" data-target="12">0</div>
+                      <div className="text-xl font-bold text-gray-900">12</div>
                     </div>
                   </div>
                 </div>
@@ -468,7 +468,7 @@ export default function HomePage() {
                 <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Client Base</div>
               </div>
               <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#00C853]/30 transition-all">
-                <div className="text-4xl font-black text-[#00C853] mb-1 stat-num" data-target="100" data-suffix="%">0%</div>
+                <div className="text-4xl font-black text-[#00C853] mb-1">100%</div>
                 <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Commitment</div>
               </div>
               <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#00C853]/30 transition-all">
@@ -476,7 +476,7 @@ export default function HomePage() {
                 <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Consultants</div>
               </div>
               <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#0066FF]/30 transition-all">
-                <div className="text-4xl font-black text-[#0066FF] mb-1 stat-num" data-target="7" data-suffix="+">0+</div>
+                <div className="text-4xl font-black text-[#0066FF] mb-1">7+</div>
                 <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Operating Regions</div>
               </div>
             </div>
