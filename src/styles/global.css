@@ -39,3 +39,40 @@ input[type="reset"] {
 [class*="hover:text-"]:hover {
   cursor: pointer;
 }
+
+/* ==========================================================================
+   CUSTOM CURSOR STYLES
+   ========================================================================== */
+.cursor-dot {
+  width: 6px; 
+  height: 6px; 
+  background-color: #0066FF; 
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  transform: translate(-50%, -50%); 
+  border-radius: 50%; 
+  z-index: 99999; 
+  pointer-events: none; 
+  transition: width 0.2s, height 0.2s;
+}
+
+.cursor-outline {
+  width: 30px; 
+  height: 30px; 
+  border: 2px solid rgba(0, 102, 255, 0.5); 
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  transform: translate(-50%, -50%); 
+  border-radius: 50%; 
+  z-index: 99999; 
+  pointer-events: none;
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Disable custom cursor on touch devices */
+@media (max-width: 1024px) {
+  body, a, button, input { cursor: auto; }
+  .cursor-dot, .cursor-outline { display: none !important; }
+}
