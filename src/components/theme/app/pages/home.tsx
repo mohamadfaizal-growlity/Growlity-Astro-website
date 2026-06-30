@@ -127,13 +127,13 @@ export default function HomePage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a href="/contact">
-                  <Button className="magnetic-btn bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-base h-12 px-6 shadow-lg shadow-blue-500/20 transition-all duration-300">
+                  <Button className="bg-gradient-to-r from-[#0066FF] to-[#00C853] hover:from-[#0052CC] hover:to-[#00A844] text-base h-12 px-6 shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-0.5 transition-all duration-300">
                     Book a Free Consultation
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </a>
                 <a href="/contact">
-                  <Button variant="outline" className="magnetic-btn border-2 border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF] hover:text-white text-base h-12 px-6 transition-all duration-300">
+                  <Button variant="outline" className="border-2 border-[#0066FF] text-[#0066FF] hover:bg-[#0066FF] hover:text-white text-base h-12 px-6 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                     Talk to an ESG Expert
                   </Button>
                 </a>
