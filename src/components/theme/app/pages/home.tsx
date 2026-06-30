@@ -115,9 +115,9 @@ export default function HomePage() {
                 Global ESG & Business Sustainability Advisory
               </Badge>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-[1.15] tracking-tight">
-                Data-Driven Strategies for {" "}
+                Empowering Enterprises with {" "}
                 <span className="bg-gradient-to-r from-[#0066FF] to-[#00C853] bg-clip-text text-transparent">
-                  Compliance, Sustainability & Long-Term Value
+                  Data-Driven ESG Strategies
                 </span>
               </h1>
               <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg">
@@ -190,9 +190,9 @@ export default function HomePage() {
                 About Growlity
               </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 text-gray-900 leading-tight">
-                Pioneering the Future of <br className="hidden md:block" />
+                Your Trusted Partner for <br className="hidden md:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0066FF] to-[#00C853]">
-                  Sustainable Business
+                  ESG & Sustainability Excellence
                 </span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
@@ -276,8 +276,8 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <Badge className="mb-3 bg-[#0066FF]/10 text-[#0066FF]">Our Expertise</Badge>
-            <h2 className="text-2xl md:text-4xl font-bold mb-3 text-gray-900">Our ESG Services</h2>
-            <p className="text-base text-gray-500 max-w-2xl mx-auto">Comprehensive solutions tailored to your sustainability journey.</p>
+            <h2 className="text-2xl md:text-4xl font-bold mb-3 text-gray-900">End-to-End ESG Advisory & Solutions</h2>
+            <p className="text-base text-gray-500 max-w-2xl mx-auto">Comprehensive, tailored strategies to drive your organization's sustainability journey.</p>
           </div>
           <div className="grid lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-5 flex flex-col gap-2">
@@ -336,8 +336,8 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <Badge className="mb-3 bg-purple-500/10 text-purple-600">Digital Solutions</Badge>
-            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">Our Proprietary Platforms</h2>
-            <p className="text-base text-gray-500 max-w-2xl mx-auto">Leveraging technology to simplify ESG data management and reporting.</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">Next-Generation ESG Technology Platforms</h2>
+            <p className="text-base text-gray-500 max-w-2xl mx-auto">Leveraging advanced technology to simplify complex ESG data management and global reporting.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {proprietaryTools.map((tool, index) => {
@@ -363,8 +363,8 @@ export default function HomePage() {
       <section className="py-10 bg-white" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">Industries We Serve</h2>
-            <p className="text-base text-gray-500">Cross-sector expertise delivering specialized sustainability impact.</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">Delivering Sector-Specific Sustainability Impact</h2>
+            <p className="text-base text-gray-500">Cross-sector expertise bringing specialized insights to your unique industry challenges.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {industries.map((ind, i) => {
@@ -389,9 +389,9 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-2xl md:text-4xl font-bold mb-5">Why Partner With Us?</h2>
+              <h2 className="text-2xl md:text-4xl font-bold mb-5">The Growlity Advantage</h2>
               <p className="text-lg text-white/90 mb-8 leading-relaxed">
-                We combine deep technical expertise with strategic business acumen to ensure your sustainability initiatives drive real value.
+                We combine deep technical expertise with strategic business acumen to ensure your sustainability initiatives are compliant, future-ready, and drive real value.
               </p>
               <div className="grid sm:grid-cols-2 gap-3">
                 {whyChooseUs.map((reason, i) => (
@@ -422,7 +422,7 @@ export default function HomePage() {
       {/* 7. ESG Standards We Support */}
       <section className="py-10 bg-white border-b border-gray-100 overflow-hidden" data-aos="fade-up">
         <div className="container mx-auto px-4 text-center mb-10">
-          <h2 className="text-2xl font-bold text-gray-900">ESG Standards & Frameworks We Support</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Expertise Across Global ESG Frameworks & Standards</h2>
         </div>
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-4">
@@ -440,7 +440,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <Badge className="mb-3 bg-[#00C853]/10 text-[#00C853]">Our Methodology</Badge>
-            <h2 className="text-2xl md:text-4xl font-bold mb-3 text-gray-900">A Proven 6-Step Process</h2>
+            <h2 className="text-2xl md:text-4xl font-bold mb-3 text-gray-900">Our Strategic 6-Step Methodology for ESG Success</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {processSteps.map((step, i) => (
@@ -461,7 +461,7 @@ export default function HomePage() {
       <section className="py-10 bg-white relative overflow-hidden" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="flex flex-col justify-center items-center text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">Our Global Impact</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">Measurable Impact & Global Reach</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-4xl">
               <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#0066FF]/30 transition-all">
                 <div className="text-4xl font-black text-[#0066FF] mb-1">Global</div>
@@ -489,8 +489,8 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-end mb-10">
             <div>
-              <Badge className="mb-3 bg-[#0066FF]/10 text-[#0066FF]">Insights</Badge>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Latest Resources</h2>
+              <Badge className="mb-3 bg-[#0066FF]/10 text-[#0066FF]">Knowledge Hub</Badge>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Insights & Thought Leadership</h2>
             </div>
             <a href="/blogs" className="text-[#0066FF] font-semibold hover:underline flex items-center mt-3 md:mt-0 text-sm">
               View all resources <ArrowRight className="ml-1 w-4 h-4" />
@@ -519,7 +519,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="text-center mb-10">
             <Badge className="mb-3 bg-[#00C853]/10 text-[#00C853]">Support</Badge>
-            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">Frequently Asked Questions</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">Navigating Your ESG Journey: Common Questions</h2>
           </div>
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
@@ -542,7 +542,7 @@ export default function HomePage() {
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "32px 32px" }}></div>
         <div className="container mx-auto px-4 relative z-10 text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-5 tracking-tight">
-            Ready to Accelerate Your ESG Journey?
+            Take the Next Step in Your Sustainability Journey
           </h2>
           <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto font-light">
             Let's build a sustainable, compliant, and future-ready business together. Talk to our experts today.
