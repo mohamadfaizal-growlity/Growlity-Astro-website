@@ -77,6 +77,11 @@ try {
 		{/* Custom Footer Scripts (from Sitepins) */}
 		{footerScripts && <Fragment set:html={footerScripts} />}
 
+		{/* BACK TO TOP BUTTON */}
+		<button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-[#0066FF] text-white rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 z-[999] hover:bg-[#0052CC] hover:-translate-y-1 hover:shadow-xl" aria-label="Back to top">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+		</button>
+
 		<script>
 			import Lenis from 'lenis';
 			
@@ -117,6 +122,52 @@ try {
 				};
 				window.addEventListener('scroll', updateProgress, { passive: true });
 				updateProgress(); // init
+
+				// Back to Top Button Logic
+				const backToTopBtn = document.getElementById('back-to-top');
+				if (backToTopBtn) {
+					window.addEventListener('scroll', () => {
+						if (window.scrollY > 300) {
+							backToTopBtn.classList.remove('opacity-0', 'invisible');
+							backToTopBtn.classList.add('opacity-100', 'visible');
+						} else {
+							backToTopBtn.classList.add('opacity-0', 'invisible');
+							backToTopBtn.classList.remove('opacity-100', 'visible');
+						}
+					}, { passive: true });
+					backToTopBtn.addEventListener('click', () => {
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+					});
+				}
+
+				// Swipe (Scratch) to Navigate Logic
+				let swipeStartX = 0;
+				let swipeStartY = 0;
+				let isSwiping = false;
+				window.addEventListener('pointerdown', (e) => {
+					// Ignore if they are clicking a button, link, or input
+					if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input')) return;
+					swipeStartX = e.clientX;
+					swipeStartY = e.clientY;
+					isSwiping = true;
+				});
+				window.addEventListener('pointerup', (e) => {
+					if (!isSwiping) return;
+					isSwiping = false;
+					const diffX = swipeStartX - e.clientX;
+					const diffY = Math.abs(swipeStartY - e.clientY);
+					
+					// Only trigger if horizontal swipe > 150px, vertical drift < 50px, and no text selected
+					if (diffY < 50 && window.getSelection().toString().length === 0) {
+						if (diffX > 150) {
+							// Swiped left (Next page / Forward)
+							window.history.forward();
+						} else if (diffX < -150) {
+							// Swiped right (Previous page / Back)
+							window.history.back();
+						}
+					}
+				});
 
 				// Magnetic Buttons Logic
 				const magneticElements = document.querySelectorAll('.magnetic-btn');
