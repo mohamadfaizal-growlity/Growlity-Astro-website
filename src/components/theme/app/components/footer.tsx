@@ -49,15 +49,7 @@ export function Footer({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
               </div>
             </div>
             
-            {/* Navigation Arrows */}
-            <div className="flex justify-center gap-4 mt-2">
-              <button onClick={() => {document.getElementById('testi-scroll-container')?.scrollBy({left: -374, behavior: 'smooth'})}} className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:text-white hover:bg-[#0066FF] hover:border-[#0066FF] hover:scale-105 transition-all shadow-sm" aria-label="Previous">
-                <ArrowRight className="w-5 h-5 rotate-180" />
-              </button>
-              <button onClick={() => {document.getElementById('testi-scroll-container')?.scrollBy({left: 374, behavior: 'smooth'})}} className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:text-white hover:bg-[#0066FF] hover:border-[#0066FF] hover:scale-105 transition-all shadow-sm" aria-label="Next">
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
+
           </div>
         </div>
         <style dangerouslySetInnerHTML={{__html: `
