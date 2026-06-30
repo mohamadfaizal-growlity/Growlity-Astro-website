@@ -37,7 +37,7 @@ import {
   Cpu as CpuIcon
 } from "lucide-react";
 
-import siteStats from "../../../../content/global-settings/stats.json";
+import siteStats from "../../../../content/homepage-stats/stats.json";
 
 export default function HomePage() {
   const [activeService, setActiveService] = useState(0);

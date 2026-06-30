@@ -1,6 +1,6 @@
 {
-  "file": "src/content/global-settings/stats.json",
-  "name": "SiteStats",
+  "file": "src/content/homepage-stats/stats.json",
+  "name": "Homepage Stats",
   "label": "Homepage Stats",
   "fileType": "json",
   "fmType": "json",
