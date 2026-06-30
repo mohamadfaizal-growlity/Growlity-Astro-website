@@ -1,5 +1,6 @@
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { Badge } from "./ui/badge";
 import { Linkedin, Twitter, Facebook, Youtube, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 
 export function Footer({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string }) {
@@ -7,6 +8,63 @@ export function Footer({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
 
   return (
     <footer className="bg-gray-50 text-slate-600 border-t border-gray-200">
+      {/* Testimonials (Global) */}
+      <section className="py-16 bg-[#F9FAFB] border-b border-gray-100">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-10">
+            <Badge className="mb-3 bg-[#0066FF]/10 text-[#0066FF]">Client Stories</Badge>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">On the side of ambitious action</h2>
+          </div>
+          
+          <div className="relative group">
+            <div id="testi-scroll-container" className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar scroll-smooth" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+              {/* Card 1 */}
+              <div className="flex-none w-[350px] snap-center bg-white p-6 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300">
+                <div className="text-6xl text-[#00C853]/40 font-serif leading-3 mb-4 mt-2">"</div>
+                <p className="text-gray-600 mb-6 italic min-h-[100px]">This recognition aligned and unified our ESG efforts globally. Thanks to Growlity, our governance and disclosures reached new heights.</p>
+                <div className="h-px bg-gray-100 mb-4 w-full"></div>
+                <div className="font-bold text-gray-900">Mr. Don Stover</div>
+                <div className="text-sm text-gray-500 mb-1">Director of Corporate Quality</div>
+                <div className="text-sm font-semibold text-[#0066FF]">APackaging Group LLC — EcoVadis Platinum</div>
+              </div>
+              
+              {/* Card 2 */}
+              <div className="flex-none w-[350px] snap-center bg-white p-6 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300">
+                <div className="text-6xl text-[#00C853]/40 font-serif leading-3 mb-4 mt-2">"</div>
+                <p className="text-gray-600 mb-6 italic min-h-[100px]">Rated in the top 1%, this reflects our core belief: sustainability is central to business, not separate — it's how we create lasting impact.</p>
+                <div className="h-px bg-gray-100 mb-4 w-full"></div>
+                <div className="font-bold text-gray-900">Mr. Gyanesh Chaudhary</div>
+                <div className="text-sm text-gray-500 mb-1">Chairman and Managing Director</div>
+                <div className="text-sm font-semibold text-[#0066FF]">Vikram Solar Group — EcoVadis Platinum</div>
+              </div>
+              
+              {/* Card 3 */}
+              <div className="flex-none w-[350px] snap-center bg-white p-6 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300">
+                <div className="text-6xl text-[#00C853]/40 font-serif leading-3 mb-4 mt-2">"</div>
+                <p className="text-gray-600 mb-6 italic min-h-[100px]">Receiving the EcoVadis Gold Medal is a proud milestone in our sustainability journey, reflecting our focused efforts to embed ESG at the core.</p>
+                <div className="h-px bg-gray-100 mb-4 w-full"></div>
+                <div className="font-bold text-gray-900">Mr. Sanjay Kumar</div>
+                <div className="text-sm text-gray-500 mb-1">Chief Strategy and Sustainability Officer</div>
+                <div className="text-sm font-semibold text-[#0066FF]">Granules India — EcoVadis Gold</div>
+              </div>
+            </div>
+            
+            {/* Navigation Arrows */}
+            <div className="flex justify-center gap-4 mt-2">
+              <button onClick={() => {document.getElementById('testi-scroll-container')?.scrollBy({left: -374, behavior: 'smooth'})}} className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:text-white hover:bg-[#0066FF] hover:border-[#0066FF] hover:scale-105 transition-all shadow-sm" aria-label="Previous">
+                <ArrowRight className="w-5 h-5 rotate-180" />
+              </button>
+              <button onClick={() => {document.getElementById('testi-scroll-container')?.scrollBy({left: 374, behavior: 'smooth'})}} className="w-12 h-12 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:text-white hover:bg-[#0066FF] hover:border-[#0066FF] hover:scale-105 transition-all shadow-sm" aria-label="Next">
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <style dangerouslySetInnerHTML={{__html: `
+          .hide-scrollbar::-webkit-scrollbar { display: none; }
+        `}} />
+      </section>
+
       {/* Top Newsletter Section */}
       <div className="border-b border-gray-200 bg-white">
         <div className="container mx-auto px-4 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
