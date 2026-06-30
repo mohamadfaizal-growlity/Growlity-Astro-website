@@ -128,7 +128,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-white overflow-x-hidden">
+    <div className="flex flex-col bg-white">
 
       {/* 1. Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-green-50 pt-8 pb-16 md:pt-10 md:pb-20 overflow-hidden">
