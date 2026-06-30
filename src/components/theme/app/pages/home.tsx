@@ -33,29 +33,26 @@ import {
   Triangle,
   Circle,
   Square,
-  Activity
+  Activity,
+  Cpu as CpuIcon
 } from "lucide-react";
 
 export default function HomePage() {
   const [activeService, setActiveService] = useState(0);
 
-  const trustedClients = [
-    { name: "Global Innovators", icon: Command },
-    { name: "EcoTech Systems", icon: Hexagon },
-    { name: "Pioneer Group", icon: Triangle },
-    { name: "Nexus Industries", icon: Circle },
-    { name: "Vertex Solutions", icon: Square },
-    { name: "Apex Dynamics", icon: Activity },
-    { name: "Quantum Corp", icon: Command },
+  const services = [
+    { title: "ESG Strategy & Advisory", description: "Gap analysis, net-zero roadmaps & climate risk assessment.", icon: Target, image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" },
+    { title: "Sustainability Reporting", description: "BRSR, CSRD, ISSB, and IFRS frameworks compliance.", icon: FileText, image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" },
+    { title: "Carbon Accounting", description: "Scope 1, 2 & 3 emissions calculation and decarbonization.", icon: CloudRain, image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80" },
+    { title: "EU CBAM Advisory", description: "Navigating EU Carbon Border Adjustment Mechanism compliance.", icon: Globe, image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80" },
+    { title: "Ratings & Disclosures", description: "Improve EcoVadis, CDP, S&P, and Sustainalytics scores.", icon: Award, image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" },
+    { title: "Life Cycle Assessment", description: "Product carbon footprint (PCF) & environmental impact.", icon: Recycle, image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15f?w=800&q=80" },
   ];
 
-  const services = [
-    { title: "ESG Strategy", description: "Develop practical sustainability roadmaps.", icon: Target, image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" },
-    { title: "ESG Reporting", description: "GRI, BRSR, CSRD, ISSB, IFRS S1/S2.", icon: FileText, image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" },
-    { title: "Carbon Accounting", description: "Measure Scope 1, 2 & 3 emissions.", icon: CloudRain, image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80" },
-    { title: "Life Cycle Assessment", description: "Product carbon footprint & environmental impact.", icon: Recycle, image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15f?w=800&q=80" },
-    { title: "Net Zero Strategy", description: "Roadmaps and decarbonization planning.", icon: Leaf, image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80" },
-    { title: "EcoVadis Consulting", description: "Improve ESG ratings and supplier performance.", icon: Award, image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" },
+  const proprietaryTools = [
+    { name: "ESGTech.ai", description: "An AI-powered platform for precise calculation of Scope 1, 2, and 3 GHG emissions.", icon: CpuIcon },
+    { name: "CBAMx", description: "A specialized platform helping exporters navigate and comply with complex EU CBAM regulations.", icon: Globe },
+    { name: "BRSR India", description: "A comprehensive knowledge hub providing templates, tools, and regulatory insights for the BRSR framework.", icon: FileText }
   ];
 
   const industries = [
@@ -69,27 +66,20 @@ export default function HomePage() {
     { name: "Food & Beverage", icon: Leaf, image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80" },
   ];
 
-  const testimonials = [
-    { name: "Sarah Jenkins", role: "Chief Sustainability Officer", quote: "Growlity transformed our approach to sustainability. Their expertise in carbon accounting and ESG strategy helped us achieve EcoVadis Gold rating in our first year.", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&q=80" },
-    { name: "Michael Chang", role: "Director of Operations", quote: "The ESGTech platform combined with their consulting team gave us total visibility into our Scope 3 emissions. Truly a game-changer for our global supply chain.", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&q=80" },
-    { name: "Elena Rodriguez", role: "VP of Corporate Affairs", quote: "Their deep knowledge of CSRD and ISSB frameworks ensured we were not just compliant, but positioned as sustainability leaders in our sector.", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&q=80" }
-  ];
-
   const whyChooseUs = [
     "Certified ESG Experts",
     "End-to-End Consulting",
-    "Global Reporting Standards",
+    "Proprietary Digital Tools",
     "Industry-Specific Solutions",
     "Customized Strategies",
     "Regulatory Compliance",
-    "Faster Certification",
+    "Global Reporting Standards",
     "Dedicated Support"
   ];
 
   const standards = [
     "GRI", "BRSR", "ISSB", "IFRS", "CSRD", "CDP",
-    "EcoVadis", "SBTi", "GHG Protocol", "ISO 14064", "ISO 14001", "SA8000",
-    "RJC", "SMETA", "TCFD"
+    "EcoVadis", "SBTi", "GHG Protocol", "ISO 14064", "ISO 14001", "SA8000", "B-Corp"
   ];
 
   const processSteps = [
@@ -101,18 +91,13 @@ export default function HomePage() {
     { step: "6", title: "Continuous Improvement", desc: "Ongoing monitoring and optimization." }
   ];
 
-  const caseStudies = [
-    { industry: "Manufacturing Company", metrics: ["35% reduction in emissions", "EcoVadis Silver", "Scope 3 assessment completed"] },
-    { industry: "Retail Company", metrics: ["ESG Report Published", "BRSR Compliance Achieved", "Supplier assessments completed"] },
-  ];
-
   const faqs = [
     { q: "What is ESG consulting?", a: "ESG consulting helps businesses integrate Environmental, Social, and Governance factors into their core strategy to ensure compliance, attract investment, and drive sustainable growth." },
     { q: "Why is ESG important?", a: "ESG is crucial for risk management, regulatory compliance, meeting stakeholder expectations, and unlocking new market opportunities." },
     { q: "Who needs ESG reporting?", a: "Publicly listed companies, businesses in supply chains of large corporations, and organizations seeking international funding or certifications." },
     { q: "How long does ESG implementation take?", a: "Timelines vary depending on the scope. A basic carbon footprint assessment may take weeks, while a full ESG strategy and report can take 3-6 months." },
     { q: "What industries do you serve?", a: "We serve a wide range of industries including manufacturing, textiles, IT, healthcare, logistics, and more." },
-    { q: "Do you help with carbon accounting?", a: "Yes, we offer comprehensive Scope 1, 2, and 3 GHG emissions calculation and decarbonization planning." },
+    { q: "Do you help with carbon accounting?", a: "Yes, we offer comprehensive Scope 1, 2, and 3 GHG emissions calculation and decarbonization planning using our proprietary ESGTech.ai platform." },
     { q: "Can you assist with EcoVadis certification?", a: "Absolutely. We guide companies through the EcoVadis assessment process to improve their sustainability scorecards." },
   ];
 
@@ -127,16 +112,16 @@ export default function HomePage() {
             <div data-aos="fade-up">
               <Badge className="mb-4 bg-[#0066FF]/10 text-[#0066FF] border-[#0066FF]/20 px-3 py-1 text-xs">
                 <Sparkles className="h-3 w-3 mr-2" />
-                Premium ESG Consulting
+                Global ESG & Business Sustainability Advisory
               </Badge>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-[1.15] tracking-tight">
-                ESG Consulting That Helps Businesses Achieve{" "}
+                Data-Driven Strategies for {" "}
                 <span className="bg-gradient-to-r from-[#0066FF] to-[#00C853] bg-clip-text text-transparent">
-                  Compliance, Sustainability & Long-Term Growth
+                  Compliance, Sustainability & Long-Term Value
                 </span>
               </h1>
               <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed max-w-lg">
-                We help organizations simplify ESG reporting, carbon accounting, sustainability strategy, certifications, climate risk management, and regulatory compliance.
+                We assist organizations in improving their sustainability performance, meeting global standards, and developing long-term value through strategy, reporting, and proprietary platforms.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a href="/contact">
@@ -158,7 +143,7 @@ export default function HomePage() {
               <div className="bg-white rounded-2xl shadow-2xl p-6 border border-gray-100 relative z-10 transform transition-transform hover:scale-[1.02] duration-500 max-w-md ml-auto">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h3 className="font-bold text-lg text-gray-800">Sustainability Dashboard</h3>
+                    <h3 className="font-bold text-lg text-gray-800">ESGTech.ai Dashboard</h3>
                     <p className="text-xs text-gray-500">Real-time Impact Tracking</p>
                   </div>
                   <div className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-semibold flex items-center">
@@ -175,11 +160,11 @@ export default function HomePage() {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="p-4 bg-green-50 rounded-xl border border-green-100/50">
-                      <div className="text-xs font-medium text-green-600 mb-1">ESG Score</div>
+                      <div className="text-xs font-medium text-green-600 mb-1">Global ESG Score</div>
                       <div className="text-xl font-bold text-gray-900 stat-num" data-target="85">0</div>
                     </div>
                     <div className="p-4 bg-purple-50 rounded-xl border border-purple-100/50">
-                      <div className="text-xs font-medium text-purple-600 mb-1">Certifications</div>
+                      <div className="text-xs font-medium text-purple-600 mb-1">Standards Covered</div>
                       <div className="text-xl font-bold text-gray-900 stat-num" data-target="12">0</div>
                     </div>
                   </div>
@@ -192,57 +177,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. Trusted By */}
-      <section className="py-10 border-b border-gray-100 bg-white overflow-hidden" data-aos="fade-up">
-        <style>{`
-          @keyframes scroll-logos {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-250px * 7)); }
-          }
-          .logo-slider-track {
-            animation: scroll-logos 30s linear infinite;
-            display: flex;
-            width: calc(250px * 14);
-          }
-          .logo-slider-track:hover {
-            animation-play-state: paused;
-          }
-        `}</style>
-        <div className="container mx-auto px-4">
-          <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
-            Trusted by 250+ Businesses Worldwide
-          </p>
-          <div className="relative w-full overflow-hidden before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-16 md:before:w-32 before:bg-gradient-to-r before:from-white before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-16 md:after:w-32 after:bg-gradient-to-l after:from-white after:to-transparent">
-            <div className="logo-slider-track items-center py-4">
-              {[...trustedClients, ...trustedClients].map((client, idx) => {
-                const Icon = client.icon;
-                return (
-                  <div key={idx} className="flex items-center justify-center w-[250px] shrink-0 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer group">
-                    <div className="flex items-center gap-3 text-xl md:text-2xl font-bold text-gray-600 tracking-tight group-hover:text-[#0066FF] transition-colors">
-                      <Icon className="w-8 h-8 text-gray-400 group-hover:text-[#0066FF] transition-colors" />
-                      {client.name}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <p className="text-center text-sm text-gray-500 mt-8 font-medium">
-            Helping businesses across manufacturing, IT, textiles, healthcare, logistics, and more.
-          </p>
-        </div>
-      </section>
-
-      {/* 3. About Company */}
+      {/* 2. About Company */}
       <section className="py-16 md:py-24 bg-white relative overflow-hidden" data-aos="fade-up">
-        {/* Background Decorative Elements */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-50/50 to-transparent -z-10" />
         <div className="absolute -left-20 top-20 w-72 h-72 bg-green-50 rounded-full blur-3xl opacity-50 -z-10" />
         
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             
-            {/* Left Content */}
             <div className="max-w-2xl">
               <Badge className="mb-4 bg-[#0066FF]/10 text-[#0066FF] border-none px-3 py-1">
                 About Growlity
@@ -257,32 +199,24 @@ export default function HomePage() {
                 Growlity is a premier ESG consulting firm dedicated to guiding organizations toward sustainable, compliant, and profitable futures. We bridge the gap between complex regulatory requirements and practical business strategies.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed mb-10">
-                Our multidisciplinary team of experts empowers businesses globally to navigate sustainability frameworks, optimize supply chains, manage carbon footprints, and achieve globally recognized certifications.
+                Operating globally across India, USA, UK, Canada, Mexico, Thailand, and GCC countries, our multidisciplinary team empowers businesses to navigate sustainability frameworks, optimize supply chains, manage carbon footprints, and achieve recognized certifications.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-[#0066FF] hover:bg-[#0052CC] text-white px-8 py-6 rounded-lg text-base transition-all duration-300 shadow-lg shadow-blue-500/25">
-                  Discover Our Journey
-                </Button>
-                <div className="flex items-center gap-4 text-gray-700 font-medium">
-                  <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                    <Leaf className="text-[#00C853] w-6 h-6" />
-                  </div>
-                  EcoVadis Partner
-                </div>
+                <a href="/about">
+                  <Button className="bg-[#0066FF] hover:bg-[#0052CC] text-white px-8 py-6 rounded-lg text-base transition-all duration-300 shadow-lg shadow-blue-500/25">
+                    Discover Our Journey
+                  </Button>
+                </a>
               </div>
             </div>
 
-            {/* Right Stats Grid */}
             <div className="relative z-10 w-full max-w-lg mx-auto lg:mx-0">
-              {/* Premium Glow Effect */}
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 via-transparent to-green-500/5 blur-2xl -z-10 rounded-full" />
               
               <div className="grid grid-cols-2 gap-4 md:gap-6">
                 
-                {/* Left Column (staggered) */}
                 <div className="flex flex-col gap-4 md:gap-6 mt-0 md:mt-12">
-                  {/* Stat Card 1 */}
                   <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(0,102,255,0.15)] hover:-translate-y-2 transition-all duration-500 group overflow-hidden">
                     <div className="absolute -right-4 -top-4 w-24 h-24 bg-gradient-to-br from-blue-100 to-transparent rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700" />
                     <div className="relative z-10">
@@ -294,42 +228,38 @@ export default function HomePage() {
                     </div>
                   </div>
                   
-                  {/* Stat Card 2 */}
                   <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(0,200,83,0.15)] hover:-translate-y-2 transition-all duration-500 group overflow-hidden">
                     <div className="absolute -right-4 -top-4 w-24 h-24 bg-gradient-to-br from-green-100 to-transparent rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700" />
                     <div className="relative z-10">
                       <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00C853] to-[#009624] flex items-center justify-center mb-6 shadow-lg shadow-green-500/30 group-hover:rotate-6 transition-transform duration-300">
                         <Globe className="w-7 h-7 text-white" />
                       </div>
-                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">25<span className="text-[#00C853]">+</span></div>
-                      <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Countries</div>
+                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">7<span className="text-[#00C853]">+</span></div>
+                      <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Global Regions</div>
                     </div>
                   </div>
                 </div>
 
-                {/* Right Column */}
                 <div className="flex flex-col gap-4 md:gap-6">
-                  {/* Stat Card 3 */}
                   <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(168,85,247,0.15)] hover:-translate-y-2 transition-all duration-500 group overflow-hidden">
                     <div className="absolute -right-4 -top-4 w-24 h-24 bg-gradient-to-br from-purple-100 to-transparent rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700" />
                     <div className="relative z-10">
                       <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center mb-6 shadow-lg shadow-purple-500/30 group-hover:rotate-6 transition-transform duration-300">
                         <Factory className="w-7 h-7 text-white" />
                       </div>
-                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">50<span className="text-purple-500">+</span></div>
+                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">15<span className="text-purple-500">+</span></div>
                       <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Industries</div>
                     </div>
                   </div>
                   
-                  {/* Stat Card 4 */}
                   <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(249,115,22,0.15)] hover:-translate-y-2 transition-all duration-500 group overflow-hidden">
                     <div className="absolute -right-4 -top-4 w-24 h-24 bg-gradient-to-br from-orange-100 to-transparent rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700" />
                     <div className="relative z-10">
                       <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-6 shadow-lg shadow-orange-500/30 group-hover:rotate-6 transition-transform duration-300">
                         <Users className="w-7 h-7 text-white" />
                       </div>
-                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">100<span className="text-orange-500">+</span></div>
-                      <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Consultants</div>
+                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter"><span className="text-xl">Global</span><span className="text-orange-500 text-xl pl-1">Team</span></div>
+                      <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em] mt-2">Expert Consultants</div>
                     </div>
                   </div>
                 </div>
@@ -341,7 +271,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. Our ESG Services */}
+      {/* 3. Our ESG Services */}
       <section className="py-10 bg-white" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -350,7 +280,6 @@ export default function HomePage() {
             <p className="text-base text-gray-500 max-w-2xl mx-auto">Comprehensive solutions tailored to your sustainability journey.</p>
           </div>
           <div className="grid lg:grid-cols-12 gap-8 items-start">
-            {/* Left side: Interactive Tabs */}
             <div className="lg:col-span-5 flex flex-col gap-2">
               {services.map((svc, i) => {
                 const Icon = svc.icon;
@@ -374,12 +303,11 @@ export default function HomePage() {
               })}
               <div className="mt-4 text-center lg:text-left">
                 <a href="/solutions" className="text-[#0066FF] font-semibold hover:underline flex items-center justify-center lg:justify-start text-sm">
-                  View all 15+ services <ArrowRight className="ml-1 w-4 h-4" />
+                  View all solutions <ArrowRight className="ml-1 w-4 h-4" />
                 </a>
               </div>
             </div>
 
-            {/* Right side: Image Display */}
             <div className="lg:col-span-7 relative h-[400px] lg:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-2xl group">
               {services.map((svc, i) => (
                 <div
@@ -403,8 +331,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 4. Proprietary Tools */}
+      <section className="py-16 bg-gray-50 border-t border-gray-100" data-aos="fade-up">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <Badge className="mb-3 bg-purple-500/10 text-purple-600">Digital Solutions</Badge>
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">Our Proprietary Platforms</h2>
+            <p className="text-base text-gray-500 max-w-2xl mx-auto">Leveraging technology to simplify ESG data management and reporting.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {proprietaryTools.map((tool, index) => {
+              const Icon = tool.icon;
+              return (
+                <div key={index} className="p-8 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0066FF] to-purple-600 flex items-center justify-center mb-6 shadow-md text-white">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{tool.name}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed mb-6">{tool.description}</p>
+                  <Button variant="outline" className="w-full border-gray-200 text-[#0066FF] hover:bg-blue-50 hover:border-blue-200">
+                    Explore Platform
+                  </Button>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* 5. Industries We Serve */}
-      <section className="py-10 bg-gray-50" data-aos="fade-up">
+      <section className="py-10 bg-white" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">Industries We Serve</h2>
@@ -451,7 +407,6 @@ export default function HomePage() {
             <div className="relative hidden lg:block" data-aos="fade-left" data-aos-delay="200">
               <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80" alt="Consulting Team" className="rounded-2xl shadow-xl max-w-md ml-auto" />
               <div className="absolute inset-0 bg-blue-900/20 rounded-2xl mix-blend-multiply max-w-md ml-auto"></div>
-              {/* Floating highlight */}
               <div className="absolute -bottom-6 -left-2 bg-white p-4 rounded-xl shadow-lg text-gray-900 flex items-center gap-3">
                 <Award className="w-8 h-8 text-[#00C853]" />
                 <div>
@@ -502,86 +457,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. Case Studies & 10. Numbers */}
+      {/* 9. Success Stories & Impact */}
       <section className="py-10 bg-white relative overflow-hidden" data-aos="fade-up">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Case Studies */}
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Success Stories</h2>
-              <div className="space-y-4">
-                {caseStudies.map((cs, i) => (
-                  <div key={i} className="p-6 rounded-xl bg-gradient-to-br from-blue-50 to-blue-50/20 border border-blue-100 hover:shadow-md transition-shadow cursor-pointer group">
-                    <h3 className="text-lg font-bold text-[#0066FF] mb-3 flex items-center">
-                      <Briefcase className="mr-2 w-4 h-4 group-hover:scale-110 transition-transform" /> {cs.industry}
-                    </h3>
-                    <ul className="space-y-2">
-                      {cs.metrics.map((metric, j) => (
-                        <li key={j} className="flex items-start text-sm text-gray-700">
-                          <CheckCircle2 className="w-4 h-4 text-[#00C853] mr-2 shrink-0 mt-0.5" />
-                          <span className="font-medium">{metric}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+          <div className="flex flex-col justify-center items-center text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900">Our Global Impact</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-4xl">
+              <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#0066FF]/30 transition-all">
+                <div className="text-4xl font-black text-[#0066FF] mb-1">Global</div>
+                <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Client Base</div>
               </div>
-            </div>
-
-            {/* Numbers */}
-            <div className="flex flex-col justify-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-900">Our Impact in Numbers</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#0066FF]/30 transition-all">
-                  <div className="text-4xl font-black text-[#0066FF] mb-1 stat-num" data-target="500" data-suffix="+">0+</div>
-                  <div className="font-semibold text-xs text-gray-600">Projects Delivered</div>
-                </div>
-                <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#00C853]/30 transition-all">
-                  <div className="text-4xl font-black text-[#00C853] mb-1 stat-num" data-target="95" data-suffix="%">0%</div>
-                  <div className="font-semibold text-xs text-gray-600">Client Satisfaction</div>
-                </div>
-                <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#00C853]/30 transition-all">
-                  <div className="text-4xl font-black text-[#00C853] mb-1 stat-num" data-target="100" data-suffix="+">0+</div>
-                  <div className="font-semibold text-xs text-gray-600">Certifications</div>
-                </div>
-                <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#0066FF]/30 transition-all">
-                  <div className="text-4xl font-black text-[#0066FF] mb-1 stat-num" data-target="25" data-suffix="+">0+</div>
-                  <div className="font-semibold text-xs text-gray-600">Global Countries</div>
-                </div>
+              <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#00C853]/30 transition-all">
+                <div className="text-4xl font-black text-[#00C853] mb-1 stat-num" data-target="100" data-suffix="%">0%</div>
+                <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Commitment</div>
+              </div>
+              <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#00C853]/30 transition-all">
+                <div className="text-4xl font-black text-[#00C853] mb-1">Expert</div>
+                <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Consultants</div>
+              </div>
+              <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#0066FF]/30 transition-all">
+                <div className="text-4xl font-black text-[#0066FF] mb-1 stat-num" data-target="7" data-suffix="+">0+</div>
+                <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Operating Regions</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 11. Testimonials */}
-      <section className="py-10 bg-gray-900 text-white" data-aos="fade-up">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <Badge className="mb-3 bg-white/10 text-white hover:bg-white/20">Testimonials</Badge>
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">What Our Clients Say</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((item, i) => (
-              <div key={i} className="p-8 rounded-xl bg-white/5 border border-white/10 relative hover:bg-white/10 transition-colors shadow-2xl">
-                <div className="text-6xl font-serif text-[#00C853] absolute top-4 right-6 opacity-40 leading-none">"</div>
-                <p className="text-base text-gray-300 italic mb-8 relative z-10 leading-relaxed min-h-[100px]">
-                  "{item.quote}"
-                </p>
-                <div className="flex items-center gap-4">
-                  <img src={item.image} alt={item.name} className="w-12 h-12 rounded-full object-cover border-2 border-[#0066FF]" />
-                  <div>
-                    <div className="font-bold text-white text-base">{item.name}</div>
-                    <div className="text-xs text-gray-400 font-medium">{item.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 12. Resources & Insights */}
+      {/* 10. Resources & Insights */}
       <section className="py-10 bg-gray-50" data-aos="fade-up">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-end mb-10">
@@ -611,7 +514,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 13. FAQs */}
+      {/* 11. FAQs */}
       <section className="py-10 bg-white" data-aos="fade-up">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="text-center mb-10">
@@ -633,7 +536,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 14. Contact CTA */}
+      {/* 12. Contact CTA */}
       <section className="py-10 relative overflow-hidden" data-aos="fade-up">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0066FF] to-[#00C853]"></div>
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "32px 32px" }}></div>
