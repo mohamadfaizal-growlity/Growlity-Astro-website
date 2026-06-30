@@ -46,7 +46,7 @@ export default function HomePage() {
     { title: "Carbon Accounting", description: "Scope 1, 2 & 3 emissions calculation and decarbonization.", icon: CloudRain, image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&q=80" },
     { title: "EU CBAM Advisory", description: "Navigating EU Carbon Border Adjustment Mechanism compliance.", icon: Globe, image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80" },
     { title: "Ratings & Disclosures", description: "Improve EcoVadis, CDP, S&P, and Sustainalytics scores.", icon: Award, image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80" },
-    { title: "Life Cycle Assessment", description: "Product carbon footprint (PCF) & environmental impact.", icon: Recycle, image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15f?w=800&q=80" },
+    { title: "Life Cycle Assessment", description: "Product carbon footprint (PCF) & environmental impact.", icon: Recycle, image: "https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=800&q=80" },
   ];
 
   const proprietaryTools = [
@@ -320,7 +320,7 @@ export default function HomePage() {
                     <Badge className="bg-[#00C853] text-white mb-3 hover:bg-[#00A844]">Featured Service</Badge>
                     <h3 className="text-3xl font-bold text-white mb-2">{svc.title}</h3>
                     <p className="text-white/80 text-lg max-w-lg mb-4">{svc.description}</p>
-                    <Button variant="outline" className="border-white/50 text-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
+                    <Button variant="outline" className="border-white/50 bg-transparent text-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
                       Learn More
                     </Button>
                   </div>
