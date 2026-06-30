@@ -9,52 +9,67 @@ export function Footer({ siteLogo = "/growlity-logo.png" }: { siteLogo?: string 
   return (
     <footer className="bg-gray-50 text-slate-600 border-t border-gray-200">
       {/* Testimonials (Global) */}
-      <section className="py-16 bg-[#F9FAFB] border-b border-gray-100">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-10">
-            <Badge className="mb-3 bg-[#0066FF]/10 text-[#0066FF]">Client Stories</Badge>
-            <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">On the side of ambitious action</h2>
+      <section className="py-20 bg-slate-900 border-b border-white/10 relative overflow-hidden">
+        {/* Abstract background glows */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -z-10"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl -z-10"></div>
+        
+        <div className="container mx-auto px-4 max-w-7xl relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-emerald-400 text-sm font-medium mb-6">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Client Success Stories
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white tracking-tight">
+              On the side of <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">ambitious action</span>
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto text-lg">Partnering with global leaders to drive measurable ESG impact and sustainable growth.</p>
           </div>
           
-          <div className="relative group">
-            <div id="testi-scroll-container" className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 hide-scrollbar scroll-smooth" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
-              {/* Card 1 */}
-              <div className="flex-none w-[350px] snap-center bg-white p-6 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300">
-                <div className="text-6xl text-[#00C853]/40 font-serif leading-3 mb-4 mt-2">"</div>
-                <p className="text-gray-600 mb-6 italic min-h-[100px]">This recognition aligned and unified our ESG efforts globally. Thanks to Growlity, our governance and disclosures reached new heights.</p>
-                <div className="h-px bg-gray-100 mb-4 w-full"></div>
-                <div className="font-bold text-gray-900">Mr. Don Stover</div>
-                <div className="text-sm text-gray-500 mb-1">Director of Corporate Quality</div>
-                <div className="text-sm font-semibold text-[#0066FF]">APackaging Group LLC — EcoVadis Platinum</div>
-              </div>
-              
-              {/* Card 2 */}
-              <div className="flex-none w-[350px] snap-center bg-white p-6 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300">
-                <div className="text-6xl text-[#00C853]/40 font-serif leading-3 mb-4 mt-2">"</div>
-                <p className="text-gray-600 mb-6 italic min-h-[100px]">Rated in the top 1%, this reflects our core belief: sustainability is central to business, not separate — it's how we create lasting impact.</p>
-                <div className="h-px bg-gray-100 mb-4 w-full"></div>
-                <div className="font-bold text-gray-900">Mr. Gyanesh Chaudhary</div>
-                <div className="text-sm text-gray-500 mb-1">Chairman and Managing Director</div>
-                <div className="text-sm font-semibold text-[#0066FF]">Vikram Solar Group — EcoVadis Platinum</div>
-              </div>
-              
-              {/* Card 3 */}
-              <div className="flex-none w-[350px] snap-center bg-white p-6 rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300">
-                <div className="text-6xl text-[#00C853]/40 font-serif leading-3 mb-4 mt-2">"</div>
-                <p className="text-gray-600 mb-6 italic min-h-[100px]">Receiving the EcoVadis Gold Medal is a proud milestone in our sustainability journey, reflecting our focused efforts to embed ESG at the core.</p>
-                <div className="h-px bg-gray-100 mb-4 w-full"></div>
-                <div className="font-bold text-gray-900">Mr. Sanjay Kumar</div>
-                <div className="text-sm text-gray-500 mb-1">Chief Strategy and Sustainability Officer</div>
-                <div className="text-sm font-semibold text-[#0066FF]">Granules India — EcoVadis Gold</div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Card 1 */}
+            <div className="bg-white/5 border border-white/10 backdrop-blur-sm p-8 rounded-3xl hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 group relative">
+              <div className="absolute top-6 right-8 text-6xl text-white/5 font-serif group-hover:text-blue-500/10 transition-colors">"</div>
+              <p className="text-slate-300 mb-8 leading-relaxed relative z-10">"This recognition aligned and unified our ESG efforts globally. Thanks to Growlity, our governance and disclosures reached new heights."</p>
+              <div className="mt-auto">
+                <div className="h-px w-12 bg-gradient-to-r from-blue-500 to-emerald-500 mb-6"></div>
+                <div className="font-bold text-white text-lg">Mr. Don Stover</div>
+                <div className="text-sm text-slate-400 mb-4">Director of Corporate Quality</div>
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-semibold">
+                  APackaging Group LLC — EcoVadis Platinum
+                </div>
               </div>
             </div>
             
-
+            {/* Card 2 */}
+            <div className="bg-white/5 border border-white/10 backdrop-blur-sm p-8 rounded-3xl hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 group relative md:translate-y-6">
+              <div className="absolute top-6 right-8 text-6xl text-white/5 font-serif group-hover:text-emerald-500/10 transition-colors">"</div>
+              <p className="text-slate-300 mb-8 leading-relaxed relative z-10">"Rated in the top 1%, this reflects our core belief: sustainability is central to business, not separate — it's how we create lasting impact."</p>
+              <div className="mt-auto">
+                <div className="h-px w-12 bg-gradient-to-r from-blue-500 to-emerald-500 mb-6"></div>
+                <div className="font-bold text-white text-lg">Mr. Gyanesh Chaudhary</div>
+                <div className="text-sm text-slate-400 mb-4">Chairman and Managing Director</div>
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold">
+                  Vikram Solar Group — EcoVadis Platinum
+                </div>
+              </div>
+            </div>
+            
+            {/* Card 3 */}
+            <div className="bg-white/5 border border-white/10 backdrop-blur-sm p-8 rounded-3xl hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 group relative">
+              <div className="absolute top-6 right-8 text-6xl text-white/5 font-serif group-hover:text-blue-500/10 transition-colors">"</div>
+              <p className="text-slate-300 mb-8 leading-relaxed relative z-10">"Receiving the EcoVadis Gold Medal is a proud milestone in our sustainability journey, reflecting our focused efforts to embed ESG at the core."</p>
+              <div className="mt-auto">
+                <div className="h-px w-12 bg-gradient-to-r from-blue-500 to-emerald-500 mb-6"></div>
+                <div className="font-bold text-white text-lg">Mr. Sanjay Kumar</div>
+                <div className="text-sm text-slate-400 mb-4">Chief Strategy & Sustainability Officer</div>
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs font-semibold">
+                  Granules India — EcoVadis Gold
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <style dangerouslySetInnerHTML={{__html: `
-          .hide-scrollbar::-webkit-scrollbar { display: none; }
-        `}} />
       </section>
 
       {/* Top Newsletter Section */}
