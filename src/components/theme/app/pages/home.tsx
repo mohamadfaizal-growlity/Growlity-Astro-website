@@ -416,7 +416,7 @@ export default function HomePage() {
               return (
                 <div key={i} className="relative h-40 rounded-xl overflow-hidden group cursor-pointer shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                   <img src={ind.image} alt={ind.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-black/50 group-hover:bg-[#0066FF]/80 transition-colors duration-300"></div>
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/70 transition-colors duration-300"></div>
                   <div className="absolute inset-0 p-5 flex flex-col items-center justify-center text-white z-10">
                     <Icon className="w-8 h-8 mx-auto mb-3 opacity-90 group-hover:scale-110 transition-transform duration-300" />
                     <span className="font-bold text-sm tracking-wide">{ind.name}</span>
