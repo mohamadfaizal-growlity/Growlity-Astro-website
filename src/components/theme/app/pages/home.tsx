@@ -274,48 +274,66 @@ export default function HomePage() {
             </div>
 
             {/* Right Stats Grid */}
-            <div className="grid grid-cols-2 gap-4 md:gap-6 relative">
-              {/* Decorative dotted pattern */}
-              <div className="absolute -top-8 -right-8 w-32 h-32 bg-[radial-gradient(#e5e7eb_2px,transparent_2px)] [background-size:16px_16px] -z-10" />
+            <div className="relative z-10 w-full max-w-lg mx-auto lg:mx-0">
+              {/* Premium Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 via-transparent to-green-500/5 blur-2xl -z-10 rounded-full" />
               
-              <div className="space-y-4 md:space-y-6 mt-0 md:mt-12">
-                {/* Stat Card 1 */}
-                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-1 transition-transform duration-300 group">
-                  <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Briefcase className="w-6 h-6 text-[#0066FF]" />
-                  </div>
-                  <div className="text-4xl font-extrabold text-gray-900 mb-2">10<span className="text-[#0066FF]">+</span></div>
-                  <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Years Exp.</div>
-                </div>
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
                 
-                {/* Stat Card 2 */}
-                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-1 transition-transform duration-300 group">
-                  <div className="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Globe className="w-6 h-6 text-[#00C853]" />
+                {/* Left Column (staggered) */}
+                <div className="flex flex-col gap-4 md:gap-6 mt-0 md:mt-12">
+                  {/* Stat Card 1 */}
+                  <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(0,102,255,0.15)] hover:-translate-y-2 transition-all duration-500 group overflow-hidden">
+                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-gradient-to-br from-blue-100 to-transparent rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700" />
+                    <div className="relative z-10">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0066FF] to-[#0047B3] flex items-center justify-center mb-6 shadow-lg shadow-blue-500/30 group-hover:rotate-6 transition-transform duration-300">
+                        <Briefcase className="w-7 h-7 text-white" />
+                      </div>
+                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">10<span className="text-[#0066FF]">+</span></div>
+                      <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Years Exp.</div>
+                    </div>
                   </div>
-                  <div className="text-4xl font-extrabold text-gray-900 mb-2">25<span className="text-[#00C853]">+</span></div>
-                  <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Countries</div>
+                  
+                  {/* Stat Card 2 */}
+                  <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(0,200,83,0.15)] hover:-translate-y-2 transition-all duration-500 group overflow-hidden">
+                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-gradient-to-br from-green-100 to-transparent rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700" />
+                    <div className="relative z-10">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00C853] to-[#009624] flex items-center justify-center mb-6 shadow-lg shadow-green-500/30 group-hover:rotate-6 transition-transform duration-300">
+                        <Globe className="w-7 h-7 text-white" />
+                      </div>
+                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">25<span className="text-[#00C853]">+</span></div>
+                      <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Countries</div>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              <div className="space-y-4 md:space-y-6">
-                {/* Stat Card 3 */}
-                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-1 transition-transform duration-300 group">
-                  <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Factory className="w-6 h-6 text-purple-500" />
+                {/* Right Column */}
+                <div className="flex flex-col gap-4 md:gap-6">
+                  {/* Stat Card 3 */}
+                  <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(168,85,247,0.15)] hover:-translate-y-2 transition-all duration-500 group overflow-hidden">
+                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-gradient-to-br from-purple-100 to-transparent rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700" />
+                    <div className="relative z-10">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center mb-6 shadow-lg shadow-purple-500/30 group-hover:rotate-6 transition-transform duration-300">
+                        <Factory className="w-7 h-7 text-white" />
+                      </div>
+                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">50<span className="text-purple-500">+</span></div>
+                      <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Industries</div>
+                    </div>
                   </div>
-                  <div className="text-4xl font-extrabold text-gray-900 mb-2">50<span className="text-purple-500">+</span></div>
-                  <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Industries</div>
+                  
+                  {/* Stat Card 4 */}
+                  <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/60 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(249,115,22,0.15)] hover:-translate-y-2 transition-all duration-500 group overflow-hidden">
+                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-gradient-to-br from-orange-100 to-transparent rounded-full opacity-50 group-hover:scale-150 transition-transform duration-700" />
+                    <div className="relative z-10">
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-6 shadow-lg shadow-orange-500/30 group-hover:rotate-6 transition-transform duration-300">
+                        <Users className="w-7 h-7 text-white" />
+                      </div>
+                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">100<span className="text-orange-500">+</span></div>
+                      <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Consultants</div>
+                    </div>
+                  </div>
                 </div>
                 
-                {/* Stat Card 4 */}
-                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-1 transition-transform duration-300 group">
-                  <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Users className="w-6 h-6 text-orange-500" />
-                  </div>
-                  <div className="text-4xl font-extrabold text-gray-900 mb-2">100<span className="text-orange-500">+</span></div>
-                  <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Consultants</div>
-                </div>
               </div>
             </div>
             
