@@ -40,6 +40,23 @@ import {
 export default function HomePage() {
   const [activeService, setActiveService] = useState(0);
 
+  const siteStats = {
+    hero: {
+      carbonTarget: "45%",
+      esgScore: "85",
+      standards: "12"
+    },
+    about: {
+      yearsExp: "10",
+      regions: "7",
+      industries: "15"
+    },
+    impact: {
+      commitment: "100%",
+      regions: "7+"
+    }
+  };
+
   const services = [
     { title: "ESG Strategy & Advisory", description: "Gap analysis, net-zero roadmaps & climate risk assessment.", icon: Target, image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" },
     { title: "Sustainability Reporting", description: "BRSR, CSRD, ISSB, and IFRS frameworks compliance.", icon: FileText, image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" },
@@ -154,18 +171,18 @@ export default function HomePage() {
                   <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-xl border border-blue-100/50">
                     <div className="text-xs font-medium text-blue-600 mb-1">Carbon Reduction Target</div>
                     <div className="flex items-end gap-2">
-                      <div className="text-2xl font-extrabold text-gray-900">45%</div>
+                      <div className="text-2xl font-extrabold text-gray-900">{siteStats.hero.carbonTarget}</div>
                       <div className="text-xs text-gray-500 mb-1">by 2030</div>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="p-4 bg-green-50 rounded-xl border border-green-100/50">
                       <div className="text-xs font-medium text-green-600 mb-1">Global ESG Score</div>
-                      <div className="text-xl font-bold text-gray-900">85</div>
+                      <div className="text-xl font-bold text-gray-900">{siteStats.hero.esgScore}</div>
                     </div>
                     <div className="p-4 bg-purple-50 rounded-xl border border-purple-100/50">
                       <div className="text-xs font-medium text-purple-600 mb-1">Standards Covered</div>
-                      <div className="text-xl font-bold text-gray-900">12</div>
+                      <div className="text-xl font-bold text-gray-900">{siteStats.hero.standards}</div>
                     </div>
                   </div>
                 </div>
@@ -223,7 +240,7 @@ export default function HomePage() {
                       <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0066FF] to-[#0047B3] flex items-center justify-center mb-6 shadow-lg shadow-blue-500/30 group-hover:rotate-6 transition-transform duration-300">
                         <Briefcase className="w-7 h-7 text-white" />
                       </div>
-                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">10<span className="text-[#0066FF]">+</span></div>
+                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">{siteStats.about.yearsExp}<span className="text-[#0066FF]">+</span></div>
                       <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Years Exp.</div>
                     </div>
                   </div>
@@ -234,7 +251,7 @@ export default function HomePage() {
                       <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#00C853] to-[#009624] flex items-center justify-center mb-6 shadow-lg shadow-green-500/30 group-hover:rotate-6 transition-transform duration-300">
                         <Globe className="w-7 h-7 text-white" />
                       </div>
-                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">7<span className="text-[#00C853]">+</span></div>
+                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">{siteStats.about.regions}<span className="text-[#00C853]">+</span></div>
                       <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Global Regions</div>
                     </div>
                   </div>
@@ -247,7 +264,7 @@ export default function HomePage() {
                       <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center mb-6 shadow-lg shadow-purple-500/30 group-hover:rotate-6 transition-transform duration-300">
                         <Factory className="w-7 h-7 text-white" />
                       </div>
-                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">15<span className="text-purple-500">+</span></div>
+                      <div className="text-4xl md:text-5xl font-black text-gray-900 mb-1 tracking-tighter">{siteStats.about.industries}<span className="text-purple-500">+</span></div>
                       <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">Industries</div>
                     </div>
                   </div>
@@ -468,7 +485,7 @@ export default function HomePage() {
                 <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Client Base</div>
               </div>
               <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#00C853]/30 transition-all">
-                <div className="text-4xl font-black text-[#00C853] mb-1">100%</div>
+                <div className="text-4xl font-black text-[#00C853] mb-1">{siteStats.impact.commitment}</div>
                 <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Commitment</div>
               </div>
               <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#00C853]/30 transition-all">
@@ -476,7 +493,7 @@ export default function HomePage() {
                 <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Consultants</div>
               </div>
               <div className="p-6 bg-gray-50 rounded-xl border border-gray-100 text-center hover:bg-white hover:shadow-md hover:border-[#0066FF]/30 transition-all">
-                <div className="text-4xl font-black text-[#0066FF] mb-1">7+</div>
+                <div className="text-4xl font-black text-[#0066FF] mb-1">{siteStats.impact.regions}</div>
                 <div className="font-semibold text-xs text-gray-600 mt-2 uppercase tracking-wide">Operating Regions</div>
               </div>
             </div>
